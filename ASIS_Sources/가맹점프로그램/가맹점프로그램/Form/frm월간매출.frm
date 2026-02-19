@@ -1,0 +1,750 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Begin VB.Form frm월간매출 
+   AutoRedraw      =   -1  'True
+   Caption         =   "월간매출"
+   ClientHeight    =   11835
+   ClientLeft      =   2100
+   ClientTop       =   2850
+   ClientWidth     =   15360
+   ControlBox      =   0   'False
+   KeyPreview      =   -1  'True
+   LinkTopic       =   "Form15"
+   LockControls    =   -1  'True
+   MDIChild        =   -1  'True
+   ScaleHeight     =   11835
+   ScaleWidth      =   15360
+   WindowState     =   2  '최대화
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   11835
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   15360
+      _ExtentX        =   27093
+      _ExtentY        =   20876
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "frm월간매출.frx":0000
+      Begin Threed.SSPanel SSPanel1 
+         Height          =   750
+         Left            =   15
+         TabIndex        =   1
+         Top             =   450
+         Width           =   15330
+         _ExtentX        =   27040
+         _ExtentY        =   1323
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin MSComCtl2.DTPicker dtpDay 
+            Height          =   315
+            Left            =   915
+            TabIndex        =   2
+            Top             =   75
+            Width           =   1215
+            _ExtentX        =   2143
+            _ExtentY        =   556
+            _Version        =   393216
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            CustomFormat    =   "yyyy-MM"
+            Format          =   56360963
+            UpDown          =   -1  'True
+            CurrentDate     =   40279
+         End
+         Begin XtremeSuiteControls.PushButton cmdList 
+            Height          =   630
+            Left            =   4665
+            TabIndex        =   4
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 조회(&F)"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm월간매출.frx":00D2
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   3
+            Left            =   6210
+            TabIndex        =   5
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 엑셀(&E)"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm월간매출.frx":07CC
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   5
+            Left            =   9495
+            TabIndex        =   6
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 닫기(&X)"
+            ForeColor       =   0
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm월간매출.frx":0F46
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   4
+            Left            =   7755
+            TabIndex        =   7
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 출력(&P)"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm월간매출.frx":1FD8
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  '투명
+            Caption         =   "접수년월:"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   180
+            Index           =   39
+            Left            =   60
+            TabIndex        =   3
+            Top             =   135
+            Width           =   810
+         End
+      End
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   420
+         Left            =   15
+         TabIndex        =   8
+         Top             =   15
+         Width           =   15330
+         _ExtentX        =   27040
+         _ExtentY        =   741
+         _Version        =   262144
+         Font3D          =   1
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   "      월간 매출"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "frm월간매출.frx":26D2
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin VB.Image Image 
+            Height          =   480
+            Index           =   0
+            Left            =   0
+            Picture         =   "frm월간매출.frx":28F8
+            Top             =   -15
+            Width           =   765
+         End
+      End
+      Begin FPSpreadADO.fpSpread sprGrid 
+         Height          =   10605
+         Left            =   15
+         TabIndex        =   9
+         Top             =   1215
+         Width           =   6855
+         _Version        =   524288
+         _ExtentX        =   12091
+         _ExtentY        =   18706
+         _StockProps     =   64
+         BackColorStyle  =   1
+         DisplayRowHeaders=   0   'False
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         MaxCols         =   6
+         MaxRows         =   16
+         ScrollBars      =   0
+         SpreadDesigner  =   "frm월간매출.frx":34C2
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel SSPanel3 
+         Height          =   2880
+         Left            =   6885
+         TabIndex        =   10
+         Top             =   1215
+         Width           =   8460
+         _ExtentX        =   14923
+         _ExtentY        =   5080
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin FPSpreadADO.fpSpread sprMileage 
+            Height          =   2775
+            Left            =   45
+            TabIndex        =   11
+            Top             =   45
+            Width           =   5220
+            _Version        =   524288
+            _ExtentX        =   9208
+            _ExtentY        =   4895
+            _StockProps     =   64
+            BorderStyle     =   0
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            GrayAreaBackColor=   16777215
+            MaxCols         =   4
+            MaxRows         =   5
+            RowHeaderDisplay=   0
+            ScrollBars      =   0
+            SpreadDesigner  =   "frm월간매출.frx":4093
+            HighlightHeaders=   1
+            HighlightStyle  =   1
+         End
+         Begin FPSpreadADO.fpSpread sprTotal 
+            Height          =   2775
+            Left            =   5280
+            TabIndex        =   12
+            Top             =   45
+            Width           =   3135
+            _Version        =   524288
+            _ExtentX        =   5530
+            _ExtentY        =   4895
+            _StockProps     =   64
+            BorderStyle     =   0
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            GrayAreaBackColor=   16777215
+            MaxCols         =   2
+            MaxRows         =   5
+            RowHeaderDisplay=   0
+            ScrollBars      =   0
+            SpreadDesigner  =   "frm월간매출.frx":4A84
+            HighlightHeaders=   1
+            HighlightStyle  =   1
+         End
+      End
+      Begin FPSpreadADO.fpSpread sprCloth 
+         Height          =   7335
+         Left            =   6885
+         TabIndex        =   13
+         Top             =   4485
+         Width           =   8460
+         _Version        =   524288
+         _ExtentX        =   14923
+         _ExtentY        =   12938
+         _StockProps     =   64
+         AllowDragDrop   =   -1  'True
+         AllowMultiBlocks=   -1  'True
+         AllowUserFormulas=   -1  'True
+         BackColorStyle  =   1
+         DAutoHeadings   =   0   'False
+         DAutoSave       =   0   'False
+         DAutoSizeCols   =   0
+         DInformActiveRowChange=   0   'False
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   4
+         MaxRows         =   30
+         Protect         =   0   'False
+         ScrollBars      =   2
+         SpreadDesigner  =   "frm월간매출.frx":5243
+         VisibleCols     =   3
+         VisibleRows     =   30
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel SSPanel2 
+         Height          =   360
+         Left            =   6885
+         TabIndex        =   14
+         Top             =   4110
+         Width           =   8460
+         _ExtentX        =   14923
+         _ExtentY        =   635
+         _Version        =   262144
+         Font3D          =   3
+         ForeColor       =   0
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 품목별 집계"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "frm월간매출.frx":597E
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+   End
+End
+Attribute VB_Name = "frm월간매출"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private Sub Data_Display()
+    On Error GoTo ErrRtn
+    
+    With sprGrid
+        For i = 1 To .MaxRows
+            .Row = i
+            
+            .Col = 2: .Text = ""
+            .Col = 3: .Text = ""
+            
+            .Col = 5: .Text = ""
+            .Col = 6: .Text = ""
+        Next i
+    End With
+        
+    With sprMileage
+        For i = 1 To .MaxRows
+            .Row = i
+            
+            .Col = 1: .Text = ""
+            .Col = 3: .Text = ""
+        Next i
+    End With
+        
+    With sprTotal
+        For i = 1 To .MaxRows
+            .Row = i
+            
+            .Col = 1: .Text = ""
+        Next i
+    End With
+        
+    '-----------------------------------------------------------------------------------------
+    '
+    '-----------------------------------------------------------------------------------------
+    Query = "SELECT * FROM TB_일일마감"
+    Query = Query & " WHERE SUBSTRING(마감일자, 1, 7) = '" & Format(dtpDay.Value, "YYYY-MM") & "'"
+    Query = Query & " ORDER BY 마감일자"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+        
+    With sprGrid
+        Do Until ADORs.EOF
+            i = Val(Right(ADORs!마감일자, 2))
+        
+            If i <= 16 Then
+                .Row = i
+                .Col = 2: .Value = ADORs!접수수량
+                .Col = 3: .Value = ADORs!접수금액
+            Else
+                .Row = i - 16
+                .Col = 5: .Value = ADORs!접수수량
+                .Col = 6: .Value = ADORs!접수금액
+            End If
+            
+            'tTAmt = tTAmt + ADORs!접수금액
+            'tTSu = tTSu + ADORs!접수수량
+            'tHAmt = tHAmt + ADORs!본사금액
+            'tAAmt = tAAmt + ADORs!가맹점금액
+            'tBSu = tBSu + ADORs!반품수량
+            'tSSu = tSSu + ADORs!수선수량
+            'tJSu = tJSu + ADORs!재세탁수량
+            'tMil = tMil + Val(ADORs!사용마일리지 & "")
+            
+            ADORs.MoveNext
+        Loop
+        ADORs.Close
+        Set ADORs = Nothing
+    End With
+    
+    '-----------------------------------------------------------------------------------------
+    '
+    '-----------------------------------------------------------------------------------------
+    Query = "SELECT    ISNULL(SUM(접수수량),0)      AS 접수수량"
+    Query = Query & ", ISNULL(SUM(접수금액),0)      AS 접수금액"
+    Query = Query & ", ISNULL(SUM(지사금액),0)      AS 지사금액"
+    Query = Query & ", ISNULL(SUM(가맹점금액),0)    AS 가맹점금액"
+    Query = Query & ", ISNULL(SUM(사용마일리지),0)  AS 사용마일리지"
+    Query = Query & " FROM TB_일일마감"
+    Query = Query & " WHERE SUBSTRING(마감일자, 1, 7) = '" & Format(dtpDay.Value, "YYYY-MM") & "'"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+    
+    With sprMileage
+        .Col = 1
+        
+        
+        .Row = 1: .Text = ADORs!지사금액 & ""     ' 본사
+        .Row = 2: .Text = ADORs!가맹점금액 & ""   ' 가맹점
+        .Row = 3: .Text = CLng(ADORs!접수금액 & "") - CLng(ADORs!사용마일리지 & "")     ' 접수금액
+        .Row = 5: .Text = ADORs!사용마일리지 & "" ' 사용마일리지
+        
+        
+        .Col = 3
+        .Row = 1: .Text = CLng(ADORs!지사금액 & "") + (CLng(ADORs!사용마일리지 & "") * ((100 - 40) / 100))       ' 본사
+        .Row = 2: .Text = CLng(ADORs!가맹점금액 & "") + (CLng(ADORs!사용마일리지 & "") * ((1 - (100 - 40) / 100)))  ' 가맹점
+        .Row = 3: .Text = ADORs!접수금액 & ""     ' 매출액
+    End With
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    '-----------------------------------------------------------------------------------------
+    '
+    '-----------------------------------------------------------------------------------------
+    Query = "SELECT    ISNULL(SUM(접수수량),0)      AS 접수수량"
+    Query = Query & ", ISNULL(SUM(반품수량),0)    AS 반품수량"
+    Query = Query & ", ISNULL(SUM(수선수량),0)    AS 수선수량"
+    Query = Query & ", ISNULL(SUM(재세탁수량),0)  AS 재세탁수량"
+    
+    Query = Query & " FROM TB_일일마감"
+    Query = Query & " WHERE SUBSTRING(마감일자, 1, 7) = '" & Format(dtpDay.Value, "YYYY-MM") & "'"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+    
+    With sprTotal
+        .Col = 1
+        .Row = 1: .Text = ADORs!접수수량 & ""
+        .Row = 2: .Text = ""
+        .Row = 3: .Text = ADORs!반품수량 & ""
+        .Row = 4: .Text = ADORs!수선수량 & ""
+        .Row = 5: .Text = ADORs!재세탁수량 & ""
+    End With
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+End Sub
+
+Private Sub cmdBtn_Click(Index As Integer)
+    Select Case Index
+        Case 3
+            Call Export_Excel(frmMain.cdgExcel, sprGrid)
+        
+        Case 4
+            Rtn = MsgBox("출력 미리보기를 하시겠습니까?", vbQuestion + vbYesNo, "출력")
+            
+            If Rtn = vbYes Then
+                Call Data_Print(True)
+            Else
+                Call Data_Print(False)
+            End If
+            
+        Case 5
+            Unload Me
+    End Select
+End Sub
+
+
+Private Sub Data_Print(Print_PreView As Boolean)
+    On Error GoTo ErrRtn
+    
+    If sprGrid.MaxRows = 0 Then Exit Sub
+
+    If Dir(AppPath & "XML", vbDirectory) = "" Then
+        MkDir AppPath & "XML"
+    End If
+
+    Open AppPath & "XML\월간매출.XML" For Output As #1
+    
+    Print #1, "<?xml version=""1.0"" encoding=""EUC-KR""?>"
+    Print #1, "<root>"
+    
+          XML = "    <조건>"
+    XML = XML & "        <접수년월>접수년월 : " & Format(dtpDay.Value, "YYYY년 MM월") & "</접수년월>"
+    XML = XML & "        <가맹점>크린에이드 - " & Func_Replace(가맹점정보.가맹점명) & "</가맹점>"
+    XML = XML & "   </조건>"
+    Print #1, XML
+    
+    With sprGrid
+        For i = 1 To .MaxRows
+            .Row = i
+            
+                             XML = "    <Data>"
+            .Col = 1:  XML = XML & "        <일자1>" & Func_Replace(.Text) & "</일자1>"
+            .Col = 2:  XML = XML & "        <수량1>" & Func_Replace(.Text) & " 점</수량1>"
+            .Col = 3:  XML = XML & "        <매출1>" & Func_Replace(.Text) & " 원</매출1>"
+            .Col = 4:  XML = XML & "        <일자2>" & Func_Replace(.Text) & "</일자2>"
+            .Col = 5:  XML = XML & "        <수량2>" & Func_Replace(.Text) & " 점</수량2>"
+            .Col = 6:  XML = XML & "        <매출2>" & Func_Replace(.Text) & " 원</매출2>"
+                       XML = XML & "   </Data>"
+                       Print #1, XML
+        Next i
+    End With
+          
+    With sprMileage
+        XML = "    <마일리지>"
+        
+        .Row = 1
+        .Col = 1: XML = XML & "        <지사마일리지1>" & .Text & " 원</지사마일리지1>"
+        .Col = 3: XML = XML & "        <지사마일리지2>" & .Text & " 원</지사마일리지2>"
+    
+        .Row = 2
+        .Col = 1: XML = XML & "        <가맹점마일리지1>" & .Text & " 원</가맹점마일리지1>"
+        .Col = 3: XML = XML & "        <가맹점마일리지2>" & .Text & " 원</가맹점마일리지2>"
+    
+        .Row = 3
+        .Col = 1: XML = XML & "        <전체마일리지1>" & .Text & " 원</전체마일리지1>"
+        .Col = 3: XML = XML & "        <전체마일리지2>" & .Text & " 원</전체마일리지2>"
+    
+        .Row = 5
+        .Col = 1: XML = XML & "        <마일리지>" & .Text & " 원</마일리지>"
+    
+        XML = XML & "   </마일리지>"
+        Print #1, XML
+    End With
+    
+    '
+    With sprTotal
+        XML = "    <수량>"
+        
+        .Col = 1
+        .Row = 1: XML = XML & "        <총점수>" & .Text & " 점</총점수>"
+        .Row = 2: XML = XML & "        <정상수량>" & .Text & " 점</정상수량>"
+        .Row = 3: XML = XML & "        <반품수량>" & .Text & " 점</반품수량>"
+        .Row = 4: XML = XML & "        <수선수량>" & .Text & " 점</수선수량>"
+        .Row = 5: XML = XML & "        <재세탁>" & .Text & " 점</재세탁>"
+    
+        XML = XML & "   </수량>"
+        Print #1, XML
+    End With
+    
+    Print #1, "</root>"
+    Close #1
+    
+    If Print_PreView = True Then
+        With rpt월간매출
+            .dc.FileURL = AppPath & "XML\월간매출.XML"
+            .Show 1
+        End With
+    Else
+        With rpt월간매출
+            .dc.FileURL = AppPath & "XML\월간매출.XML"
+            .PrintReport False
+        End With
+        
+        Unload rpt월간매출
+    End If
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+End Sub
+
+Private Sub cmdList_Click()
+    Call Data_Display
+    
+    Call 접수집계_Display
+End Sub
+
+Private Sub dtpDay_Change()
+    Call Data_Display
+    Call 접수집계_Display
+End Sub
+
+Private Sub Form_Load()
+    With sprGrid
+        .MaxRows = 16
+        .RowHeight(-1) = 23
+                
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeNormal
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+
+    With sprCloth
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeExtended
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+    
+    dtpDay.Value = Format(Date, "YYYY-MM")
+End Sub
+
+Private Sub Form_Resize()
+    On Error Resume Next
+    
+    cmdBtn(5).Left = Me.Width - cmdBtn(5).Width - 200
+End Sub
+
+Private Sub 접수집계_Display()
+    On Error GoTo ErrRtn
+    
+    Query = "SELECT   SUBSTRING(A.의류코드,1,2) AS 의류분류코드"
+    Query = Query & ", B.의류분류명"
+    Query = Query & ", COUNT(A.택번호) AS 수량"
+    Query = Query & ", SUM(A.금액) AS 금액"
+    Query = Query & " FROM TB_입출고 AS A LEFT OUTER JOIN TB_의류분류 AS B ON SUBSTRING(A.의류코드,1,2) = B.의류분류코드"
+    Query = Query & " WHERE SUBSTRING(A.접수일자,1,7) = '" & Format(dtpDay.Value, "YYYY-MM") & "' AND 판매취소 <> 'Y'"
+    Query = Query & " GROUP BY SUBSTRING(A.의류코드,1,2), B.의류분류명"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    With sprCloth
+        .MaxRows = 0
+        .ReDraw = False
+        
+        Do Until ADORs.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+
+            .Col = 1: .Text = ADORs!의류분류코드 & ""
+            .Col = 2: .Text = ADORs!의류분류명 & ""
+            .Col = 3: .Text = ADORs!수량 & ""
+            .Col = 4: .Text = ADORs!금액 & ""
+            
+            ADORs.MoveNext
+        Loop
+        ADORs.Close
+        Set ADORs = Nothing
+        
+        .SortKey(1) = 3
+        .SortKeyOrder(1) = SortKeyOrderDescending
+        .Sort -1, -1, -1, -1, SortByRow
+
+        .ReDraw = True
+    End With
+        
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+End Sub

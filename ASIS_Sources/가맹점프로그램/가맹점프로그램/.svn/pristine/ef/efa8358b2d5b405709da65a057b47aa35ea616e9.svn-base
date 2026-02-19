@@ -1,0 +1,82 @@
+VERSION 5.00
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Begin VB.Form frmInputEventCode 
+   BorderStyle     =   1  '단일 고정
+   Caption         =   "할인코드 입력"
+   ClientHeight    =   1410
+   ClientLeft      =   12075
+   ClientTop       =   6645
+   ClientWidth     =   4965
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   1410
+   ScaleWidth      =   4965
+   Begin XtremeSuiteControls.PushButton cmdAction 
+      Height          =   660
+      Left            =   3255
+      TabIndex        =   1
+      Top             =   660
+      Width           =   1590
+      _Version        =   851970
+      _ExtentX        =   2805
+      _ExtentY        =   1164
+      _StockProps     =   79
+      Caption         =   "적용"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림"
+         Size            =   9
+         Charset         =   129
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Appearance      =   6
+   End
+   Begin XtremeSuiteControls.FlatEdit txtCode 
+      Height          =   450
+      Left            =   105
+      TabIndex        =   0
+      Top             =   120
+      Width           =   4740
+      _Version        =   851970
+      _ExtentX        =   8361
+      _ExtentY        =   794
+      _StockProps     =   77
+      BackColor       =   -2147483643
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림"
+         Size            =   14.25
+         Charset         =   129
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Alignment       =   2
+   End
+End
+Attribute VB_Name = "frmInputEventCode"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Public Rate As String
+Public EventCode As String
+Private Sub cmdAction_Click()
+    Rate = GetEventRate(txtCode.Text)
+    If InStr(Rate, "ERROR") > 0 Then
+        MsgBox (Replace(Rate, "ERROR ", ""))
+    Else
+        EventCode = txtCode.Text
+        Unload Me
+    End If
+End Sub
+
+Private Sub txtCode_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 13 Then
+    cmdAction_Click
+    End If
+End Sub

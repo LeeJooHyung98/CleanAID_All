@@ -1,0 +1,2208 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Begin VB.Form frmMigrationNew 
+   BackColor       =   &H00D9E5E9&
+   BorderStyle     =   1  '단일 고정
+   Caption         =   "데이터 가져오기"
+   ClientHeight    =   8985
+   ClientLeft      =   15375
+   ClientTop       =   5475
+   ClientWidth     =   6990
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "frmMigrationNew.frx":0000
+   LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   8985
+   ScaleWidth      =   6990
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   8985
+      Left            =   0
+      TabIndex        =   1
+      Top             =   0
+      Width           =   6990
+      _ExtentX        =   12330
+      _ExtentY        =   15849
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "frmMigrationNew.frx":08CA
+      Begin XtremeSuiteControls.TabControl TabControl 
+         Height          =   7425
+         Left            =   15
+         TabIndex        =   8
+         Top             =   1545
+         Width           =   6960
+         _Version        =   851970
+         _ExtentX        =   12277
+         _ExtentY        =   13097
+         _StockProps     =   68
+         Appearance      =   3
+         Color           =   16
+         PaintManager.BoldSelected=   -1  'True
+         PaintManager.ShowIcons=   -1  'True
+         PaintManager.ButtonMargin=   "3,2,3,2"
+         ItemCount       =   1
+         Item(0).Caption =   "서버 -> 가맹점 DB 생성"
+         Item(0).ControlCount=   4
+         Item(0).Control(0)=   "TabControlPage1"
+         Item(0).Control(1)=   "TabControlPage"
+         Item(0).Control(2)=   "TabControlPage2"
+         Item(0).Control(3)=   "chkInput"
+         Begin Threed.SSCheck chkInput 
+            Height          =   255
+            Left            =   3180
+            TabIndex        =   31
+            Top             =   60
+            Width           =   2955
+            _ExtentX        =   5212
+            _ExtentY        =   450
+            _Version        =   262144
+            Caption         =   "입출고 정보 다시 수신"
+         End
+         Begin XtremeSuiteControls.TabControlPage TabControlPage2 
+            Height          =   6975
+            Left            =   30
+            TabIndex        =   19
+            Top             =   420
+            Width           =   6900
+            _Version        =   851970
+            _ExtentX        =   12171
+            _ExtentY        =   12303
+            _StockProps     =   1
+            Page            =   2
+            Begin FPSpreadADO.fpSpread sprRestore 
+               Height          =   5355
+               Left            =   60
+               TabIndex        =   20
+               Top             =   75
+               Width           =   6675
+               _Version        =   524288
+               _ExtentX        =   11774
+               _ExtentY        =   9446
+               _StockProps     =   64
+               BackColorStyle  =   1
+               DAutoCellTypes  =   0   'False
+               DAutoHeadings   =   0   'False
+               DAutoSave       =   0   'False
+               DisplayRowHeaders=   0   'False
+               EditModeReplace =   -1  'True
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               FormulaSync     =   0   'False
+               GrayAreaBackColor=   16777215
+               GridSolid       =   0   'False
+               MaxCols         =   6
+               MaxRows         =   0
+               ScrollBars      =   2
+               SpreadDesigner  =   "frmMigrationNew.frx":093C
+               UserResize      =   1
+               VisibleCols     =   4
+               Appearance      =   1
+               HighlightHeaders=   1
+               HighlightStyle  =   1
+               ScrollBarStyle  =   2
+            End
+            Begin XtremeSuiteControls.PushButton cmdBtn 
+               Height          =   1200
+               Index           =   1
+               Left            =   75
+               TabIndex        =   22
+               Top             =   5490
+               Width           =   1485
+               _Version        =   851970
+               _ExtentX        =   2619
+               _ExtentY        =   2117
+               _StockProps     =   79
+               Caption         =   " 자료 수신"
+               BackColor       =   -2147483633
+               Appearance      =   6
+               Picture         =   "frmMigrationNew.frx":111B
+            End
+            Begin VB.Label Label2 
+               Caption         =   "2. 가장 마지막으로 최신 지사를 수신하되 지사코드를 입력하지 않고 수신하여 주어야 다른 자료도 같이 수신 됩니다."
+               ForeColor       =   &H000000FF&
+               Height          =   615
+               Index           =   1
+               Left            =   1770
+               TabIndex        =   30
+               Top             =   6090
+               Width           =   4905
+            End
+            Begin VB.Label Label2 
+               Caption         =   "1. 지사 이동이 있을 경우 반드시 가장 이전 지사코드순으로 입력후 먼저 작료 수신을 하여 주어야함."
+               ForeColor       =   &H000000FF&
+               Height          =   375
+               Index           =   0
+               Left            =   1740
+               TabIndex        =   27
+               Top             =   5550
+               Width           =   4905
+            End
+         End
+         Begin XtremeSuiteControls.TabControlPage TabControlPage 
+            Height          =   6975
+            Left            =   30
+            TabIndex        =   10
+            Top             =   420
+            Width           =   6900
+            _Version        =   851970
+            _ExtentX        =   12171
+            _ExtentY        =   12303
+            _StockProps     =   1
+            Page            =   1
+            Begin VB.CommandButton Command1 
+               Caption         =   "Command1"
+               Height          =   480
+               Left            =   5460
+               TabIndex        =   18
+               Top             =   3975
+               Width           =   1170
+            End
+            Begin XtremeSuiteControls.PushButton btnMisu 
+               Height          =   600
+               Left            =   3945
+               TabIndex        =   12
+               Top             =   90
+               Width           =   2745
+               _Version        =   851970
+               _ExtentX        =   4842
+               _ExtentY        =   1058
+               _StockProps     =   79
+               Caption         =   " 고객 미수금액 변환작업"
+               BackColor       =   -2147483633
+               Enabled         =   0   'False
+               UseVisualStyle  =   -1  'True
+               Picture         =   "frmMigrationNew.frx":1B2D
+            End
+            Begin XtremeSuiteControls.PushButton btnDC 
+               Height          =   600
+               Left            =   3945
+               TabIndex        =   14
+               Top             =   780
+               Visible         =   0   'False
+               Width           =   2745
+               _Version        =   851970
+               _ExtentX        =   4842
+               _ExtentY        =   1058
+               _StockProps     =   79
+               Caption         =   " 할인정보 변환작업"
+               BackColor       =   -2147483633
+               Enabled         =   0   'False
+               UseVisualStyle  =   -1  'True
+               Picture         =   "frmMigrationNew.frx":253F
+            End
+            Begin XtremeSuiteControls.PushButton btnLastReceipt 
+               Height          =   600
+               Left            =   3945
+               TabIndex        =   16
+               Top             =   1470
+               Width           =   2745
+               _Version        =   851970
+               _ExtentX        =   4842
+               _ExtentY        =   1058
+               _StockProps     =   79
+               Caption         =   " 고객 최종거래일자 변환"
+               BackColor       =   -2147483633
+               Enabled         =   0   'False
+               UseVisualStyle  =   -1  'True
+               Picture         =   "frmMigrationNew.frx":2F51
+            End
+            Begin VB.Label Label 
+               BackStyle       =   0  '투명
+               Caption         =   "고객별 최종거래일자 변환오류 수정"
+               ForeColor       =   &H00FF0000&
+               Height          =   375
+               Index           =   4
+               Left            =   120
+               TabIndex        =   17
+               Top             =   1590
+               Width           =   3735
+            End
+            Begin VB.Label Label 
+               BackStyle       =   0  '투명
+               Caption         =   "2010-12-15 일자로 설치한 가맹점에서 할인정보에 이상이 있는 곳만 작업하세요."
+               ForeColor       =   &H000000C0&
+               Height          =   375
+               Index           =   3
+               Left            =   120
+               TabIndex        =   15
+               Top             =   900
+               Visible         =   0   'False
+               Width           =   3735
+            End
+            Begin VB.Label Label 
+               BackStyle       =   0  '투명
+               Caption         =   "2010-12-15 일자로 설치한 가맹점에서 고객 미수금에 이상이 있는 곳만 작업하세요."
+               ForeColor       =   &H00FF0000&
+               Height          =   375
+               Index           =   2
+               Left            =   120
+               TabIndex        =   13
+               Top             =   210
+               Width           =   3735
+            End
+         End
+         Begin XtremeSuiteControls.TabControlPage TabControlPage1 
+            Height          =   6975
+            Left            =   30
+            TabIndex        =   9
+            Top             =   420
+            Width           =   6900
+            _Version        =   851970
+            _ExtentX        =   12171
+            _ExtentY        =   12303
+            _StockProps     =   1
+            Page            =   0
+            Begin VB.TextBox txtFilePath 
+               Appearance      =   0  '평면
+               BeginProperty Font 
+                  Name            =   "Tahoma"
+                  Size            =   9
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   585
+               IMEMode         =   10  '한글 
+               Left            =   780
+               Locked          =   -1  'True
+               MultiLine       =   -1  'True
+               TabIndex        =   24
+               Top             =   90
+               Width           =   4710
+            End
+            Begin FPSpreadADO.fpSpread sprGrid 
+               Height          =   4695
+               Left            =   60
+               TabIndex        =   11
+               Top             =   735
+               Width           =   6675
+               _Version        =   524288
+               _ExtentX        =   11774
+               _ExtentY        =   8281
+               _StockProps     =   64
+               BackColorStyle  =   1
+               DAutoCellTypes  =   0   'False
+               DAutoHeadings   =   0   'False
+               DAutoSave       =   0   'False
+               DisplayRowHeaders=   0   'False
+               EditModeReplace =   -1  'True
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               FormulaSync     =   0   'False
+               GrayAreaBackColor=   16777215
+               GridSolid       =   0   'False
+               MaxCols         =   6
+               MaxRows         =   0
+               ScrollBars      =   2
+               SpreadDesigner  =   "frmMigrationNew.frx":3963
+               UserResize      =   1
+               VisibleCols     =   4
+               Appearance      =   1
+               HighlightHeaders=   1
+               HighlightStyle  =   1
+               ScrollBarStyle  =   2
+            End
+            Begin XtremeSuiteControls.PushButton cmdBtn 
+               Height          =   450
+               Index           =   0
+               Left            =   75
+               TabIndex        =   21
+               Top             =   5490
+               Width           =   1485
+               _Version        =   851970
+               _ExtentX        =   2619
+               _ExtentY        =   794
+               _StockProps     =   79
+               Caption         =   " 자료 변환"
+               BackColor       =   -2147483633
+               Enabled         =   0   'False
+               Appearance      =   6
+               Picture         =   "frmMigrationNew.frx":4142
+            End
+            Begin XtremeSuiteControls.PushButton btnFileOpen 
+               Height          =   600
+               Left            =   5535
+               TabIndex        =   26
+               Top             =   75
+               Width           =   1200
+               _Version        =   851970
+               _ExtentX        =   2117
+               _ExtentY        =   1058
+               _StockProps     =   79
+               Caption         =   "DB 파일열기"
+               BackColor       =   -2147483633
+               TextAlignment   =   10
+               Appearance      =   6
+               Picture         =   "frmMigrationNew.frx":4B54
+               ImageAlignment  =   6
+               TextImageRelation=   0
+            End
+            Begin XtremeSuiteControls.CommonDialog CommonDialog1 
+               Left            =   255
+               Top             =   390
+               _Version        =   851970
+               _ExtentX        =   423
+               _ExtentY        =   423
+               _StockProps     =   4
+            End
+            Begin VB.Label Label 
+               Alignment       =   1  '오른쪽 맞춤
+               BackStyle       =   0  '투명
+               Caption         =   "파일명:"
+               Height          =   195
+               Index           =   0
+               Left            =   60
+               TabIndex        =   25
+               Top             =   135
+               Width           =   675
+            End
+         End
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   660
+         Index           =   1
+         Left            =   15
+         TabIndex        =   6
+         Top             =   870
+         Width           =   6960
+         _ExtentX        =   12277
+         _ExtentY        =   1164
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin VB.TextBox txtTime 
+            Height          =   345
+            Left            =   3390
+            TabIndex        =   28
+            Text            =   "300"
+            Top             =   150
+            Width           =   555
+         End
+         Begin VB.TextBox txtMstCode 
+            Alignment       =   2  '가운데 맞춤
+            BackColor       =   &H0080FFFF&
+            BeginProperty Font 
+               Name            =   "Arial"
+               Size            =   14.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   450
+            Left            =   945
+            TabIndex        =   0
+            Top             =   90
+            Width           =   975
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   510
+            Index           =   2
+            Left            =   5565
+            TabIndex        =   23
+            Top             =   75
+            Width           =   1215
+            _Version        =   851970
+            _ExtentX        =   2143
+            _ExtentY        =   900
+            _StockProps     =   79
+            Caption         =   " 닫기(&X)"
+            BackColor       =   -2147483633
+            TextAlignment   =   1
+            Appearance      =   6
+            Picture         =   "frmMigrationNew.frx":50EE
+         End
+         Begin VB.Label Label3 
+            AutoSize        =   -1  'True
+            Caption         =   "연결시간(초)"
+            Height          =   180
+            Left            =   2310
+            TabIndex        =   29
+            Top             =   240
+            Width           =   1080
+         End
+         Begin VB.Label Label 
+            Alignment       =   1  '오른쪽 맞춤
+            Caption         =   "지사코드:"
+            Height          =   165
+            Index           =   1
+            Left            =   30
+            TabIndex        =   7
+            Top             =   225
+            Width           =   855
+         End
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   840
+         Index           =   0
+         Left            =   15
+         TabIndex        =   2
+         Top             =   15
+         Width           =   6960
+         _ExtentX        =   12277
+         _ExtentY        =   1482
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin VB.Image Image1 
+            Height          =   360
+            Left            =   90
+            Picture         =   "frmMigrationNew.frx":5B00
+            Top             =   105
+            Width           =   360
+         End
+         Begin VB.Label Label1 
+            BackStyle       =   0  '투명
+            Caption         =   "1. 입력되어 있는 모든 자료가 삭제됩니다."
+            ForeColor       =   &H00FF0000&
+            Height          =   240
+            Index           =   0
+            Left            =   765
+            TabIndex        =   5
+            Top             =   75
+            Width           =   5700
+         End
+         Begin VB.Label Label1 
+            BackStyle       =   0  '투명
+            Caption         =   "2. 데이터를 가져오기전에 모든 작업을 종료해 주세요."
+            ForeColor       =   &H00FF0000&
+            Height          =   240
+            Index           =   1
+            Left            =   765
+            TabIndex        =   4
+            Top             =   585
+            Width           =   5610
+         End
+         Begin VB.Label Label1 
+            BackStyle       =   0  '투명
+            Caption         =   "주의! 자료 복구가 불가능합니다."
+            ForeColor       =   &H00404040&
+            Height          =   240
+            Index           =   2
+            Left            =   1005
+            TabIndex        =   3
+            Top             =   315
+            Width           =   5415
+         End
+      End
+   End
+End
+Attribute VB_Name = "frmMigrationNew"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Dim MDBCon  As ADODB.Connection
+
+Dim 가맹점코드 As String
+    
+'------------------------
+' TB_입출고
+'------------------------
+Dim 접수번호   As Long
+Dim 입고일     As String
+Dim 고객번호   As String
+Dim 번호       As String
+
+Dim 접수수량   As Integer
+Dim 접수금액   As Long
+Dim 입금액     As Long
+Dim 의류명     As String
+
+Dim 세탁마진   As Integer
+Dim 외주마진   As Integer
+Dim 수선마진   As Integer
+
+
+Private Sub cmdBtn_Click(Index As Integer)
+    On Error GoTo ErrRtn
+    
+    Dim sDatabaseName   As String
+    Dim nMsgResult      As VbMsgBoxResult
+    
+    Select Case Index
+        Case 0
+
+
+        Case 1:
+            
+            Rtn = MsgBox("서버로부터 자료를 수신하겠습니까?", vbQuestion + vbYesNo + vbDefaultButton1, "확인")
+
+            If Rtn = vbNo Then Exit Sub
+            
+            ' 이전 작업 내용이 있을 경우 처음부터 다시 받기 위하여 초기화 한다.
+            ' 이어서 받기는 해당 오류가 나타났을 경우에 시도 한다.
+            Call SetIniStr("RecvAction", "TB_입출고", "", iniFile)
+                    
+            cmdBtn(1).Enabled = False
+            cmdBtn(2).Enabled = False
+            
+            If IsNumeric(txtTime.Text) = True Then
+                m_CommandTimeOut = txtTime.Text
+            End If
+            
+            ' 특정지사코드가 있을 경우 해당 지사에서 자료를 가지고 온다.
+            ' 지사 이동이 있었을 경우 이전 지사 자료 수신때문에
+            If txtMstCode <> "" Then
+                '---------------------------------------------------------
+                ' 가맹점 지사 서버에서 다운로드 하는 정보
+                sDatabaseName = "LAUNDRY" & txtMstCode
+                Call Dn_입출고정보(sDatabaseName)
+                
+                If chkInput.Value <> ssCBChecked Then
+                    Call Dn_매출정보(sDatabaseName)
+                    Call Dn_현금영수증정보(sDatabaseName)
+                    Call Dn_신용카드승인정보(sDatabaseName)
+                    Call Dn_이용실적정보(sDatabaseName)
+                    Call Dn_가맹점입금정보(sDatabaseName)
+                    Call Dn_부자재정보(sDatabaseName)
+                    Call Dn_미수금정보(sDatabaseName)
+                End If
+            
+            ' 특정지사가 없을 경우 해당 지사에서 자료를 가저온다.
+            Else
+                '---------------------------------------------------------
+                ' 기본 서버에서 다운로드 하는 정보
+                If chkInput.Value <> ssCBChecked Then
+                    sDatabaseName = "LAUNDRY1000"
+                
+                    Call Dn_공지사항(sDatabaseName)
+                    Call Dn_고객정보(sDatabaseName)
+                    Call Dn_일일마감(sDatabaseName)
+                    'Call Dn_요일할인정보(sDatabaseName)
+                    'Call Dn_할인정보(sDatabaseName)
+                    Call Dn_사고품정보(sDatabaseName)
+                End If
+                
+                '---------------------------------------------------------
+                ' 가맹점 지사 서버에서 다운로드 하는 정보
+                sDatabaseName = "LAUNDRY" & 가맹점정보.지사코드
+                Call Dn_입출고정보(sDatabaseName)
+                
+                If chkInput.Value <> ssCBChecked Then
+                    Call Dn_매출정보(sDatabaseName)
+                    Call Dn_현금영수증정보(sDatabaseName)
+                    Call Dn_신용카드승인정보(sDatabaseName)
+                    Call Dn_이용실적정보(sDatabaseName)
+                    Call Dn_가맹점입금정보(sDatabaseName)
+                    Call Dn_부자재정보(sDatabaseName)
+                    Call Dn_미수금정보(sDatabaseName)
+                End If
+            End If
+            
+            MsgBox "자료 수신 완료"
+            cmdBtn(1).Enabled = True
+            cmdBtn(2).Enabled = True
+        
+        
+        Case 2: Unload Me
+    End Select
+
+    Exit Sub
+
+ErrRtn:
+     
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    cmdBtn(2).Enabled = True
+
+    Screen.MousePointer = 0
+End Sub
+ 
+Private Sub Form_Load()
+    
+    Me.Top = ((frmMain.Height - Me.Height) / 2) + frmMain.Top
+    Me.Left = ((frmMain.Width - Me.Width) / 2) + frmMain.Left
+    
+End Sub
+
+Private Sub Dn_공지사항(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 1000번에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "공지사항 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+        
+    Screen.MousePointer = vbHourglass
+    '-------------------------------------------------------------------
+    ' 공지사항
+    '-------------------------------------------------------------------
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "공지사항"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    nCnt = 0
+
+    Query = "SELECT * FROM TB_공지사항"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & "   AND 공지구분 IN ('2','3')"
+    Query = Query & " ORDER BY 작성일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+        
+        '---------------------------------------------------------
+        '
+        '---------------------------------------------------------
+        Query = "SELECT * FROM TB_공지사항"
+        Query = Query & " WHERE 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Query = Query & "   AND 공지구분   = '" & ADORs!공지구분 & "'"
+        Query = Query & "   AND 작성일자   = '" & ADORs!작성일자 & "'"
+        Query = Query & "   AND 문서번호   =  " & ADORs!문서번호
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""     '1
+        SUBRs!공지구분 = ADORs!공지구분 & ""         '2
+        SUBRs!작성일자 = ADORs!작성일자 & ""         '3
+        SUBRs!문서번호 = ADORs!문서번호 & ""         '4
+        SUBRs!시작일자 = ADORs!시작일자 & ""         '5
+        SUBRs!종료일자 = ADORs!종료일자 & ""         '6
+        SUBRs!공지내용 = ADORs!공지내용 & ""         '7
+        SUBRs!수신여부 = ADORs!수신여부 & ""         '8
+        SUBRs!수신일자 = ADORs!수신일자 & ""         '9
+        SUBRs!파일명 = ADORs!파일명 & ""         '9
+
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "공지사항 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+
+Private Sub Dn_고객정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 1000번에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "고객정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+    '===========================================================
+    ' 고객
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "고객 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+    
+    nCnt = 0
+                
+    Query = "SELECT * FROM TB_고객정보"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 고객코드 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+        
+        '---------------------------------------------------------
+        ' 고객정보
+        '---------------------------------------------------------
+        Query = "SELECT * FROM TB_고객정보"
+        Query = Query & " WHERE 고객코드   = '" & ADORs!고객코드 & "'"
+        Query = Query & "   AND 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""                 '1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""             '2
+        SUBRs!고객코드 = ADORs!고객코드 & ""                 '3
+        SUBRs!성명 = ADORs!성명 & ""                         '4
+        SUBRs!전화번호 = ADORs!전화번호 & ""                 '5
+        SUBRs!휴대전화 = ADORs!휴대전화 & ""                 '6
+        SUBRs!주소 = ADORs!주소 & ""                         '7
+        SUBRs!카드번호 = ADORs!카드번호 & ""                 '8
+        SUBRs!문자발송여부 = ADORs!문자발송여부 & ""         '9
+        SUBRs!등록일자 = ADORs!등록일자 & ""                 '10
+        SUBRs!메모 = ADORs!메모 & ""                         '11
+        SUBRs!고객등급코드 = ADORs!고객등급코드 & ""         '12
+        SUBRs!수정일자 = ADORs!수정일자 & ""                 '13
+        
+        SUBRs!접수금액 = ADORs!접수금액 & ""                 '14
+        SUBRs!현금입금 = ADORs!현금입금 & ""                 '15
+        SUBRs!카드입금 = ADORs!카드입금 & ""                 '16
+        SUBRs!사용마일리지 = ADORs!사용마일리지 & ""         '17
+        SUBRs!쿠폰금액 = ADORs!쿠폰금액 & ""                 '18
+        SUBRs!세트할인 = ADORs!세트할인 & ""                 '19
+        SUBRs!에누리 = ADORs!에누리 & ""                     '20
+        
+        SUBRs!미수금액 = ADORs!미수금액 & ""                 '21
+        SUBRs!이용횟수 = ADORs!이용횟수 & ""                 '22
+        SUBRs!총접수금액 = ADORs!총접수금액 & ""             '23
+        SUBRs!누적마일리지 = ADORs!누적마일리지 & ""         '24
+        SUBRs!사용가능마일리지 = ADORs!사용가능마일리지 & "" '25
+        
+        If ADORs!삭제 = False Then
+            SUBRs!삭제 = 0                                   '26
+        Else
+            SUBRs!삭제 = 1                                   '26
+        End If
+        
+        SUBRs!최종거래일자 = ADORs!최종거래일자 & ""         '28
+        SUBRs!초기미수금 = ADORs!초기미수금 & ""             '
+        SUBRs!이전고객 = ADORs!이전고객 & ""                 '
+        
+        SUBRs!본사전송여부 = "Y"         '27
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "고객정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+Private Sub Dn_일일마감(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 1000번에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "일일마감 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+        
+    Screen.MousePointer = vbHourglass
+        
+    '===========================================================
+    ' TB_일일마감
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "일일마감 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    nCnt = 0
+                        
+    Query = "SELECT * FROM TB_일일마감"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 마감일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+        
+        Query = "SELECT * FROM TB_일일마감"
+        Query = Query & " WHERE 마감일자 = '" & Format(ADORs!마감일자, "YYYY-MM-DD") & "'"
+        Query = Query & "   AND 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""                       '1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""                   '2
+        SUBRs!마감일자 = Format(ADORs!마감일자, "YYYY-MM-DD") & "" '3
+        SUBRs!접수금액 = ADORs!접수금액 & ""                       '4
+        SUBRs!접수수량 = ADORs!접수수량 & ""                       '5
+        SUBRs!출고수량 = ADORs!출고수량 & ""                       '6
+        SUBRs!반품수량 = ADORs!반품수량 & ""                       '7
+        SUBRs!재세탁수량 = ADORs!재세탁수량 & ""                   '8
+        SUBRs!수선금액 = ADORs!수선금액 & ""                       '9
+        SUBRs!수선수량 = ADORs!수선수량 & ""                       '10
+        SUBRs!판매구분 = ADORs!판매구분 & ""                       '11
+        SUBRs!시작택번호 = ADORs!시작택번호 & ""                   '12
+        SUBRs!종료택번호 = ADORs!종료택번호 & ""                  '13
+        SUBRs!쿠폰금액 = ADORs!쿠폰금액 & ""                      '14
+        SUBRs!쿠폰건수 = ADORs!쿠폰건수 & ""                      '15
+        SUBRs!발생마일리지 = ADORs!발생마일리지 & ""              '16
+        SUBRs!사용마일리지 = ADORs!사용마일리지 & ""              '17
+        SUBRs!삭제마일리지 = ADORs!삭제마일리지 & ""              '18
+        SUBRs!현금입금 = ADORs!현금입금 & ""                      '19
+        SUBRs!카드금액 = ADORs!카드금액 & ""                      '20
+        SUBRs!카드건수 = ADORs!카드건수 & ""                      '21
+        SUBRs!반품환불금액 = ADORs!반품환불금액 & ""              '22
+        SUBRs!반품환불건수 = ADORs!반품환불건수 & ""              '23
+        SUBRs!세탁환불금액 = ADORs!세탁환불금액 & ""              '24
+        SUBRs!세탁환불건수 = ADORs!세탁환불건수 & ""              '25
+        SUBRs!삼성카드할인금액 = ADORs!삼성카드할인금액 & ""      '26
+        SUBRs!삼성카드할인건수 = ADORs!삼성카드할인건수 & ""      '27
+        SUBRs!삼성카드할인고객수 = ADORs!삼성카드할인고객수 & ""  '28
+        SUBRs!근무자명 = ADORs!근무자명 & ""                      '29
+        SUBRs!지사금액 = ADORs!지사금액 & ""                      '30
+        SUBRs!가맹점금액 = ADORs!가맹점금액 & ""                 '31
+        SUBRs!운동화금액 = ADORs!운동화금액 & ""                 '32
+        SUBRs!운동화건수 = ADORs!운동화건수 & ""                 '33
+        SUBRs!운동화비율 = ADORs!운동화비율 & ""                 '34
+        SUBRs!카페트금액 = ADORs!카페트금액 & ""                 '35
+        SUBRs!카페트건수 = ADORs!카페트건수 & ""                 '36
+        SUBRs!명품세탁금액 = ADORs!명품세탁금액 & ""             '37
+        SUBRs!명품세탁건수 = ADORs!명품세탁건수 & ""             '38
+        SUBRs!명품세탁비율 = ADORs!명품세탁비율 & ""             '39
+        SUBRs!명품염색금액 = ADORs!명품염색금액 & ""             '40
+        SUBRs!명품염색건수 = ADORs!명품염색건수 & ""             '41
+        SUBRs!명품염색비율 = ADORs!명품염색비율 & ""             '42
+        SUBRs!마감여부 = ADORs!마감여부 & ""                     '43
+        
+        SUBRs!로열티정보1 = ADORs!로열티정보1 & ""
+        SUBRs!로열티정보2 = ADORs!로열티정보2 & ""
+        SUBRs!수수료정보 = ADORs!수수료정보 & ""
+        SUBRs!반품환불지사금액 = ADORs!반품환불지사금액
+        SUBRs!세탁환불지사금액 = ADORs!세탁환불지사금액
+        
+        SUBRs!미수카드건수 = ADORs!미수카드건수
+        SUBRs!미수카드금액 = ADORs!미수카드금액
+        
+        SUBRs!카드취소건수 = ADORs!카드취소건수
+        SUBRs!카드취소금액 = ADORs!카드취소금액
+        
+        SUBRs!로열티금액1 = ADORs!로열티금액1
+        SUBRs!로열티금액2 = ADORs!로열티금액2
+        SUBRs!수수료승인금액 = ADORs!수수료승인금액
+        SUBRs!수수료취소금액 = ADORs!수수료취소금액
+        
+        SUBRs!본사전송여부 = "Y"                                  '44 ADORs!본사전송여부
+        
+        SUBRs.Update
+        SUBRs.Close:    Set SUBRs = Nothing
+                            
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "일일마감 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+Private Sub Dn_요일할인정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 1000번에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "요일할인정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+    '-------------------------------------------------------------------
+    ' TB_가맹점요일할인 - 크린에이드 서버에서 수신
+    ' 2012-07-04일 추가
+    '-------------------------------------------------------------------
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "가맹점요일할인 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    nCnt = 0
+    
+    Query = "SELECT    시작일자"
+    Query = Query & ", 종료일자"
+    Query = Query & ", 요일"
+    Query = Query & ", 의류코드"
+    Query = Query & ", 의류명"
+    Query = Query & ", ISNULL(금액,0)     AS 금액"
+    Query = Query & ", ISNULL(할인금액,0) AS 할인금액"
+    Query = Query & ", ISNULL(할인율,0)   AS 할인율"
+    Query = Query & " FROM TB_가맹점요일할인"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockOptimistic
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_요일할인 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_요일할인"
+        Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+        Query = Query & "   AND 요일     = '" & ADORs!요일 & "'"
+        Query = Query & "   AND 의류코드 = '" & ADORs!의류코드 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!시작일자 = Format(ADORs!시작일자, "YYYY-MM-DD") & "" ' 1 시작일자
+        SUBRs!종료일자 = Format(ADORs!종료일자, "YYYY-MM-DD") & "" ' 2 종료일자
+        SUBRs!요일 = ADORs!요일 & ""                               ' 3
+        SUBRs!의류코드 = ADORs!의류코드 & ""                       ' 4
+        SUBRs!의류명 = ADORs!의류명 & ""                           ' 5
+        SUBRs!금액 = ADORs!금액 & ""                               ' 6
+        SUBRs!할인금액 = ADORs!할인금액 & ""                       ' 7
+        SUBRs!할인율 = ADORs!할인율 & ""                           ' 8
+        SUBRs!순서 = GetGoodsOrderby(ADORs!의류코드 & "")          ' 9
+        
+        SUBRs.Update
+        SUBRs.Close:    Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "요일할인정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+Private Sub Dn_할인정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 1000번에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "할인정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+    '-------------------------------------------------------------------
+    ' TB_가맹점할인 - 크린에이드 서버에서 수신
+    ' 2012-07-04일 추가
+    '-------------------------------------------------------------------
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "가맹점 할인 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    i = 0
+    Query = "SELECT    시작일자"
+    Query = Query & ", 종료일자"
+    Query = Query & ", 의류코드"
+    Query = Query & ", 의류명"
+    Query = Query & ", ISNULL(금액,0)     AS 금액"
+    Query = Query & ", ISNULL(할인금액,0) AS 할인금액"
+    Query = Query & ", ISNULL(할인율,0)   AS 할인율"
+    Query = Query & " FROM TB_가맹점할인"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockOptimistic
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        If i = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(i, "#,##0") '현재
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_할인정보 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_할인정보"
+        Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+        Query = Query & "   AND 의류코드 = '" & ADORs!의류코드 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!시작일자 = Format(ADORs!시작일자, "YYYY-MM-DD") & "" ' 1 시작일자
+        SUBRs!종료일자 = Format(ADORs!종료일자, "YYYY-MM-DD") & "" ' 2 종료일자
+        SUBRs!의류코드 = ADORs!의류코드 & ""                       ' 4
+        SUBRs!의류명 = ADORs!의류명 & ""                           ' 5
+        SUBRs!금액 = ADORs!금액 & ""                               ' 6
+        SUBRs!할인금액 = ADORs!할인금액 & ""                       ' 7
+        SUBRs!할인율 = ADORs!할인율 & ""                           ' 8
+        SUBRs!순서 = GetGoodsOrderby(ADORs!의류코드 & "")          ' 9
+        
+        SUBRs.Update
+        
+        SUBRs.Close:    Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "할인정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+
+Private Sub Dn_사고품정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 1000번에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "사고품정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+        
+    '===========================================================
+    ' 11. 사고품내역
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "사고품내역 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    nCnt = 0
+                        
+    Query = "SELECT * FROM TB_사고품내역"
+'    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 사고접수일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+    
+        Query = "SELECT * FROM TB_사고품내역"
+        Query = Query & " WHERE 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Query = Query & "   AND 일련번호   =  " & ADORs!일련번호
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""         ' 1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""     ' 2
+        SUBRs!일련번호 = ADORs!일련번호 & ""         ' 3
+        
+        SUBRs!사고접수일자 = ADORs!사고접수일자 & "" ' 4
+        SUBRs!담당자명 = ADORs!담당자명 & ""         ' 5
+        SUBRs!고객코드 = ADORs!고객코드 & ""         ' 6
+        SUBRs!성명 = ADORs!성명 & ""                 ' 7
+        SUBRs!전화번호 = ADORs!전화번호 & ""         ' 8
+        SUBRs!휴대전화 = ADORs!휴대전화 & ""         ' 9
+        SUBRs!주소 = ADORs!주소 & ""                 '10
+        SUBRs!접수일자 = ADORs!접수일자 & ""         '11
+        SUBRs!택번호 = ADORs!택번호 & ""             '12
+        SUBRs!출고일자 = ADORs!출고일자 & ""         '13
+        SUBRs!인도일자 = ADORs!인도일자 & ""         '14
+        SUBRs!의류명 = ADORs!의류명 & ""             '15
+        SUBRs!상표 = ADORs!상표 & ""                 '16
+        
+        SUBRs!색상 = ADORs!색상 & ""                 '17
+        SUBRs!구입일자 = ADORs!구입일자 & ""         '18
+        SUBRs!구입처 = ADORs!구입처 & ""             '19
+        SUBRs!구입형태 = ADORs!구입형태 & ""         '20
+        SUBRs!구입가격 = ADORs!구입가격 & ""         '21
+        SUBRs!품목 = ADORs!품목 & ""                 '22
+        SUBRs!용도 = ADORs!용도 & ""                 '23
+        SUBRs!소재 = ADORs!소재 & ""                 '24
+        SUBRs!내용연수 = ADORs!내용연수 & ""         '25
+        SUBRs!경과일수 = ADORs!경과일수 & ""         '26
+        SUBRs!환산일수 = ADORs!환산일수 & ""         '27
+        SUBRs!배상비율 = ADORs!배상비율 & ""         '28
+        SUBRs!배상금액 = ADORs!배상금액 & ""         '29
+        SUBRs!크레임구분 = ADORs!크레임구분 & ""     '30
+        SUBRs!보상구분 = ADORs!보상구분 & ""         '31
+        SUBRs!처리구분 = ADORs!처리구분 & ""         '32
+        SUBRs!보상금액 = ADORs!보상금액 & ""         '33
+        SUBRs!처리일자 = ADORs!처리일자 & ""         '34
+        SUBRs!비고 = ADORs!비고 & ""                 '35
+        
+        SUBRs!가맹점의견 = ADORs!가맹점의견 & ""     '36
+        SUBRs!지사의견 = ADORs!지사의견 & ""         '37
+        SUBRs!본사의견 = ADORs!본사의견 & ""         '38
+        SUBRs!지사승인 = ADORs!지사승인 & ""         '39
+        SUBRs!지사승인일시 = ADORs!지사승인일시 & "" '40
+        SUBRs!본사승인 = ADORs!본사승인 & ""         '41
+        SUBRs!본사승인일시 = ADORs!본사승인일시 & "" '42
+      
+        SUBRs!본사전송여부 = "Y"
+        SUBRs!본사전송일자 = Format(Now, "yyyy-MM-dd hh:mm:ss")
+      
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+                            
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "사고품정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+ 
+Private Sub Dn_입출고정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    Dim sActionLast As String
+    Dim varTemp As Variant
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 1000번에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "입출고정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+    
+    nCnt = 0
+    sActionLast = ""
+    
+    ' 작업도중 오류가 발생하였을 경우 마지막 작업한 일자를 가지고 온다.
+    ' 마지막 작업을 진행한 일자를 얻어온다.
+    sActionLast = GetIniStr("RecvAction", "TB_입출고", "", iniFile)
+    ' 접수일자 | 택번호 | 접수번호
+    varTemp = Split(sActionLast, "|")
+    
+    If UBound(varTemp) < 0 Then
+        '===========================================================
+        ' 3.TB_입출고
+        '===========================================================
+        sprRestore.MaxRows = sprRestore.MaxRows + 1
+        sprRestore.Row = sprRestore.MaxRows
+        sprRestore.Col = 1: sprRestore.Text = "입출고 정보"
+        sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+    End If
+
+                    
+
+    If UBound(varTemp) > 0 Then
+        If IsDate(varTemp(0)) Then
+            Query = "SELECT * FROM TB_입출고"
+            Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+            Query = Query & "   AND 접수일자 >= '" & CStr(varTemp(0)) & "'"
+            Query = Query & "   AND 택번호 >= '" & CStr(varTemp(1)) & "'"
+            Query = Query & "   AND 접수번호 >= '" & CStr(varTemp(2)) & "'"
+            Query = Query & " ORDER BY 접수일자 ASC, 택번호 ASC, 접수번호 ASC"
+            
+            ' 이전 수량을 구한다.
+            sprRestore.Col = 5: nCnt = Val(sprRestore.Text)
+        End If
+
+    Else
+        Query = "SELECT * FROM TB_입출고"
+        Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & " ORDER BY 접수일자 ASC, 택번호 ASC, 접수번호 ASC"
+    End If
+    
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+            
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If UBound(varTemp) < 0 Then
+            If nCnt = 1 Then
+                sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+                DoEvents
+            End If
+        End If
+        
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+    
+        '----------------------------------------------------------
+        '
+        '----------------------------------------------------------
+        Query = "SELECT * FROM TB_입출고"
+        Query = Query & " WHERE 택번호     = '" & ADORs!택번호 & "'"
+        Query = Query & "   AND 접수번호   =  " & ADORs!접수번호
+        Query = Query & "   AND 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""             '1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""         '2
+        SUBRs!접수일자 = ADORs!접수일자 & ""             '3
+        SUBRs!택번호 = ADORs!택번호 & ""                 '4
+        SUBRs!접수번호 = ADORs!접수번호 & ""             '5
+        SUBRs!고객코드 = ADORs!고객코드 & ""             '6
+        SUBRs!의류코드 = ADORs!의류코드 & ""             '7
+        SUBRs!의류명 = ADORs!의류명 & ""                 '8
+        SUBRs!색상 = ADORs!색상 & ""                     '9
+        SUBRs!무늬 = ADORs!무늬 & ""                     '10
+        SUBRs!내용 = ADORs!내용 & ""                     '11
+        SUBRs!금액 = ADORs!금액 & ""                     '12
+        SUBRs!상표 = ADORs!상표 & ""                     '13
+        SUBRs!결제여부 = ADORs!결제여부 & ""             '14
+        SUBRs!예정일자 = ADORs!예정일자 & ""             '15
+        SUBRs!출고일자 = ADORs!출고일자 & ""             '16
+        SUBRs!판매취소 = ADORs!판매취소 & ""             '17
+        SUBRs!판매취소일자 = ADORs!판매취소일자 & ""     '18
+        SUBRs!반품환불일자 = ADORs!반품환불일자 & ""     '19
+        SUBRs!세탁환불일자 = ADORs!세탁환불일자 & ""     '20
+        SUBRs!환불사유 = ADORs!환불사유 & ""             '21
+        SUBRs!수선금액 = ADORs!수선금액 & ""             '22
+        SUBRs!세탁마진 = ADORs!세탁마진 & ""             '23
+        SUBRs!외주마진 = ADORs!외주마진 & ""             '24
+        SUBRs!수선마진 = ADORs!수선마진 & ""             '25
+        SUBRs!세트Key = ADORs!세트Key & ""               '26
+        SUBRs!세트구분 = ADORs!세트구분 & ""             '27
+        SUBRs!세트금액1 = ADORs!세트금액1 & ""           '28
+        SUBRs!세트금액2 = ADORs!세트금액2 & ""           '29
+        SUBRs!정상금액 = ADORs!정상금액 & ""             '30
+        SUBRs!마일리지 = ADORs!마일리지 & ""             '31
+        SUBRs!가맹점출고일자 = ADORs!가맹점출고일자 & "" '32
+        SUBRs!가맹점입고일자 = ADORs!가맹점입고일자 & "" '33
+        SUBRs!가맹점입고구분 = ADORs!가맹점입고구분 & "" '34
+        SUBRs!부모택번호 = ADORs!부모택번호 & ""         '35
+        SUBRs!근무자명 = ADORs!근무자명 & ""             '36
+        SUBRs!미입고사유 = ADORs!미입고사유 & ""         '37
+        SUBRs!오점내용 = ADORs!오점내용 & ""             '38
+        SUBRs!접수시간 = ADORs!접수시간 & ""             '39
+        SUBRs!출고시간 = ADORs!출고시간 & ""             '40
+        SUBRs!의류금액 = ADORs!의류금액 & ""             '41
+        SUBRs!지사입고일자 = ADORs!지사입고일자 & ""     '42
+        SUBRs!지사출고일자 = ADORs!지사출고일자 & ""     '43
+        SUBRs!지사출고물품 = ADORs!지사출고물품 & ""     '44
+        SUBRs!지사출고상태 = ADORs!지사출고상태 & ""     '45
+        SUBRs!본사전송여부 = "Y"                          '46 ADORs!본사전송여부
+        
+        'SubRs!지사출고예정 = ADORs!지사출고예정 & ""     '47
+        'SubRs!지사출고번호 = ADORs!지사출고번호 & ""     '48
+        
+        'SUBRs!오점이미지 = ADORs!오점이미지 & ""          '
+        
+        ' 마지막 작업 내용을 가지고 있는다.
+        sActionLast = ADORs!접수일자 & "|" & ADORs!택번호 & "|" & ADORs!접수번호
+        
+        SUBRs.Update
+        
+        SUBRs.Close:    Set SUBRs = Nothing
+                                                                 
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:    Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    Screen.MousePointer = vbDefault
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    
+    ' 작업내용을 완료 한다.
+    Call SetIniStr("RecvAction", "TB_입출고", "", iniFile)
+    
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    ' 마지막 작업을 진행한 일자를 기록 한다.
+    Call SetIniStr("RecvAction", "TB_입출고", sActionLast, iniFile)
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "입출고정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+ 
+Private Sub Dn_매출정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 해당 지사 서버에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "매출정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+        
+    Screen.MousePointer = vbHourglass
+    '-----------------------------------------------------------
+    ' 4.TB_매출
+    '-----------------------------------------------------------
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "매출 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+    
+    nCnt = 0
+                    
+    Query = "SELECT * FROM TB_매출"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 매출일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+            
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+    
+        '----------------------------------------------------------
+        '
+        '----------------------------------------------------------
+        Query = "SELECT * FROM TB_매출"
+        Query = Query & " WHERE 고객코드   = '" & ADORs!고객코드 & "'"
+        Query = Query & "   AND 접수번호   =  " & ADORs!접수번호
+        Query = Query & "   AND 일련번호   =  " & ADORs!일련번호
+        Query = Query & "   AND 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""                 '1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""             '2
+        SUBRs!고객코드 = ADORs!고객코드 & ""                 '3
+        SUBRs!접수번호 = ADORs!접수번호 & ""                 '4
+        SUBRs!일련번호 = ADORs!일련번호 & ""                 '5
+        SUBRs!매출일자 = ADORs!매출일자 & ""                 '6
+        SUBRs!매출시간 = ADORs!매출시간 & ""                 '7
+        SUBRs!적요 = ADORs!적요 & ""                         '8
+        SUBRs!접수금액 = ADORs!접수금액 & ""                 '9
+        SUBRs!입금합계 = ADORs!입금합계 & ""                 '10
+        SUBRs!현금입금 = ADORs!현금입금 & ""                 '11
+        SUBRs!카드입금 = ADORs!카드입금 & ""                 '12
+        SUBRs!쿠폰입금 = ADORs!쿠폰입금 & ""                 '13
+        SUBRs!쿠폰번호 = ADORs!쿠폰번호 & ""                 '14
+        SUBRs!사용마일리지 = ADORs!사용마일리지 & ""         '15
+        SUBRs!세트할인 = ADORs!세트할인 & ""                 '16
+        SUBRs!에누리 = ADORs!에누리 & ""                     '17
+        SUBRs!접수수량 = ADORs!접수수량 & ""                 '18
+        SUBRs!반품수량 = ADORs!반품수량 & ""                 '19
+        SUBRs!발생마일리지 = ADORs!발생마일리지 & ""         '20
+        SUBRs!누적마일리지 = ADORs!누적마일리지 & ""         '21
+        SUBRs!사용가능마일리지 = ADORs!사용가능마일리지 & "" '22
+        SUBRs!삭제마일리지 = ADORs!삭제마일리지 & ""         '23
+        SUBRs!이전미수금 = ADORs!이전미수금 & ""             '24
+        SUBRs!본사전송여부 = "Y"                              '25 ADORs!본사전송여부
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "입출고정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+
+ 
+Private Sub Dn_현금영수증정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 해당 지사 서버에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "현금영수증정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+    '===========================================================
+    ' 현금영수증
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "현금영수증 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    nCnt = 0
+                    
+    Query = "SELECT * FROM TB_현금영수증"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 승인일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+    
+        Query = "SELECT * FROM TB_현금영수증"
+        Query = Query & " WHERE 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Query = Query & "   AND 승인번호   = '" & ADORs!승인번호 & "'"
+        Query = Query & "   AND 승인일자   = '" & ADORs!승인일자 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""         '1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""     '2
+        SUBRs!승인번호 = ADORs!승인번호 & ""         '3
+        SUBRs!승인일자 = ADORs!승인일자 & ""         '4
+        SUBRs!승인시간 = ADORs!승인시간 & ""         '5
+        SUBRs!거래유형 = ADORs!거래유형 & ""         '6
+        SUBRs!입력방법 = ADORs!입력방법 & ""         '7
+        SUBRs!사용자정보 = ADORs!사용자정보 & ""     '8
+        SUBRs!총금액 = ADORs!총금액 & ""             '9
+        SUBRs!메시지1 = ADORs!메시지1 & ""           '10
+        SUBRs!메시지2 = ADORs!메시지2 & ""           '11
+        SUBRs!소득구분 = ADORs!소득구분 & ""         '12
+        SUBRs!국세청1 = ADORs!국세청1 & ""           '13
+        SUBRs!국세청2 = ADORs!국세청2 & ""           '14
+        SUBRs!접수번호 = ADORs!접수번호 & ""         '15
+        SUBRs!단말기번호 = ADORs!단말기번호 & ""     '16
+        SUBRs!거래구분 = ADORs!거래구분 & ""         '17
+        SUBRs!상태 = ADORs!상태 & ""                 '18
+        SUBRs!고객코드 = ADORs!고객코드 & ""         '19
+        SUBRs!본사전송여부 = "Y"                      '20 ADORs!본사전송여부
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+                        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "현금영수증정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+
+Private Sub Dn_신용카드승인정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 해당 지사 서버에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "현금영수증정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+    '===========================================================
+    ' 신용카드승인
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "신용카드승인 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    nCnt = 0
+                    
+    Query = "SELECT * FROM TB_신용카드승인"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 승인일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+    
+        Query = "SELECT * FROM TB_신용카드승인"
+        Query = Query & " WHERE 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Query = Query & "   AND 승인번호   = '" & ADORs!승인번호 & "'"
+        Query = Query & "   AND 승인일자   = '" & ADORs!승인일자 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""         '1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""     '2
+        SUBRs!승인번호 = ADORs!승인번호 & ""         '3
+        SUBRs!승인일자 = ADORs!승인일자 & ""         '4
+        SUBRs!승인시간 = ADORs!승인시간 & ""         '5
+        SUBRs!할부기간 = ADORs!할부기간 & ""         '6
+        SUBRs!결제금액 = ADORs!결제금액 & ""         '7
+        SUBRs!발급사코드 = ADORs!발급사코드 & ""     '8
+        SUBRs!카드종류명 = ADORs!카드종류명 & ""     '9
+        SUBRs!매입사코드 = ADORs!매입사코드 & ""     '10
+        SUBRs!매입사명 = ADORs!매입사명 & ""         '11
+        SUBRs!카드번호 = ADORs!카드번호 & ""         '12
+        SUBRs!메시지1 = ADORs!메시지1 & ""           '13
+        SUBRs!메시지2 = ADORs!메시지2 & ""           '14
+        SUBRs!가맹점번호 = ADORs!가맹점번호 & ""     '15
+        SUBRs!접수번호 = ADORs!접수번호 & ""         '16
+        SUBRs!단말기번호 = ADORs!단말기번호 & ""     '17
+        SUBRs!거래구분 = ADORs!거래구분 & ""         '18
+        SUBRs!상태 = ADORs!상태 & ""                 '19
+        SUBRs!고객코드 = ADORs!고객코드 & ""         '20
+        SUBRs!취소일자 = ADORs!취소일자 & ""         '20
+        SUBRs!기타메모 = ADORs!기타메모 & ""         '20
+        
+        SUBRs!본사전송여부 = "Y"                      '21 ADORs!본사전송여부
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+                        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "신용카드승인정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+Private Sub Dn_이용실적정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 해당 지사 서버에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "이용실적정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+    '===========================================================
+    ' 이용실적
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "이용실적 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    i = 0
+                    
+    Query = "DELETE FROM TB_이용실적  WHERE 가맹점코드 <> '" & 가맹점정보.가맹점코드 & "'"
+    ADOCon.Execute Query
+                    
+                    
+    Query = "SELECT * FROM TB_이용실적"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 고객코드 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        If i = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(i, "#,##0") '현재
+        DoEvents
+    
+        Query = "SELECT * FROM TB_이용실적"
+        Query = Query & " WHERE 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Query = Query & "   AND 고객코드   = '" & ADORs!고객코드 & "'"
+        Query = Query & "   AND 연도       = '" & ADORs!연도 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""     '1
+        SUBRs!고객코드 = ADORs!고객코드 & ""         '2
+        SUBRs!연도 = ADORs!연도 & ""                 '3
+        SUBRs!이용횟수 = ADORs!이용횟수 & ""         '4
+        SUBRs!이용금액 = ADORs!이용금액 & ""         '5
+        SUBRs!본사전송여부 = "Y"                      '6 ADORs!본사전송여부
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+                        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "이용실적정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+
+Private Sub Dn_가맹점입금정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 해당 지사 서버에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "가맹점입금정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+   '===========================================================
+    ' 9. 가맹점입금
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "가맹점입금 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    i = 0
+                    
+    Query = "SELECT * FROM TB_가맹점입금"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 입금일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        If i = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(i, "#,##0") '현재
+        DoEvents
+    
+        Query = "SELECT * FROM TB_가맹점입금"
+        Query = Query & " WHERE 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Query = Query & "   AND 입금일자   = '" & ADORs!입금일자 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""         '1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""     '2
+        SUBRs!입금일자 = ADORs!입금일자 & ""         '3
+        SUBRs!배송기사코드 = ADORs!배송기사코드 & "" '4
+        SUBRs!배송기사명 = ADORs!배송기사명 & ""     '5
+        SUBRs!입금액 = ADORs!입금액 & ""             '6
+        SUBRs!비고 = ADORs!비고 & ""                 '7
+        SUBRs!경리담당자 = ADORs!경리담당자 & ""     '8
+        SUBRs!입금확정 = ADORs!입금확정 & ""         '9
+        SUBRs!확정일자 = ADORs!확정일자 & ""         '10
+        SUBRs!본사전송여부 = "Y"                      '11  ADORs!본사전송여부
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+                        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "가맹점입금정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+
+Private Sub Dn_부자재정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 해당 지사 서버에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "부자재정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+    '===========================================================
+    ' 10. 부자재주문
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "부자재주문 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    nCnt = 0
+                    
+    Query = "SELECT * FROM TB_부자재주문"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 주문일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+    
+        Query = "SELECT * FROM TB_부자재주문"
+        Query = Query & " WHERE 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Query = Query & "   AND 주문코드   = '" & ADORs!주문코드 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""         '1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""     '2
+        SUBRs!주문코드 = ADORs!주문코드 & ""         '3
+        SUBRs!주문일자 = ADORs!주문일자 & ""         '4
+        SUBRs!부자재코드 = ADORs!부자재코드 & ""     '5
+        SUBRs!부자재명 = ADORs!부자재명 & ""         '6
+        SUBRs!규격 = ADORs!규격 & ""                 '7
+        SUBRs!수량 = ADORs!수량 & ""                 '8
+        SUBRs!단가 = ADORs!단가 & ""                 '9
+        SUBRs!공급가액 = ADORs!공급가액 & ""         '10
+        SUBRs!세액 = ADORs!세액 & ""                 '11
+        SUBRs!합계금액 = ADORs!합계금액 & ""         '12
+        SUBRs!비고 = ADORs!비고 & ""                 '13
+        SUBRs!출고일자 = ADORs!출고일자 & ""         '14
+        SUBRs!입고확정 = ADORs!입고확정 & ""         '15
+        SUBRs!확정일자 = ADORs!확정일자 & ""         '16
+        SUBRs!본사전송여부 = "Y"                      '17 ADORs!본사전송여부
+      
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+                        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "부자재정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+
+Private Sub Dn_미수금정보(sCompanyCode As String)
+    Dim nCnt    As Long
+    Dim sMsg    As String
+    
+    On Error GoTo ErrRtn
+
+RE_ACTION:
+    
+    ' 해당 지사 서버에서 다운로드를 한다.
+    If Not Server_Connection(HostCon, sCompanyCode) Then
+        
+        sMsg = "미수금정보 수신을 위하여 서버에 연결할 수 없습니다. 자동으로 다시 연결 합니다."
+        sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+        
+        MsgBox sMsg, vbInformation, "작업 확인"
+        GoTo RE_ACTION
+    End If
+    
+    Screen.MousePointer = vbHourglass
+   '===========================================================
+    ' 10.미수금수정 정보
+    '===========================================================
+    sprRestore.MaxRows = sprRestore.MaxRows + 1
+    sprRestore.Row = sprRestore.MaxRows
+    sprRestore.Col = 1: sprRestore.Text = "미수금수정 정보"
+    sprRestore.Col = 2: sprRestore.Text = Format(Time, "hh:mm:ss")
+
+    nCnt = 0
+                    
+    Query = "SELECT * FROM TB_미수금수정"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & " ORDER BY 수정일자 ASC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, HostCon, adOpenStatic, adLockReadOnly
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        If nCnt = 1 Then
+            sprRestore.Col = 4: sprRestore.Text = Format(ADORs.RecordCount, "#,##0")  '현재
+            DoEvents
+        End If
+        sprRestore.Col = 5: sprRestore.Text = Format(nCnt, "#,##0") '현재
+        DoEvents
+    
+        Query = "SELECT * FROM TB_미수금수정 "
+        Query = Query & " WHERE 고객코드 = '" & ADORs!고객코드 & "'"
+        Query = Query & "   AND 수정일자   = '" & ADORs!수정일자 & "'"
+        Set SUBRs = New ADODB.RecordSet
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!고객코드 = ADORs!고객코드 & ""         '1
+        SUBRs!수정일자 = ADORs!수정일자 & ""     '2
+        SUBRs!수정미수금 = ADORs!수정미수금 & ""         '3
+        SUBRs!이전미수금 = ADORs!이전미수금 & ""         '4
+        SUBRs!지사코드 = ADORs!지사코드 & ""     '5
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""         '6
+        SUBRs!내용 = ADORs!내용 & ""                 '7
+        SUBRs!본사전송여부 = "Y"                      '17 ADORs!본사전송여부
+      
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+                        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+    HostCon.Close:      Set HostCon = Nothing
+    sprRestore.Col = 3: sprRestore.Text = Format(Time, "hh:mm:ss")
+    Screen.MousePointer = vbDefault
+    Exit Sub
+
+ErrRtn:
+    Screen.MousePointer = vbDefault
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+    sMsg = "미수금정보 수신중 오류가 발생 하였습니다. 자동으로 다시 수신 합니다."
+    sMsg = sMsg & "해당 메시지가 지속적으로 발생할 경우 인터넷을 확인후 시도하여 주십시요."
+    
+    MsgBox sMsg, vbInformation, "작업 확인"
+    GoTo RE_ACTION
+    
+End Sub
+
+Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
+    If cmdBtn(1).Enabled = False Then
+        Cancel = True
+    End If
+End Sub

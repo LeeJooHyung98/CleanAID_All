@@ -1,0 +1,1026 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Begin VB.Form P_SMS_001 
+   Caption         =   "대리점 문자메시지 관리"
+   ClientHeight    =   10200
+   ClientLeft      =   1605
+   ClientTop       =   2430
+   ClientWidth     =   15150
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9.75
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "P_SMS_001.frx":0000
+   LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
+   MDIChild        =   -1  'True
+   ScaleHeight     =   10200
+   ScaleWidth      =   15150
+   WindowState     =   2  '최대화
+   Begin Threed.SSPanel panPrint 
+      Height          =   3555
+      Left            =   240
+      TabIndex        =   7
+      Top             =   1200
+      Visible         =   0   'False
+      Width           =   3195
+      _ExtentX        =   5636
+      _ExtentY        =   6271
+      _Version        =   262144
+      RoundedCorners  =   0   'False
+      Outline         =   -1  'True
+      FloodShowPct    =   -1  'True
+      Begin Threed.SSCommand cmdPrint 
+         Height          =   615
+         Left            =   480
+         TabIndex        =   8
+         Top             =   2700
+         Width           =   2235
+         _ExtentX        =   3942
+         _ExtentY        =   1085
+         _Version        =   262144
+         Caption         =   "확      인"
+      End
+      Begin Threed.SSFrame SSFrame6 
+         Height          =   1695
+         Left            =   240
+         TabIndex        =   9
+         Top             =   780
+         Width           =   2715
+         _ExtentX        =   4789
+         _ExtentY        =   2990
+         _Version        =   262144
+         Caption         =   "프린트 내용 선택"
+         Begin Threed.SSOption optPrint 
+            Height          =   375
+            Index           =   0
+            Left            =   180
+            TabIndex        =   10
+            Top             =   240
+            Width           =   2295
+            _ExtentX        =   4048
+            _ExtentY        =   661
+            _Version        =   262144
+            Caption         =   "전    체"
+            Value           =   -1
+         End
+         Begin Threed.SSOption optPrint 
+            Height          =   375
+            Index           =   1
+            Left            =   180
+            TabIndex        =   11
+            Top             =   660
+            Width           =   2415
+            _ExtentX        =   4260
+            _ExtentY        =   661
+            _Version        =   262144
+            Caption         =   "구 분 별 (정 상)"
+         End
+         Begin Threed.SSOption optPrint 
+            Height          =   375
+            Index           =   2
+            Left            =   180
+            TabIndex        =   12
+            Top             =   1140
+            Width           =   2235
+            _ExtentX        =   3942
+            _ExtentY        =   661
+            _Version        =   262144
+            Caption         =   "구 분 별 (할 인)"
+         End
+      End
+      Begin Threed.SSPanel panCaption 
+         Height          =   435
+         Index           =   25
+         Left            =   60
+         TabIndex        =   13
+         Top             =   60
+         Width           =   3075
+         _ExtentX        =   5424
+         _ExtentY        =   767
+         _Version        =   262144
+         BackColor       =   16744576
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   "대리점 LIST 출력"
+         BevelOuter      =   1
+         RoundedCorners  =   0   'False
+      End
+   End
+   Begin SSSplitter.SSSplitter SSSplitter 
+      Height          =   10200
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   15150
+      _ExtentX        =   26723
+      _ExtentY        =   17992
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "P_SMS_001.frx":058A
+      Begin Threed.SSPanel SSPanel1 
+         Height          =   330
+         Left            =   5340
+         TabIndex        =   16
+         Top             =   3225
+         Width           =   9795
+         _ExtentX        =   17277
+         _ExtentY        =   582
+         _Version        =   262144
+         Font3D          =   3
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   "추가 구입 정보"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_SMS_001.frx":063C
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+      Begin Threed.SSPanel panInput 
+         Height          =   765
+         Left            =   15
+         TabIndex        =   1
+         Top             =   15
+         Width           =   15120
+         _ExtentX        =   26670
+         _ExtentY        =   1349
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         Begin VB.TextBox txtInput 
+            Height          =   315
+            Index           =   0
+            Left            =   1530
+            TabIndex        =   3
+            Top             =   60
+            Width           =   1395
+         End
+         Begin VB.ComboBox cboInput 
+            Height          =   315
+            Index           =   3
+            Left            =   1530
+            Style           =   2  '드롭다운 목록
+            TabIndex        =   2
+            Top             =   405
+            Width           =   2775
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   0
+            Left            =   60
+            TabIndex        =   4
+            Top             =   60
+            Width           =   1440
+            _ExtentX        =   2540
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "대리점코드"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   35
+            Left            =   60
+            TabIndex        =   5
+            Top             =   405
+            Width           =   1440
+            _ExtentX        =   2540
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "지 사"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+      End
+      Begin FPSpreadADO.fpSpread spdView 
+         Height          =   9390
+         Left            =   15
+         TabIndex        =   6
+         Top             =   795
+         Width           =   5310
+         _Version        =   524288
+         _ExtentX        =   9366
+         _ExtentY        =   16563
+         _StockProps     =   64
+         BackColorStyle  =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         SpreadDesigner  =   "P_SMS_001.frx":0A9E
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel panDetail 
+         Height          =   2415
+         Left            =   5340
+         TabIndex        =   14
+         Top             =   795
+         Width           =   9795
+         _ExtentX        =   17277
+         _ExtentY        =   4260
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         Begin VB.TextBox txtInput 
+            Height          =   315
+            Index           =   1
+            Left            =   1515
+            TabIndex        =   26
+            Top             =   60
+            Width           =   3735
+         End
+         Begin VB.TextBox txtInput 
+            Height          =   315
+            Index           =   2
+            Left            =   1515
+            TabIndex        =   25
+            Top             =   780
+            Width           =   3735
+         End
+         Begin VB.TextBox txtInput 
+            Height          =   315
+            Index           =   3
+            Left            =   1515
+            TabIndex        =   24
+            Top             =   420
+            Width           =   3735
+         End
+         Begin VB.TextBox txtInput 
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   4
+            Left            =   1515
+            TabIndex        =   23
+            Top             =   1500
+            Width           =   3735
+         End
+         Begin VB.Frame Frame1 
+            Caption         =   "추가 입금 정보"
+            Height          =   2235
+            Left            =   5685
+            TabIndex        =   17
+            Top             =   90
+            Width           =   3225
+            Begin VB.TextBox txtsmsAddInput 
+               Height          =   315
+               Index           =   1
+               Left            =   1710
+               TabIndex        =   20
+               Top             =   840
+               Width           =   1395
+            End
+            Begin VB.TextBox txtsmsAddInput 
+               Height          =   315
+               Index           =   0
+               Left            =   1710
+               TabIndex        =   19
+               Top             =   480
+               Width           =   1395
+            End
+            Begin VB.CommandButton cmdAddSmsCount 
+               Caption         =   "추가 입금"
+               Enabled         =   0   'False
+               Height          =   525
+               Left            =   180
+               TabIndex        =   18
+               Top             =   1560
+               Width           =   2925
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   36
+               Left            =   90
+               TabIndex        =   21
+               Top             =   480
+               Width           =   1440
+               _ExtentX        =   2540
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "추가 수량"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   37
+               Left            =   90
+               TabIndex        =   22
+               Top             =   840
+               Width           =   1440
+               _ExtentX        =   2540
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "추가 금액"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   1
+            Left            =   45
+            TabIndex        =   27
+            Top             =   60
+            Width           =   1440
+            _ExtentX        =   2540
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "대리점코드"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   2
+            Left            =   45
+            TabIndex        =   28
+            Top             =   780
+            Width           =   1440
+            _ExtentX        =   2540
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "대표자명"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   3
+            Left            =   45
+            TabIndex        =   29
+            Top             =   420
+            Width           =   1440
+            _ExtentX        =   2540
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "대리점명1"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   33
+            Left            =   1530
+            TabIndex        =   30
+            Top             =   1890
+            Width           =   3735
+            _ExtentX        =   6588
+            _ExtentY        =   556
+            _Version        =   262144
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+            Begin Threed.SSOption optSMSSelect 
+               Height          =   255
+               Index           =   0
+               Left            =   360
+               TabIndex        =   31
+               Top             =   30
+               Width           =   1335
+               _ExtentX        =   2355
+               _ExtentY        =   450
+               _Version        =   262144
+               Caption         =   "사용"
+            End
+            Begin Threed.SSOption optSMSSelect 
+               Height          =   255
+               Index           =   1
+               Left            =   2100
+               TabIndex        =   32
+               Top             =   30
+               Width           =   1335
+               _ExtentX        =   2355
+               _ExtentY        =   450
+               _Version        =   262144
+               Caption         =   "사용 안함"
+            End
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   32
+            Left            =   45
+            TabIndex        =   33
+            Top             =   1890
+            Width           =   1440
+            _ExtentX        =   2540
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "사용여부"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   4
+            Left            =   45
+            TabIndex        =   34
+            Top             =   1500
+            Width           =   1440
+            _ExtentX        =   2540
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "잔여 수량"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+      End
+      Begin FPSpreadADO.fpSpread spdView2 
+         Height          =   6615
+         Left            =   5340
+         TabIndex        =   15
+         Top             =   3570
+         Width           =   9795
+         _Version        =   524288
+         _ExtentX        =   17277
+         _ExtentY        =   11668
+         _StockProps     =   64
+         BackColorStyle  =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         SpreadDesigner  =   "P_SMS_001.frx":0F4C
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+   End
+End
+Attribute VB_Name = "P_SMS_001"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Dim RS01 As ADODB.Recordset
+Dim sValue() As String
+
+Dim Err_Num As Long
+Dim Err_Dec As String
+
+Dim P_SMS001_Flag As Boolean
+
+Dim sPrintOption As String
+
+Private Sub Data_Display()
+    On Error GoTo ErrRtn
+
+    ReDim sValue(2)
+    
+    sValue(0) = "0"
+    sValue(1) = Mid(Trim(cboInput(3).Text), 2, 4)
+    sValue(2) = "%"
+    
+    ' 대리점 정보
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("PRO_SMS_001_01", sValue(), Err_Num, Err_Dec)
+    
+    spdView.MaxCols = RS01.Fields.Count
+    spdView.MaxRows = RS01.RecordCount
+    
+    'Call spdDisplay1(RS01)
+    Call fpSpread_Display(spdView, RS01)
+    Call GetColWidth(REG_App, Me.Name, spdView)
+        
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+'Private Sub spdDisplay1(Rs As ADODB.Recordset)
+'    Call fpSpread_Display(spdView, Rs)
+'End Sub
+
+'Private Sub spdDisplay2(Rs As ADODB.Recordset)
+'    Call fpSpread_Display(spdView2, Rs)
+'End Sub
+
+Private Sub cboInput_Click(Index As Integer)
+    Call Data_Display
+End Sub
+
+Private Sub cmdAddSmsCount_Click()
+    On Error GoTo Error_Rtn
+
+    If Mid(Trim(cboInput(3).Text), 2, 4) = "" Then
+        MsgBox "지사 코드를 확인하여 주십시요.", vbInformation, "확인"
+        
+        Exit Sub
+    End If
+    
+    If txtInput(1).Text = "" Then
+        MsgBox "체인점 코드를 확인하여 주십시요.", vbInformation, "확인"
+        txtInput(1).SetFocus
+        Exit Sub
+    End If
+    
+    If txtsmsAddInput(0).Text = "" Then
+        MsgBox "수량을 확인하여 주십시요.", vbInformation, "확인"
+        txtsmsAddInput(0).SetFocus
+        Exit Sub
+    End If
+    
+    If txtsmsAddInput(1).Text = "" Then
+        MsgBox "금액을 확인하여 주십시요.", vbInformation, "확인"
+        txtsmsAddInput(1).SetFocus
+        Exit Sub
+    End If
+    
+    
+    ReDim sValue(3)
+    
+    sValue(0) = Mid(Trim(cboInput(3).Text), 2, 4)
+    sValue(1) = txtInput(1).Text
+    sValue(2) = txtsmsAddInput(0).Text
+    sValue(3) = txtsmsAddInput(1).Text
+    
+    ' 대리점 정보
+    Call ExecPro("PRO_SMS_001_03", sValue(), Err_Num, Err_Dec)
+    
+    If Err_Num = 0 Then
+        MsgBox "해당되는 데이터가 정상적으로 저장이 되었습니다.", vbInformation
+    End If
+
+    Exit Sub
+
+Error_Rtn:
+    'sendErrormessage
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure cmdAddSmsCount_Click of Form P_SMS_001"
+
+End Sub
+
+Private Sub cmdPrint_Click()
+'    Call DataScreen2
+'    panPrint.Visible = False
+End Sub
+
+Private Sub Form_Activate()
+'    cmdBtn(0).Enabled = True
+'    cmdBtn(1).Enabled = False
+'    cmdBtn(2).Enabled = False
+'    cmdBtn(3).Enabled = False
+'    cmdBtn(4).Enabled = False
+'    cmdBtn(5).Enabled = False
+'    cmdBtn(6).Enabled = True
+'
+'    pnlHeader.Caption = " " & Me.Caption & " (" & Me.Name & ")"
+    
+End Sub
+
+Private Sub Form_Load()
+    On Error GoTo ErrRtn
+    
+    With spdView
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+        
+        
+        
+        .ColsFrozen = 1  '틀고정
+        .Row = -1
+    
+        .Col = 1
+        .ColWidth(1) = 5
+        .CellType = CellTypeStaticText
+        .TypeVAlign = TypeVAlignCenter
+        .TypeHAlign = TypeHAlignCenter
+
+        .Col = 2
+        .ColWidth(2) = 14
+        .CellType = CellTypeStaticText
+        .TypeVAlign = TypeVAlignCenter
+        .TypeHAlign = TypeHAlignLeft
+
+        .Col = 3
+        .ColWidth(3) = 5
+        .CellType = CellTypeStaticText
+        .TypeVAlign = TypeVAlignCenter
+        .TypeHAlign = TypeHAlignCenter
+    
+        .Col = 4
+        .ColWidth(4) = 8
+        .CellType = CellTypeFloat
+        .TypeFloatSeparator = True
+        .TypeFloatDecimalPlaces = 0
+        .TypeVAlign = TypeVAlignCenter
+        .TypeHAlign = TypeHAlignRight
+    End With
+    
+    With spdView2
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    
+    
+        .ColsFrozen = 1  '틀고정
+        .Row = -1
+    
+        .Col = 1
+        .ColWidth(1) = 14
+        .CellType = CellTypeStaticText
+        .TypeVAlign = TypeVAlignCenter
+        .TypeHAlign = TypeHAlignCenter
+
+        .Col = 2
+        .ColWidth(2) = 14
+        .CellType = CellTypeFloat
+        .TypeFloatSeparator = True
+        .TypeFloatDecimalPlaces = 0
+        .TypeVAlign = TypeVAlignCenter
+        .TypeHAlign = TypeHAlignRight
+
+        .Col = 3
+        .ColWidth(3) = 14
+        .CellType = CellTypeFloat
+        .TypeFloatSeparator = True
+        .TypeFloatDecimalPlaces = 0
+        .TypeVAlign = TypeVAlignCenter
+        .TypeHAlign = TypeHAlignRight
+    
+        .Col = 4
+        .ColWidth(4) = 25
+        .CellType = CellTypeStaticText
+        .TypeVAlign = TypeVAlignCenter
+        .TypeHAlign = TypeHAlignCenter
+    End With
+    
+    If Store.Code <> MASTER_OFFICE_CODE Then
+        MsgBox "본사에서만 사용하는 프로그램 목록 입니다.", vbInformation, "확인"
+        Exit Sub
+    End If
+    
+    
+    If P_SMS001_Flag = False Then
+        ' Combo BOX의 내역을 채운다.
+        'Call ComboAdd
+            
+        Call Get_지사리스트(cboInput(3))
+            
+            
+        ReDim sValue(2)
+        
+        sValue(0) = "1"
+        sValue(1) = Store.Code
+        sValue(2) = "%"
+        
+        Set RS01 = New ADODB.Recordset
+        Set RS01 = ExecPro("PRO_SMS_001_01", sValue(), Err_Num, Err_Dec)
+        
+        spdView.MaxCols = RS01.Fields.Count
+        spdView.MaxRows = RS01.RecordCount
+        
+        'Call spdDisplay1(RS01)
+        Call fpSpread_Display(spdView, RS01)
+        Call GetColWidth(REG_App, Me.Name, spdView)
+        Call GetColWidth(REG_App, Me.Name, spdView2)
+        
+        P_SMS001_Flag = True
+    End If
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+    P_SMS001_Flag = False
+End Sub
+
+Private Sub spdView_Click(ByVal Col As Long, ByVal Row As Long)
+    Call Data_Display2
+End Sub
+
+Private Sub Data_Display2()
+    Dim i As Integer
+    
+    txtInput(1).Text = ""
+    txtInput(2).Text = ""
+    txtInput(3).Text = ""
+    txtInput(4).Text = ""
+    
+    optSMSSelect(1).Value = True
+    
+    txtsmsAddInput(0).Text = ""
+    txtsmsAddInput(1).Text = ""
+    
+    ReDim sValue(2)
+    
+    sValue(0) = "0"
+    sValue(1) = Mid(Trim(cboInput(3).Text), 2, 4)
+
+    spdView.Row = spdView.ActiveRow
+    spdView.Col = 1
+    sValue(2) = spdView.Text
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("PRO_SMS_001_01", sValue(), Err_Num, Err_Dec)
+    
+    If RS01.RecordCount <> 0 Then
+        txtInput(1).Text = RS01!대리점코드 & ""
+        txtInput(3).Text = RS01!대리점명1 & ""
+        txtInput(4).Text = Format(RS01!잔여수량, "#,##0") & ""
+
+        If Not IsNull(RS01!사용여부) Then
+            If RS01!사용여부 = "Y" Then
+                optSMSSelect(0).Value = True
+            Else
+                optSMSSelect(1).Value = True
+            End If
+        End If
+        
+        Call Data_Display3 ' 추가 상세 정보를 조회 한다.
+    End If
+End Sub
+
+Private Sub Data_Display3()
+    Dim i As Integer
+     
+    ReDim sValue(2)
+    
+    sValue(0) = "0"
+    sValue(1) = Mid(Trim(cboInput(3).Text), 2, 4)
+    sValue(2) = txtInput(1).Text
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("PRO_SMS_001_04", sValue(), Err_Num, Err_Dec)
+     
+    spdView2.MaxCols = RS01.Fields.Count
+    spdView2.MaxRows = RS01.RecordCount
+    
+    'Call spdDisplay2(RS01)
+    Call fpSpread_Display(spdView2, RS01)
+    Call GetColWidth(REG_App, Me.Name, spdView2)
+End Sub
+
+Public Sub DataAdd()
+    Dim i As Integer
+    
+'    dtInput(0).Value = Date
+'    dtInput(1).Value = Date
+'
+'    dtInput(0).Value = ""
+'    dtInput(1).Value = ""
+'
+'    For i = 0 To txtInput.Count - 1
+'        txtInput(i).Text = ""
+'    Next i
+'
+'    For i = 0 To cboInput.Count - 1
+'        cboInput(i).ListIndex = -1
+'    Next i
+'
+'    For i = 0 To optSelect.Count - 1
+'        optSelect(i).Value = False
+'    Next i
+    
+    ReDim sValue(0)
+    
+    sValue(0) = "0"
+    
+'    Set RS01 = New ADODB.Recordset
+'    Set RS01 = ExecPro("SP_01001_04", sValue(), Err_Num, Err_Dec)
+'
+'    If Not IsNull(RS01!대리점코드) Then
+'        txtInput(1).Text = RS01!대리점코드
+'    Else
+'        txtInput(1).Text = "001"
+'    End If
+    
+    txtInput(1).SetFocus
+End Sub
+
+Public Sub DataCancel()
+    'Call Data_Display2
+End Sub
+
+Public Sub DataDelete()
+'    If MsgBox("해당되는 대리점코드를 삭제하시겠습니까?", vbYesNo + vbInformation + vbDefaultButton2, "데이터 삭제") = vbYes Then
+'
+'        ReDim sValue(1)
+'
+'        sValue(0) = txtInput(1).Text
+'        sValue(1) = Mid(cboInput(3).Text, 2, 4)
+'
+'        Call ExecPro("SP_01001_02_MASTER", sValue(), Err_Num, Err_Dec)
+'
+'        If Err_Num = 0 Then
+'            spdView.Row = spdView.ActiveRow
+'            spdView.Action = ActionDeleteRow
+'
+'            MsgBox "해당되는 데이터가 정상적으로 삭제가 되었습니다.", vbInformation
+'        End If
+'    End If
+End Sub
+'
+'Private Sub ComboAdd()
+'    ReDim sValue(1)
+'
+'    sValue(0) = "0"
+'
+'    Set RS01 = New ADODB.Recordset
+'    Set RS01 = ExecPro("SP_00001", sValue(), Err_Num, Err_Dec)
+'
+'    Do While Not RS01.EOF
+'        cboInput(0).AddItem "[" & RS01!담당자코드 & "] " & RS01!담당자명
+'
+'        RS01.MoveNext
+'    Loop
+'
+'    sValue(0) = "0"
+'
+'    Set RS01 = New ADODB.Recordset
+'    Set RS01 = ExecPro("SP_00002", sValue(), Err_Num, Err_Dec)
+'
+'    Do While Not RS01.EOF
+'        cboInput(1).AddItem "[" & RS01!기사코드 & "] " & RS01!기사명
+'
+'        RS01.MoveNext
+'    Loop
+'
+'    cboInput(2).AddItem "[0] 해당없음"
+'    cboInput(2).AddItem "[5] 목요일"
+'    cboInput(2).AddItem "[6] 금요일"
+'    cboInput(2).AddItem "[7] 토요일"
+'    cboInput(2).AddItem "[1] 일요일"
+'    cboInput(2).AddItem "[2] 월요일"
+'    cboInput(2).AddItem "[3] 화요일"
+'    cboInput(2).AddItem "[4] 수요일"
+'End Sub
+
+Public Sub DataSave()
+    If Mid(Trim(cboInput(3).Text), 2, 4) = "" Then
+        MsgBox "지사 정보를 입력 하여 주십시요", vbInformation, "확인"
+        txtInput(1).SetFocus
+        Exit Sub
+    End If
+
+    If Trim(txtInput(1).Text) = "" Then
+        MsgBox "대리점 코드를 입력 하여 주십시요", vbInformation, "확인"
+        txtInput(1).SetFocus
+        Exit Sub
+    End If
+    
+    If MsgBox("해당되는 내역을 저장하시겠습니까?", vbYesNo + vbInformation, "데이터 저장") = vbYes Then
+        ReDim sValue(2)
+        
+        PanelsMsg ""
+        
+        sValue(0) = Mid(Trim(cboInput(3).Text), 2, 4)                    ' 지사 코드
+        sValue(1) = txtInput(1).Text                                    ' 대리점코드
+        sValue(2) = IIf(optSMSSelect(1).Value = True, "N", "Y")         ' Y:사용, N:사용안함
+        
+        Call ExecPro("PRO_SMS_001_02", sValue(), Err_Num, Err_Dec)
+        
+        If Err_Num = 0 Then
+'            MsgBox "해당되는 데이터가 정상적으로 저장이 되었습니다.", vbInformation
+        End If
+    End If
+End Sub
+
+Public Sub DataPrint()
+'    Dim ReportFP As String
+'    Dim ReportFile As String
+'
+'    ReportFP = GetIniStr("REPORT", "FilePath", "", m_iniFile)
+'    ReportFile = ReportFP & "\" & Me.Name & ".rpt"
+'
+'    P_00000.crPrint.StoredProcParam(0) = "0"
+'    P_00000.crPrint.StoredProcParam(1) = txtInput(1).Text
+'    P_00000.crPrint.WindowTitle = Me.Caption
+'
+'    Call ReportPrint(ReportFile, "1")
+End Sub
+
+Private Sub spdView_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+'    If NewRow <> -1 Then
+'        spdView.Row = Row
+'        spdView.Col = -1
+'        spdView.BackColor = vbWhite
+'
+'        spdView.Row = NewRow
+'        spdView.Col = -1
+'        spdView.BackColor = glbYellow
+'    End If
+
+    Call spdView_Click(NewCol, NewRow)
+End Sub
+
+
+
+Public Sub DataScreen()
+    panPrint.Visible = True
+    
+    sPrintOption = "2"
+End Sub
+
+Private Sub DataScreen2()
+'    Dim ReportFP As String
+'    Dim ReportFile As String
+'
+'    ReportFP = GetIniStr("REPORT", "FilePath", "", m_iniFile)
+'    ReportFile = ReportFP & "\" & Me.Name & ".rpt"
+'
+'    Dim i As Integer
+'    For i = 0 To 30
+'        P_00000.crPrint.Formulas(i) = ""
+'    Next
+'
+'    P_00000.crPrint.StoredProcParam(0) = "0"
+'
+'    If optPrint(0).Value = True Then
+'        P_00000.crPrint.StoredProcParam(1) = "0"
+'    ElseIf optPrint(1).Value = True Then
+'        P_00000.crPrint.StoredProcParam(1) = "1"
+'    ElseIf optPrint(2).Value = True Then
+'        P_00000.crPrint.StoredProcParam(1) = "2"
+'    End If
+'
+'    P_00000.crPrint.WindowTitle = Me.Caption
+'
+'    If sPrintOption = "2" Then
+'        Call ReportPrint(ReportFile, "2")
+'    ElseIf sPrintOption = "1" Then
+'        Call ReportPrint(ReportFile, "1")
+'    End If
+End Sub
+
+Private Sub txtInput_KeyPress(Index As Integer, KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        SendKeys "{TAB}"
+    End If
+End Sub
+
+Private Sub txtsmsAddInput_KeyPress(Index As Integer, KeyAscii As Integer)
+    Select Case KeyAscii
+        Case 48 To 57, 37, 39, 8, vbKeyReturn
+        Case Else
+            KeyAscii = 0
+    End Select
+End Sub

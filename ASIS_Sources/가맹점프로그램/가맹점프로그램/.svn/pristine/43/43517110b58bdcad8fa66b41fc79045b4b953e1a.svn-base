@@ -1,0 +1,326 @@
+VERSION 5.00
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Begin VB.Form frm카카오메세지변경 
+   BackColor       =   &H00FFFFFF&
+   BorderStyle     =   1  '단일 고정
+   Caption         =   "메세지 추가 / 변경"
+   ClientHeight    =   7635
+   ClientLeft      =   9975
+   ClientTop       =   4410
+   ClientWidth     =   6270
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   7635
+   ScaleWidth      =   6270
+   Begin XtremeSuiteControls.GroupBox GroupBox2 
+      Height          =   1560
+      Left            =   165
+      TabIndex        =   8
+      Top             =   5055
+      Width           =   5940
+      _Version        =   851970
+      _ExtentX        =   10477
+      _ExtentY        =   2752
+      _StockProps     =   79
+      Caption         =   "문자내용 상세"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림체"
+         Size            =   9.75
+         Charset         =   129
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      UseVisualStyle  =   -1  'True
+      Begin XtremeSuiteControls.FlatEdit txtMsg2 
+         Height          =   1230
+         Left            =   90
+         TabIndex        =   9
+         Top             =   285
+         Width           =   5760
+         _Version        =   851970
+         _ExtentX        =   10160
+         _ExtentY        =   2170
+         _StockProps     =   77
+         BackColor       =   -2147483643
+         MultiLine       =   -1  'True
+         FlatStyle       =   -1  'True
+      End
+      Begin VB.Label lbl_SMS2 
+         Alignment       =   1  '오른쪽 맞춤
+         Appearance      =   0  '평면
+         AutoSize        =   -1  'True
+         BackColor       =   &H80000005&
+         BackStyle       =   0  '투명
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H000000C0&
+         Height          =   180
+         Left            =   5685
+         TabIndex        =   10
+         Top             =   15
+         Width           =   105
+      End
+   End
+   Begin XtremeSuiteControls.GroupBox GroupBox1 
+      Height          =   750
+      Left            =   180
+      TabIndex        =   3
+      Top             =   225
+      Width           =   5940
+      _Version        =   851970
+      _ExtentX        =   10477
+      _ExtentY        =   1323
+      _StockProps     =   79
+      Caption         =   "문자내용 제목"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림"
+         Size            =   9.75
+         Charset         =   129
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      UseVisualStyle  =   -1  'True
+      Begin XtremeSuiteControls.FlatEdit txtTitle 
+         Height          =   345
+         Left            =   90
+         TabIndex        =   4
+         Top             =   270
+         Width           =   5760
+         _Version        =   851970
+         _ExtentX        =   10160
+         _ExtentY        =   609
+         _StockProps     =   77
+         BackColor       =   -2147483643
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         FlatStyle       =   -1  'True
+      End
+   End
+   Begin XtremeSuiteControls.PushButton btnCommand 
+      Height          =   750
+      Index           =   0
+      Left            =   1590
+      TabIndex        =   1
+      Top             =   6750
+      Width           =   1500
+      _Version        =   851970
+      _ExtentX        =   2646
+      _ExtentY        =   1323
+      _StockProps     =   79
+      Caption         =   "저장"
+      BackColor       =   -2147483633
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림"
+         Size            =   9.75
+         Charset         =   129
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Appearance      =   6
+   End
+   Begin XtremeSuiteControls.GroupBox grpEvent 
+      Height          =   3900
+      Left            =   180
+      TabIndex        =   0
+      Top             =   1050
+      Width           =   5940
+      _Version        =   851970
+      _ExtentX        =   10477
+      _ExtentY        =   6879
+      _StockProps     =   79
+      Caption         =   "카카오톡 문자내용 상세"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림체"
+         Size            =   9.75
+         Charset         =   129
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      UseVisualStyle  =   -1  'True
+      Begin XtremeSuiteControls.FlatEdit txtMsg 
+         Height          =   3570
+         Left            =   90
+         TabIndex        =   5
+         Top             =   285
+         Width           =   5760
+         _Version        =   851970
+         _ExtentX        =   10160
+         _ExtentY        =   6297
+         _StockProps     =   77
+         BackColor       =   -2147483643
+         MultiLine       =   -1  'True
+         FlatStyle       =   -1  'True
+      End
+      Begin VB.Label lbl_SMS 
+         Alignment       =   1  '오른쪽 맞춤
+         Appearance      =   0  '평면
+         AutoSize        =   -1  'True
+         BackColor       =   &H80000005&
+         BackStyle       =   0  '투명
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H000000C0&
+         Height          =   180
+         Left            =   5685
+         TabIndex        =   7
+         Top             =   15
+         Width           =   105
+      End
+   End
+   Begin XtremeSuiteControls.PushButton btnCommand 
+      Height          =   750
+      Index           =   1
+      Left            =   3090
+      TabIndex        =   2
+      Top             =   6750
+      Width           =   1500
+      _Version        =   851970
+      _ExtentX        =   2646
+      _ExtentY        =   1323
+      _StockProps     =   79
+      Caption         =   "삭제"
+      BackColor       =   -2147483633
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림"
+         Size            =   9.75
+         Charset         =   129
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Enabled         =   0   'False
+      Appearance      =   6
+   End
+   Begin XtremeSuiteControls.PushButton btnCommand 
+      Height          =   750
+      Index           =   2
+      Left            =   4605
+      TabIndex        =   6
+      Top             =   6750
+      Width           =   1500
+      _Version        =   851970
+      _ExtentX        =   2646
+      _ExtentY        =   1323
+      _StockProps     =   79
+      Caption         =   "닫기"
+      BackColor       =   -2147483633
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림"
+         Size            =   9.75
+         Charset         =   129
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Appearance      =   6
+   End
+End
+Attribute VB_Name = "frm카카오메세지변경"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Public MsgID As String
+
+Private Sub btnCommand_Click(Index As Integer)
+    Select Case Index
+        Case 0 ' 저장
+            frmSaveMsg
+        Case 1 ' 삭제
+            frmDeleteMsg
+        Case 2 ' 닫기
+            Unload Me
+    End Select
+End Sub
+
+Public Sub frmGetMsg()
+    Dim RecordSet As ADODB.RecordSet
+    Set RecordSet = GetMsg(MsgID)
+    If (Not RecordSet.EOF) Then
+        txtTitle.Text = RecordSet!Title
+        txtMsg.Text = RecordSet!msg
+        txtMsg2.Text = RecordSet!re_msg
+        btnCommand(1).Enabled = True
+    End If
+    Set RecordSet = Nothing
+End Sub
+
+Public Sub frmSaveMsg()
+    If Val(lbl_SMS.Tag) > m_KAKAO_Lng Then
+        MsgBox "작성된 메시지가 " & CStr(m_KAKAO_Lng) & "자 이상 입니다. " & CStr(m_KAKAO_Lng) & "자 이상은 전송할 수 없습니다.", vbCritical, "확인"
+        Exit Sub
+    End If
+    If Val(lbl_SMS2.Tag) > m_SMS_Lng Then
+        MsgBox "작성된 메시지가 " & CStr(m_SMS_Lng) & "자 이상 입니다. " & CStr(m_SMS_Lng) & "자 이상은 전송할 수 없습니다.", vbCritical, "확인"
+        Exit Sub
+    End If
+    Call SaveKaKaoMsg(MsgID, txtTitle.Text, txtMsg.Text, txtMsg2.Text)
+    MsgBox ("저장되었습니다.")
+    Unload Me
+End Sub
+
+Public Sub frmDeleteMsg()
+    Call DeleteKaKaoMsg(MsgID)
+    MsgBox ("삭제되었습니다.")
+    Unload Me
+End Sub
+
+Private Sub txtMsg_Change()
+    lbl_SMS.Tag = CStr(LenB(StrConv(txtMsg.Text, vbFromUnicode)))
+    lbl_SMS.Caption = lbl_SMS.Tag & " / " & m_KAKAO_Lng & "자"
+    If LenB(StrConv(txtMsg.Text, vbFromUnicode)) > m_KAKAO_Lng Then
+        lbl_SMS.BackColor = vbRed
+        MsgBox "작성된 메시지가 " & CStr(m_KAKAO_Lng) & "자 이상 입니다. " & CStr(m_KAKAO_Lng) & "자 이상은 전송할 수 없습니다.", vbCritical, "확인"
+        Exit Sub
+    Else
+        lbl_SMS.BackColor = Me.BackColor
+    End If
+End Sub
+
+Private Sub txtMsg2_Change()
+    lbl_SMS2.Tag = CStr(LenB(StrConv(txtMsg2.Text, vbFromUnicode)))
+    lbl_SMS2.Caption = lbl_SMS2.Tag & " / " & m_KAKAO_Lng & "자"
+    If LenB(StrConv(txtMsg2.Text, vbFromUnicode)) > m_SMS_Lng Then
+        lbl_SMS2.BackColor = vbRed
+        MsgBox "작성된 메시지가 " & CStr(m_KAKAO_Lng) & "자 이상 입니다. " & CStr(m_KAKAO_Lng) & "자 이상은 전송할 수 없습니다.", vbCritical, "확인"
+        Exit Sub
+    Else
+        lbl_SMS2.BackColor = Me.BackColor
+    End If
+
+End Sub

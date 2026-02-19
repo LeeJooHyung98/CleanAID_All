@@ -1,0 +1,3178 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{A5CC20C4-B5F5-11CD-98EC-0020AF234C9D}#4.1#0"; "CSText32.ocx"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Object = "{6514F5A0-641C-11D2-9FD0-0020AF131A57}#3.0#0"; "fpFlp30.ocx"
+Begin VB.Form frm접수현황 
+   Caption         =   "접수 현황"
+   ClientHeight    =   11970
+   ClientLeft      =   -3795
+   ClientTop       =   1215
+   ClientWidth     =   16410
+   ControlBox      =   0   'False
+   KeyPreview      =   -1  'True
+   LinkTopic       =   "Form20"
+   LockControls    =   -1  'True
+   MDIChild        =   -1  'True
+   ScaleHeight     =   11970
+   ScaleWidth      =   16410
+   WindowState     =   2  '최대화
+   Begin LpADOLib.fpListAdo fpList1 
+      Height          =   2475
+      Left            =   2445
+      TabIndex        =   68
+      Top             =   2640
+      Visible         =   0   'False
+      Width           =   6360
+      _Version        =   196608
+      _ExtentX        =   11218
+      _ExtentY        =   4366
+      TextAlias       =   ""
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림체"
+         Size            =   9
+         Charset         =   129
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Enabled         =   -1  'True
+      MousePointer    =   0
+      Object.TabStop         =   -1  'True
+      BackColor       =   -2147483628
+      ForeColor       =   -2147483640
+      Columns         =   4
+      Sorted          =   0
+      LineWidth       =   1
+      SelDrawFocusRect=   -1  'True
+      ColumnSeparatorChar=   9
+      ColumnSearch    =   -1
+      ColumnWidthScale=   2
+      RowHeight       =   -1
+      MultiSelect     =   0
+      WrapList        =   0   'False
+      WrapWidth       =   0
+      SelMax          =   -1
+      AutoSearch      =   1
+      SearchMethod    =   0
+      VirtualMode     =   0   'False
+      VRowCount       =   0
+      DataSync        =   3
+      ThreeDInsideStyle=   0
+      ThreeDInsideHighlightColor=   -2147483633
+      ThreeDInsideShadowColor=   -2147483627
+      ThreeDInsideWidth=   1
+      ThreeDOutsideStyle=   0
+      ThreeDOutsideHighlightColor=   -2147483628
+      ThreeDOutsideShadowColor=   -2147483632
+      ThreeDOutsideWidth=   1
+      ThreeDFrameWidth=   0
+      BorderStyle     =   1
+      BorderColor     =   -2147483642
+      BorderWidth     =   1
+      ThreeDOnFocusInvert=   0   'False
+      ThreeDFrameColor=   -2147483633
+      Appearance      =   0
+      BorderDropShadow=   1
+      BorderDropShadowColor=   -2147483632
+      BorderDropShadowWidth=   3
+      ScrollHScale    =   2
+      ScrollHInc      =   0
+      ColsFrozen      =   0
+      ScrollBarV      =   0
+      NoIntegralHeight=   0   'False
+      HighestPrecedence=   0
+      AllowColResize  =   0
+      AllowColDragDrop=   0
+      ReadOnly        =   0   'False
+      VScrollSpecial  =   0   'False
+      VScrollSpecialType=   0
+      EnableKeyEvents =   -1  'True
+      EnableTopChangeEvent=   -1  'True
+      DataAutoHeadings=   0   'False
+      DataAutoSizeCols=   0
+      SearchIgnoreCase=   -1  'True
+      ScrollBarH      =   1
+      VirtualPageSize =   0
+      VirtualPagesAhead=   0
+      ExtendCol       =   0
+      ColumnLevels    =   1
+      ListGrayAreaColor=   16777215
+      GroupHeaderHeight=   -1
+      GroupHeaderShow =   0   'False
+      AllowGrpResize  =   0
+      AllowGrpDragDrop=   0
+      MergeAdjustView =   0   'False
+      ColumnHeaderShow=   -1  'True
+      ColumnHeaderHeight=   -1
+      GrpsFrozen      =   0
+      BorderGrayAreaColor=   -2147483637
+      ExtendRow       =   0
+      DataField       =   ""
+      DataMember      =   ""
+      OLEDragMode     =   0
+      OLEDropMode     =   0
+      Redraw          =   -1  'True
+      ResizeRowToFont =   0   'False
+      TextTipMultiLine=   0
+      ColDesigner     =   "frm접수현황.frx":0000
+   End
+   Begin Threed.SSPanel pnlProg 
+      Height          =   1215
+      Left            =   45
+      TabIndex        =   59
+      Top             =   2250
+      Visible         =   0   'False
+      Width           =   3105
+      _ExtentX        =   5477
+      _ExtentY        =   2143
+      _Version        =   262144
+      BackColor       =   16777215
+      PictureFrames   =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림체"
+         Size            =   9
+         Charset         =   129
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Picture         =   "frm접수현황.frx":032E
+      Caption         =   " "
+      BorderWidth     =   0
+      BevelOuter      =   1
+      BevelInner      =   2
+      Alignment       =   4
+      RoundedCorners  =   0   'False
+      FloodShowPct    =   -1  'True
+   End
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   11970
+      Left            =   0
+      TabIndex        =   5
+      Top             =   0
+      Width           =   16410
+      _ExtentX        =   28945
+      _ExtentY        =   21114
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "frm접수현황.frx":32F9
+      Begin Threed.SSPanel SSPanel1 
+         Height          =   1095
+         Index           =   0
+         Left            =   15
+         TabIndex        =   6
+         Top             =   450
+         Width           =   16380
+         _ExtentX        =   28893
+         _ExtentY        =   1931
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin Threed.SSCheck chkTotal 
+            Height          =   240
+            Left            =   4170
+            TabIndex        =   64
+            Top             =   450
+            Width           =   1170
+            _ExtentX        =   2064
+            _ExtentY        =   423
+            _Version        =   262144
+            Font3D          =   3
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "전체기간"
+         End
+         Begin VB.TextBox txtFind 
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            IMEMode         =   10  '한글 
+            Left            =   2415
+            TabIndex        =   3
+            Top             =   750
+            Width           =   2805
+         End
+         Begin VB.ComboBox cboGubun 
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Left            =   915
+            Style           =   2  '드롭다운 목록
+            TabIndex        =   2
+            Top             =   750
+            Width           =   1455
+         End
+         Begin XtremeSuiteControls.PushButton cmdList 
+            Height          =   630
+            Left            =   8340
+            TabIndex        =   4
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 조회(&F)"
+            Appearance      =   6
+            Picture         =   "frm접수현황.frx":338B
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   3
+            Left            =   9885
+            TabIndex        =   8
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 엑셀(&E)"
+            Appearance      =   6
+            Picture         =   "frm접수현황.frx":3A85
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   5
+            Left            =   13170
+            TabIndex        =   9
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 닫기(&X)"
+            ForeColor       =   0
+            Appearance      =   6
+            Picture         =   "frm접수현황.frx":41FF
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   4
+            Left            =   11430
+            TabIndex        =   10
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 출력(&P)"
+            Appearance      =   6
+            Picture         =   "frm접수현황.frx":5291
+         End
+         Begin MSComCtl2.DTPicker dtpDay 
+            Height          =   315
+            Index           =   0
+            Left            =   915
+            TabIndex        =   0
+            Top             =   405
+            Width           =   1455
+            _ExtentX        =   2566
+            _ExtentY        =   556
+            _Version        =   393216
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            CustomFormat    =   "yyyy-MM-dd"
+            Format          =   56557571
+            CurrentDate     =   40279
+         End
+         Begin MSComCtl2.DTPicker dtpDay 
+            Height          =   315
+            Index           =   1
+            Left            =   2640
+            TabIndex        =   1
+            Top             =   405
+            Width           =   1455
+            _ExtentX        =   2566
+            _ExtentY        =   556
+            _Version        =   393216
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            CustomFormat    =   "yyyy-MM-dd"
+            Format          =   56557571
+            CurrentDate     =   40279
+         End
+         Begin XtremeSuiteControls.PushButton btnTerm 
+            Height          =   345
+            Index           =   0
+            Left            =   915
+            TabIndex        =   60
+            Top             =   30
+            Width           =   705
+            _Version        =   851970
+            _ExtentX        =   1244
+            _ExtentY        =   609
+            _StockProps     =   79
+            Caption         =   "1개월"
+            UseVisualStyle  =   -1  'True
+         End
+         Begin XtremeSuiteControls.PushButton btnTerm 
+            Height          =   345
+            Index           =   1
+            Left            =   1650
+            TabIndex        =   62
+            Top             =   30
+            Width           =   705
+            _Version        =   851970
+            _ExtentX        =   1244
+            _ExtentY        =   609
+            _StockProps     =   79
+            Caption         =   "1주일"
+            UseVisualStyle  =   -1  'True
+         End
+         Begin XtremeSuiteControls.PushButton btnTerm 
+            Height          =   345
+            Index           =   2
+            Left            =   2385
+            TabIndex        =   63
+            Top             =   30
+            Width           =   705
+            _Version        =   851970
+            _ExtentX        =   1244
+            _ExtentY        =   609
+            _StockProps     =   79
+            Caption         =   "오늘"
+            UseVisualStyle  =   -1  'True
+         End
+         Begin CSTextLibCtl.sitxEdit txtTAGNo 
+            Height          =   315
+            Left            =   6555
+            TabIndex        =   65
+            Top             =   750
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   "__-____"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderEffect    =   2
+            EOLTab          =   -1  'True
+            FocusSelect     =   -1  'True
+            Insert          =   0   'False
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   "__-____"
+            StartText.x     =   3
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   "##-####"
+            Justification   =   1
+            CharacterTable  =   ""
+            BorderStyle     =   0
+            Characters      =   2
+            MaxLength       =   6
+         End
+         Begin XtremeSuiteControls.PushButton cmdFind1 
+            Height          =   330
+            Left            =   5235
+            TabIndex        =   67
+            Top             =   735
+            Width           =   405
+            _Version        =   851970
+            _ExtentX        =   714
+            _ExtentY        =   582
+            _StockProps     =   79
+            UseVisualStyle  =   -1  'True
+            Picture         =   "frm접수현황.frx":598B
+         End
+         Begin VB.Label Label2 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "택번호:"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   4
+            Left            =   5685
+            TabIndex        =   66
+            Top             =   810
+            Width           =   840
+         End
+         Begin VB.Label Label2 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "조회기간:"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   1
+            Left            =   45
+            TabIndex        =   61
+            Top             =   120
+            Width           =   840
+         End
+         Begin VB.Label Label2 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "접수일자:"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   2
+            Left            =   45
+            TabIndex        =   58
+            Top             =   465
+            Width           =   840
+         End
+         Begin VB.Label Label2 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "검색조건:"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   180
+            Index           =   3
+            Left            =   45
+            TabIndex        =   57
+            Top             =   810
+            Width           =   840
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  '투명
+            Caption         =   "~"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   0
+            Left            =   2430
+            TabIndex        =   56
+            Top             =   465
+            Width           =   120
+         End
+      End
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   420
+         Left            =   15
+         TabIndex        =   7
+         Top             =   15
+         Width           =   16380
+         _ExtentX        =   28893
+         _ExtentY        =   741
+         _Version        =   262144
+         Font3D          =   1
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   12
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   "      접수 현황"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "frm접수현황.frx":639D
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin VB.Image Image 
+            Height          =   480
+            Index           =   0
+            Left            =   0
+            Picture         =   "frm접수현황.frx":65C3
+            Top             =   -15
+            Width           =   765
+         End
+      End
+      Begin Threed.SSPanel SSPanel1 
+         Height          =   975
+         Index           =   1
+         Left            =   15
+         TabIndex        =   11
+         Top             =   10980
+         Width           =   16380
+         _ExtentX        =   28893
+         _ExtentY        =   1720
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   0
+            Left            =   1140
+            TabIndex        =   12
+            Top             =   30
+            Width           =   795
+            _Version        =   262145
+            _ExtentX        =   1402
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   1
+            Left            =   330
+            TabIndex        =   13
+            Top             =   30
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "접 수 량"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   2
+            Left            =   1920
+            TabIndex        =   14
+            Top             =   630
+            Visible         =   0   'False
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "총매출액"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   915
+            Index           =   0
+            Left            =   15
+            TabIndex        =   15
+            Top             =   30
+            Width           =   330
+            _ExtentX        =   582
+            _ExtentY        =   1614
+            _Version        =   262144
+            CaptionStyle    =   1
+            BackColor       =   12648384
+            PictureMaskColorSource=   1
+            PictureUseMask  =   -1  'True
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "매출"
+            BevelOuter      =   0
+            PictureAlignment=   11
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   3
+            Left            =   330
+            TabIndex        =   16
+            Top             =   330
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "반 품 량"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   7
+            Left            =   330
+            TabIndex        =   17
+            Top             =   630
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "출 고 량"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   1
+            Left            =   1140
+            TabIndex        =   18
+            Top             =   330
+            Width           =   795
+            _Version        =   262145
+            _ExtentX        =   1402
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   2
+            Left            =   1140
+            TabIndex        =   19
+            Top             =   630
+            Width           =   795
+            _Version        =   262145
+            _ExtentX        =   1402
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   3
+            Left            =   2730
+            TabIndex        =   20
+            Top             =   630
+            Visible         =   0   'False
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   4
+            Left            =   2730
+            TabIndex        =   21
+            Top             =   330
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   5
+            Left            =   2730
+            TabIndex        =   22
+            ToolTipText     =   "순매출액 = 총매출액 - 반품금액 - 포인트사용"
+            Top             =   30
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   8
+            Left            =   1920
+            TabIndex        =   23
+            Top             =   330
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "반품금액"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   9
+            Left            =   1920
+            TabIndex        =   24
+            Top             =   30
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "순매출액"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   10
+            Left            =   4290
+            TabIndex        =   25
+            Top             =   30
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "현    금"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   915
+            Index           =   11
+            Left            =   3975
+            TabIndex        =   26
+            Top             =   30
+            Width           =   330
+            _ExtentX        =   582
+            _ExtentY        =   1614
+            _Version        =   262144
+            CaptionStyle    =   1
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "수금액"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   12
+            Left            =   4290
+            TabIndex        =   27
+            Top             =   330
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "카    드"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   13
+            Left            =   4290
+            TabIndex        =   28
+            Top             =   630
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "쿠    폰"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   6
+            Left            =   5100
+            TabIndex        =   29
+            Top             =   30
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   7
+            Left            =   5100
+            TabIndex        =   30
+            Top             =   330
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   8
+            Left            =   5100
+            TabIndex        =   31
+            Top             =   630
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   4
+            Left            =   6345
+            TabIndex        =   32
+            Top             =   30
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "마일리지"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   5
+            Left            =   6345
+            TabIndex        =   33
+            Top             =   330
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "미    수"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   9
+            Left            =   7155
+            TabIndex        =   34
+            Top             =   30
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   10
+            Left            =   7155
+            TabIndex        =   35
+            Top             =   330
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   6
+            Left            =   6345
+            TabIndex        =   36
+            Top             =   630
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "합    계"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   11
+            Left            =   7155
+            TabIndex        =   37
+            Top             =   630
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   14
+            Left            =   8715
+            TabIndex        =   38
+            Top             =   30
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "현    금"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   915
+            Index           =   15
+            Left            =   8400
+            TabIndex        =   39
+            Top             =   30
+            Width           =   330
+            _ExtentX        =   582
+            _ExtentY        =   1614
+            _Version        =   262144
+            CaptionStyle    =   1
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "미수입금"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   16
+            Left            =   8715
+            TabIndex        =   40
+            Top             =   330
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "카    드"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   17
+            Left            =   8715
+            TabIndex        =   41
+            Top             =   630
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "합    계"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   12
+            Left            =   9525
+            TabIndex        =   42
+            Top             =   30
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   13
+            Left            =   9525
+            TabIndex        =   43
+            Top             =   330
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   14
+            Left            =   9525
+            TabIndex        =   44
+            Top             =   630
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   18
+            Left            =   13140
+            TabIndex        =   45
+            Top             =   30
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "마일리지"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   19
+            Left            =   13140
+            TabIndex        =   46
+            Top             =   330
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "미    수"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   15
+            Left            =   13950
+            TabIndex        =   47
+            Top             =   30
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   16
+            Left            =   13950
+            TabIndex        =   48
+            Top             =   330
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   20
+            Left            =   11070
+            TabIndex        =   49
+            Top             =   30
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "현   금"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   17
+            Left            =   11880
+            TabIndex        =   50
+            Top             =   30
+            Width           =   1290
+            _Version        =   262145
+            _ExtentX        =   2275
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   21
+            Left            =   11070
+            TabIndex        =   51
+            Top             =   330
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "카   드"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   18
+            Left            =   11880
+            TabIndex        =   52
+            Top             =   330
+            Width           =   1290
+            _Version        =   262145
+            _ExtentX        =   2275
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   915
+            Index           =   22
+            Left            =   10755
+            TabIndex        =   53
+            Top             =   30
+            Width           =   330
+            _ExtentX        =   582
+            _ExtentY        =   1614
+            _Version        =   262144
+            CaptionStyle    =   1
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "합계"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   23
+            Left            =   11070
+            TabIndex        =   54
+            Top             =   630
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "쿠   폰"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   19
+            Left            =   11880
+            TabIndex        =   55
+            Top             =   630
+            Width           =   1290
+            _Version        =   262145
+            _ExtentX        =   2275
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   315
+            Index           =   24
+            Left            =   13140
+            TabIndex        =   70
+            Top             =   630
+            Width           =   825
+            _ExtentX        =   1455
+            _ExtentY        =   556
+            _Version        =   262144
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "합    계"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   315
+            Index           =   20
+            Left            =   13950
+            TabIndex        =   71
+            Top             =   630
+            Width           =   1260
+            _Version        =   262145
+            _ExtentX        =   2222
+            _ExtentY        =   556
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   9.76
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   16
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+      End
+      Begin FPSpreadADO.fpSpread sprGrid 
+         Height          =   9405
+         Left            =   15
+         TabIndex        =   69
+         Top             =   1560
+         Width           =   16380
+         _Version        =   524288
+         _ExtentX        =   28893
+         _ExtentY        =   16589
+         _StockProps     =   64
+         AutoCalc        =   0   'False
+         BackColorStyle  =   1
+         ColsFrozen      =   4
+         DAutoCellTypes  =   0   'False
+         DAutoHeadings   =   0   'False
+         DAutoSave       =   0   'False
+         DAutoSizeCols   =   0
+         DInformActiveRowChange=   0   'False
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         FormulaSync     =   0   'False
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   23
+         MaxRows         =   200
+         MoveActiveOnFocus=   0   'False
+         OperationMode   =   1
+         Protect         =   0   'False
+         ScrollBarExtMode=   -1  'True
+         SpreadDesigner  =   "frm접수현황.frx":718D
+         UserResize      =   1
+         VisibleCols     =   13
+         VisibleRows     =   50
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+   End
+End
+Attribute VB_Name = "frm접수현황"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Dim sValue() As String
+
+Dim Err_Num As Long
+Dim Err_Desc As String
+    
+Private Sub btnTerm_Click(Index As Integer)
+    Select Case Index
+        Case 0:
+            dtpDay(0).Value = Format(DateAdd("m", -1, Date), "YYYY-MM-DD")
+            dtpDay(1).Value = Format(Date, "YYYY-MM-DD")
+        
+        Case 1:
+            dtpDay(0).Value = Format(DateAdd("ww", -1, Date), "YYYY-MM-DD")
+            dtpDay(1).Value = Format(Date, "YYYY-MM-DD")
+        
+        Case 2:
+            dtpDay(0).Value = Format(Date, "YYYY-MM-DD")
+            dtpDay(1).Value = Format(Date, "YYYY-MM-DD")
+    End Select
+    
+    Call Data_Display
+End Sub
+
+Private Sub chkTotal_Click(Value As Integer)
+    dtpDay(0).Enabled = Not dtpDay(0).Enabled
+    dtpDay(1).Enabled = Not dtpDay(1).Enabled
+End Sub
+
+Private Sub cmdBtn_Click(Index As Integer)
+    Select Case Index
+        Case 3:
+            Call Export_Excel(frmMain.cdgExcel, sprGrid)
+            'Call sprGrid.ExportExcelBook("test.xls", "")
+            'Call sprGrid.ExportToTextFile("test.csv", """", ",", vbCrLf, ExportToTextFileCreateNewFile, "")
+            
+        Case 4:
+            Rtn = MsgBox("출력 미리보기를 하시겠습니까?", vbQuestion + vbYesNo, "출력")
+            
+            If Rtn = vbYes Then
+                Call Data_Print(True)
+            Else
+                Call Data_Print(False)
+            End If
+            
+        Case 5: Unload Me
+    End Select
+End Sub
+
+Private Sub Data_Print(Print_PreView As Boolean)
+    On Error GoTo ErrRtn
+    
+    If sprGrid.MaxRows = 0 Then Exit Sub
+
+    If Dir(AppPath & "XML", vbDirectory) = "" Then
+        MkDir AppPath & "XML"
+    End If
+
+    Open AppPath & "XML\접수현황.XML" For Output As #1
+    
+    Print #1, "<?xml version=""1.0"" encoding=""EUC-KR""?>"
+    Print #1, "<root>"
+        
+          XML = "    <조건>"
+          
+    If chkTotal.Value = -1 Then
+        XML = XML & "        <접수일자>접수일자 : 전체기간</접수일자>"
+    Else
+        XML = XML & "        <접수일자>접수일자 : " & Format(dtpDay(0).Value, "YYYY-MM-DD") & " ~ " & Format(dtpDay(1).Value, "YYYY-MM-DD") & "</접수일자>"
+    End If
+    
+    XML = XML & "        <가맹점>크린에이드 - " & Func_Replace(가맹점정보.가맹점명) & "</가맹점>"
+    XML = XML & "   </조건>"
+    Print #1, XML
+    
+    With sprGrid
+        For i = 1 To .MaxRows
+            .Row = i
+            
+                             XML = "    <Data>"
+            .Col = 5:  XML = XML & "        <접수일자>" & Format(.Text, "YYYY-MM-DD") & "</접수일자>"
+            .Col = 2:  XML = XML & "        <성명>" & Func_Replace(.Text) & "</성명>"
+            .Col = 3:  XML = XML & "        <휴대전화>" & Func_Replace(.Text) & "</휴대전화>"
+            .Col = 4:  XML = XML & "        <전화번호>" & Func_Replace(.Text) & "</전화번호>"
+            .Col = 8:  XML = XML & "        <출고일자>" & Format(.Text, "YYYY-MM-DD") & "</출고일자>"
+            .Col = 14: XML = XML & "        <지사출고일>" & Format(.Text, "YYYY-MM-DD") & "</지사출고일>"
+            .Col = 15: XML = XML & "        <택번호>" & .Text & "</택번호>"
+            .Col = 16: XML = XML & "        <품명>" & Func_Replace(.Text) & "</품명>"
+            .Col = 17: XML = XML & "        <색상>" & Func_Replace(.Text) & "</색상>"
+            .Col = 18: XML = XML & "        <무늬>" & Func_Replace(.Text) & "</무늬>"
+            .Col = 19: XML = XML & "        <내용>" & Func_Replace(.Text) & "</내용>"
+            .Col = 20: XML = XML & "        <금액>" & .Text & "</금액>"
+            .Col = 21: XML = XML & "        <결제>" & Func_Replace(.Text) & "</결제>"
+            .Col = 22: XML = XML & "        <상표>" & Func_Replace(.Text) & "</상표>"
+                       XML = XML & "   </Data>"
+                       Print #1, XML
+        Next i
+        
+        Print #1, "</root>"
+        Close #1
+    End With
+    
+    If Print_PreView = True Then
+        With rpt접수현황
+            .dc.FileURL = AppPath & "XML\접수현황.XML"
+            .Show 1
+        End With
+    Else
+        With rpt접수현황
+            .dc.FileURL = AppPath & "XML\접수현황.XML"
+            .PrintReport False
+        End With
+    
+        Unload rpt접수현황
+    End If
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+    Screen.MousePointer = 0
+End Sub
+
+Private Sub Data_Display()
+    On Error GoTo ErrRtn
+    
+    If (chkTotal.Value = -1) And (Trim(txtFind.Text) = "") Then
+        MsgBox "검색조건을 입력하세요.", vbInformation, "확인"
+        
+        txtFind.SetFocus
+        Exit Sub
+    End If
+    
+    pnlProg.Visible = True
+    DoEvents
+            
+    Query = "SELECT    A.접수번호"
+    Query = Query & ", A.접수일자"
+    Query = Query & ", A.접수시간"
+    Query = Query & ", A.예정일자"
+    Query = Query & ", A.출고일자"
+    Query = Query & ", A.출고시간"
+    Query = Query & ", A.지사출고상태"
+    Query = Query & ", A.의류명"
+    Query = Query & ", A.택번호"
+    Query = Query & ", A.색상"
+    Query = Query & ", A.무늬"
+    Query = Query & ", A.내용"
+    Query = Query & ", A.금액"
+    Query = Query & ", A.결제여부"
+    Query = Query & ", A.상표"
+    Query = Query & ", A.오점내용"
+    Query = Query & ", SUBSTRING(A.가맹점출고일자,1,10) AS 가맹점출고일자"
+    Query = Query & ", SUBSTRING(A.가맹점입고일자,1,10) AS 가맹점입고일자"
+    Query = Query & ", A.가맹점입고구분"
+    Query = Query & ", SUBSTRING(A.지사입고일자,1,10)   AS 지사입고일자"
+    Query = Query & ", SUBSTRING(A.지사출고일자,1,10)   AS 지사출고일자"
+    Query = Query & ", B.성명"
+    Query = Query & ", B.휴대전화"
+    Query = Query & ", B.전화번호"
+    Query = Query & " FROM TB_입출고 AS A LEFT OUTER JOIN TB_고객정보 AS B ON (A.고객코드 = B.고객코드) "
+    
+    If chkTotal.Value = -1 Then
+        Query = Query & " WHERE (A.접수일자 >= '0000-00-00')"
+    Else
+        Query = Query & " WHERE (A.접수일자 >= '" & Format(dtpDay(0).Value, "YYYY-MM-DD") & "'"
+        Query = Query & "   AND  A.접수일자 <= '" & Format(dtpDay(1).Value, "YYYY-MM-DD") & "')"
+    End If
+    
+    Query = Query & "   AND (A.판매취소 <> 'Y')"
+
+'    Query = Query & "   AND ((A.판매취소 <> 'Y')"
+'    Query = Query & "   AND (A.반품환불일자 IS NULL OR A.반품환불일자 = '')"
+'    Query = Query & "   AND (A.세탁환불일자 IS NULL OR A.세탁환불일자 = ''))"
+    
+    If txtTAGNo.RawData <> "" Then
+        Query = Query & " AND SUBSTRING(A.택번호,4,6) = '" & txtTAGNo.RawData & "'"
+    End If
+    
+    If txtFind.Text <> "" Then
+        Select Case cboGubun.Text
+            Case "성명":     Query = Query & " AND (B.성명 LIKE '%" & Trim(txtFind.Text) & "%') "
+            Case "전화번호": Query = Query & " AND (B.전화번호 LIKE '%" & Trim(txtFind.Text) & "%') "
+            Case "고객코드": Query = Query & " AND (B.고객코드 LIKE '%" & Trim(txtFind.Text) & "%') "
+        End Select
+    End If
+    
+    'Query = Query & " ORDER BY A.접수일자 DESC, A.접수번호 DESC, A.택번호 DESC"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    With sprGrid
+        .MaxRows = 0
+        .ReDraw = False
+        
+        Do Until ADORs.EOF
+            
+            
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1:  .Text = ADORs!접수번호 & ""                                ' 1
+            
+            If Trim(ADORs!성명) = "" Then
+                .Col = 2: .Text = " "                                             ' 2
+            Else
+                .Col = 2: .Text = ADORs!성명 & ""                                 ' 2
+            End If
+            
+            If Trim(ADORs!휴대전화) = "" Then
+                .Col = 3: .Text = " "                                             ' 3
+            Else
+                .Col = 3: .Text = ADORs!휴대전화 & ""                             ' 3
+            End If
+            
+            If Trim(ADORs!전화번호) = "" Then
+                .Col = 4: .Text = " "                                             ' 4
+            Else
+                .Col = 4: .Text = ADORs!전화번호 & ""                             ' 4
+            End If
+            
+            .Col = 5:  .Text = Format(ADORs!접수일자, "YY-MM-DD") & ""            ' 5
+            
+            If ADORs!접수시간 = "" Then
+                .Col = 6: .Text = " "                                             ' 6
+            Else
+                .Col = 6: .Text = Left(ADORs!접수시간, 5) & ""                    ' 6
+            End If
+            
+            .Col = 7:  .Text = Format(ADORs!예정일자, "YY-MM-DD") & ""            ' 7
+            .Col = 8:
+                If ADORs!출고일자 <> "" Then
+                    .Text = Format(ADORs!출고일자, "YY-MM-DD") & ""
+                Else
+                    .Text = ""
+                End If          ' 8
+            .Col = 9:  .Text = Left(ADORs!출고시간, 5) & ""                       ' 9
+            .Col = 10: .Text = Format(ADORs!가맹점출고일자, "YY-MM-DD") & ""      '10
+            
+            '------------------------------------------------------------------------
+            If Trim(ADORs!가맹점입고일자) = "00:00:00" Then
+                .Col = 11: .Text = Format(ADORs!지사출고일자, "YY-MM-DD") & ""    '11
+            Else
+                .Col = 11: .Text = Format(ADORs!가맹점입고일자, "YY-MM-DD") & ""  '11
+            End If
+            
+                           If Trim(.Text) = "" Then .BackColor = vbYellow         '11
+            '------------------------------------------------------------------------
+            .Col = 12: .Text = ADORs!가맹점입고구분 & ""       '12
+            
+            .Col = 13: .Text = Format(ADORs!지사입고일자, "YY-MM-DD") & ""        '12
+            
+            '------------------------------------------------------------------------
+            .Col = 14: .Text = Format(ADORs!지사출고일자, "YY-MM-DD") & ""        '13
+            
+                       If Trim(.Text) = "" Then .BackColor = vbYellow             '13
+            '------------------------------------------------------------------------
+            'If (ADORs!택번호 = "122586588") Then Debug.Assert (False)
+            If Len(ADORs!택번호) = 9 Then
+                .Col = 15: .Text = Format(Right(ADORs!택번호, 6), "00-0000")      '14
+            Else
+                .Col = 15: .Text = ADORs!택번호 & ""                              '14
+            End If
+            
+            .Col = 16: .Text = ADORs!의류명 & ""                                  '15
+            .Col = 17: .Text = ADORs!색상 & ""                                    '16
+            .Col = 18: .Text = ADORs!무늬 & ""                                    '17
+            .Col = 19: .Text = ADORs!내용 & ""                                    '18
+            .Col = 20: .Text = ADORs!금액 & ""                                    '19
+            .Col = 21: .Text = ADORs!결제여부 & ""                                '20
+            .Col = 22: .Text = ADORs!상표 & ""                                    '21
+            .Col = 23: .Text = ADORs!오점내용 & ""                                '22
+            
+            ADORs.MoveNext
+        Loop
+        ADORs.Close
+        Set ADORs = Nothing
+        
+        .SortKey(1) = 5                                                           '접수일자
+        .SortKeyOrder(1) = SortKeyOrderDescending                                 'DESC
+
+        .SortKey(2) = 1                                                           '접수번호
+        .SortKeyOrder(2) = SortKeyOrderDescending                                 'DESC
+
+        .SortKey(3) = 14                                                          '택번호
+        .SortKeyOrder(3) = SortKeyOrderDescending                                 'DESC
+
+        .Sort -1, -1, -1, -1, SortByRow
+        
+        .ReDraw = True
+    End With
+    
+    Call Total_Display
+    
+    pnlProg.Visible = False
+    
+    Exit Sub
+    
+ErrRtn:
+    pnlProg.Visible = False
+    
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+End Sub
+
+Private Sub cmdFind1_Click()
+    On Error GoTo ErrRtn
+    
+    If cboGubun.Text = "의류명" Then Exit Sub
+    
+    '-----------------------------------------------------------------------------------
+    ' TB_고객
+    '-----------------------------------------------------------------------------------
+    Query = "SELECT    고객코드"
+    Query = Query & ", 성명"
+    Query = Query & ", 전화번호"
+    Query = Query & ", 주소"
+    Query = Query & " FROM TB_고객정보"
+    Query = Query & " WHERE 삭제 = 0" '
+    
+    If txtFind.Text <> "" Then
+        If cboGubun.Text = "전화번호" Then
+            Query = Query & " AND (전화번호  LIKE '%" & txtFind.Text & "%'"
+            Query = Query & "  OR  휴대전화 LIKE '%" & txtFind.Text & "%')"
+            Query = Query & " ORDER BY " & cboGubun.Text & " ASC"
+        Else
+            Query = Query & " AND " & cboGubun.Text & " LIKE '%" & txtFind.Text & "%' "
+            Query = Query & " ORDER BY " & cboGubun.Text & " ASC"
+        End If
+    Else
+        Query = Query & " ORDER BY 성명 ASC"
+    End If
+    
+    'If txtFind.Text <> "" Then
+    '    Query = Query & " AND 성명 LIKE '%" & txtFind.Text & "%' "
+    'End If
+    
+    'Query = Query & " ORDER BY 성명 ASC "
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenStatic, adLockReadOnly
+    
+    With fpList1
+        Set .DataSource = ADORs
+        
+        .Top = 1530
+        .Left = 2445
+        
+        .Visible = True
+        .SetFocus
+    End With
+    
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+    Screen.MousePointer = 0
+End Sub
+
+Private Sub fpList1_DblClick()
+    On Error GoTo ErrRtn
+    
+    With fpList1
+        .Col = 0: .Row = .ListIndex: txtFind.Tag = Trim(.ColList)  '코드
+        .Col = 1: .Row = .ListIndex: txtFind.Text = Trim(.ColList) '이름
+        
+        If txtFind.Tag = "" Then
+            .Visible = False
+            
+            txtFind.SetFocus
+            Exit Sub
+        End If
+        
+        .Visible = False
+        
+        Call cmdList_Click
+    End With
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+    Screen.MousePointer = 0
+End Sub
+
+Private Sub fpList1_KeyPress(KeyAscii As Integer)
+    Select Case KeyAscii
+        Case 13
+            KeyAscii = 0
+            fpList1_DblClick
+        
+        Case 27
+            KeyAscii = 0
+            fpList1.Visible = False
+            txtFind.SetFocus
+    End Select
+End Sub
+
+Private Sub fpList1_LostFocus()
+    fpList1.Visible = False
+End Sub
+
+Private Sub cmdList_Click()
+    Call Data_Display
+End Sub
+
+Private Sub Form_Activate()
+'    dtpDay(1).Value = Format(Date, "YYYY-MM-DD")
+End Sub
+
+Private Sub Form_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        SendKeys "{Tab}"
+        KeyAscii = 0
+    End If
+End Sub
+
+Private Sub Form_Load()
+    With sprGrid
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+
+        .Col = 1: .ColHidden = True
+
+        .Col = 1: .ColMerge = MergeRestricted
+        .Col = 2: .ColMerge = MergeRestricted
+        .Col = 3: .ColMerge = MergeRestricted
+        .Col = 4: .ColMerge = MergeRestricted
+        .Col = 5: .ColMerge = MergeRestricted
+        .Col = 6: .ColMerge = MergeRestricted
+
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeExtended
+
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+        
+    With fpList1
+        .ColumnHeaderHeight = 300
+        .RowHeight = 300
+    
+        .ListApplyTo = ListApplyToColHeaders
+        .BackColor = RGB(192, 192, 192)
+        .LineStyle = LineStyleRaised
+    End With
+    
+    dtpDay(0).Value = Format(Date, "YYYY-MM-DD")
+    dtpDay(1).Value = Format(Date, "YYYY-MM-DD")
+    
+    With cboGubun
+        .Clear
+        .AddItem "성명"
+        .AddItem "전화번호"
+        .AddItem "고객코드"
+        
+        .ListIndex = 0
+    End With
+End Sub
+
+Private Sub Form_Resize()
+    On Error Resume Next
+    
+    cmdBtn(5).Left = Me.Width - cmdBtn(5).Width - 200
+End Sub
+
+Private Sub txtFind_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyReturn Then
+        cmdList_Click
+    End If
+End Sub
+
+'Private Sub mskTag_Change()
+'    mskTag.SelStart = 0
+'    mskTag.SelLength = 8
+'End Sub
+'
+'Private Sub mskTag_KeyDown(KeyCode As Integer, Shift As Integer)
+'    If KeyCode = vbKeyReturn Then
+'        Call Search_All
+'
+'        'Search_TagNo
+'    End If
+'End Sub
+
+'Private Sub txtTel_GotFocus(Index As Integer)
+'    txtTel(Index).SelStart = 0
+'    txtTel(Index).SelLength = 4
+'End Sub
+'
+'Private Sub txtTEL_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+'    If KeyCode = vbKeyReturn Then
+'        Select Case Index
+'            Case 0
+'
+'            Case 1
+'                Query = " SELECT * FROM TB_고객정보 "
+'                Query = Query & " WHERE 전화번호 = '" & txtTel(0).Text & "' "
+'                Set Rs = New ADODB.Recordset
+'                Rs.Open Query, ADOCon, adOpenStatic, adLockOptimistic
+'
+'                If Not Rs.EOF Or Not Rs.BOF Then
+'                    Rs.MoveLast
+'                End If
+'
+'                If Rs.RecordCount = 1 Then
+'                    ' 찿기
+'                    Search_All
+'                    'Search_Tel
+'                    Exit Sub
+'
+'                ElseIf Rs.RecordCount < 1 Then
+'                    MsgBox " 등록된 회원이 없습니다.", vbInformation, "확인"
+'                    Exit Sub
+'
+'                ElseIf Rs.RecordCount >= 2 Then
+'                    '뿌리고 입력대기상태
+'                    frm고객검색.DataDisplay Query
+'                    frm고객검색.Show 1
+'
+'                    If frm고객검색.SELECTCODE = "CANCEL" Then
+'                        txtTel(1).SetFocus
+'                        Exit Sub
+'                    End If
+'
+'                    If 고객정보.고객코드 <> "Error" Then txtCode = 고객정보.고객코드
+'
+'                    txtFind.Text = 고객정보.성명
+'                    Search_All
+'
+'                    Exit Sub
+'                End If
+'        End Select
+'    End If
+'End Sub
+
+'Private Sub sprGrid_DblClick(ByVal Col As Long, ByVal Row As Long)
+'    Dim intMaxRow  As Integer
+'    Dim intActrow  As Integer
+'    Dim strData(3) As String
+'
+'    If Col = 6 Then
+'        With sprGrid
+'            .Row = Row
+'            .Col = 6: strData(0) = IIf(.Text = "" Or .Text = " ", "出", "")
+'
+'            If strData(0) = "" Then strData(0) = " "
+'
+'            .Col = 6: .Text = strData(0)
+'
+'            .Col = 1:  strData(1) = .Text
+'            .Col = 8:  strData(2) = .Text
+'        End With
+'
+'        Query = "UPDATE TB_입출고 SET 지사출고상태         = '" & strData(0) & "'"
+'        Query = Query & "           , 지사출고일자     = '" & IIf(Trim(strData(0)) = "", "", Format(Date, "YYYY-MM-DD")) & "'"
+'        Query = Query & "           , 가맹점입고구분 = '수동'"
+'        Query = Query & " WHERE 접수일자 = '" & strData(1) & "'"
+'        Query = Query & "  AND 택번호 = '" & strData(2) & "'"
+'        ADOCon.Execute Query
+'    End If
+'End Sub
+
+Private Sub Total_Display()
+    Dim 조회일자1 As String
+    Dim 조회일자2 As String
+    
+    On Error GoTo ErrRtn
+    
+    조회일자1 = Format(dtpDay(0).Value, "YYYY-MM-DD")
+    조회일자2 = Format(dtpDay(1).Value, "YYYY-MM-DD")
+    
+    For i = 0 To 19
+        txtNum(i).Value = 0
+    Next i
+    
+    DoEvents
+    
+''    ReDim sValue(1)
+''
+''    sValue(0) = 조회일자1
+''    sValue(1) = 조회일자2
+''
+''    Set ADORs = New ADODB.Recordset
+''    Set ADORs = SP_Exec(ADOCon, "SP_TOTAL", sValue(), Err_Num, Err_Desc)
+''
+''    txtNum(0).Value = ADORs!접수수량 & "" '접수수량
+''    txtNum(5).Value = ADORs!접수금액 & "" '접수금액
+''
+''    txtNum(1).Value = ADORs!판매취소수량 & "" '판매취소수량
+''    txtNum(4).Value = ADORs!판매취소금액 & "" '판매취소금액
+''
+''    txtNum(2).Value = ADORs!출고수량 & "" '출고수량
+''
+''    ADORs.Close
+''    Set ADORs = Nothing
+    
+    
+    '--------------------------------------------------------------------------------------
+    ' 1. 접수수량
+    '--------------------------------------------------------------------------------------
+    Query = "SELECT    ISNULL(COUNT(*),0)"
+    Query = Query & ", ISNULL(SUM(금액),0)"
+    Query = Query & " FROM TB_입출고"
+    Query = Query & " WHERE (접수일자 >= '" & 조회일자1 & "' "
+    Query = Query & "   AND  접수일자 <= '" & 조회일자2 & "') "
+    Query = Query & "   AND (판매취소 <> 'Y')"
+    'Query = Query & "  AND (판매취소 = '' OR 판매취소 IS NULL)"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    txtNum(0).Value = ADORs(0) & "" '접수수량
+    txtNum(5).Value = ADORs(1) & "" '접수금액
+
+    ADORs.Close
+    Set ADORs = Nothing
+
+    '----------------------------------------------------------------
+    ' 7) 기타자료2 7-2) 반품환불 내역
+    '----------------------------------------------------------------
+    Query = "SELECT    ISNULL(COUNT(택번호),0)"
+    Query = Query & ", ISNULL(SUM(금액),0)"
+    Query = Query & ", ISNULL(SUM(금액*(100-세탁마진)/100),0)"
+    Query = Query & " FROM TB_입출고"
+    Query = Query & " WHERE SUBSTRING(반품환불일자,1,10) BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    txtNum(1).Value = ADORs(0) & "" '수량
+    txtNum(4).Value = ADORs(1) & "" '금액
+    ADORs.Close:    Set ADORs = Nothing
+    
+'
+    '--------------------------------------------------------------------------------------
+    ' 2. 판매취소
+    '--------------------------------------------------------------------------------------
+'    Query = "SELECT    ISNULL(COUNT(*),0)"
+'    Query = Query & ", ISNULL(SUM(금액),0)"
+'    Query = Query & " FROM TB_입출고"
+'    Query = Query & " WHERE (접수일자 >= '" & 조회일자1 & "' "
+'    Query = Query & "   AND  접수일자 <= '" & 조회일자2 & "') "
+'    Query = Query & "   AND (판매취소 = 'Y')"
+'    'Query = Query & "  AND (판매취소 = '' OR 판매취소 IS NULL)"
+'    Set ADORs = New ADODB.Recordset
+'    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'    txtNum(1).Value = ADORs(0) & "" '판매취소수량
+'    txtNum(4).Value = ADORs(1) & "" '판매취소금액
+'
+'    ADORs.Close
+'    Set ADORs = Nothing
+
+    '--------------------------------------------------------------------------------------
+    ' 3. 출고수량
+    '--------------------------------------------------------------------------------------
+    Query = "SELECT ISNULL(COUNT(*),0)"
+    Query = Query & " FROM TB_입출고"
+    Query = Query & " WHERE (출고일자 >= '" & 조회일자1 & "' "
+    Query = Query & "   AND  출고일자 <= '" & 조회일자2 & "') "
+    Query = Query & "   AND (판매취소 <> 'Y')"
+    'Query = Query & "  AND (판매취소 = '' OR 판매취소 IS NULL)"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    txtNum(2).Value = ADORs(0) & "" '출고수량
+
+    ADORs.Close
+    Set ADORs = Nothing
+
+'    '-------------------------------------------------------------------------------------
+'    ' 일일정산
+'    '-------------------------------------------------------------------------------------
+'    Query = "SELECT    A.반품수량"
+'    Query = Query & ", A.현금입금"
+'    Query = Query & ", A.카드입금"
+'    Query = Query & ", A.쿠폰입금"
+'    Query = Query & ", A.사용마일리지"
+'    Query = Query & ", A.접수수량"
+'    Query = Query & ", A.접수번호"
+'    Query = Query & ", ISNULL(B.접수일자, '') AS 접수일자"
+'    Query = Query & " FROM TB_매출 AS A LEFT OUTER JOIN (SELECT DISTINCT 접수일자, 접수번호"
+'    Query = Query & "                                    FROM TB_입출고"
+'    Query = Query & "                                    WHERE 접수일자 >= '" & 조회일자1 & "'"
+'    Query = Query & "                                      AND 접수일자 <= '" & 조회일자2 & "'"
+'    Query = Query & "                                   ) AS B ON A.매출일자 = B.접수일자 AND A.접수번호 = B.접수번호"
+'    Query = Query & " WHERE (A.매출일자 >= '" & 조회일자1 & "'"
+'    Query = Query & "   AND  A.매출일자 <= '" & 조회일자2 & "')"
+'    Set ADORs = New ADODB.Recordset
+'    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'    Do Until ADORs.EOF
+'        If ADORs!반품수량 <> 0 Then
+'            '반품처리
+'
+'            If (ADORs!접수일자 = "") Then
+'                txtNum(12).Value = txtNum(12).Value + ADORs!현금입금             '
+'                txtNum(13).Value = txtNum(13).Value + ADORs!카드입금             '
+'                txtNum(14).Value = txtNum(14).Value + ADORs!쿠폰입금             '
+'                txtNum(15).Value = txtNum(15).Value + ADORs!사용마일리지         '
+'            Else
+'                txtNum(6).Value = txtNum(6).Value + ADORs!현금입금               '
+'                txtNum(7).Value = txtNum(7).Value + ADORs!카드입금               '
+'                txtNum(8).Value = txtNum(8).Value + ADORs!쿠폰입금               '
+'                txtNum(9).Value = txtNum(9).Value + ADORs!사용마일리지           '
+'            End If
+'
+'        ElseIf (ADORs!접수수량 = 0) Or (ADORs!접수번호 = 0) Or (ADORs!접수일자 = "") Then
+'            '미수금 입금
+'
+'            txtNum(12).Value = txtNum(12).Value + ADORs!현금입금             '
+'            txtNum(13).Value = txtNum(13).Value + ADORs!카드입금             '
+'            txtNum(14).Value = txtNum(14).Value + ADORs!쿠폰입금             '
+'            txtNum(15).Value = txtNum(15).Value + ADORs!사용마일리지         '
+'
+'        ElseIf ADORs!접수수량 > 0 Then
+'            txtNum(6).Value = txtNum(6).Value + ADORs!현금입금               '
+'            txtNum(7).Value = txtNum(7).Value + ADORs!카드입금               '
+'            txtNum(8).Value = txtNum(8).Value + ADORs!쿠폰입금               '
+'            txtNum(9).Value = txtNum(9).Value + ADORs!사용마일리지           '
+'        End If
+'
+'        ADORs.MoveNext
+'    Loop
+'    ADORs.Close
+'    Set ADORs = Nothing
+'
+
+    '----------------------------------------------------------------
+    ' 2. 선불결제 2-2) 현금결제 구하기
+    '----------------------------------------------------------------
+    '매출중에 접수일자에 발생한 건만 처리
+    ' 판매 취소한 내역도 빼주어야 한다. ( 현금입금에 -가 들어 가기 때문에 바로 처리가 가능하다.)
+    Query = "SELECT ISNULL(SUM(현금입금),0)"
+    Query = Query & " FROM TB_매출 "
+    Query = Query & " WHERE 매출일자  BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    Query = Query & "   AND 접수금액 <> 0"
+    ' Query = Query & "   AND NOT 적요 LIKE '%판매취소%' "
+    Query = Query & "   AND NOT 적요 LIKE '%미수금액 입금%'"
+
+    txtNum(6).Value = Recordset_Result(Query) '
+
+    '----------------------------------------------------------------
+    ' 2. 선불결제 2-3) 카드결제 건수 / 금액 구하기
+    ' 건수= 승인 + 취소 , 금액 = 승인 + 취소
+    '----------------------------------------------------------------
+    Query = "SELECT    ISNULL(COUNT(카드입금),0)"
+    Query = Query & ", ISNULL(SUM(카드입금),0)"
+    Query = Query & " FROM TB_매출 "
+    Query = Query & " WHERE 매출일자 BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    Query = Query & "   AND 카드입금 <> 0" ' 카드 금결제가 아닌 경우도 0원이 들어간다.
+'   Query = Query & "   AND 접수금액 > 0"
+'   Query = Query & "   AND NOT 적요 LIKE '%판매취소%' "
+    Query = Query & "   AND NOT 적요 LIKE '%미수금액 입금%'"
+    Query = Query & "   AND NOT 적요 LIKE '%반품환불%'"
+    Query = Query & "   AND NOT 적요 LIKE '%세탁환불%'"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    txtNum(7).Value = ADORs(1)
+
+    ADORs.Close:    Set ADORs = Nothing
+    
+    '--------------------------------------------------------------------
+    ' 2. 선불결제 2-5) 쿠폰 사용 건수/ 금액
+    '--------------------------------------------------------------------
+    Query = "SELECT    ISNULL(SUM(쿠폰입금),0)"
+    Query = Query & ", ISNULL(COUNT(쿠폰번호),0)"
+    Query = Query & " FROM TB_매출"
+    Query = Query & " WHERE 매출일자 BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    Query = Query & "   AND 쿠폰입금 > 0"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    txtNum(8).Value = ADORs(0)
+    
+    ADORs.Close:    Set ADORs = Nothing
+    
+    '--------------------------------------------------------------------
+    ' 2. 선불결제 2-4) 발생/사용/삭제 마일리지
+    '--------------------------------------------------------------------
+    Query = "SELECT    ISNULL(SUM(발생마일리지),0)"
+    Query = Query & ", ISNULL(SUM(사용마일리지),0)"
+    Query = Query & ", ISNULL(SUM(삭제마일리지),0)"
+    Query = Query & " FROM TB_매출"
+    Query = Query & " WHERE 매출일자 BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    txtNum(9).Value = ADORs(1) '사용마일리지
+    ADORs.Close:    Set ADORs = Nothing
+
+
+    '----------------------------------------------------------------
+    ' 2. 선불결제 2-6) 미수금 금액
+    ' 마일리지를 사용한 것을 판매취소할 경우 미수금액이 마일리지 사용한 것으로 처리되기 때문에
+    ' 별도로 마일리지판매취소 금액을 구해서 -해준다.
+    ' 마일리지판매취소 값이 -로 넘어오기 때문에 - 해주면 +로 처리된다.(위에서 마일리지 금액이 처리되어 나요기 때문)
+    '----------------------------------------------------------------
+    Query = "SELECT ISNULL(SUM(접수금액),0) - ISNULL(SUM(입금합계),0) AS 미수금 "
+    Query = Query & " FROM TB_매출"
+    Query = Query & " WHERE 매출일자 BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    'Query = Query & "   AND 접수금액 > 0"
+    Query = Query & "   AND NOT 적요  LIKE '%미수금액 입금%'"
+    Query = Query & "   AND NOT 적요  LIKE '%반품환불%'"
+    Query = Query & "   AND NOT 적요  LIKE '%세탁환불%'"
+
+    txtNum(10).Value = Recordset_Result(Query) '
+    
+    Query = "SELECT ISNULL(SUM(사용마일리지),0)  AS 판매취소마일리지금액 "
+    Query = Query & " FROM TB_매출"
+    Query = Query & " WHERE 매출일자 BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    Query = Query & "   AND 접수금액 < 0"
+    Query = Query & "   AND 사용마일리지 < 0"
+    Query = Query & "   AND NOT 적요  LIKE '%미수금액 입금%'"
+    Query = Query & "   AND NOT 적요  LIKE '%반품환불%'"
+    Query = Query & "   AND NOT 적요  LIKE '%세탁환불%'"
+    txtNum(10).Value = txtNum(10).Value - Recordset_Result(Query)  '
+    
+
+    '----------------------------------------------------------------
+    ' 3. 미수결제 3-1) 미수금 수금 현금결제 구하기
+    '----------------------------------------------------------------
+    Query = "SELECT ISNULL(SUM(현금입금),0)"
+    Query = Query & " FROM TB_매출"
+    Query = Query & " WHERE 매출일자 BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    Query = Query & "   AND 접수금액 = 0"
+    Query = Query & "   AND 적요  LIKE '%미수금액 입금%'"
+
+    txtNum(12).Value = Recordset_Result(Query) '
+
+    '----------------------------------------------------------------
+    ' 3. 미수결제 3-2) 미수금 수금 카드결제 구하기
+    '----------------------------------------------------------------
+    Query = "SELECT    ISNULL(COUNT(카드입금),0)"
+    Query = Query & ", ISNULL(SUM(카드입금),0)"
+    Query = Query & " FROM TB_매출"
+    Query = Query & " WHERE 매출일자 BETWEEN '" & 조회일자1 & "' AND '" & 조회일자2 & "' "
+    Query = Query & "   AND 카드입금 <> 0"
+    Query = Query & "   AND 접수금액 = 0" ' 판매취소시 0원으로 들어온다.
+    Query = Query & "   AND 적요  LIKE '%미수금액 입금%'"
+
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    txtNum(13).Value = ADORs(1)
+
+    ADORs.Close:    Set ADORs = Nothing
+    txtNum(14).Value = txtNum(12).Value + txtNum(13).Value      '미수금입금 = 현금 + 카드
+    
+    
+    'txtNum(3).Value = txtNum(5).Value + txtNum(4).Value                     '총매출 = 순매출 + 반품금액
+    '수금액 = 현금 + 카드+쿠폰+마일리지+미수금
+    txtNum(11).Value = txtNum(6).Value + txtNum(7).Value + txtNum(8).Value + txtNum(9).Value + txtNum(10).Value
+    
+'    txtNum(10).Value = txtNum(5).Value - txtNum(11).Value - txtNum(9).Value  '미수금액
+    
+    txtNum(17).Value = txtNum(6).Value + txtNum(12).Value       '현금
+    txtNum(18).Value = txtNum(7).Value + txtNum(13).Value       '카드
+    txtNum(19).Value = txtNum(8).Value                          '쿠폰
+    txtNum(15).Value = txtNum(9).Value                          '마일리지
+    txtNum(16).Value = txtNum(10).Value                         '미수
+    txtNum(20).Value = txtNum(17).Value + txtNum(18).Value + txtNum(19).Value + txtNum(15).Value + txtNum(16).Value
+    
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+    Screen.MousePointer = 0
+End Sub

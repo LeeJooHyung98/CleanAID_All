@@ -1,0 +1,1870 @@
+VERSION 5.00
+Object = "{A5CC20C4-B5F5-11CD-98EC-0020AF234C9D}#4.1#0"; "CSText32.ocx"
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Begin VB.Form frm출고결제 
+   BorderStyle     =   1  '단일 고정
+   Caption         =   "출고 & 결제"
+   ClientHeight    =   7335
+   ClientLeft      =   7635
+   ClientTop       =   3975
+   ClientWidth     =   9525
+   ControlBox      =   0   'False
+   DrawWidth       =   3
+   FillColor       =   &H00C0C0C0&
+   Icon            =   "frm출고결제.frx":0000
+   KeyPreview      =   -1  'True
+   LinkTopic       =   "Form10"
+   LockControls    =   -1  'True
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   7335
+   ScaleWidth      =   9525
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   7335
+      Left            =   0
+      TabIndex        =   1
+      Top             =   0
+      Width           =   9525
+      _ExtentX        =   16801
+      _ExtentY        =   12938
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "frm출고결제.frx":0A02
+      Begin Threed.SSPanel SSPanel 
+         Height          =   945
+         Left            =   15
+         TabIndex        =   26
+         Top             =   15
+         Width           =   4740
+         _ExtentX        =   8361
+         _ExtentY        =   1667
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin CSTextLibCtl.silgEdit txtMisu 
+            Height          =   420
+            Left            =   1605
+            TabIndex        =   27
+            Top             =   45
+            Width           =   1575
+            _Version        =   262145
+            _ExtentX        =   2778
+            _ExtentY        =   741
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   11.26
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderEffect    =   2
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            FocusSelect     =   -1  'True
+            Insert          =   0   'False
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   "0"
+            Text            =   " 0"
+            StartText.x     =   3
+            StartText.y     =   5
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   18
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            BorderStyle     =   0
+            Undo            =   1
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   420
+            Index           =   2
+            Left            =   45
+            TabIndex        =   28
+            Top             =   45
+            Width           =   1530
+            _ExtentX        =   2699
+            _ExtentY        =   741
+            _Version        =   262144
+            Font3D          =   1
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "미 수 금 액"
+            PictureBackgroundStyle=   2
+            PictureBackground=   "frm출고결제.frx":0B14
+            BorderWidth     =   0
+            BevelOuter      =   1
+            PictureAlignment=   9
+            RoundedCorners  =   0   'False
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   420
+            Index           =   3
+            Left            =   45
+            TabIndex        =   29
+            Top             =   495
+            Width           =   1530
+            _ExtentX        =   2699
+            _ExtentY        =   741
+            _Version        =   262144
+            Font3D          =   1
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "출 고 금 액"
+            PictureBackgroundStyle=   2
+            PictureBackground=   "frm출고결제.frx":0E56
+            BorderWidth     =   0
+            BevelOuter      =   1
+            PictureAlignment=   9
+            RoundedCorners  =   0   'False
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.silgEdit txtChulPay 
+            Height          =   420
+            Left            =   1605
+            TabIndex        =   30
+            Top             =   495
+            Width           =   1575
+            _Version        =   262145
+            _ExtentX        =   2778
+            _ExtentY        =   741
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   11.26
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderEffect    =   2
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            FocusSelect     =   -1  'True
+            Insert          =   0   'False
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   "0"
+            Text            =   " 0"
+            StartText.x     =   3
+            StartText.y     =   5
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   18
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            BorderStyle     =   0
+            Undo            =   1
+            Data            =   0
+         End
+      End
+      Begin Threed.SSPanel SSPanel1 
+         Height          =   780
+         Left            =   15
+         TabIndex        =   2
+         Top             =   6540
+         Width           =   9495
+         _ExtentX        =   16748
+         _ExtentY        =   1376
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton btnAccount 
+            Height          =   660
+            Left            =   60
+            TabIndex        =   3
+            Top             =   60
+            Width           =   1890
+            _Version        =   851970
+            _ExtentX        =   3334
+            _ExtentY        =   1164
+            _StockProps     =   79
+            Caption         =   " 출고 && 결제"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm출고결제.frx":1198
+         End
+         Begin XtremeSuiteControls.PushButton btnExit 
+            Height          =   660
+            Left            =   8025
+            TabIndex        =   4
+            Top             =   60
+            Width           =   1425
+            _Version        =   851970
+            _ExtentX        =   2514
+            _ExtentY        =   1164
+            _StockProps     =   79
+            Caption         =   " 취소"
+            ForeColor       =   0
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm출고결제.frx":1892
+         End
+         Begin XtremeSuiteControls.PushButton btnDelivery 
+            Height          =   660
+            Left            =   60
+            TabIndex        =   33
+            Top             =   60
+            Width           =   1890
+            _Version        =   851970
+            _ExtentX        =   3334
+            _ExtentY        =   1164
+            _StockProps     =   79
+            Caption         =   " 인터넷출고"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm출고결제.frx":1E2C
+         End
+      End
+      Begin Threed.SSPanel SSPanel2 
+         Height          =   390
+         Index           =   1
+         Left            =   4770
+         TabIndex        =   5
+         Top             =   15
+         Width           =   4740
+         _ExtentX        =   8361
+         _ExtentY        =   688
+         _Version        =   262144
+         Font3D          =   1
+         ForeColor       =   0
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 신용카드 승인내역"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "frm출고결제.frx":2526
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+      Begin FPSpreadADO.fpSpread sprCard 
+         Height          =   1995
+         Left            =   4770
+         TabIndex        =   6
+         Top             =   420
+         Width           =   4740
+         _Version        =   524288
+         _ExtentX        =   8361
+         _ExtentY        =   3519
+         _StockProps     =   64
+         BackColorStyle  =   1
+         DisplayRowHeaders=   0   'False
+         EditModePermanent=   -1  'True
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   13
+         SpreadDesigner  =   "frm출고결제.frx":274C
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel SSPanel2 
+         Height          =   420
+         Index           =   2
+         Left            =   4770
+         TabIndex        =   7
+         Top             =   2430
+         Width           =   4740
+         _ExtentX        =   8361
+         _ExtentY        =   741
+         _Version        =   262144
+         Font3D          =   1
+         ForeColor       =   0
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 현금영수증 승인내역"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "frm출고결제.frx":2FF7
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton btnCashCancel 
+            Height          =   390
+            Left            =   2745
+            TabIndex        =   8
+            Top             =   15
+            Width           =   1965
+            _Version        =   851970
+            _ExtentX        =   3466
+            _ExtentY        =   688
+            _StockProps     =   79
+            Caption         =   "현금영수증 승인취소"
+            ForeColor       =   0
+            UseVisualStyle  =   -1  'True
+         End
+      End
+      Begin FPSpreadADO.fpSpread sprCash 
+         Height          =   3660
+         Left            =   4770
+         TabIndex        =   9
+         Top             =   2865
+         Width           =   4740
+         _Version        =   524288
+         _ExtentX        =   8361
+         _ExtentY        =   6456
+         _StockProps     =   64
+         BackColorStyle  =   1
+         DisplayColHeaders=   0   'False
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   1
+         MaxRows         =   11
+         RowHeaderDisplay=   0
+         ScrollBars      =   0
+         SpreadDesigner  =   "frm출고결제.frx":321D
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel SSPanel2 
+         Height          =   5175
+         Index           =   0
+         Left            =   15
+         TabIndex        =   10
+         Top             =   1350
+         Width           =   4740
+         _ExtentX        =   8361
+         _ExtentY        =   9128
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin Threed.SSOption optReceipt 
+            Height          =   285
+            Index           =   0
+            Left            =   1650
+            TabIndex        =   11
+            Top             =   2370
+            Width           =   1110
+            _ExtentX        =   1958
+            _ExtentY        =   503
+            _Version        =   262144
+            BackColor       =   16777215
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "미출력"
+         End
+         Begin XtremeSuiteControls.PushButton btnCard 
+            Height          =   420
+            Left            =   3195
+            TabIndex        =   12
+            Top             =   1395
+            Width           =   1515
+            _Version        =   851970
+            _ExtentX        =   2672
+            _ExtentY        =   741
+            _StockProps     =   79
+            Caption         =   "신용카드결제"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   9
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            UseVisualStyle  =   -1  'True
+         End
+         Begin XtremeSuiteControls.PushButton btnCash 
+            Height          =   420
+            Left            =   3195
+            TabIndex        =   13
+            Top             =   945
+            Width           =   1515
+            _Version        =   851970
+            _ExtentX        =   2672
+            _ExtentY        =   741
+            _StockProps     =   79
+            Caption         =   "현금영수증"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   9
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            UseVisualStyle  =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   420
+            Index           =   10
+            Left            =   45
+            TabIndex        =   14
+            Top             =   45
+            Width           =   1530
+            _ExtentX        =   2699
+            _ExtentY        =   741
+            _Version        =   262144
+            Font3D          =   1
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "받 은 금 액"
+            PictureBackgroundStyle=   2
+            PictureBackground=   "frm출고결제.frx":3843
+            BorderWidth     =   0
+            BevelOuter      =   1
+            PictureAlignment=   9
+            RoundedCorners  =   0   'False
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   420
+            Index           =   11
+            Left            =   45
+            TabIndex        =   15
+            Top             =   495
+            Width           =   1530
+            _ExtentX        =   2699
+            _ExtentY        =   741
+            _Version        =   262144
+            Font3D          =   1
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "거 스 름 돈"
+            PictureBackgroundStyle=   2
+            PictureBackground=   "frm출고결제.frx":3B85
+            BorderWidth     =   0
+            BevelOuter      =   1
+            PictureAlignment=   9
+            RoundedCorners  =   0   'False
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.silgEdit txtIncome 
+            Height          =   420
+            Left            =   1605
+            TabIndex        =   0
+            Top             =   45
+            Width           =   1575
+            _Version        =   262145
+            _ExtentX        =   2778
+            _ExtentY        =   741
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   -2147483640
+            BackColor       =   12648447
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   11.26
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderEffect    =   2
+            DataProperty    =   2
+            FocusSelect     =   -1  'True
+            Insert          =   0   'False
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   "0"
+            Text            =   " 0"
+            StartText.x     =   3
+            StartText.y     =   5
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   18
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            BorderStyle     =   0
+            Undo            =   1
+            Data            =   0
+         End
+         Begin CSTextLibCtl.silgEdit txtChange 
+            Height          =   420
+            Left            =   1605
+            TabIndex        =   16
+            Top             =   495
+            Width           =   1575
+            _Version        =   262145
+            _ExtentX        =   2778
+            _ExtentY        =   741
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   11.26
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderEffect    =   2
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            FocusSelect     =   -1  'True
+            Insert          =   0   'False
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   "0"
+            Text            =   " 0"
+            StartText.x     =   3
+            StartText.y     =   5
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   18
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            BorderStyle     =   0
+            Undo            =   1
+            Data            =   0
+         End
+         Begin CSTextLibCtl.silgEdit txtCash 
+            Height          =   420
+            Left            =   1605
+            TabIndex        =   17
+            Top             =   945
+            Width           =   1575
+            _Version        =   262145
+            _ExtentX        =   2778
+            _ExtentY        =   741
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   11.26
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderEffect    =   2
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            FocusSelect     =   -1  'True
+            Insert          =   0   'False
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   "0"
+            Text            =   " 0"
+            StartText.x     =   3
+            StartText.y     =   5
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   18
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            BorderStyle     =   0
+            Undo            =   1
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   420
+            Index           =   12
+            Left            =   45
+            TabIndex        =   18
+            Top             =   945
+            Width           =   1530
+            _ExtentX        =   2699
+            _ExtentY        =   741
+            _Version        =   262144
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "현 금 결 제"
+            PictureBackgroundStyle=   2
+            PictureBackground=   "frm출고결제.frx":3EC7
+            BorderWidth     =   0
+            BevelOuter      =   1
+            PictureAlignment=   9
+            RoundedCorners  =   0   'False
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   420
+            Index           =   13
+            Left            =   45
+            TabIndex        =   19
+            Top             =   1395
+            Width           =   1530
+            _ExtentX        =   2699
+            _ExtentY        =   741
+            _Version        =   262144
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "카 드 결 제"
+            PictureBackgroundStyle=   2
+            PictureBackground=   "frm출고결제.frx":4209
+            BorderWidth     =   0
+            BevelOuter      =   1
+            PictureAlignment=   9
+            RoundedCorners  =   0   'False
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   420
+            Index           =   14
+            Left            =   45
+            TabIndex        =   20
+            Top             =   1845
+            Width           =   1530
+            _ExtentX        =   2699
+            _ExtentY        =   741
+            _Version        =   262144
+            Font3D          =   1
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "결제후 잔액"
+            PictureBackgroundStyle=   2
+            PictureBackground=   "frm출고결제.frx":454B
+            BorderWidth     =   0
+            BevelOuter      =   1
+            PictureAlignment=   9
+            RoundedCorners  =   0   'False
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.silgEdit txtCard 
+            Height          =   420
+            Left            =   1605
+            TabIndex        =   21
+            Top             =   1395
+            Width           =   1575
+            _Version        =   262145
+            _ExtentX        =   2778
+            _ExtentY        =   741
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   -2147483640
+            BackColor       =   16777215
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   11.26
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderEffect    =   2
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            FocusSelect     =   -1  'True
+            Insert          =   0   'False
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   "0"
+            Text            =   " 0"
+            StartText.x     =   3
+            StartText.y     =   5
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   18
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            BorderStyle     =   0
+            Undo            =   1
+            Data            =   0
+         End
+         Begin CSTextLibCtl.silgEdit txtBalance2 
+            Height          =   420
+            Left            =   1605
+            TabIndex        =   22
+            Top             =   1845
+            Width           =   1575
+            _Version        =   262145
+            _ExtentX        =   2778
+            _ExtentY        =   741
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   255
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   11.26
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderEffect    =   2
+            DataProperty    =   2
+            ReadOnly        =   -1  'True
+            FocusSelect     =   -1  'True
+            Insert          =   0   'False
+            Modified        =   -1  'True
+            HideSelection   =   -1  'True
+            RawData         =   "0"
+            Text            =   " 0"
+            StartText.x     =   3
+            StartText.y     =   5
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   18
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   2
+            BorderStyle     =   0
+            Undo            =   1
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel7 
+            Height          =   420
+            Index           =   15
+            Left            =   45
+            TabIndex        =   23
+            Top             =   2295
+            Width           =   1530
+            _ExtentX        =   2699
+            _ExtentY        =   741
+            _Version        =   262144
+            BackColor       =   12648384
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "영수증 출력"
+            PictureBackgroundStyle=   2
+            PictureBackground=   "frm출고결제.frx":488D
+            BorderWidth     =   0
+            BevelOuter      =   1
+            PictureAlignment=   9
+            RoundedCorners  =   0   'False
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSOption optReceipt 
+            Height          =   285
+            Index           =   1
+            Left            =   2775
+            TabIndex        =   24
+            Top             =   2370
+            Width           =   690
+            _ExtentX        =   1217
+            _ExtentY        =   503
+            _Version        =   262144
+            BackColor       =   16777215
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "1장"
+         End
+         Begin Threed.SSOption optReceipt 
+            Height          =   285
+            Index           =   2
+            Left            =   3615
+            TabIndex        =   31
+            Top             =   2370
+            Width           =   690
+            _ExtentX        =   1217
+            _ExtentY        =   503
+            _Version        =   262144
+            BackColor       =   16777215
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "2장"
+            Value           =   -1
+         End
+         Begin VB.Label lblNum 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "0"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00808080&
+            Height          =   165
+            Left            =   4065
+            TabIndex        =   32
+            Top             =   4905
+            Width           =   585
+         End
+      End
+      Begin Threed.SSPanel SSPanel2 
+         Height          =   360
+         Index           =   3
+         Left            =   15
+         TabIndex        =   25
+         Top             =   975
+         Width           =   4740
+         _ExtentX        =   8361
+         _ExtentY        =   635
+         _Version        =   262144
+         Font3D          =   1
+         ForeColor       =   255
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9.75
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 결제금액"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "frm출고결제.frx":4BCF
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+   End
+End
+Attribute VB_Name = "frm출고결제"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+
+Private Sub btnDelivery_Click()
+    optReceipt(1).Value = True
+    Call Account
+End Sub
+
+Private Sub btnAccount_Click()
+    Call Account
+End Sub
+
+Private Sub Account()
+    Dim 접수일자   As String
+    Dim 택번호     As String
+
+    Dim strState   As String
+    Dim strTemp    As String
+    
+    Dim 미수금액   As Long
+    Dim 출고금액   As Long
+    
+    Dim 현금결제   As Long
+    Dim 카드결제   As Long
+    
+    Dim 세탁금액   As Long
+    Dim 결제합계   As Long
+    
+    Dim 고객코드   As String
+    Dim 의류명     As String
+    
+    Dim iPaper     As Integer
+    Dim PrintCount As Integer
+    
+    Dim iCheckCnt  As Integer
+    
+    On Error GoTo ErrRtn
+
+    btnAccount.Enabled = False
+
+    고객코드 = frm출고.txtCode.Text & ""
+    
+    미수금액 = txtMisu.Value    '
+    출고금액 = txtChulPay.Value '
+    
+    현금결제 = txtCash.Value    '
+    카드결제 = txtCard.Value    '
+    
+    결제합계 = txtCash.Value + txtCard.Value
+    
+    If (현금결제 + 카드결제) > 미수금액 Then
+       MsgBox "'미수금액'보다 '수금액' 처리가 더 많습니다. 수금액을 확인하여 주십시요", vbInformation, "확인"
+       
+       btnAccount.Enabled = True
+       Exit Sub
+    End If
+    
+    
+
+    With frm출고.sprChul
+        
+        ' 미불-> 완불로 변경
+        If 결제합계 > 0 Then
+            ' 먼저 출고 선택된것 부터 완불 처리를 한다.
+            For i = 1 To .MaxRows
+                .Row = i
+                
+                .Col = 12
+                If .Text = "1" Then
+                    
+                    .Col = 8: 세탁금액 = .Value
+                    .Col = 9
+                    
+                    If (Trim(.Text) = "미불") And (결제합계 >= 세탁금액) Then '결제여부
+                        결제합계 = 결제합계 - 세탁금액
+                    
+                        strState = "완불"
+                        
+                        .Col = 9: .Text = strState & ""                                      ' "완불"
+                        
+                        .Col = 1:  접수일자 = Format(.Text, "YYYY-MM-DD") & ""               ' 접수일자
+                        .Col = 18: 택번호 = Replace(.Text, "-", "")                          ' 택번호
+                        
+                        '------------------------------------------------------------
+                        ' 입출고
+                        '------------------------------------------------------------
+                        Query = "UPDATE TB_입출고 SET 결제여부     = '" & strState & "'"
+                        Query = Query & "           , 본사전송여부 = 'N'"
+                        Query = Query & " WHERE 접수일자 = '" & 접수일자 & "'"
+                        Query = Query & "   AND 택번호   = '" & 택번호 & "'"
+                        ADOCon.Execute Query
+                    End If
+                End If
+                
+                If 결제합계 <= 0 Then Exit For
+            Next i
+        
+            ' 나머지 금액을 완불 처리한다.
+            For i = 1 To .MaxRows
+                .Row = i
+                
+                .Col = 8: 세탁금액 = .Value
+                
+                .Col = 9
+                
+                If (Trim(.Text) = "미불") And (결제합계 >= 세탁금액) Then '결제여부
+                    결제합계 = 결제합계 - 세탁금액
+                
+                    strState = "완불"
+                    
+                    .Col = 9: .Text = strState & ""                                      ' "완불"
+                    
+                    .Col = 1:  접수일자 = Format(.Text, "YYYY-MM-DD") & ""               ' 접수일자
+                    .Col = 18: 택번호 = Replace(.Text, "-", "")                          ' 택번호
+                    
+                    '------------------------------------------------------------
+                    ' 입출고
+                    '------------------------------------------------------------
+                    Query = "UPDATE TB_입출고 SET 결제여부     = '" & strState & "'"
+                    Query = Query & "           , 본사전송여부 = 'N'"
+                    Query = Query & " WHERE 접수일자 = '" & 접수일자 & "'"
+                    Query = Query & "   AND 택번호   = '" & 택번호 & "'"
+                    ADOCon.Execute Query
+                End If
+                If 결제합계 <= 0 Then Exit For
+            Next i
+        End If
+        
+        '출고체크를 하였는지...
+        iCheckCnt = 0
+        
+        For i = 1 To .MaxRows
+            .Row = i
+            .Col = 12
+            
+            If .Text = "1" Then
+                iCheckCnt = iCheckCnt + 1
+            End If
+        Next i
+        
+        
+        If iCheckCnt > 0 Then
+            
+            For i = 1 To .MaxRows
+                .Row = i
+                
+                .Col = 1:  접수일자 = Format(.Text, "YYYY-MM-DD")                '접수일자
+                .Col = 12: strTemp = Trim(.Text) & ""                            ' "확"
+                
+                .Col = 18: 택번호 = Replace(.Text, "-", "")                      '택번호
+        
+                If strTemp = "1" Then
+                    '--------------------------------------------------------
+                    ' TB_매출 테이블 적요란에 의류명 넣기위해서...
+                    '--------------------------------------------------------
+                    If 의류명 = "" Then
+                        .Col = 3: 의류명 = Trim(.Text) & ""         ' 의류명
+                    End If
+                    
+                    '----------------------------------------------------------------------
+                    ' TB_입출고
+                    '----------------------------------------------------------------------
+                    Query = "UPDATE TB_입출고 SET"
+                    Query = Query & "  출고일자     = '" & Format(Date, "YYYY-MM-DD") & "'"
+                    Query = Query & ", 출고시간     = '" & Format(Now, "hh:mm:ss") & "'"
+                    Query = Query & ", 본사전송여부 = 'N'"
+                    Query = Query & " WHERE 접수일자 = '" & 접수일자 & "'"
+                    Query = Query & "   AND 택번호   = '" & 택번호 & "'"
+                    ADOCon.Execute Query
+                End If
+            Next i
+        End If
+    End With
+    
+    Call Set_고객미수금액(고객코드, 현금결제 + 카드결제, "DELETE") ' 미수금액
+    
+    If (현금결제 > 0) Or (카드결제 > 0) Then
+        '-----------------------------------------------------------
+        ' TB_매출
+        '-----------------------------------------------------------
+        Dim iSEQ As Long
+        
+        Query = "SELECT ISNULL(MAX(일련번호),0) + 1"
+        Query = Query & " FROM TB_매출"
+        Query = Query & " WHERE 고객코드 = '" & 고객코드 & "'"
+        'Query = Query & "   AND 접수번호 = 0"
+        Query = Query & "   AND 접수번호 = " & lblNum.Caption
+        Set ADORs = New ADODB.RecordSet
+        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+                        
+        iSEQ = ADORs(0)
+        
+        ADORs.Close
+        Set ADORs = Nothing
+        
+        '-----------------------------------------------------------
+        Query = "SELECT * FROM TB_매출"
+        Query = Query & " WHERE 고객코드 = '" & 고객코드 & "'"
+        'Query = Query & "   AND 접수번호 = 0"
+        Query = Query & "   AND 접수번호 = " & lblNum.Caption
+        Query = Query & "   AND 일련번호 = " & iSEQ
+        Set ADORs = New ADODB.RecordSet
+        ADORs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If ADORs.EOF Then ADORs.AddNew
+        
+        ADORs!지사코드 = 가맹점정보.지사코드                    '
+        ADORs!가맹점코드 = 가맹점정보.가맹점코드                '
+        
+        ADORs!고객코드 = 고객코드 & ""                          ' 1
+        'ADORs!접수번호 = 0 & ""                                ' 2
+        ADORs!접수번호 = lblNum.Caption & ""                    ' 2
+        ADORs!일련번호 = iSEQ                                   ' 3
+        
+        ADORs!매출일자 = Format(Date, "YYYY-MM-DD") & ""        ' 4
+        ADORs!매출시간 = Format(Now, "hh:mm:ss")                ' 5
+        ADORs!적요 = "[미수금액 입금] " & 의류명 & " 외"          ' 6
+        ADORs!접수금액 = 0                                      ' 7
+        ADORs!입금합계 = 현금결제 + 카드결제                    ' 8
+        ADORs!현금입금 = 현금결제                               ' 9
+        ADORs!카드입금 = 카드결제                               '10
+        ADORs!쿠폰입금 = 0                                      '
+        ADORs!쿠폰번호 = ""                                     '
+        ADORs!사용마일리지 = 0                                  '
+        ADORs!세트할인 = 0                                      '
+        ADORs!에누리 = 0                                        '
+        ADORs!접수수량 = 0                                      '12
+        ADORs!반품수량 = 0                                      '13
+        ADORs!발생마일리지 = 0                                  '
+        ADORs!누적마일리지 = 0                                  '
+        ADORs!사용가능마일리지 = 0                              '
+        ADORs!이전미수금 = txtMisu.Value                        '
+        
+        ADORs!본사전송여부 = ""                                 '
+        
+        ADORs.Update
+        
+        ADORs.Close
+        Set ADORs = Nothing
+    End If
+    
+    Call SetInternetDelivery(frm출고.btnInternet.Tag)
+    
+''    '-------------------------------------------------------------------------------
+''    ' TB_신용카드승인
+''    '-------------------------------------------------------------------------------
+''    Dim 승인번호 As String
+''    Dim 승인일자 As String
+''    Dim 승인시간 As String
+''
+''    With sprCard
+''        For i = 1 To .MaxRows
+''            .Row = i
+''
+''            .Col = 2: 승인번호 = .Text & ""
+''            .Col = 3: 승인일자 = .Text & ""
+''            .Col = 4: 승인시간 = .Text & ""
+''
+''            Query = "UPDATE TB_신용카드승인 SET 접수번호 =  0"
+''            Query = Query & "                 , 고객코드 = '" & 고객코드 & "'"
+''            Query = Query & " WHERE 승인번호 = '" & 승인번호 & "'"
+''            Query = Query & "   AND 승인일자 = '" & 승인일자 & "'"
+''            Query = Query & "   AND 승인시간 = '" & 승인시간 & "'"
+''            ADOCon.Execute Query
+''         Next i
+''    End With
+''
+''    '-------------------------------------------------------------------------------
+''    ' TB_현금영수증
+''    '-------------------------------------------------------------------------------
+''    With sprCash
+''        .Col = 1
+''
+''        .Row = 1
+''        If .Text <> "" Then
+''            .Row = 1: 승인번호 = .Text & ""
+''            .Row = 2: 승인일자 = .Text & ""
+''            .Row = 3: 승인시간 = .Text & ""
+''
+''            Query = "UPDATE TB_현금영수증 SET 접수번호 =  0"
+''            Query = Query & "               , 고객코드 = '" & 고객코드 & "'"
+''            Query = Query & " WHERE 승인번호 = '" & 승인번호 & "'"
+''            Query = Query & "   AND 승인일자 = '" & 승인일자 & "'"
+''            Query = Query & "   AND 승인시간 = '" & 승인시간 & "'"
+''            ADOCon.Execute Query
+''        End If
+''    End With
+    
+    '------------------------------------------------------------------------
+    ' 보관증출력
+    '------------------------------------------------------------------------
+    Dim CommPort As String
+    Dim BaudRate As String
+    Dim CardYN   As String
+    Dim CashYN   As String
+    
+    CommPort = GetIniStr("VAN", "KS7500_CommPort", "", iniFile)
+    BaudRate = GetIniStr("VAN", "KS7500_BaudRate", "", iniFile)
+    
+    ' 출력 여부 확인
+    sprCard.Row = 1: sprCard.Col = 2:   CardYN = IIf(Trim(sprCard.Text) = "", "N", "Y")
+    sprCash.Row = 1: sprCash.Col = 1:   CashYN = IIf(Trim(sprCash.Text) = "", "N", "Y")
+    
+    ' 카드전표, 현금영수증, 미출력 모두 아닐경우 처리하지 않는다.
+    If CardYN = "N" And CashYN = "N" And optReceipt(0).Value = True Then
+
+    
+    ' 출력일 경우
+    Else
+        
+                Dim TempPrint As String
+                If optReceipt(0).Value = True Then
+                    
+                Else
+                    iPaper = IIf(optReceipt(1).Value = True, 1, 2)
+
+                    For PrintCount = 1 To iPaper
+                        TempPrint = TempPrint & 출고영수증_Report(PrintCount)
+                    Next PrintCount
+
+                End If
+'
+                Call frmKicc.Card_Print(TempPrint)
+    End If
+    
+    Unload frm출고결제
+    
+    Call frm출고.Get_FindData("Code", 고객코드)
+    
+    'frm출고.Text_Clear
+    'frm출고.txtTel.SetFocus
+    
+    Exit Sub
+
+ErrRtn:
+    btnAccount.Enabled = True
+
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+End Sub
+
+Private Sub btnCard_Click()
+    
+    btnCard.Enabled = False
+    
+    If txtMisu.Value = 0 And txtChulPay.Value = 0 Then
+        MsgBox "미수금액 및 출고금액이 없습니다.", vbInformation, "확인"
+        
+        btnCard.Enabled = True
+        Exit Sub
+    End If
+    
+    If txtBalance2.Value <= 0 Then
+        MsgBox "카드 결제할 금액이 없습니다.", vbInformation, "확인"
+        
+        btnCard.Enabled = True
+        Exit Sub
+    
+    End If
+    
+    If Check_KS7500 = False Then
+        MsgBox "환경설정에서 사업자번호, 단말기번호 등이 올바르게 입력되었는지 확인하십시요.", vbInformation, "확인"
+        
+        btnCard.Enabled = True
+        Exit Sub
+    End If
+    
+    
+    Account_Form = "출고"
+    
+    
+    frmKSNET2.pnlCustomCode.Caption = frm출고.txtCode.Text  '
+    frmKSNET2.pnlNum.Caption = lblNum.Caption               ' frmKSNET.pnlNum.Caption = 0
+    frmKSNET2.txtMoney.Value = txtBalance2.Value            '
+    frmKSNET2.txtMoney.Tag = txtBalance2.Value              '
+    
+    Call frmKSNET2.신용카드승인요청_Rtn("1")
+    
+    frmKSNET2.Show 1
+
+    btnCard.Enabled = True
+End Sub
+
+Private Sub btnCash_Click()
+    If Check_KS7500 = False Then
+        MsgBox "환경설정에서 사업자번호, 단말기번호 등이 올바르게 입력되었는지 확인하십시요.", vbInformation, "확인"
+        
+        Exit Sub
+    End If
+    Unload frmKSNETCash
+    Account_Form = "출고"
+    
+    frmKSNETCash.pnlCustomCode.Caption = frm출고.txtCode.Text  '
+    frmKSNETCash.pnlNum.Caption = lblNum.Caption               ' frmKSNETCash.pnlNum.Caption = 0
+    frmKSNETCash.txtMoney.Value = txtCash.Value                '
+    
+    Call frmKSNETCash.현금영수증승인요청_Rtn("3")
+    
+    frmKSNETCash.Show 1
+End Sub
+
+Private Sub btnCashCancel_Click()
+    sprCash.Row = 1
+    sprCash.Col = 1
+    
+    If sprCash.Text = "" Then Exit Sub
+    Unload frmKSNETCash
+    Account_Form = "출고"
+    
+    With frmKSNETCash.sprGrid
+        .Col = 1
+    
+        .Row = 1:  .Text = Spread_GetData(sprCash, 1, 1, True)   '승인번호
+        .Row = 2:  .Text = Spread_GetData(sprCash, 2, 1, True)   '승인일자
+        .Row = 3:  .Text = Spread_GetData(sprCash, 3, 1, True)   '승인시간
+        .Row = 4:  .Text = Spread_GetData(sprCash, 4, 1, True)   '거래유형 '입력방법
+        .Row = 5:  .Text = Spread_GetData(sprCash, 5, 1, True)   '총금액
+        .Row = 6:  .Text = Spread_GetData(sprCash, 6, 1, True)   '사용자정보
+        .Row = 7:  .Text = Spread_GetData(sprCash, 7, 1, True)   '메시지1
+        .Row = 8:  .Text = Spread_GetData(sprCash, 8, 1, True)   '메시지2
+        .Row = 9:  .Text = Spread_GetData(sprCash, 9, 1, True)   '소득구분
+        .Row = 10: .Text = Spread_GetData(sprCash, 10, 1, True)  '국세청1
+        .Row = 11: .Text = Spread_GetData(sprCash, 11, 1, True)  '국세청2
+    End With
+
+    frmKSNETCash.pnlCustomCode.Caption = Trim(frm출고.txtCode.Text)             '고객코드
+    frmKSNETCash.pnlNum.Caption = 0                                             '접수번호
+    frmKSNETCash.txtMoney.Value = Spread_GetData(sprCash, 5, 1, True)           '총금액
+
+    frmKSNETCash.pnlApprovalNo.Caption = Spread_GetData(sprCash, 1, 1, True)   '승인번호
+    frmKSNETCash.pnlApprovalDay.Caption = Spread_GetData(sprCash, 2, 1, True)  '승인일자
+    frmKSNETCash.pnlApprovalTime.Caption = Spread_GetData(sprCash, 3, 1, True) '승인시간
+
+    Call frmKSNETCash.현금영수증승인요청_Rtn("4")
+    
+    frmKSNETCash.Show 1
+End Sub
+
+
+Private Sub btnExit_Click()
+    Unload Me
+End Sub
+
+Private Sub Form_Load()
+    
+    Me.Top = ((frmMain.Height - Me.Height) / 2) + frmMain.Top
+    Me.Left = ((frmMain.Width - Me.Width) / 2) + frmMain.Left
+    
+    With sprCard
+        .MaxRows = 0
+        .RowHeight(-1) = 18
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeNormal
+    End With
+    
+    With sprCash
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeNormal
+    End With
+
+    Dim iPaper As String
+    
+    iPaper = GetIniStr("Printer", "Paper2", "", iniFile)
+    
+    If iPaper = "2" Then
+        optReceipt(2).Value = True
+    ElseIf iPaper = "1" Then
+        optReceipt(1).Value = True
+    Else
+        optReceipt(0).Value = True
+    End If
+
+    '-------------------------------------------------------------------------
+    ' TB_입출고 - 접수번호
+    '-------------------------------------------------------------------------
+    Query = "SELECT ISNULL(MAX(접수번호),0)"
+    Query = Query & " FROM TB_입출고"
+    Query = Query & " WHERE 고객코드  = '" & frm출고.txtCode.Text & "'"
+    Query = Query & "   AND 접수일자 <= '" & Format(Date, "YYYY-MM-DD") & "'"
+    Query = Query & "   AND 결제여부  = '미불'"
+    Set SUBRs = New ADODB.RecordSet
+    SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+    
+    If SUBRs.EOF Then
+        lblNum.Caption = 0                        '
+    Else
+        lblNum.Caption = SUBRs(0)                 '
+    End If
+    SUBRs.Close
+    Set SUBRs = Nothing
+    If frm출고.btnInternet.Tag <> "" Then
+        btnAccount.Visible = False
+    Else
+        btnDelivery.Visible = False
+    End If
+End Sub
+
+Private Sub sprCard_ButtonClicked(ByVal Col As Long, ByVal Row As Long, ByVal ButtonDown As Integer)
+    If Row <= 0 Then Exit Sub
+    
+    Account_Form = "출고"
+    
+    
+    With frmKSNET2.sprGrid
+        .Col = 1
+    
+        .Row = 1:  .Text = Spread_GetData(sprCard, Row, 2, True)  '승인번호
+        .Row = 2:  .Text = Spread_GetData(sprCard, Row, 3, True)   '승인일자
+        .Row = 3:  .Text = Spread_GetData(sprCard, Row, 4, True)   '승인시간
+        
+        .Row = 4:  .Text = Spread_GetData(sprCard, Row, 5, True)   '할부기간
+        .Row = 5:  .Text = Spread_GetData(sprCard, Row, 6, True)   '결제금액
+                
+        .Row = 6:  .Text = Spread_GetData(sprCard, Row, 7, True)   '발급사코드
+        .Row = 7:  .Text = Spread_GetData(sprCard, Row, 8, True)   '발급사명
+        .Row = 8:  .Text = Spread_GetData(sprCard, Row, 9, True)   '매입사코드
+        .Row = 9:  .Text = Spread_GetData(sprCard, Row, 10, True)  '매입사명
+        .Row = 10: .Text = Spread_GetData(sprCard, Row, 11, True)  '카드번호
+        .Row = 11: .Text = Spread_GetData(sprCard, Row, 12, True)  '메시지1
+        .Row = 12: .Text = Spread_GetData(sprCard, Row, 13, True)  '메시지2
+    End With
+
+    frmKSNET2.pnlCustomCode.Caption = frm출고.txtCode.Text             '
+    frmKSNET2.pnlNum.Caption = 0                                       '
+    
+    frmKSNET2.txtMoney.ReadOnly = True
+    frmKSNET2.txtMoney.Value = Spread_GetData(sprCard, Row, 6, True)   '
+
+    frmKSNET2.pnlApprovalNo.Caption = Spread_GetData(sprCard, Row, 2, True)   '승인번호
+    frmKSNET2.pnlApprovalDay.Caption = Spread_GetData(sprCard, Row, 3, True)  '승인일자
+    frmKSNET2.pnlApprovalTime.Caption = Spread_GetData(sprCard, Row, 4, True) '승인시간
+
+    Call frmKSNET2.신용카드승인요청_Rtn("2")
+    
+    frmKSNET2.Show 1
+End Sub
+
+Private Sub txtCard_Change()
+    txtBalance2.Value = txtMisu.Value - txtCash.Value - txtCard.Value
+
+    If txtCash.Value = 0 And txtCard.Value = 0 Then
+        btnExit.Enabled = True
+    Else
+        btnExit.Enabled = False
+    End If
+End Sub
+
+Private Sub txtCash_Change()
+    If txtCash.Value = 0 And txtCard.Value = 0 Then
+        btnExit.Enabled = True
+    Else
+        btnExit.Enabled = False
+    End If
+End Sub
+
+Private Sub txtIncome_Change()
+    Dim 미수금액 As Long
+    
+    미수금액 = txtMisu.Value
+    
+'    If txtIncome.Value >= 미수금액 Then
+'        txtBalance2.Value = 0 '결제후 잔액
+'
+'        If txtIncome.Value >= (미수금액 + txtCard.Value) Then
+'            txtChange.Value = txtIncome.Value - 미수금액 + txtCard.Value '거스름돈
+'            txtCash.Value = txtIncome.Value - txtChange.Value            '현금결제
+'        Else
+'            txtChange.Value = 0                                          '거스름돈
+'            txtCash.Value = txtIncome.Value                              '현금결제
+'        End If
+'    Else
+'        txtChange.Value = 0                                              '현금결제
+'        txtCash.Value = txtIncome.Value                                  '현금결제
+'        txtBalance2.Value = 미수금액 - (txtCash.Value + txtCard.Value)   '결제후 잔액
+'    End If
+    
+    
+    
+    If txtIncome.Value >= (미수금액 - txtCard.Value) Then
+        txtBalance2.Value = 0                              '결제후 잔액
+        txtCash.Value = 미수금액 - txtCard.Value   '현금결제
+        txtChange.Value = txtIncome.Value - txtCash.Value  '거스름돈
+    Else
+        txtChange.Value = 0                                                    '거스름돈
+        txtCash.Value = txtIncome.Value                                        '현금결제
+        txtBalance2.Value = 미수금액 - (txtCash.Value + txtCard.Value) '결제후 잔액
+    End If
+End Sub
+
+Private Sub txtIncome_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        KeyAscii = 0
+    
+        Rtn = MsgBox("(출고) 결제처리 하시겠습니까?", vbQuestion + vbYesNo + vbDefaultButton1, "확인")
+        
+        If Rtn = vbYes Then
+            Call btnAccount_Click
+        End If
+    End If
+End Sub
+
+Private Sub txtMisu_Change()
+    txtBalance2.Value = txtMisu.Value - txtCash.Value - txtCard.Value
+End Sub
+
+Private Function 출고영수증_Report(iPaper As Integer) As String
+    On Error GoTo ErrRtn
+
+    Dim tmp      As String
+    Dim 이전미수 As String
+    Dim 출고수량 As Integer
+    Dim 출고금액 As String
+
+    Dim 현금결제 As String
+    Dim 카드결제 As String
+
+    Dim 카드번호 As String
+
+    Dim 받은금액 As String
+    Dim 거스름돈 As String
+
+    Dim 전화번호     As String
+    Dim 전화번호출력 As String
+
+    Dim PrintStr     As String
+    Dim Print_Msg As String
+
+    전화번호출력 = GetIniStr("Printer", "TelPrint", "Y", iniFile)
+    
+  
+    If iPaper = 1 Then
+        If 가맹점정보.지사코드 = M_COUPON_KLENZ_CODE Then '크렌즈갤러리
+            Print_Msg = Print_Msg & PrintTitle2("크렌즈갤러리 - 세탁물 출고증(보관용)")
+        Else
+            Print_Msg = Print_Msg & PrintTitle2("크린에이드 - 세탁물 출고증(보관용)")
+        End If
+    Else
+        If 가맹점정보.지사코드 = M_COUPON_KLENZ_CODE Then '크렌즈갤러리
+            Print_Msg = Print_Msg & PrintTitle2("크렌즈갤러리 - 세탁물 출고증(고객용)")
+        Else
+            Print_Msg = Print_Msg & PrintTitle2("크린에이드 - 세탁물 출고증(고객용)")
+        End If
+    End If
+
+    Print_Msg = Print_Msg & PrintLineFeed(1)
+
+    '--------------------------------------------------------------------------------------------------------
+    Query = "SELECT    ISNULL(가맹점명, '')     AS 가맹점명"
+    Query = Query & ", ISNULL(매장전화번호, '') AS 매장전화번호"
+    Query = Query & ", ISNULL(사업장주소, '')   AS 사업장주소"
+    Query = Query & ", ISNULL(사업자번호, '')   AS 사업자번호"
+    Query = Query & ", ISNULL(대표자명, '')     AS 대표자명"
+    Query = Query & " FROM TB_기본정보"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    If ADORs.EOF Then
+        Print_Msg = Print_Msg & PrintString("상 호 명 : ", 1)
+        Print_Msg = Print_Msg & PrintString("전화번호 : ", 1)
+        Print_Msg = Print_Msg & PrintString("주    소 : ", 1)
+    Else
+        Print_Msg = Print_Msg & PrintString("상 호 명 : " + ADORs!가맹점명 + "  크린에이드", 1, True)
+        Print_Msg = Print_Msg & PrintString("사업자No : " + ADORs!사업자번호, 1, True)
+        Print_Msg = Print_Msg & PrintString("대 표 자 : " + ADORs!대표자명, 1, True)
+        Print_Msg = Print_Msg & PrintString("전화번호 : " + ADORs!매장전화번호, 1, True)
+        Print_Msg = Print_Msg & PrintString("주    소 : " + ADORs!사업장주소, 1, True)
+
+    End If
+    ADORs.Close
+    Set ADORs = Nothing
+
+    Print_Msg = Print_Msg & PrintString("===============================================", 1)
+    Print_Msg = Print_Msg & PrintString("출고일자 : " + Format(Now, "YYYY년 MM월 DD일 AM/PM hh:mm"), 1, True)
+    Print_Msg = Print_Msg & PrintString("고객코드 : " + frm출고.txtCode.Text, 1, True)
+    
+    Print_Msg = Print_Msg & PrintCustomer(전화번호출력, frm출고.txtName.Text, Trim(frm출고.txtTel.Text), Trim(frm출고.txtHP.Text), frm출고.txtAddress.Text)
+    
+    Print_Msg = Print_Msg & PrintString("===============================================", 1)
+    Print_Msg = Print_Msg & PrintString("택번호  의류/상표          작업   색상     금액", 1)
+    Print_Msg = Print_Msg & PrintString("-----------------------------------------------", 1)
+
+    출고수량 = 0
+
+    With frm출고.sprChul
+        For i = 1 To .MaxRows
+            Dim TempMoney As String
+            .Row = i
+
+            .Col = 12
+            If Trim(.Text) = "1" Then
+                출고수량 = 출고수량 + 1
+
+                '*********************************************************
+                '* 택번호
+                '*********************************************************
+                .Col = 4: PrintStr = .Text + " "
+
+                '*********************************************************
+                '* 품명
+                '*********************************************************
+                .Col = 3
+                If LenH(.Text) >= 18 Then
+                    tmp = MidH(.Text, 1, 18)
+                Else
+                    tmp = Trim(.Text) + String(18 - LenH(.Text), " ")
+                End If
+
+                PrintStr = PrintStr & tmp + " "
+
+                '*********************************************************
+                '* 내용
+                '*********************************************************
+                .Col = 7
+                If LenH(.Text) >= 6 Then
+                    tmp = MidH(.Text, 1, 6)
+                Else
+                    tmp = Trim(.Text) + String(6 - LenH(.Text), " ")
+                End If
+
+                PrintStr = PrintStr & tmp + " "
+
+                '*********************************************************
+                '* 색상
+                '*********************************************************
+                .Col = 5
+                If LenH(.Text) >= 4 Then
+                    tmp = MidH(.Text, 1, 4)
+                Else
+                    tmp = Trim(.Text) + String(4 - LenH(.Text), " ")
+                End If
+
+                PrintStr = PrintStr & tmp + " "
+
+                '*********************************************************
+                '* 금액
+                '*********************************************************
+                .Col = 19
+
+                If Len(.Text) > 8 Then
+                    PrintStr = PrintStr & .Text
+                Else
+                    PrintStr = PrintStr & String(8 - LenH(.Text), " ") + .Text
+                End If
+
+                Print_Msg = Print_Msg & PrintString(PrintStr, 1)
+                
+                .Col = 8
+                TempMoney = Replace(.Text, ",", "")
+                
+                .Col = 19
+                If Val(Replace(.Text, ",", "")) > Val(TempMoney) Then
+                    Dim Calc As String
+                    
+                    Calc = "-" + Format(Str(Val(Replace(.Text, ",", "")) - TempMoney), "#,##0")
+                    If Len(Calc) > 8 Then
+                    Else
+                        Calc = String(8 - LenH(Calc), " ") + Calc
+                    End If
+    '                TempMoney = Format(Str(Val(TempMoney)), "#,##0")
+    '                If Len(CStr(.Text)) > 7 Then
+    '                Else
+    '                    TempMoney = String(7 - LenH(CStr(.Text)), " ") + .Text
+    '                End If
+                    Print_Msg = Print_Msg & PrintString("        * 할인금액 " + String(20, " ") + Calc, 1, True)
+                    'Print_Msg = Print_Msg & PrintString("        * 정상금액 :" + CStr(TempMoney) + "/ 할인금액 :" + Calc, 1, True)
+                End If
+'                '*********************************************************
+'                '* 상표
+'                '*********************************************************
+'                .Col = 10
+'
+'                If Trim(.Text) <> "" Then
+'                    Call KS7500i.PrintString( "        - " + .Text ,1)
+'                End If
+'
+'                '*********************************************************
+'                '* 오점
+'                '*********************************************************
+'                .Col = 16
+'
+'                If Trim(.Text) <> "" Then
+'                    Call KS7500i.PrintString( "        - " + .Text ,1)
+'                End If
+            End If
+        Next i
+    End With
+
+    출고금액 = frm출고결제.txtChulPay.Text
+    이전미수 = frm출고.txtMisu.Text
+    현금결제 = frm출고결제.txtCash.Text
+    카드결제 = frm출고결제.txtCard.Text
+
+    받은금액 = frm출고결제.txtIncome.Text
+    거스름돈 = frm출고결제.txtChange.Text
+
+    If 출고수량 = 0 Then
+        Print_Msg = Print_Msg & PrintString("                미수금 입금", 1, True)
+    End If
+
+    Print_Msg = Print_Msg & PrintString("-----------------------------------------------", 1)
+    Print_Msg = Print_Msg & PrintString(String(25, " ") + "이전미수 : " + String(9 - LenH(이전미수), " ") + 이전미수 + "원", 8)
+    Print_Msg = Print_Msg & PrintString("출고수량 : " + String(9 - LenH(CStr(출고수량)), " ") + CStr(출고수량) + "점 / 출고금액 : " + String(9 - LenH(출고금액), " ") + 출고금액 + "원", 1)
+
+    Print_Msg = Print_Msg & PrintString(String(25, " ") + "받은금액 : " + String(9 - LenH(받은금액), " ") + 받은금액 + "원", 1)
+    Print_Msg = Print_Msg & PrintString(String(25, " ") + "거스름돈 : " + String(9 - LenH(거스름돈), " ") + 거스름돈 + "원", 1)
+
+    Print_Msg = Print_Msg & PrintString(String(25, " ") + "현금결제 : " + String(9 - LenH(현금결제), " ") + 현금결제 + "원", 1)
+    Print_Msg = Print_Msg & PrintString(String(25, " ") + "카드결제 : " + String(9 - LenH(카드결제), " ") + 카드결제 + "원", 1)
+    Print_Msg = Print_Msg & PrintString("===============================================", 1)
+    Print_Msg = Print_Msg & PrintString("※ 본 세탁물을 이상없이 인수하였습니다.(    점)", 1)
+
+    Print_Msg = Print_Msg & PrintLineFeed(1)
+    Print_Msg = Print_Msg & PrintString("고객성명 :                     (인)", 1)
+
+    Print_Msg = Print_Msg & PrintLineFeed(5)
+
+    Print_Msg = Print_Msg & PrintCut
+
+    출고영수증_Report = Print_Msg
+    Exit Function
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+    Screen.MousePointer = 0
+End Function

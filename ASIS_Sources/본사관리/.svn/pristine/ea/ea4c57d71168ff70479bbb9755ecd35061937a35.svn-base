@@ -1,0 +1,1078 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Begin VB.Form P_01011_A 
+   Caption         =   " [본사]가맹점 품목단가 관리"
+   ClientHeight    =   12165
+   ClientLeft      =   2895
+   ClientTop       =   2490
+   ClientWidth     =   15885
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9.75
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "P_01011_A.frx":0000
+   LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
+   MDIChild        =   -1  'True
+   ScaleHeight     =   12165
+   ScaleWidth      =   15885
+   WindowState     =   2  '최대화
+   Begin SSSplitter.SSSplitter SSSplitter 
+      Height          =   12165
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   15885
+      _ExtentX        =   28019
+      _ExtentY        =   21458
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "P_01011_A.frx":058A
+      Begin Threed.SSPanel panInput 
+         Height          =   780
+         Left            =   15
+         TabIndex        =   1
+         Top             =   540
+         Width           =   15855
+         _ExtentX        =   27966
+         _ExtentY        =   1376
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         Begin Threed.SSOption optGubun 
+            Height          =   270
+            Index           =   0
+            Left            =   180
+            TabIndex        =   2
+            Top             =   270
+            Width           =   1590
+            _ExtentX        =   2805
+            _ExtentY        =   476
+            _Version        =   262144
+            BackColor       =   16777215
+            Caption         =   "가맹점종류별"
+         End
+         Begin Threed.SSOption optGubun 
+            Height          =   255
+            Index           =   1
+            Left            =   1950
+            TabIndex        =   3
+            Top             =   270
+            Width           =   960
+            _ExtentX        =   1693
+            _ExtentY        =   450
+            _Version        =   262144
+            BackColor       =   16777215
+            Caption         =   "지사별"
+         End
+         Begin MSComCtl2.DTPicker dtInput 
+            Height          =   315
+            Left            =   4635
+            TabIndex        =   18
+            Top             =   75
+            Width           =   3015
+            _ExtentX        =   5318
+            _ExtentY        =   556
+            _Version        =   393216
+            CheckBox        =   -1  'True
+            DateIsNull      =   -1  'True
+            Format          =   56950784
+            CurrentDate     =   36686
+         End
+         Begin XtremeSuiteControls.ProgressBar ProgressBar 
+            Height          =   330
+            Left            =   4620
+            TabIndex        =   20
+            Top             =   420
+            Visible         =   0   'False
+            Width           =   3030
+            _Version        =   851970
+            _ExtentX        =   5345
+            _ExtentY        =   582
+            _StockProps     =   93
+            Scrolling       =   1
+            Appearance      =   6
+            UseVisualStyle  =   0   'False
+         End
+         Begin VB.Shape Shape 
+            BackStyle       =   1  '투명하지 않음
+            BorderColor     =   &H00808080&
+            FillColor       =   &H00FFFFFF&
+            FillStyle       =   0  '단색
+            Height          =   630
+            Left            =   45
+            Shape           =   4  '둥근 사각형
+            Top             =   75
+            Width           =   3000
+         End
+         Begin VB.Label Label 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "적용일자:"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   225
+            Index           =   0
+            Left            =   3315
+            TabIndex        =   19
+            Top             =   120
+            Width           =   1260
+         End
+      End
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   510
+         Left            =   15
+         TabIndex        =   4
+         Top             =   15
+         Width           =   8250
+         _ExtentX        =   14552
+         _ExtentY        =   900
+         _Version        =   262144
+         Font3D          =   3
+         ForeColor       =   255
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " [본사]가맹점 품목단가 관리 (P_01011_A)"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_01011_A.frx":067C
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   510
+         Left            =   8280
+         TabIndex        =   5
+         Top             =   15
+         Width           =   7590
+         _ExtentX        =   13388
+         _ExtentY        =   900
+         _Version        =   262144
+         Font3D          =   3
+         ForeColor       =   192
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_01011_A.frx":087E
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   7
+            Left            =   6660
+            TabIndex        =   6
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "종료"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":0A80
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   6
+            Left            =   5730
+            TabIndex        =   7
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "엑셀"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":101A
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   5
+            Left            =   4800
+            TabIndex        =   8
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "인쇄"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":15B4
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   4
+            Left            =   3750
+            TabIndex        =   9
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "취소"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":1B4E
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   3
+            Left            =   2820
+            TabIndex        =   10
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "삭제"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":20E8
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   2
+            Left            =   1890
+            TabIndex        =   11
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "저장"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":2682
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   1
+            Left            =   960
+            TabIndex        =   12
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "신규"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":2C1C
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   0
+            Left            =   30
+            TabIndex        =   13
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "조회"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":31B6
+         End
+      End
+      Begin FPSpreadADO.fpSpread sprList 
+         Height          =   7455
+         Left            =   15
+         TabIndex        =   14
+         Top             =   4695
+         Width           =   4650
+         _Version        =   524288
+         _ExtentX        =   8202
+         _ExtentY        =   13150
+         _StockProps     =   64
+         BackColorStyle  =   1
+         EditEnterAction =   5
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   4
+         ScrollBars      =   2
+         SpreadDesigner  =   "P_01011_A.frx":3750
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin FPSpreadADO.fpSpread sprMaster 
+         Height          =   3345
+         Left            =   15
+         TabIndex        =   15
+         Top             =   1335
+         Width           =   4650
+         _Version        =   524288
+         _ExtentX        =   8202
+         _ExtentY        =   5900
+         _StockProps     =   64
+         BackColorStyle  =   1
+         EditEnterAction =   5
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   2
+         ScrollBars      =   2
+         SpreadDesigner  =   "P_01011_A.frx":3D09
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin FPSpreadADO.fpSpread spdView 
+         Height          =   10410
+         Left            =   4680
+         TabIndex        =   16
+         Top             =   1740
+         Width           =   11190
+         _Version        =   524288
+         _ExtentX        =   19738
+         _ExtentY        =   18362
+         _StockProps     =   64
+         BackColorStyle  =   1
+         EditEnterAction =   5
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   6
+         SpreadDesigner  =   "P_01011_A.frx":422B
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel panCaption 
+         Height          =   390
+         Index           =   2
+         Left            =   4680
+         TabIndex        =   17
+         Top             =   1335
+         Width           =   11190
+         _ExtentX        =   19738
+         _ExtentY        =   688
+         _Version        =   262144
+         Font3D          =   3
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 가맹점 품목 현황"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_01011_A.frx":4818
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         Begin VB.TextBox txtFind 
+            Height          =   345
+            Left            =   7590
+            TabIndex        =   24
+            Top             =   30
+            Visible         =   0   'False
+            Width           =   3105
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   330
+            Index           =   8
+            Left            =   4770
+            TabIndex        =   21
+            Top             =   30
+            Width           =   840
+            _Version        =   851970
+            _ExtentX        =   1482
+            _ExtentY        =   582
+            _StockProps     =   79
+            Caption         =   "&Copy"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":4C7A
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   330
+            Index           =   9
+            Left            =   5655
+            TabIndex        =   22
+            Top             =   30
+            Width           =   1020
+            _Version        =   851970
+            _ExtentX        =   1799
+            _ExtentY        =   582
+            _StockProps     =   79
+            Caption         =   "&Paste"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":5214
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   330
+            Index           =   10
+            Left            =   6690
+            TabIndex        =   23
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   582
+            _StockProps     =   79
+            Caption         =   "Find"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_01011_A.frx":57AE
+         End
+      End
+   End
+End
+Attribute VB_Name = "P_01011_A"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Dim RS01 As ADODB.Recordset
+Dim strSql As String
+Dim sValue() As String
+
+Dim Err_Num As Long
+Dim Err_Dec As String
+
+Private Sub SPR_Resize()
+    On Error GoTo ErrRtn
+    
+    spdView(0).Width = Me.Width - 9800
+    spdView(0).Height = Me.Height - 3140
+
+    spdView(1).Width = Me.Width - 9800
+    spdView(1).Height = Me.Height - 2360
+
+    Exit Sub
+    
+ErrRtn:
+
+End Sub
+
+Private Sub cmdBtn_Click(Index As Integer)
+    On Error GoTo ErrRtn
+    
+'    Me.MousePointer = 11
+    
+    Select Case Index
+        Case 0: 'Call Data_Display   ' 조회
+        Case 1: 'Call DataAdd        ' 신규
+        Case 2: Call DataSave       ' 저장
+        Case 3: Call DataDelete     ' 삭제
+        Case 4: Call DataCancel     ' 취소
+        Case 5: 'Call DataPrint      ' 인쇄
+        Case 6: Call Export_Excel(P_00000.cdgExcel, spdView)      ' 엑셀
+        Case 7: Unload Me           ' 종료
+        
+        Case 8
+            spdView.ClipboardCopy
+            spdView.ClearSelection
+        Case 9
+            spdView.MaxRows = 700
+            spdView.ClipboardPaste
+        Case 10
+            txtFind.Visible = Not txtFind.Visible
+            txtFind.SelStart = 0:   txtFind.SelLength = Len(txtFind.Text)
+            txtFind.SetFocus
+    End Select
+    
+'    Me.MousePointer = 0
+    
+    Exit Sub
+    
+ErrRtn:
+    Me.MousePointer = 0
+    
+    If Err.Number = "0" Then
+        
+    ElseIf Err.Number = "91" Then
+        End
+    Else
+        Resume Next
+    End If
+End Sub
+
+Private Sub Form_Activate()
+    cmdBtn(0).Enabled = True
+    cmdBtn(1).Enabled = True
+    cmdBtn(2).Enabled = True
+    cmdBtn(3).Enabled = True
+    cmdBtn(4).Enabled = True
+    
+    pnlHeader.Caption = " " & Me.Caption & " (" & Me.Name & ")"
+End Sub
+
+'Private Sub spdDisplay(RS As ADODB.Recordset)
+'
+'    Call fpSpread_Display(spdView(0), RS)
+'
+'    spdView(0).DataSource = Nothing
+'End Sub
+
+Private Sub Form_Load()
+    On Error GoTo ErrRtn
+    
+    With sprMaster
+        .MaxRows = 0
+        .RowHeight(-1) = 13
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+    
+    With sprList
+        .MaxRows = 0
+        .RowHeight(-1) = 13
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+    
+    With spdView
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeNormal
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+    
+
+    If P_01004_A_Flag = False Then
+        dtInput.Value = Date
+        
+        optGubun(1).Value = True
+        
+'        Call Master_tblComboAdd(cboInput(0))
+'
+'        cboInput(0).ListIndex = 1
+        
+'        '------------------------------------------------------------------
+'        ' SP_01004_A_00
+'        '------------------------------------------------------------------
+'        ReDim sValue(1)
+'
+'        sValue(0) = "1"
+'
+'        Set RS01 = New ADODB.Recordset
+'        Set RS01 = ExecPro("SP_01004_A_00", sValue(), Err_Num, Err_Dec)
+'
+'        spdView(0).MaxCols = RS01.Fields.Count
+'        spdView(0).MaxRows = RS01.RecordCount
+'
+'        'Call spdDisplay(RS01)
+'        Call fpSpread_Display(spdView(0), RS01)
+        
+'        '------------------------------------------------------------------
+'        ' SP_01004_A_03
+'        '------------------------------------------------------------------
+'        ReDim sValue(4)
+'
+'        sValue(0) = "1"
+'
+'        Set RS01 = New ADODB.Recordset
+'        Set RS01 = ExecPro("SP_01004_A_03", sValue(), Err_Num, Err_Dec)
+'
+'        spdView(1).MaxCols = RS01.Fields.Count
+'        spdView(1).MaxRows = RS01.RecordCount
+'
+'        If RS01.RecordCount > 0 Then Call fpSpread_Display(spdView(1), RS01) 'Call spdDisplay2(RS01)
+'        spdView(2).Enabled = True
+'
+'        P_01004_A_Flag = True
+    End If
+    
+    Call SPR_Resize
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Form_Resize()
+    Call SPR_Resize
+End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+    'P_01004_A_Flag = False
+End Sub
+
+Private Sub DataAdd()
+
+End Sub
+
+Private Sub DataSave()
+    Dim i          As Integer
+    Dim iRow       As Long
+    Dim iSale(1)   As Integer
+    
+    Dim 가맹점코드 As String
+    Dim 의류코드   As String
+    Dim 의류명     As String
+    
+    ProgressBar.Value = 0
+    ProgressBar.Min = 0
+    ProgressBar.Max = 100
+    ProgressBar.Visible = True
+    
+    If sprList.ActiveRow <= 0 Then Exit Sub
+    If spdView.MaxRows <= 0 Then Exit Sub
+    
+    sprList.Row = sprList.ActiveRow
+    sprList.Col = 1: 가맹점코드 = sprList.Text & ""
+    
+    
+    ' 가맹점의 의류 분류 등록이 안되어 있으면 가격 생성을 못하도독 수정
+    sValue(0) = 가맹점코드
+        
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01011_B_01", sValue(), Err_Num, Err_Dec)
+    
+    If RS01.EOF Then
+        MsgBox "가맹점의 의류 분류가 등록되어 있지 않아 가격 자료를 생성할 수 없습니다.", vbCritical, "오류"
+        Exit Sub
+    
+    End If
+    
+    
+    Set RS01 = New ADODB.Recordset
+    
+    For i = 1 To spdView.DataRowCnt
+        ProgressBar.Value = (i / spdView.MaxRows) * 100
+        DoEvents
+    
+        '-------------------------------------------------------------------
+        ' TB_가맹점의류 저장 - SP_01011_02
+        '-------------------------------------------------------------------
+        ReDim sValue(5)
+        
+        spdView.Row = i
+                         
+        ' 자료가 있을 경우만 저장한다.
+        spdView.Col = 1: sValue(2) = spdView.Text & ""
+        If Trim(sValue(2)) <> "" Then
+                             
+                             sValue(0) = 가맹점코드                            '1
+                             sValue(1) = Format(dtInput.Value, "YYYY-MM-DD")   '2
+            spdView.Col = 1: sValue(2) = spdView.Text & ""                     '3
+            spdView.Col = 2: sValue(3) = spdView.Text & ""                     '4
+            spdView.Col = 3: sValue(4) = spdView.Value & ""                    '5
+            spdView.Col = 4: sValue(5) = spdView.Text & ""                     '6
+        
+            Call ExecPro("SP_01011_02", sValue(), Err_Num, Err_Dec)
+        End If
+    Next i
+
+    ProgressBar.Visible = False
+
+    If Err_Num = 0 Then
+        MsgBox "해당되는 데이터가 정상적으로 저장이 되었습니다.", vbInformation
+    End If
+    
+    'Call Data_Display
+End Sub
+
+Private Sub DataDelete()
+    Rtn = MsgBox("해당되는 데이터를 삭제하시겠습니까?", vbYesNo + vbInformation + vbDefaultButton2, "데이터 삭제")
+    
+    If Rtn = vbNo Then Exit Sub
+    
+    ReDim sValue(1)
+    
+    sprList.Row = sprList.ActiveRow
+    sprList.Col = 1: sValue(0) = sprList.Text & ""                   '1 가맹점코드
+                     sValue(1) = Format(dtInput.Value, "YYYY-MM-DD") '2 적용일자
+    
+    Call ExecPro("SP_01011_A_04", sValue(), Err_Num, Err_Dec)
+    
+    If Err_Num = 0 Then
+        spdView.MaxRows = 0
+        
+        MsgBox "해당되는 데이터가 정상적으로 삭제가 되었습니다.", vbInformation
+    End If
+End Sub
+
+Public Sub DataCancel()
+    'Call Data_Display
+End Sub
+
+
+Private Sub optGubun_Click(Index As Integer, Value As Integer)
+    sprList.MaxRows = 0
+    DoEvents
+    
+    If Index = 0 Then
+        ReDim sValue(0)
+        
+        sValue(0) = "0"
+        
+        Set RS01 = New ADODB.Recordset
+        Set RS01 = ExecPro("SP_01004_A_06", sValue(), Err_Num, Err_Dec)
+    
+        With sprMaster
+            .MaxRows = 0
+            .Redraw = False
+            
+            Do Until RS01.EOF
+                .MaxRows = .MaxRows + 1
+                .Row = .MaxRows
+                
+                .Col = 1: .Text = RS01!가맹점구분코드 & ""
+                .Col = 2: .Text = RS01!가맹점구분명 & ""
+                
+                RS01.MoveNext
+            Loop
+            RS01.Close
+            Set RS01 = Nothing
+            
+            .Redraw = True
+        End With
+        
+    Else
+        ReDim sValue(0)
+        
+        sValue(0) = "0"
+        
+        Set RS01 = New ADODB.Recordset
+        Set RS01 = ExecPro("SP_A_0001", sValue(), Err_Num, Err_Dec)
+    
+        With sprMaster
+            .EventEnabled(EventButtonClicked) = False '버튼클릭 이벤트 죽임
+            
+            .MaxRows = 0
+            .Redraw = False
+            
+            Do Until RS01.EOF
+                .MaxRows = .MaxRows + 1
+                .Row = .MaxRows
+                
+                .Col = 1: .Text = RS01!지사코드 & ""
+                .Col = 2: .Text = RS01!지사명 & ""
+                
+                RS01.MoveNext
+            Loop
+            RS01.Close
+            Set RS01 = Nothing
+            
+            .EventEnabled(EventButtonClicked) = True
+            
+            .Redraw = True
+        End With
+    End If
+End Sub
+
+Private Sub sprList_Click(ByVal Col As Long, ByVal Row As Long)
+    If Row <= 0 Then Exit Sub
+    
+    ReDim sValue(1)
+    
+    sprList.Row = Row
+    sprList.Col = 3: sValue(0) = sprList.Text & ""     '지사코드
+    sprList.Col = 1: sValue(1) = sprList.Text & ""     '가맹점코드
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01011_A_03", sValue(), Err_Num, Err_Dec)
+    
+    With spdView
+        .MaxRows = 0
+        .Redraw = False
+        
+        panCaption(2).Caption = "가맹점 품목 현황 <기준 가격 : " & Trim(RS01!적용일자) & " >"
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1: .Text = Trim(RS01!품목코드) & "" '1
+            .Col = 2: .Text = Trim(RS01!품목명) & ""   '2
+            .Col = 3: .Text = RS01!금액 & ""           '3
+            .Col = 4: .Text = RS01!출력순번 & ""       '4
+            .Col = 5: .Text = RS01!사용유무 & ""       '5
+            .Col = 6: .Text = RS01!신규 & ""         '5
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+    
+End Sub
+
+Private Sub sprMaster_Click(ByVal Col As Long, ByVal Row As Long)
+    Dim sWork        As String
+    Dim 코드         As String
+    Dim 가맹정구분명 As String
+    
+    If Row <= 0 Then Exit Sub
+    
+    sprMaster.Row = Row
+    sprMaster.Col = 1: 코드 = Trim(sprMaster.Text) & ""
+    sprMaster.Col = 2: 가맹정구분명 = Trim(sprMaster.Text) & ""
+    
+    If optGubun(0).Value = True Then
+        Call 가맹점2_Display(코드, 가맹정구분명)
+    Else
+        Call 가맹점_Display(코드)
+    End If
+End Sub
+
+Private Sub sprMaster_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+    Call sprMaster_Click(NewCol, NewRow)
+End Sub
+
+Private Sub 가맹점_Display(지사코드 As String)
+    ReDim sValue(0)
+    
+    sValue(0) = 지사코드
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01001_00_MASTER", sValue(), Err_Num, Err_Dec)
+    
+    With sprList
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            If (RS01!종료일자 = "") Or (RS01!종료일자 = "2099-12-31") Then '가맹점이 현 지사에서 관리중...
+                .MaxRows = .MaxRows + 1
+                .Row = .MaxRows
+                
+                .Col = 1: .Text = RS01(0) & ""  '2
+                .Col = 2: .Text = RS01(1) & ""  '3
+                .Col = 3: .Text = 지사코드 & "" '4
+            End If
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+End Sub
+
+
+Private Sub 가맹점2_Display(가맹점구분 As String, 가맹점구분명 As String)
+    ReDim sValue(0)
+    
+    sValue(0) = 가맹점구분
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01004_A_07", sValue(), Err_Num, Err_Dec)
+    
+    With sprList
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            If (RS01!종료일자 = "") Or (RS01!종료일자 = "2099-12-31") Then '가맹점이 현 지사에서 관리중...
+                .MaxRows = .MaxRows + 1
+                .Row = .MaxRows
+                
+                .Col = 1: .Text = RS01(0) & ""       '2
+                .Col = 2: .Text = RS01(1) & ""       '3
+                .Col = 3: .Text = RS01(2) & ""       '4
+                .Col = 4: .Text = 가맹점구분명 & ""  '5
+            End If
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+End Sub
+
+
+Private Sub spdView_Click(ByVal Col As Long, ByVal Row As Long)
+    If Row <= 0 Then Exit Sub
+    
+    spdView.Row = Row
+    spdView.Col = 1
+    
+    Call Data_Display(spdView.Text)
+End Sub
+
+Private Sub spdView_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+    Call spdView_Click(NewCol, NewRow)
+End Sub
+
+Private Sub Data_Display(의류분류코드 As String)
+'    ReDim sValue(1)
+'
+'    sValue(0) = "0"                             '
+'    sValue(1) = 의류분류코드
+'
+'    Set RS01 = New ADODB.Recordset
+'    Set RS01 = ExecPro("SP_01003_00", sValue(), Err_Num, Err_Dec)
+'
+'    With spdView1
+'        .MaxRows = 0
+'        .Redraw = False
+'
+'        Do Until RS01.EOF
+'            .MaxRows = .MaxRows + 1
+'            .Row = .MaxRows
+'
+'            .Col = 1: .Text = RS01!코드 & ""
+'            .Col = 2: .Text = RS01!품목명 & ""
+'            .Col = 3: .Text = RS01!단가 & ""
+'
+'            RS01.MoveNext
+'        Loop
+'        RS01.Close
+'        Set RS01 = Nothing
+'
+'        .Redraw = True
+'    End With
+End Sub
+ 
+Private Sub txtFind_KeyDown(KeyCode As Integer, Shift As Integer)
+    If KeyCode = vbKeyReturn Then
+    
+        ' 조회에서 매장 코드가 설정된 경우 해당 매장이 선택 되도록 한다.
+        DoEvents
+        If Trim(txtFind.Text) = "" Then Exit Sub
+        
+        With spdView
+            .Redraw = False
+            Rtn = .SearchCol(2, 1, .MaxRows, Trim(txtFind.Text), SearchFlagsPartialMatch)
+            .Row = .MaxRows
+            .Action = ActionActiveCell
+            .Row = Rtn
+            .Action = ActionActiveCell
+            .Redraw = True
+            DoEvents
+            
+        End With
+    
+    End If
+End Sub

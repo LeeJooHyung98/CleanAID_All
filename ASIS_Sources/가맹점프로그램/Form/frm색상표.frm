@@ -1,0 +1,232 @@
+VERSION 5.00
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Begin VB.Form frm색상표 
+   BorderStyle     =   1  '단일 고정
+   Caption         =   "색상"
+   ClientHeight    =   4995
+   ClientLeft      =   60
+   ClientTop       =   4140
+   ClientWidth     =   13080
+   ControlBox      =   0   'False
+   KeyPreview      =   -1  'True
+   LinkTopic       =   "Form21"
+   LockControls    =   -1  'True
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   4995
+   ScaleWidth      =   13080
+   ShowInTaskbar   =   0   'False
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   4995
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   13080
+      _ExtentX        =   23072
+      _ExtentY        =   8811
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   0
+      BorderStyle     =   0
+      PaneTree        =   "frm색상표.frx":0000
+      Begin Threed.SSPanel pnlBack 
+         Height          =   4995
+         Index           =   0
+         Left            =   0
+         TabIndex        =   1
+         Top             =   0
+         Width           =   13080
+         _ExtentX        =   23072
+         _ExtentY        =   8811
+         _Version        =   262144
+         BackColor       =   16777215
+         BorderWidth     =   1
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin CleanAID.ctlMenu ctlMenu1 
+            Height          =   825
+            Index           =   0
+            Left            =   75
+            TabIndex        =   2
+            Top             =   75
+            Visible         =   0   'False
+            Width           =   1830
+            _ExtentX        =   3228
+            _ExtentY        =   1455
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   20.25
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+         End
+      End
+   End
+End
+Attribute VB_Name = "frm색상표"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private Sub ctlMenu1_Click(Index As Integer)
+    Dim strButtonText As String     ' 선택된 색상을 저장한다.
+    Dim intRow        As Integer           ' 마지막 라인
+
+    strButtonText = ctlMenu1(Index).GetMenuName
+
+    ' 품목보기일 경우
+    If strButtonText = "품목보기" Then
+        Load frm의류상세
+      
+        frm의류상세.Show 1
+      
+        '-----------------------------------------
+        ' Active Cell
+        '-----------------------------------------
+        frm접수.sprGrid.SetActiveCell 3, iCur
+        
+        Exit Sub
+    End If
+   
+    ' 선택된 라인에 물품이 없을 경우 아무 처리도 하지 않는다.
+    If Len(Get_SpreadText(frm접수.sprGrid, Val(iCur), 1)) <= 0 Then
+        Exit Sub
+    End If
+   
+    '-------------------------------------------------------------
+    ' 입고 폼에 색상을 출력 한다.
+    '-------------------------------------------------------------
+    DoEvents
+    frm접수.sprGrid.Row = iCur
+    frm접수.sprGrid.Col = 3: frm접수.sprGrid.Text = strButtonText
+    
+    frm색상표.Hide 'Unload Me' 자신은 종료 한다.
+   
+   If frm접수.chkRepair.Value = -1 Then
+        ' 내용화면을 보여준다.
+        DoEvents
+        Load frm세탁수선
+        
+        frm세탁수선.Show
+   Else
+        ' 내용화면을 보여준다.
+        DoEvents
+        Load frm무늬 'Load frm작업
+        
+        frm무늬.Show 'frm작업.Show
+    End If
+    
+    '-----------------------------------
+    ' Active Cell
+    '-----------------------------------
+    frm접수.sprGrid.SetActiveCell 4, iCur
+End Sub
+
+Private Sub Form_Load()
+    Dim frm As Form
+    
+    For Each frm In Forms
+        If frm.Name = "frm작업" Then
+            frm.Hide
+            Unload frm
+        End If
+    Next frm
+    
+    Me.Top = frmMain.Top   '310
+    Me.Left = frmMain.Left '80
+    
+    i = 1
+    
+    '----------------------------------------------------------
+    ' TB_색상표
+    '----------------------------------------------------------
+    Query = "SELECT    색상코드"
+    Query = Query & ", 색상명"
+    Query = Query & ", RGB"
+    Query = Query & ", 순서"
+    Query = Query & " FROM TB_색상표"
+    Query = Query & " ORDER BY 순서"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    Do Until ADORs.EOF
+        Load ctlMenu1(i)
+        ctlMenu1(i).Left = GetLeft(i)
+        ctlMenu1(i).Top = GetTop(i)
+        
+        Call ctlMenu1(i).SET_Item(ADORs!색상명, 0, ADORs!색상코드, ADORs!RGB)
+        ctlMenu1(i).Enabled = True
+        ctlMenu1(i).Visible = True
+           
+        i = i + 1
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    If i > 0 Then
+        Me.Height = ctlMenu1(i - 1).Top + ctlMenu1(i - 1).Height + 550
+    End If
+End Sub
+
+Private Function GetLeft(ByVal Locate As Integer) As Long
+    On Error Resume Next
+    
+    Select Case Locate
+        Case 1, 8, 15, 22, 29, 36, 43, 50, 57, 64
+            GetLeft = 45
+        Case 2, 9, 16, 23, 30, 37, 44, 51, 58, 65
+            GetLeft = 1905
+        Case 3, 10, 17, 24, 31, 38, 45, 52, 59, 66
+            GetLeft = 3765
+        Case 4, 11, 18, 25, 32, 39, 46, 53, 60, 67
+            GetLeft = 5625
+        Case 5, 12, 19, 26, 33, 40, 47, 54, 61, 68
+            GetLeft = 7485
+        Case 6, 13, 20, 27, 34, 41, 48, 55, 62, 69
+            GetLeft = 9345
+        Case 7, 14, 21, 28, 35, 42, 49, 56, 63, 70
+            GetLeft = 11205
+        Case Else
+            GetLeft = 0
+    End Select
+End Function
+
+Private Function GetTop(ByVal Locate As Integer) As Long
+    On Error Resume Next
+    
+    Select Case Locate
+        Case 1, 2, 3, 4, 5, 6, 7
+            GetTop = 45
+        Case 8, 9, 10, 11, 12, 13, 14
+            GetTop = 945 '915
+        Case 15, 16, 17, 18, 19, 20, 21
+            GetTop = 1845 '1785
+        Case 22, 23, 24, 25, 26, 27, 28
+            GetTop = 2745 '2655
+        Case 29, 30, 31, 32, 33, 34, 35
+            GetTop = 3645 '3530
+        Case 36, 37, 38, 39, 40, 41, 42
+            GetTop = 4545 '4500
+        Case 43, 44, 45, 46, 47, 48, 49
+            GetTop = 5445 '5370
+        Case 50, 51, 52, 53, 54, 55, 56
+            GetTop = 6345 '6240
+        Case 57, 58, 59, 60, 61, 62, 63
+            GetTop = 7245 '7110
+        Case 64, 65, 66, 67, 68, 69, 70
+            GetTop = 8145 '7980
+        Case Else
+            GetTop = 0
+    End Select
+End Function
+

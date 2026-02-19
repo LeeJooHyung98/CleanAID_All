@@ -1,0 +1,768 @@
+VERSION 5.00
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Object = "{555E8FCC-830E-45CC-AF00-A012D5AE7451}#13.2#0"; "Codejock.CommandBars.v13.2.1.ocx"
+Begin VB.MDIForm frmMain 
+   Appearance      =   0  '평면
+   BackColor       =   &H8000000F&
+   ClientHeight    =   7950
+   ClientLeft      =   6720
+   ClientTop       =   3105
+   ClientWidth     =   12090
+   Icon            =   "frmMain.frx":0000
+   LinkTopic       =   "MDIForm1"
+   LockControls    =   -1  'True
+   NegotiateToolbars=   0   'False
+   ScrollBars      =   0   'False
+   WindowState     =   2  '최대화
+   Begin VB.Timer Timer1 
+      Enabled         =   0   'False
+      Interval        =   2000
+      Left            =   0
+      Top             =   1800
+   End
+   Begin XtremeSuiteControls.CommonDialog cdgExcel 
+      Left            =   570
+      Top             =   210
+      _Version        =   851970
+      _ExtentX        =   423
+      _ExtentY        =   423
+      _StockProps     =   4
+   End
+   Begin XtremeCommandBars.CommandBars CommandBars 
+      Left            =   150
+      Top             =   120
+      _Version        =   851970
+      _ExtentX        =   635
+      _ExtentY        =   635
+      _StockProps     =   0
+      DesignerControls=   -1  'True
+      DesignerControlsData=   "frmMain.frx":08CA
+   End
+   Begin VB.Menu PopUp 
+      Caption         =   "POPup"
+      Visible         =   0   'False
+      Begin VB.Menu m_99998 
+         Caption         =   "오름차순"
+      End
+      Begin VB.Menu m_99999 
+         Caption         =   "내림차순"
+      End
+   End
+End
+Attribute VB_Name = "frmMain"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private Declare Function InitCommonControls Lib "Comctl32.dll" () As Long
+
+Dim bMAIN_ACTIVATE As Boolean
+
+Dim StatusBar As XtremeCommandBars.IStatusBar
+
+'StatusBar - Place these constants in the General code section
+Const ID_INDICATOR_CAPS = 59137
+Const ID_INDICATOR_NUM = 59138
+Const ID_INDICATOR_SCRL = 59139
+
+Const ID_INDICATOR_DATE = 500
+
+Const ID_VERSION = 100
+Const ID_NAME = 200
+Const ID_TEL = 300
+
+Dim sValue() As String
+Dim Err_Num As Long
+Dim Err_Desc As String
+
+Function FindPane(Id As Long) As StatusBarPane
+    Set FindPane = frmMain.CommandBars.StatusBar.FindPane(Id)
+End Function
+
+Private Sub CommandBars_Execute(ByVal Control As XtremeCommandBars.ICommandBarControl)
+    On Error Resume Next
+    'On Error GoTo 0
+    'Call Error_Msg("", "main", "1", Control.Id)
+    Select Case Control.Id
+    
+        Case 1028: frm접수.SetFocus
+        Case 1029: frm출고.SetFocus
+        Case 1030: frm출고.SetFocus
+        
+        Case 1061: frm출고작업.SetFocus
+        Case 1062: frm본사출고현황.SetFocus 'frm입고작업.SetFocus
+        
+        Case 1079: frm출고작업.SetFocus
+        Case 1080: frm입고작업.SetFocus
+        
+        Case 1033: frm접수현황.SetFocus
+        Case 1034: frm출고현황.SetFocus
+        Case 1037: frm택번호조회.SetFocus
+        Case 1035: frm매출.SetFocus
+        Case 1036: frm판매취소현황.SetFocus
+        
+        Case 1054: frm보관증재출력.SetFocus
+        
+        Case 1041: frm일일판매집계.SetFocus  'frm일일판매리스트.Show 1
+        Case 1091: frm일일판매현황.SetFocus
+        
+        Case 1064: frm메일내역.SetFocus
+        Case 1065: frm월간매출.SetFocus
+        
+        Case 1066: frm고객별매출액.SetFocus
+        Case 1071: frm고객별이용실적.SetFocus
+        Case 1072: frm세탁비환불현황.SetFocus
+        Case 1073: frm쿠폰조회.SetFocus
+        Case 1074: frm품목별집계현황.SetFocus
+        '
+        Case 1067: frm고객미출고현황.SetFocus
+        Case 1069: frm본사출고현황.SetFocus
+        Case 1075: frm고객별미수금.SetFocus
+        Case 1076: frm일일매출집계.SetFocus
+        Case 1077: frm마일리지현황.SetFocus
+        
+        Case 1070: frm할인관리.SetFocus
+        
+        Case 1038:
+                ' frm공지사항.Show 1
+                frm일일매출마감.Show 1
+        
+        Case 1039: frm통계분석.SetFocus
+        Case 1040: 'frm품목별집계현황.Show 1
+        
+        Case 1068: frm본사미출고현황.SetFocus
+        
+        Case 1078:
+            'Call Error_Msg("", "main", "2", Control.Id)
+            frm사고품.SetFocus
+        
+        Case 1047: frm고객현황.SetFocus
+        
+        Case 1063: '
+                'frm공지사항.Show 1
+                frm일일매출마감.Show 1
+                    
+        Case 1050: frm환경설정.Show
+        
+        Case 1092
+                Dim Url As String
+                
+                If Dir(App.Path & "\AidSupport.exe", vbNormal) <> "" Then
+                    'Excute_Program Me, "AidSupport.exe"
+                    Shell App.Path & "\AidSupport.exe", vbNormalFocus
+                
+                Else
+                    
+                    Url = "http://as82.kr/cleanaid"
+                    frmIE.Caption = "원격 A/S"
+                    frmIE.WebBrowser1.Navigate Url
+                    frmIE.Show 1
+                End If
+        Case 1055:
+                Rtn = MsgBox("정말로 종료하시겠습니까?", vbQuestion + vbYesNo + vbDefaultButton1, "확인")
+                
+                If Rtn = vbYes Then
+                    'Call MSSQL_Backup 'SQL Server Backup
+                    
+                    ' 각종 로그 파일을 지운다.
+                    Call DeleteFileLog
+                        
+                    End
+                End If
+        
+        Case 1081: frm행사안내용문자.SetFocus
+        Case 1059: frm세탁물인도문자.SetFocus
+        Case 1094: frm세탁물지연문자.SetFocus
+        
+        Case 1060: frm문자일별현황.SetFocus
+        Case 1082: frm문자월별현황.SetFocus
+        Case 1100: frm문자특정번호.SetFocus
+        
+        
+        Case 1099: frm반품현황.SetFocus
+        
+        
+        Case 1083: frm공지사항.Show
+        
+        Case 1084: frm입고예정.SetFocus
+        
+        Case 1051:
+                
+                Select Case InputBox("암호를 입력하세요.", "암호")
+                    Case "cleanaid1996", "dudtjsgh"
+                        frmMigrationNew.Show 1
+                    Case Else
+                End Select
+        
+        Case 1085: frm근무자.Show 1
+        
+        Case 1086: frm부자재주문.SetFocus
+        
+        Case 1087: frm물건찾기.SetFocus
+        
+        Case 1088: frm신용카드승인.SetFocus
+        Case 1089: frm현금영수증승인.SetFocus
+        
+        Case 1090: frm의류분류현황.Show 1
+        Case 1049: frm의류현황.Show 1
+        
+        Case 1095
+            'If (Format(Date, "YYYY-MM-DD") >= "2011-04-05") And (Format(Date, "YYYY-MM-DD") <= "2011-04-13") Then
+            '    frm설문조사.Show 1
+            'End If
+            
+            If (Format(Date, "YYYY-MM-DD") >= "2011-07-06") And (Format(Date, "YYYY-MM-DD") <= "2011-07-12") Then
+                frm설문조사2.Show 1
+            End If
+            
+        Case 1096
+            If (Format(Date, "YYYY-MM-DD") >= "2011-07-06") And (Format(Date, "YYYY-MM-DD") <= "2011-07-12") Then
+                frm설문조사.Show 1
+            End If
+            
+        Case 1097
+            If (Format(Date, "YYYY-MM-DD") >= "2011-07-06") And (Format(Date, "YYYY-MM-DD") <= "2011-07-12") Then
+                frm설문조사3.Show 1
+            End If
+            
+        ' 무엇이든 물어보세요
+        Case 1098
+            frm무엇이든.Show 1
+            
+        Case 1101 '카카오 행사 문자
+            frm카카오행사문자.SetFocus
+        Case 1103 '카카오 행사 문자
+            frm카카오본사행사문자.SetFocus
+    End Select
+End Sub
+
+Private Sub CommandBars_Update(ByVal Control As XtremeCommandBars.ICommandBarControl)
+    'FindPane(ID_INDICATOR_DATE).Text = Format(Date, "YYYY-MM-DD")
+End Sub
+
+Private Sub MDIForm_Activate()
+    On Error GoTo ErrRtn
+        
+    ' 인터넷을 사용할 경우 업데이트 내용이 있을 경우 확인하여 처리한다.
+    If bMAIN_ACTIVATE = False Then
+        bMAIN_ACTIVATE = True
+            
+        DoEvents
+        
+        ' 프로그램의 버전을 설정한다.
+        'If Format(Date, "YYYY-MM-DD") <= "20090610" Then
+        '    Call SendProgramVersion
+        'End If
+
+        'If GetSetting("Laundry_Zi", "UpDate", "Auto", "Y") = "Y" Then
+        '    If GetSetting("Laundry_Zi", "Connect", "Type", "True") = False Then
+        '        frmUpdateCheck.Show 1
+        '    End If
+        'End If
+        
+''        ' 기본 정보를 가저온다.
+''        If 가맹점정보.가맹점코드 = "000000" Then
+''            FormStoreDefaultINFO.Show 1
+''        End If
+        
+        Call Get_가맹점정보 ' 신규 가맹점 정보가 있을 경우
+        
+'        ' 시작일이 일주일 전일경우 까지 계속 전송한다.
+'        ' 별도의 작업을 처리하기에는 무리가 있어 시작일부터 일주일간 계속전송한다.
+'        ' 시작일날 개점을 하지않을 경우가 있을수 있어 이렇게 처리한다.
+'        If 가맹점정보.StartDate >= Format(DateAdd("d", -7, Date), "YYYY-MM-DD") Then
+'            Call SendStoreDefaultInfo
+'        End If
+'
+'        If 가맹점정보.가맹점코드 <> "000000" Then
+'            Call SendSalesData("2008-01-01", DateDiff("d", "2008-01-01", Date))
+'        End If
+        
+    End If
+    
+    '--------------------------------------------------------------------------------------------------------------------------------------
+    ' 프로그램 사용 종료일 확인 하여 사용하지 못하도록 설정
+    ' 폐점 매장에서 계속 사용하는 문제 처리
+    '--------------------------------------------------------------------------------------------------------------------------------------
+    If 가맹점정보.가맹점상태 = "2" And 가맹점정보.PG사용종료일 < Format(Date, "yyyy-MM-dd") Then
+        Dim sMsg    As String
+        
+        
+         '-------------------------------------------------------------------
+         ' @@ 접속 정보를 저장한다.
+         '-------------------------------------------------------------------
+         If Server_Connection(HostCon, "LAUNDRY1000") Then
+        
+             ReDim sValue(1)
+             sValue(0) = 가맹점정보.가맹점코드                 ' 가맹점코드
+             sValue(1) = "제한-로그인 실패"
+             
+             Set ADORs = New ADODB.RecordSet
+             Set ADORs = SP_Exec(HostCon, "SP_R_CONNECT_INS", sValue(), Err_Num, Err_Desc)
+             
+             sMsg = "" & vbNewLine
+             sMsg = sMsg & "프로그램 사용이 제한된 매장 입니다.          " & vbNewLine & vbNewLine
+             sMsg = sMsg & "가맹점상태 : " & 가맹점정보.가맹점상태 & vbNewLine
+             sMsg = sMsg & "사용종료일 : " & 가맹점정보.PG사용종료일 & vbNewLine & vbNewLine
+             sMsg = sMsg & "연락처(전산실) : 031)522-2025"
+         
+             MsgBox sMsg, vbInformation, "  알 림  "
+             End
+        End If
+    End If
+    
+    
+    
+    
+    
+    '--------------------------------------------------------------------------------------------------------------------------------------
+    ' frmBase - Form_Load 복사
+    '--------------------------------------------------------------------------------------------------------------------------------------
+    'frmMain.StatusBar1.Panels(1) = M_CompnyMasterName & "   " & "Ver " & Program_Version
+    'frmMain.StatusBar1.Panels(1).ToolTipText = M_CompnyMasterName & "   " & "Ver " & Program_Version & "   최종 수정일:" & Program_LastEdit
+    
+    'FindPane(ID_VERSION).Text = M_CompnyMasterName & " " & "Ver " & Program_Version & " (최종 수정일:" & Program_LastEdit & ")"
+    FindPane(ID_VERSION).Text = "Ver " & Program_Version & "  (최종수정일자 : " & Program_LastEdit & ")"
+        
+    '-------------------------------------------------------
+    '
+    '-------------------------------------------------------
+    Query = "SELECT * FROM TB_기본정보"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+            
+    If ADORs.EOF Then
+        FindPane(ID_NAME).Text = "체인점명"
+        FindPane(ID_TEL).Text = "전화번호"
+    Else
+        'frmMain.StatusBar1.Panels(2) = ADORs!가맹점명
+        'frmMain.StatusBar1.Panels(5) = Trim(ADORs!매장전화번호) & ""
+        
+        FindPane(ID_NAME).Text = ADORs!가맹점명 & ""
+        FindPane(ID_TEL).Text = "전화:" & ADORs!매장전화번호 & ""
+    End If
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    '-----------------------------------------------------------------------------------------------------
+    ' 전일 마감이 안되었을 경우 마감을 해야 사용할 수 있게함 nDayCloseChk는 form6에서 마감되었을 경우 True
+    ' 최근 일주일의 내용을 검사하여 마감여부를 확인한다.
+    '-----------------------------------------------------------------------------------------------------
+    If Not nDayCloseChk Then
+        m_strDayClose = "" '마감일자를 초기화 한다.
+        
+        For i = 1 To 10
+            m_strDayClose = Format(DateAdd("d", -i, Date), "YYYY-MM-DD")
+            
+            If Not Get_일일마감여부(m_strDayClose) Then
+                Query = "SELECT 접수일자 FROM TB_입출고"
+                Query = Query & " WHERE 접수일자 = '" & m_strDayClose & "'"
+                Set ADORs = New ADODB.RecordSet
+                ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+                
+                If Not ADORs.EOF Then
+                    ADORs.Close
+                    Set ADORs = Nothing
+                    
+                    chkinputflig = "조회중"
+                    
+                    bMsgMode = True
+                    strMessage = "[ " & Format(m_strDayClose, "YYYY-MM-DD") & " ]일자을 마감하여 주십시요"
+                    
+                    MsgBox strMessage, vbInformation, "일일마감"
+                    
+                    frm일일매출마감.dtpDay.Value = Format(m_strDayClose, "YYYY-MM-DD")
+                    frm일일매출마감.Show 1
+                    DoEvents
+                    
+                    'Exit For
+                End If
+                ADORs.Close
+                Set ADORs = Nothing
+            End If
+        Next i
+        
+        nDayCloseChk = True ' 일주일동안 마감이 없을 경우 참으로 한다.
+    End If
+    
+''    ' 출력할 메시지가 있을 경우 출력 한다.
+''    If bMsgMode Then
+''        MsgBox strMessage, vbInformation, "Laundry - 메시지"
+''        bMsgMode = False
+''    End If
+    
+    If MailCheck = False Then
+        ' 편지내역을 CHECK한다.
+        Query = "SELECT COUNT(*) AS 수량"
+        Query = Query & " FROM TB_공지사항 "
+        Query = Query & " WHERE 공지구분 = '2'"
+        Query = Query & "   AND 작성일자   = '" & Format(Date, "YYYY-MM-DD") & "'"
+        
+        MailCheck = True
+    End If
+    
+    Timer1.Enabled = True
+        
+    Exit Sub
+    
+ErrRtn:
+    'MsgBox "프로그램이 정상적으로 동작하지 않을 수 있습니다." & vbLf & vbLf & Err.Description, vbCritical, "확인"
+End Sub
+
+Private Sub MDIForm_Initialize()
+   InitCommonControls
+End Sub
+
+Private Sub MDIForm_Load()
+    Dim strDate    As String
+    Dim strWeekDay As Integer
+    Dim strWD      As String
+    Dim sTag       As String
+            
+''    If App.PrevInstance = True Then
+''        Call ActivatePrevInstance(Me, M_CompnyMasterName)    '이전 실행 처리
+''
+''        Exit Sub
+''    End If
+
+    Me.Caption = M_CompnyMasterName & " (Ver " & App.Major & "." & App.Minor & "." & App.Revision & ")"
+
+    '-------------------------------------------------------------------------
+    '
+    '-------------------------------------------------------------------------
+    CommandBars.LoadDesignerBars
+
+    'Dim StatusBar As XtremeCommandBars.IStatusBar
+    Set StatusBar = CommandBars.StatusBar
+
+    StatusBar.Visible = True               'Make the custom status bar visible
+
+    StatusBar.AddPane 0                      'Adds the "special" idle pane to the custom status bar
+    StatusBar.SetPaneStyle 0, SBPS_STRETCH 'Set Pane Style
+    StatusBar.IdleText = "작업준비"          'Add some Idle Text to be displayed while the application is idle
+    StatusBar.SetPaneWidth 0, 75             'Set Pane width
+
+    StatusBar.AddPane ID_VERSION
+    StatusBar.SetPaneText ID_VERSION, ""
+    StatusBar.SetPaneWidth ID_VERSION, 350
+
+    StatusBar.AddPane ID_NAME
+    StatusBar.SetPaneText ID_NAME, ""
+    StatusBar.SetPaneWidth ID_NAME, 150
+
+    StatusBar.AddPane ID_TEL
+    StatusBar.SetPaneText ID_TEL, "전화 : 000-0000"
+    StatusBar.SetPaneWidth ID_TEL, 150
+
+    StatusBar.AddPane ID_INDICATOR_DATE
+    StatusBar.SetPaneText ID_INDICATOR_DATE, Format(Date, "YYYY-MM-DD")
+    StatusBar.SetPaneWidth ID_INDICATOR_DATE, 80
+
+    StatusBar.AddPane ID_INDICATOR_CAPS 'Adds the special Caps lock indicator pane
+    StatusBar.AddPane ID_INDICATOR_NUM  'Adds the special Num lock indicator pane
+    StatusBar.AddPane ID_INDICATOR_SCRL 'Adds the special Scroll lock indicator pane
+    '-------------------------------------------------------------------------
+
+    bMAIN_ACTIVATE = False
+    
+    '-------------------------------------------------------------------------
+    If Screen.Width / Screen.TwipsPerPixelX > 1024 Then
+        frmMain.WindowState = 0
+        
+        
+        Me.Width = 15480  'Screen.TwipsPerPixelX * 1024
+        Me.Height = 11190 'Screen.TwipsPerPixelY * 768
+    
+        Me.Top = (Screen.Height - Me.Height) / 2
+        Me.Left = (Screen.Width - Me.Width) / 2
+    
+    Else
+        frmMain.WindowState = 2
+    End If
+    
+    
+  
+'    ' 기본 프린터 여백정보 얻기
+'    Prt_Top = GetPrtStartPoint("TOP")
+'    Prt_Left = GetPrtStartPoint("LEFT")
+'    Prt_Height = GetPrtStartPoint("HEIGHT")
+    
+    sTag = Get_TagNo("", "R")
+    frm접수.cmdTagNo.Caption = Get_TagNo(sTag, "+")
+    
+    'TAG_Load  '택번호
+        
+    '마감일자를 초기화 한다.
+    nDayCloseChk = False
+    m_strDayClose = ""
+
+    chkinputflig = "메뉴"
+    
+    strDate = Format(Date, "YYYY-MM-DD")
+        
+'    '-------------------------------------------------------------
+'    ' 요일세일 - 일,월,화,수,목,금,토
+'    '-------------------------------------------------------------
+    chkDaySale = Get_요일행사여부
+
+
+'    Query = "SELECT 요일할인 FROM TB_기본정보"
+'    Set ADORs = New ADODB.Recordset
+'    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'    If Not ADORs.EOF Then
+'        i = Weekday(Date)
+'
+'        If Mid(ADORs(0), i, 1) = "1" Then
+'            chkDaySale = True
+'        Else
+'            chkDaySale = False
+'        End If
+'    End If
+'    ADORs.Close
+'    Set ADORs = Nothing
+    
+'    If (Format(Date, "YYYY-MM-DD") >= "2011-04-05") And (Format(Date, "YYYY-MM-DD") <= "2011-04-13") Then
+'        frm설문조사.Show 1
+'    End If
+    
+    
+''    '---------------------------------------------------------------------------
+''    ' TB_근무현황
+''    '---------------------------------------------------------------------------
+''    Query = "SELECT * FROM TB_근무현황"
+''    Query = Query & " WHERE 시작일자  = '" & Format(Date, "YYYY-MM-DD") & "'"
+''    Query = Query & "   AND 근무자명   <> '" & strManager & "'"
+''    Query = Query & "   AND 종료일자  = ''"
+''    Query = Query & "   AND 업무마감  = 'N'"
+''    Set ADORs = New ADODB.Recordset
+''    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+''
+''    If Not ADORs.EOF Then
+''        PreManager = ADORs!근무자명 & ""
+''    End If
+''    ADORs.Close
+''    Set ADORs = Nothing
+End Sub
+
+Private Sub MDIForm_QueryUnload(Cancel As Integer, UnloadMode As Integer)
+    On Error Resume Next
+    
+    Unload frm공지사항
+    
+    Unload frm의류
+    Unload frm색상표
+    Unload frm무늬
+    Unload frm작업
+    Unload frmKSNET2
+    Unload frmKSNETCash
+    Unload frmKicc
+    
+    'Call MSSQL_Backup
+    
+'    Tag_Save '택번호 저장
+End Sub
+
+Private Sub MSSQL_Backup()
+    On Error GoTo ErrRtn
+    
+    Dim ADOCmd     As New ADODB.Command
+    
+    Dim sPath      As String
+    Dim sCnt       As String
+    Dim BackupFile As String
+    
+    '------------------------------------------------------------------------------
+    ' Backup 처리
+    '------------------------------------------------------------------------------
+    sPath = GetIniStr("BACKUP", "PATH", "", iniFile)
+    sCnt = GetIniStr("BACKUP", "COUNT", "", iniFile)
+    
+    If (sCnt = "") Or (sCnt > "31") Then sCnt = "0"
+    
+    If sPath = "" Then
+        If Dir(AppPath & "Backup", vbDirectory) = "" Then
+            MkDir AppPath & "Backup"
+        End If
+        
+        BackupFile = AppPath & "Backup\" & Format(sCnt, "00") & "CleanAID.bak"
+    Else
+        If Dir(sPath, vbDirectory) = "" Then
+            MkDir sPath
+        End If
+        
+        If Right(sPath, 1) <> "\" Then
+            sPath = sPath & "\"
+        End If
+        
+        BackupFile = sPath & Format(sCnt, "00") & "CleanAID.bak"
+    End If
+    
+    If Dir(BackupFile) <> "" Then Kill BackupFile
+        
+    '-----------------------------------------------------------------
+    '
+    '-----------------------------------------------------------------
+    Query = "USE MASTER" & vbNewLine
+    Query = Query & " BACKUP DATABASE [CleanAID]"
+    Query = Query & " TO DISK = '" & Trim(BackupFile) & "'"
+    Query = Query & " WITH INIT" ', STATS "
+    
+    With ADOCmd
+        .ActiveConnection = ADOCon
+        .CommandType = adCmdText
+        .CommandTimeout = 0
+        '.CommandText = "use master"
+        '.Execute
+        .CommandText = Query
+        .Execute
+        Set .ActiveConnection = Nothing
+    End With
+    
+    Set ADOCmd = Nothing
+    
+    Call SetIniStr("BACKUP", "COUNT", CInt(sCnt) + 1, iniFile)
+    
+    Exit Sub
+    
+ErrRtn:
+    Set ADOCmd = Nothing
+End Sub
+
+Private Sub MDIForm_Resize()
+    On Error Resume Next
+    
+    If Me.WindowState = vbMinimized Then
+        Unload frm의류
+        Unload frm색상표
+        Unload frm무늬
+        Unload frm작업
+    End If
+End Sub
+
+
+Private Sub MDIForm_Unload(Cancel As Integer)
+    bMAIN_ACTIVATE = False
+    
+    ' 각종 로그 파일을 지운다.
+    Call DeleteFileLog
+
+End Sub
+
+'Private Sub StatusBar1_PanelClick(ByVal Panel As ComctlLib.Panel)
+'    If Panel.Index = 4 Then
+'        Dim sStr    As String
+'
+'        sStr = InputBox("관리자외 사용금지", "암호입력")
+'
+'        If sStr = "dudtjsgh" Or sStr = "cleanaid" Or sStr = 가맹점정보.전화2 Then
+'            'Set Myrec = MyDB.OpenRecordset("SELECT MAX(DGubun) from  TB_DataBaseUpdate")
+'
+'            '------------------------------------------------------------------------------------
+'            Query = "SELECT MAX(DGubun) FROM TB_DataBaseUpdate"
+'            Set SUBRs = New ADODB.Recordset
+'            SUBRs.Open Query, ADOCon, adOpenStatic, adLockOptimistic
+'
+'            ADOCon.Execute "DELETE FROM TB_DataBaseUpdate WHERE DGubun = '" & SUBRs(0) & "' "
+'
+'            SUBRs.Close
+'            Set SUBRs = Nothing
+'        End If
+'    End If
+'End Sub
+
+Private Sub TagNo_Click()
+    frmTag.Show
+End Sub
+
+Private Sub Timer1_Timer()
+    Dim TmpRs       As ADODB.RecordSet
+    
+    Dim sDate       As String
+    Dim dblFlage    As Double
+    Dim bSendFlage  As Boolean
+    Dim strRegCheck As String
+    
+    On Error GoTo ErrRtn
+    
+'    '------------------------------------------------------------------------------------
+'    ' 메시지 관리 내용 추가
+'    '------------------------------------------------------------------------------------
+'    Query = "SELECT * FROM TB_공지사항 "
+'    Query = Query & " WHERE 공지구분 IN ('2', '3')" '본사, 지사에서 입력한 공지사항
+'    Query = Query & "   AND (수신여부 IS NULL OR 수신여부 = '')"
+'    Query = Query & "   AND (시작일자 <= '" & Format(Date, "YYYY-MM-DD") & "'"
+'    Query = Query & "   AND  종료일자 >= '" & Format(Date, "YYYY-MM-DD") & "')"
+'    Set TmpRs = New ADODB.Recordset
+'    TmpRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'    Dim frm As Form
+'
+'    Do Until TmpRs.EOF
+'        If InStr(TmpRs!수신일자 & "", Format(Date, "YYYY-MM-DD")) <= 0 Then
+'            frmMessage.pnlDay.Caption = Format(TmpRs!시작일자, "YYYY-MM-DD") & " ~ " & Format(TmpRs!종료일자, "YYYY-MM-DD")
+'            frmMessage.pnlMailDay.Caption = TmpRs!작성일자 & ""                         '
+'            frmMessage.pnlMailNo.Caption = TmpRs!문서번호 & ""                         '
+'            frmMessage.RichTextBox1.Text = GetMailConvert(TmpRs!공지내용 & "", "READ") '
+'            frmMessage.Show 1                                                '
+'        End If
+'
+'        TmpRs.MoveNext
+'    Loop
+'    TmpRs.Close
+'    Set TmpRs = Nothing
+    
+    Exit Sub
+    
+ErrRtn:
+    If Err.Number = "3061" Then
+        Timer1.Enabled = False
+        Exit Sub
+    End If
+End Sub
+
+
+Private Sub Title_Click()
+'    Exit Sub
+'
+'    ' 프로그램의 버전을 설정한다.
+'    Call SendProgramVersion
+'
+'
+'    ' 기본 자료를 설정한다.
+'    Call SetTableDefaultSendData
+'
+'    ' 본사에서 'N'를 설정한 자룔를 다시 전송한다.
+'    Call SendNoSalesData
+'
+'    ' 각종 테이블의 자료를 전송한다.
+'    ProgressBar1.Visible = True
+'    Call SendTable_Data(ProgressBar1)
+'    ProgressBar1.Visible = False
+'
+'    ' 마감 자료를 전송한다.
+'    Call SendSalesData(Format(DateAdd("d", -7, Date), "YYYY-MM-DD"), 7)
+End Sub
+
+
+' 각종 로그 파일을 지운다.
+Private Sub DeleteFileLog()
+
+
+On Error GoTo ERR_RTN
+
+    Kill App.Path & "\Log\*.*"
+    Kill App.Path & "\ErrFile\*.*"
+    Kill App.Path & "\Backup\*.*"
+    Kill App.Path & "\Temp\*.*"
+    
+    Exit Sub
+    
+ERR_RTN:
+
+End Sub
+    
+    
+

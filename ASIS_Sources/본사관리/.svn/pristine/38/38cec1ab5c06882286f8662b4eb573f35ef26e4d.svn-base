@@ -1,0 +1,795 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Begin VB.Form P_SMSALL_10 
+   Caption         =   "본사 이벤트 관리"
+   ClientHeight    =   12330
+   ClientLeft      =   3945
+   ClientTop       =   3000
+   ClientWidth     =   17580
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9.75
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "P_SMSALL_010.frx":0000
+   LinkTopic       =   "Form1"
+   MDIChild        =   -1  'True
+   ScaleHeight     =   12330
+   ScaleWidth      =   17580
+   WindowState     =   2  '최대화
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   12330
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   17580
+      _ExtentX        =   31009
+      _ExtentY        =   21749
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "P_SMSALL_010.frx":058A
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   495
+         Left            =   15
+         TabIndex        =   1
+         Top             =   15
+         Width           =   9930
+         _ExtentX        =   17515
+         _ExtentY        =   873
+         _Version        =   262144
+         Font3D          =   1
+         ForeColor       =   255
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 본사 이벤트 관리"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_SMSALL_010.frx":063C
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   495
+         Index           =   0
+         Left            =   9960
+         TabIndex        =   2
+         Top             =   15
+         Width           =   7605
+         _ExtentX        =   13414
+         _ExtentY        =   873
+         _Version        =   262144
+         Font3D          =   3
+         ForeColor       =   192
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_SMSALL_010.frx":083E
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   7
+            Left            =   6660
+            TabIndex        =   3
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "종료"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_SMSALL_010.frx":0A40
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   6
+            Left            =   5730
+            TabIndex        =   4
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "화면"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_SMSALL_010.frx":0FDA
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   5
+            Left            =   4800
+            TabIndex        =   5
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "인쇄"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_SMSALL_010.frx":1574
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   4
+            Left            =   3750
+            TabIndex        =   6
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "취소"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_SMSALL_010.frx":1B0E
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   3
+            Left            =   2820
+            TabIndex        =   7
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "삭제"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_SMSALL_010.frx":20A8
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   2
+            Left            =   1890
+            TabIndex        =   8
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "저장"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_SMSALL_010.frx":2642
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   1
+            Left            =   960
+            TabIndex        =   9
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "신규"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_SMSALL_010.frx":2BDC
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   0
+            Left            =   30
+            TabIndex        =   10
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "조회"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_SMSALL_010.frx":3176
+         End
+      End
+      Begin Threed.SSPanel panInput 
+         Height          =   645
+         Left            =   15
+         TabIndex        =   11
+         Top             =   525
+         Width           =   17550
+         _ExtentX        =   30956
+         _ExtentY        =   1138
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         Begin VB.ComboBox cboInput 
+            Height          =   315
+            Index           =   0
+            Left            =   1245
+            TabIndex        =   12
+            Text            =   "cboInput"
+            Top             =   165
+            Width           =   2775
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   35
+            Left            =   60
+            TabIndex        =   13
+            Top             =   165
+            Width           =   1155
+            _ExtentX        =   2037
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "검색구분"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+      End
+      Begin FPSpreadADO.fpSpread spdView 
+         Height          =   11130
+         Left            =   15
+         TabIndex        =   14
+         Top             =   1185
+         Width           =   5880
+         _Version        =   524288
+         _ExtentX        =   10372
+         _ExtentY        =   19632
+         _StockProps     =   64
+         BackColorStyle  =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   3
+         OperationMode   =   2
+         ScrollBars      =   2
+         SelectBlockOptions=   2
+         SpreadDesigner  =   "P_SMSALL_010.frx":3710
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel SSPanel1 
+         Height          =   11130
+         Left            =   5910
+         TabIndex        =   15
+         Top             =   1185
+         Width           =   11655
+         _ExtentX        =   20558
+         _ExtentY        =   19632
+         _Version        =   262144
+         BackColor       =   16777215
+         FloodShowPct    =   -1  'True
+         Begin VB.TextBox txtTitle 
+            Height          =   315
+            Left            =   1590
+            TabIndex        =   34
+            Top             =   150
+            Width           =   3735
+         End
+         Begin VB.ComboBox cboGubun 
+            Height          =   315
+            ItemData        =   "P_SMSALL_010.frx":3C4E
+            Left            =   1605
+            List            =   "P_SMSALL_010.frx":3C5B
+            Style           =   2  '드롭다운 목록
+            TabIndex        =   16
+            Top             =   1305
+            Width           =   3735
+         End
+         Begin XtremeSuiteControls.CheckBox chkDay 
+            Height          =   285
+            Index           =   0
+            Left            =   1620
+            TabIndex        =   17
+            Top             =   1680
+            Width           =   420
+            _Version        =   851970
+            _ExtentX        =   741
+            _ExtentY        =   503
+            _StockProps     =   79
+            Caption         =   "일"
+            BackColor       =   16777215
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.CheckBox chkDay 
+            Height          =   285
+            Index           =   1
+            Left            =   2175
+            TabIndex        =   18
+            Top             =   1680
+            Width           =   420
+            _Version        =   851970
+            _ExtentX        =   741
+            _ExtentY        =   503
+            _StockProps     =   79
+            Caption         =   "월"
+            BackColor       =   16777215
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.CheckBox chkDay 
+            Height          =   285
+            Index           =   2
+            Left            =   2715
+            TabIndex        =   19
+            Top             =   1680
+            Width           =   420
+            _Version        =   851970
+            _ExtentX        =   741
+            _ExtentY        =   503
+            _StockProps     =   79
+            Caption         =   "화"
+            BackColor       =   16777215
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.CheckBox chkDay 
+            Height          =   285
+            Index           =   3
+            Left            =   3270
+            TabIndex        =   20
+            Top             =   1680
+            Width           =   420
+            _Version        =   851970
+            _ExtentX        =   741
+            _ExtentY        =   503
+            _StockProps     =   79
+            Caption         =   "수"
+            BackColor       =   16777215
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.CheckBox chkDay 
+            Height          =   285
+            Index           =   4
+            Left            =   3810
+            TabIndex        =   21
+            Top             =   1680
+            Width           =   420
+            _Version        =   851970
+            _ExtentX        =   741
+            _ExtentY        =   503
+            _StockProps     =   79
+            Caption         =   "목"
+            BackColor       =   16777215
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.CheckBox chkDay 
+            Height          =   285
+            Index           =   5
+            Left            =   4365
+            TabIndex        =   22
+            Top             =   1680
+            Width           =   420
+            _Version        =   851970
+            _ExtentX        =   741
+            _ExtentY        =   503
+            _StockProps     =   79
+            Caption         =   "금"
+            BackColor       =   16777215
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.CheckBox chkDay 
+            Height          =   285
+            Index           =   6
+            Left            =   4905
+            TabIndex        =   23
+            Top             =   1680
+            Width           =   420
+            _Version        =   851970
+            _ExtentX        =   741
+            _ExtentY        =   503
+            _StockProps     =   79
+            Caption         =   "토"
+            BackColor       =   16777215
+            Appearance      =   6
+         End
+         Begin MSComCtl2.DTPicker dtInput 
+            Height          =   315
+            Index           =   0
+            Left            =   1605
+            TabIndex        =   26
+            Top             =   510
+            Width           =   3735
+            _ExtentX        =   6588
+            _ExtentY        =   556
+            _Version        =   393216
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Format          =   57933824
+            CurrentDate     =   36684
+         End
+         Begin MSComCtl2.DTPicker dtInput 
+            Height          =   315
+            Index           =   1
+            Left            =   1605
+            TabIndex        =   27
+            Top             =   870
+            Width           =   3735
+            _ExtentX        =   6588
+            _ExtentY        =   556
+            _Version        =   393216
+            Format          =   57933824
+            CurrentDate     =   36684
+         End
+         Begin XtremeSuiteControls.GroupBox grpEvent 
+            Height          =   5550
+            Left            =   165
+            TabIndex        =   30
+            Top             =   2100
+            Width           =   5130
+            _Version        =   851970
+            _ExtentX        =   9049
+            _ExtentY        =   9790
+            _StockProps     =   79
+            Caption         =   "행사내용"
+            BackColor       =   16777215
+            Transparent     =   -1  'True
+            UseVisualStyle  =   -1  'True
+            Begin XtremeSuiteControls.FlatEdit txtEventMsg 
+               Height          =   5220
+               Left            =   90
+               TabIndex        =   31
+               Top             =   225
+               Width           =   4935
+               _Version        =   851970
+               _ExtentX        =   8705
+               _ExtentY        =   9208
+               _StockProps     =   77
+               BackColor       =   -2147483643
+               MultiLine       =   -1  'True
+               FlatStyle       =   -1  'True
+            End
+         End
+         Begin XtremeSuiteControls.GroupBox GroupBox1 
+            Height          =   5550
+            Left            =   5430
+            TabIndex        =   32
+            Top             =   2100
+            Width           =   5130
+            _Version        =   851970
+            _ExtentX        =   9049
+            _ExtentY        =   9790
+            _StockProps     =   79
+            Caption         =   "문자내용"
+            BackColor       =   16777215
+            Transparent     =   -1  'True
+            UseVisualStyle  =   -1  'True
+            Begin XtremeSuiteControls.FlatEdit txtReMsg 
+               Height          =   5220
+               Left            =   90
+               TabIndex        =   33
+               Top             =   210
+               Width           =   4935
+               _Version        =   851970
+               _ExtentX        =   8705
+               _ExtentY        =   9208
+               _StockProps     =   77
+               BackColor       =   -2147483643
+               MultiLine       =   -1  'True
+               FlatStyle       =   -1  'True
+            End
+         End
+         Begin VB.Label lblTitle 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "행사명 :"
+            Height          =   225
+            Index           =   0
+            Left            =   60
+            TabIndex        =   35
+            Top             =   210
+            Width           =   1470
+         End
+         Begin VB.Label lblTitle 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "종료일자 :"
+            Height          =   225
+            Index           =   17
+            Left            =   75
+            TabIndex        =   29
+            Top             =   915
+            Width           =   1470
+         End
+         Begin VB.Label lblTitle 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "시작일자 :"
+            Height          =   225
+            Index           =   19
+            Left            =   75
+            TabIndex        =   28
+            Top             =   570
+            Width           =   1470
+         End
+         Begin VB.Label lblTitle 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "요일구분 :"
+            Height          =   225
+            Index           =   11
+            Left            =   75
+            TabIndex        =   25
+            Top             =   1710
+            Width           =   1470
+         End
+         Begin VB.Label lblTitle 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "행사구분 :"
+            Height          =   225
+            Index           =   16
+            Left            =   75
+            TabIndex        =   24
+            Top             =   1350
+            Width           =   1470
+         End
+      End
+   End
+End
+Attribute VB_Name = "P_SMSALL_10"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub cmdBtn_Click(Index As Integer)
+    On Error GoTo ErrRtn
+    
+    Select Case Index
+        Case 0: Data_Display
+        Case 1: Data_Clear
+        Case 2: Data_Save
+        Case 3:
+        Case 4:
+        Case 5: 'Call DataPrint      ' 인쇄
+        Case 6:
+        Case 7: Unload Me           ' 종료
+          
+    End Select
+    
+'    Me.MousePointer = 0
+    
+    Exit Sub
+    
+ErrRtn:
+    Me.MousePointer = 0
+    
+    If Err.Number = "0" Then
+        
+    ElseIf Err.Number = "91" Then
+        End
+    Else
+        Resume Next
+    End If
+End Sub
+
+Private Sub Data_Display()
+On Error GoTo ErrRtn
+    
+    Dim nCnt    As Long
+    Dim vTemp   As Variant
+    Dim Query   As String
+    
+    Query = "SELECT evt_id, title, case shop_type WHEN 'SHOP' THEN '일반' WHEN 'EMART' THEN '이마트' WHEN 'ALL' THEN '전체' END as SHOP_TYPE FROM BIZ_PURIO..tbl_event"
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecQuery(Query, Err_Num, Err_Dec)
+    
+    With spdView
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1: .Text = RS01!evt_id & "" ' 1
+            .Col = 2: .Text = RS01!Title & ""   ' 2
+            .Col = 3: .Text = RS01!shop_type & ""   ' 2
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+    
+    Data_Clear
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Data_Display2(evt_id As String)
+On Error GoTo ErrRtn
+    
+    Dim nCnt    As Long
+    Dim vTemp   As Variant
+    Dim Query   As String
+    
+    Query = "SELECT * FROM BIZ_PURIO..tbl_event WHERE evt_id = '" & evt_id & "'"
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecQuery(Query, Err_Num, Err_Dec)
+    txtTitle.Tag = evt_id
+    txtTitle.Text = RS01!Title
+    dtInput(0).Value = RS01!start_date
+    dtInput(1).Value = RS01!end_date
+    Select Case RS01!shop_type
+    Case "ALL"
+        cboGubun.Text = "전체"
+    Case "SHOP"
+        cboGubun.Text = "일반가맹점"
+    Case "EMART"
+        cboGubun.Text = "이마트"
+    End Select
+    txtEventMsg.Text = RS01!MSG
+    txtReMsg.Text = RS01!re_msg
+
+    If Mid(RS01!Week, 1, 1) = "1" Then chkDay(0).Value = xtpChecked Else chkDay(0).Value = xtpUnchecked
+    If Mid(RS01!Week, 2, 1) = "1" Then chkDay(1).Value = xtpChecked Else chkDay(1).Value = xtpUnchecked
+    If Mid(RS01!Week, 3, 1) = "1" Then chkDay(2).Value = xtpChecked Else chkDay(2).Value = xtpUnchecked
+    If Mid(RS01!Week, 4, 1) = "1" Then chkDay(3).Value = xtpChecked Else chkDay(3).Value = xtpUnchecked
+    If Mid(RS01!Week, 5, 1) = "1" Then chkDay(4).Value = xtpChecked Else chkDay(4).Value = xtpUnchecked
+    If Mid(RS01!Week, 6, 1) = "1" Then chkDay(5).Value = xtpChecked Else chkDay(5).Value = xtpUnchecked
+    If Mid(RS01!Week, 7, 1) = "1" Then chkDay(6).Value = xtpChecked Else chkDay(6).Value = xtpUnchecked
+    RS01.Close
+    Set RS01 = Nothing
+    
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Data_Clear()
+On Error GoTo ErrRtn
+    
+   
+    txtTitle.Tag = ""
+    txtTitle.Text = ""
+    dtInput(0).Value = Now
+    dtInput(1).Value = Now
+    
+    cboGubun.Text = "전체"
+    txtEventMsg.Text = ""
+    txtReMsg.Text = ""
+
+    chkDay(0).Value = xtpUnchecked
+    chkDay(1).Value = xtpUnchecked
+    chkDay(2).Value = xtpUnchecked
+    chkDay(3).Value = xtpUnchecked
+    chkDay(4).Value = xtpUnchecked
+    chkDay(5).Value = xtpUnchecked
+    chkDay(6).Value = xtpUnchecked
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Data_Save()
+On Error GoTo ErrRtn
+    
+    Dim Week As String
+    Dim Gubun As String
+    Week = chkDay(0).Value & chkDay(1).Value & chkDay(2).Value & chkDay(3).Value & chkDay(4).Value & chkDay(5).Value & chkDay(6).Value
+    
+    Select Case cboGubun.Text
+    Case "전체"
+        Gubun = "ALL"
+    Case "일반가맹점"
+        Gubun = "SHOP"
+    Case "이마트"
+        Gubun = "EMART"
+    End Select
+    
+    Dim Query As String
+    If txtTitle.Tag <> "" Then
+        Query = ""
+        Query = Query & " UPDATE BIZ_PURIO..tbl_event"
+        Query = Query & " SET "
+        Query = Query & "   TITLE      ='" & txtTitle.Text & "',"
+        Query = Query & "   MSG        ='" & txtEventMsg.Text & "',"
+        Query = Query & "   RE_MSG     ='" & txtReMsg.Text & "',"
+        Query = Query & "   WEEK       ='" & Week & "',"
+        Query = Query & "   START_DATE ='" & dtInput(0).Value & "',"
+        Query = Query & "   END_DATE   ='" & dtInput(1).Value & "',"
+        Query = Query & "   SHOP_TYPE  ='" & Gubun & "'"
+        Query = Query & " WHERE"
+        Query = Query & "   EVT_ID = '" & txtTitle.Tag & "'"
+    Else
+        Query = ""
+        Query = "INSERT INTO BIZ_PURIO..tbl_event(TITLE, MSG, RE_MSG, WEEK, START_DATE, END_DATE, SHOP_TYPE) "
+        Query = Query & "VALUES ("
+        Query = Query & "'" & txtTitle.Text & "',"
+        Query = Query & "'" & txtEventMsg.Text & "',"
+        Query = Query & "'" & txtReMsg.Text & "',"
+        Query = Query & "'" & Week & "',"
+        Query = Query & "'" & dtInput(0).Value & "',"
+        Query = Query & "'" & dtInput(1).Value & "',"
+        Query = Query & "'" & Gubun & "'"
+        Query = Query & ")"
+    End If
+    
+    Call ExecQuery(Query, Err_Num, Err_Dec)
+    Data_Display
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+Private Sub Form_Load()
+    Data_Display
+    dtInput(0).Value = Now
+    dtInput(1).Value = Now
+End Sub
+
+Private Sub spdView_Click(ByVal Col As Long, ByVal Row As Long)
+    With spdView
+        .Row = Row: .Col = 1
+        Data_Display2 (.Text)
+    End With
+End Sub

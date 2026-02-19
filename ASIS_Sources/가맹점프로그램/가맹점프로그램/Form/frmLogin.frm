@@ -1,0 +1,875 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Begin VB.Form frmLogin 
+   BorderStyle     =   1  '단일 고정
+   Caption         =   "접속"
+   ClientHeight    =   7830
+   ClientLeft      =   5415
+   ClientTop       =   4380
+   ClientWidth     =   11940
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "frmLogin.frx":0000
+   LinkTopic       =   "Form8"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   7830
+   ScaleWidth      =   11940
+   Begin Threed.SSPanel sspMSg 
+      Height          =   945
+      Left            =   990
+      TabIndex        =   16
+      Top             =   3480
+      Visible         =   0   'False
+      Width           =   10035
+      _ExtentX        =   17701
+      _ExtentY        =   1667
+      _Version        =   262144
+      Caption         =   "공지사항 출력 중입니다. 이미지가 클 경우 시간이 오래 걸릴 수 있습니다. 잠시만 기다려 주십시요."
+      BevelInner      =   1
+      RoundedCorners  =   0   'False
+      FloodShowPct    =   -1  'True
+   End
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   7830
+      Left            =   0
+      TabIndex        =   2
+      Top             =   0
+      Width           =   11940
+      _ExtentX        =   21061
+      _ExtentY        =   13811
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "frmLogin.frx":08CA
+      Begin Threed.SSPanel SSPanel 
+         Height          =   2265
+         Left            =   15
+         TabIndex        =   12
+         Top             =   15
+         Width           =   3045
+         _ExtentX        =   5371
+         _ExtentY        =   3995
+         _Version        =   262144
+         BackColor       =   16777215
+         PictureFrames   =   1
+         Picture         =   "frmLogin.frx":097C
+         PictureBackground=   "frmLogin.frx":12DEE
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton btnNotice 
+            Height          =   405
+            Index           =   0
+            Left            =   45
+            TabIndex        =   13
+            Top             =   1815
+            Visible         =   0   'False
+            Width           =   1635
+            _Version        =   851970
+            _ExtentX        =   2884
+            _ExtentY        =   714
+            _StockProps     =   79
+            Caption         =   "종료된 공지사항"
+            UseVisualStyle  =   -1  'True
+         End
+         Begin XtremeSuiteControls.PushButton btnNotice 
+            Height          =   405
+            Index           =   1
+            Left            =   1800
+            TabIndex        =   14
+            Top             =   1815
+            Visible         =   0   'False
+            Width           =   1185
+            _Version        =   851970
+            _ExtentX        =   2090
+            _ExtentY        =   714
+            _StockProps     =   79
+            Caption         =   "공지중..."
+            UseVisualStyle  =   -1  'True
+         End
+      End
+      Begin RichTextLib.RichTextBox RichTextBox1 
+         Height          =   4080
+         Left            =   15
+         TabIndex        =   3
+         Top             =   2295
+         Width           =   11910
+         _ExtentX        =   21008
+         _ExtentY        =   7197
+         _Version        =   393217
+         BackColor       =   12648447
+         Enabled         =   -1  'True
+         ReadOnly        =   -1  'True
+         ScrollBars      =   3
+         Appearance      =   0
+         TextRTF         =   $"frmLogin.frx":1F0FA
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9.75
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin Threed.SSPanel SSPanel1 
+         Height          =   1020
+         Index           =   0
+         Left            =   15
+         TabIndex        =   4
+         Top             =   6795
+         Width           =   11910
+         _ExtentX        =   21008
+         _ExtentY        =   1799
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton btnEnd 
+            Height          =   525
+            Left            =   10890
+            TabIndex        =   8
+            Top             =   405
+            Width           =   945
+            _Version        =   851970
+            _ExtentX        =   1667
+            _ExtentY        =   926
+            _StockProps     =   79
+            Caption         =   "종료"
+            Appearance      =   6
+            Picture         =   "frmLogin.frx":1F19F
+         End
+         Begin VB.ComboBox cboManager 
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   11.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   345
+            Left            =   4305
+            Style           =   2  '드롭다운 목록
+            TabIndex        =   0
+            Top             =   150
+            Width           =   1800
+         End
+         Begin VB.TextBox txtPW 
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   11.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   345
+            IMEMode         =   3  '사용 못함
+            Left            =   4305
+            PasswordChar    =   "*"
+            TabIndex        =   1
+            Top             =   555
+            Width           =   1800
+         End
+         Begin XtremeSuiteControls.PushButton cmdConnect 
+            Height          =   750
+            Left            =   6165
+            TabIndex        =   5
+            Top             =   150
+            Width           =   1515
+            _Version        =   851970
+            _ExtentX        =   2672
+            _ExtentY        =   1323
+            _StockProps     =   79
+            Caption         =   " 접속"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frmLogin.frx":1FBB1
+         End
+         Begin XtremeSuiteControls.PushButton btnServer 
+            Height          =   525
+            Left            =   90
+            TabIndex        =   11
+            Top             =   405
+            Width           =   1305
+            _Version        =   851970
+            _ExtentX        =   2302
+            _ExtentY        =   926
+            _StockProps     =   79
+            Caption         =   " DB 설정"
+            Appearance      =   6
+            Picture         =   "frmLogin.frx":2048B
+         End
+         Begin VB.Label Label1 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "비밀번호:"
+            Height          =   180
+            Index           =   6
+            Left            =   3180
+            TabIndex        =   7
+            Top             =   630
+            Width           =   1080
+         End
+         Begin VB.Label Label1 
+            Alignment       =   1  '오른쪽 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "근무자:"
+            Height          =   180
+            Index           =   1
+            Left            =   3180
+            TabIndex        =   6
+            Top             =   225
+            Width           =   1080
+         End
+      End
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   390
+         Left            =   15
+         TabIndex        =   9
+         Top             =   6390
+         Width           =   11910
+         _ExtentX        =   21008
+         _ExtentY        =   688
+         _Version        =   262144
+         Font3D          =   1
+         ForeColor       =   192
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 프로그램 접속"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "frmLogin.frx":20A25
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton btnNotice 
+            Height          =   405
+            Index           =   2
+            Left            =   10290
+            TabIndex        =   15
+            Top             =   0
+            Width           =   1605
+            _Version        =   851970
+            _ExtentX        =   2831
+            _ExtentY        =   714
+            _StockProps     =   79
+            Caption         =   "공지사항 확인"
+            ForeColor       =   255
+            UseVisualStyle  =   -1  'True
+         End
+      End
+      Begin FPSpreadADO.fpSpread sprGrid 
+         Height          =   2265
+         Left            =   3075
+         TabIndex        =   10
+         Top             =   15
+         Width           =   8850
+         _Version        =   524288
+         _ExtentX        =   15610
+         _ExtentY        =   3995
+         _StockProps     =   64
+         AllowDragDrop   =   -1  'True
+         AllowUserFormulas=   -1  'True
+         AutoCalc        =   0   'False
+         AutoClipboard   =   0   'False
+         BorderStyle     =   0
+         DAutoCellTypes  =   0   'False
+         DAutoHeadings   =   0   'False
+         DAutoSave       =   0   'False
+         DAutoSizeCols   =   0
+         DInformActiveRowChange=   0   'False
+         DisplayRowHeaders=   0   'False
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   6
+         MaxRows         =   300
+         MoveActiveOnFocus=   0   'False
+         OperationMode   =   3
+         Protect         =   0   'False
+         ScrollBars      =   2
+         SelectBlockOptions=   0
+         SpreadDesigner  =   "frmLogin.frx":20D34
+         VisibleCols     =   2
+         VisibleRows     =   50
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+   End
+End
+Attribute VB_Name = "frmLogin"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Private Sub btnNotice_Click(Index As Integer)
+    
+    Select Case Index
+        Case 0
+            RichTextBox1.Text = ""
+            Call 공지사항_Display
+        
+        Case 1
+            RichTextBox1.Text = ""
+            Call 공지사항_Display(Format(Date, "YYYY-MM-DD"))
+        
+        Case 2
+            Call SaveCheckDate
+            DoEvents
+            'Call 공지사항_Display
+        
+        Case Else
+        
+    End Select
+
+End Sub
+
+'Private Declare Function InitCommonControls Lib "Comctl32.dll" () As Long
+
+Private Sub btnServer_Click()
+    frm서버.Show 1
+End Sub
+
+Private Sub cboManager_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        KeyAscii = 0
+        
+        SendKeys "{TAB}"
+    End If
+End Sub
+
+Private Sub Form_Activate()
+    If CheckKSNET_OCX = True And Format(Date, "yyyy-MM-dd") <= "2015-09-20" Then
+        MsgBox "서명 패드가 정상 동작 하지 않을 경우 본사로 연락 해주세요." & vbNewLine & "전산실: 031) 522-2025 ", vbInformation, "확인"
+    End If
+End Sub
+
+Private Sub Form_Initialize()
+'    InitCommonControls
+End Sub
+
+Private Sub Form_Load()
+    On Error GoTo ErrRtn
+    
+    sspMSg.Visible = False
+    
+    Me.Caption = "접속 (Ver " & App.Major & "." & App.Minor & "." & App.Revision & ")"
+    
+    Me.Left = (Screen.Width - Me.Width) / 2
+    Me.Top = (Screen.Height - Me.Height) / 2
+
+    
+    If App.PrevInstance = True Then End
+    
+    If 가맹점정보.지사코드 = "1024" Then
+        SSPanel.Picture = SSPanel.PictureBackground
+    End If
+    SSPanel.PictureBackground = Nothing
+        
+    If Right(App.Path, 1) = "\" Then
+        AppPath = App.Path
+    Else
+        AppPath = App.Path & "\"
+    End If
+    
+    iniFile = AppPath & "\CleanAID.ini" ' 환경 설정 파일의 이름을 설정한다.
+                    
+    With sprGrid
+        .MaxRows = 0
+        .RowHeight(-1) = 16
+        
+        .Col = 4: .ColHidden = True
+        .Col = 5: .ColHidden = True
+        .Col = 6: .ColHidden = True
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+        
+        
+        
+    End With
+    
+    Call Manager_Display(cboManager)
+    
+    Call 공지사항_Display  '공지사항_Display(Format(Date, "YYYY-MM-DD"))
+    
+    Exit Sub
+
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+    Screen.MousePointer = 0
+End Sub
+
+'------------------------------------------------------------------------------
+' 함수명 : 공지사항_Display
+' 설  명 :
+'------------------------------------------------------------------------------
+Private Sub 공지사항_Display(Optional 공지일자 As String)
+    Dim sStr    As String
+    
+    Query = "SELECT    작성일자"
+    Query = Query & ", 공지내용"
+    Query = Query & ", 문서번호"
+    Query = Query & ", 공지구분"
+    Query = Query & ", RTRIM(수신일자) AS 수신일자 "
+    Query = Query & ", ISNULL(파일명,'') AS 파일명 "
+    Query = Query & " FROM TB_공지사항"
+    Query = Query & " WHERE 공지구분 IN ('2', '3')" '본사, 지사에서 입력한 공지사항
+    
+    If 공지일자 <> "" Then
+        Query = Query & "   AND (시작일자 <= '" & Format(공지일자, "YYYY-MM-DD") & "'"
+        Query = Query & "   AND  종료일자 >= '" & Format(공지일자, "YYYY-MM-DD") & "')"
+    End If
+    
+    Query = Query & " ORDER BY 작성일자 DESC, 문서번호 DESC"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+    
+    With sprGrid
+        .MaxRows = 0
+    
+        Do While Not ADORs.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            Debug.Print ADORs!공지내용 & ""
+            
+            sStr = ADORs!공지내용 & ""
+            If InStr(ADORs!공지내용 & "", "제    목:") > 0 Then sStr = Mid(ADORs!공지내용 & "", InStr(ADORs!공지내용 & "", "제    목:"), 200)
+            If InStr(sStr, vbNewLine) > 0 Then sStr = Mid(sStr, 1, InStr(sStr, vbNewLine) - 1)
+            Debug.Print sStr
+            
+            .Col = 1: .Text = Format(ADORs!작성일자, "YYYY-MM-DD")
+            .Col = 2: .Text = sStr
+            
+            ' 2012-05-31일 이전의 내용은 모두 수신한것으로 처리한다.
+            If Format(ADORs!작성일자, "YYYY-MM-DD") < "2012-05-31" Then
+                .Col = 3: .Text = "확인"
+            Else
+                .Col = 3: .Text = IIf(ADORs!수신일자 & "" = "", " ", "확인")
+            End If
+            .Col = 4: .Text = ADORs!문서번호 & ""
+            .Col = 5: .Text = ADORs!공지구분 & ""
+            .Col = 6: .Text = ADORs!파일명 & ""
+            
+            ADORs.MoveNext
+        Loop
+        ADORs.Close
+        Set ADORs = Nothing
+    End With
+    
+    If sprGrid.MaxRows > 0 Then
+        Call sprGrid_Click(1, 1)
+    End If
+End Sub
+
+Private Sub cmdConnect_Click()
+    Dim nRow    As Long
+    Dim sMsg    As String
+    Dim sStr    As String
+    Dim ErrCnt  As String
+    
+    On Error GoTo ErrRtn
+    
+ 
+sStr = "1"
+
+    If txtPW.Text = "cleanaid1996" Then
+        frm환경설정.Show 1
+        
+        Exit Sub
+    End If
+    
+    If cboManager.ListIndex < 0 Then
+        MsgBox "근무자를 선택하세요.", vbInformation, "오류"
+        cboManager.SetFocus
+        Exit Sub
+    End If
+
+    If txtPW.Text = "" Then
+        MsgBox "암호를 입력하세요.", vbInformation, "오류"
+        txtPW.Text = ""
+        txtPW.SetFocus
+        Exit Sub
+    End If
+
+sStr = "2"
+
+    With sprGrid
+        For nRow = 1 To sprGrid.DataRowCnt
+            .Col = 3
+            .Row = nRow
+        
+            If Trim(.Text) = "" Then
+            
+                .Col = 1:   sMsg = "[" & .Text & "] "
+                .Col = 2:   sMsg = sMsg & " 제목:" & .Text & vbNewLine & vbNewLine
+                
+                            sMsg = sMsg & "공지 사항을 확인후 로그인 해주세요" & vbNewLine
+                            sMsg = sMsg & "해당 공지사항을 클릭 후 '공지사항 확인' 버튼을 클릭하여 주십시요"
+                            MsgBox sMsg, vbInformation, "공지확인"
+                
+                .Action = ActionActiveCell
+                Call sprGrid_Click(1, nRow)
+                
+                Exit Sub
+            End If
+        Next nRow
+    End With
+
+    '---------------------------------------------------------
+    'TB_사용자관리
+    '---------------------------------------------------------
+    Query = "SELECT * FROM TB_기본정보"
+    Query = Query & " WHERE 비밀번호 = '" & txtPW.Text & "' "
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    If ADORs.EOF Then
+        ADORs.Close
+        Set ADORs = Nothing
+
+        MsgBox "암호가 올바르지 않습니다.", vbInformation, "오류"
+        txtPW.Text = ""
+        txtPW.SetFocus
+        Exit Sub
+    End If
+    ADORs.Close
+    Set ADORs = Nothing
+        
+    strManager = cboManager.Text & "" '근무자
+    
+sStr = "2-1"
+    '---------------------------------------------------------
+    'TB_근무현황
+    '---------------------------------------------------------
+    Query = "SELECT * FROM TB_근무현황"
+    Query = Query & " WHERE 근무자명 = '" & strManager & "'"
+    Query = Query & "   AND 시작일자 = '" & Format(Date, "YYYY-MM-DD") & "'"
+    Query = Query & "   AND 종료일자 = ''"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+    
+    If ADORs.EOF Then
+        Query = "INSERT INTO TB_근무현황 (근무자명, 시작일자, 시작시간) VALUES ("
+        Query = Query & "  '" & strManager & "'"
+        Query = Query & ", '" & Format(Date, "YYYY-MM-DD") & "'"
+        Query = Query & ", '" & Format(Now, "hh:mm:ss") & "')"
+        ADOCon.Execute Query
+    End If
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    '---------------------------------------------------------
+    ' TB_기본정보 에 현재 프로그램 버전 넣어주기
+    '---------------------------------------------------------
+    Query = "SELECT * FROM TB_기본정보"
+    Query = Query & " WHERE 프로그램버전 = '" & App.Major & "." & App.Minor & "." & App.Revision & "'"
+    Set ADORs = New ADODB.RecordSet
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+    
+    If ADORs.EOF Then
+        Query = "UPDATE TB_기본정보 SET"
+        Query = Query & "  프로그램버전 = '" & App.Major & "." & App.Minor & "." & App.Revision & "'"
+        Query = Query & ", 본사전송여부 = 'N'"
+        ADOCon.Execute Query
+    End If
+    ADORs.Close
+    Set ADORs = Nothing
+    
+sStr = "3"
+    Unload frmLogin
+    DoEvents
+    
+sStr = "4"
+    
+    '---------------------------------------------------------
+    ' 서버를 이용하여 백업여부를
+    '---------------------------------------------------------
+    Dim strBACKUP As String
+    Dim strFile   As String
+    
+    strBACKUP = GetIniStr("UPDATE", "BACKUP", "", iniFile) '데이터베이스
+    
+    If strBACKUP = "Y" Then
+        strFile = Dir(AppPath & "DBUpdate.exe")
+        
+        If strFile <> "" Then
+            'Excute_Program Me, "DBUpdate.exe"
+            'ShellExecute hwnd, "Open", AppPath & "DBUpdate.exe", "", App.Path, 1
+            Shell AppPath & "DBUpdate.exe", vbHide
+        End If
+    End If
+    
+sStr = "5"
+    Unload frmLogin
+    DoEvents
+ 
+ sStr = "6"
+   
+    frmSplash.Show     '메세지
+    frmSplash.Refresh
+      
+    frmSplash.lblMsg.Caption = ""
+    frmSplash.ProgressBar1.MAX = 100
+    frmSplash.ProgressBar1.Min = 0
+    frmSplash.ProgressBar1.Value = 0
+      
+sStr = "7"
+    Call ServerData_Receive '서버데이터 다운로드
+      
+'    Load frm공지사항       '메인화면
+'
+'    Unload frmSplash
+'    DoEvents
+'
+'    frm공지사항.Show
+    
+sStr = "5"
+    Load frmMain       '메인화면
+
+sStr = "6"
+    Unload frmSplash
+    DoEvents
+    
+sStr = "7"
+    frmMain.Show
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, "cmdConnect [" & sStr & "] " & Err.description & vbNewLine & sStr)
+
+    Screen.MousePointer = 0
+    
+    txtPW.Text = ""
+    'txtPW.SetFocus
+End Sub
+
+Private Sub btnEnd_Click()
+    End
+End Sub
+
+Private Sub sprGrid_Click(ByVal Col As Long, ByVal Row As Long)
+    Dim 작성일자 As String
+    Dim 문서번호 As String
+    Dim 공지구분 As String
+    Dim 파일명   As String
+    
+    On Error GoTo ERR_RTN
+    
+    If Row <= 0 Then Exit Sub
+    
+    Screen.MousePointer = vbHourglass
+    sspMSg.ZOrder 0
+    sspMSg.Visible = True
+    DoEvents
+    
+    RichTextBox1.Text = ""
+    
+    With sprGrid
+        .Row = Row
+        
+        .Col = 1: 작성일자 = .Text & ""
+        .Col = 4: 문서번호 = .Text & ""
+        .Col = 5: 공지구분 = .Text & ""
+        .Col = 6: 파일명 = .Text & ""
+        
+        If 작성일자 >= "2013-05-15" And 파일명 = "" Then
+            파일명 = 작성일자 & 문서번호
+        End If
+        
+        Query = "SELECT * FROM TB_공지사항"
+        Query = Query & " WHERE 작성일자 = '" & 작성일자 & "'"
+        Query = Query & "   AND 문서번호 =  " & 문서번호
+        Query = Query & "   AND 공지구분 = '" & 공지구분 & "'"
+        Set ADORs = New ADODB.RecordSet
+        ADORs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If Not ADORs.EOF Then
+        
+            If 파일명 = "" Then
+                RichTextBox1.Text = GetMailConvert(ADORs!공지내용 & "", "READ")
+            Else
+            
+                Debug.Print "DDDD" & Now
+                Call DataPCSaveFileView(작성일자, 문서번호, RichTextBox1)
+            
+            End If
+            
+            btnNotice(2).Enabled = IIf(Trim(ADORs!수신일자 & "") = "", True, False)
+        End If
+        
+        ADORs.Close
+        Set ADORs = Nothing
+    
+    End With
+    sspMSg.Visible = False
+    Screen.MousePointer = vbDefault
+    Exit Sub
+    
+ERR_RTN:
+    sspMSg.Visible = False
+    Screen.MousePointer = vbDefault
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+End Sub
+
+Private Sub sprGrid_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+    Call sprGrid_Click(NewCol, NewRow)
+End Sub
+
+'암호
+
+Private Sub txtPW_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        KeyAscii = 0
+        cmdConnect_Click
+    End If
+End Sub
+
+Private Sub SaveCheckDate()
+    Dim nRow     As Long
+    Dim 작성일자 As String
+    Dim 문서번호 As String
+    Dim 공지구분 As String
+    
+    nRow = sprGrid.ActiveRow
+    If nRow <= 0 Then Exit Sub
+    
+    With sprGrid
+        .Row = nRow
+        
+        .Col = 1: 작성일자 = .Text & ""
+        .Col = 4: 문서번호 = .Text & ""
+        .Col = 5: 공지구분 = .Text & ""
+        
+        Query = "SELECT * FROM TB_공지사항"
+        Query = Query & " WHERE 작성일자 = '" & 작성일자 & "'"
+        Query = Query & "   AND 문서번호 =  " & 문서번호
+        Query = Query & "   AND 공지구분 = '" & 공지구분 & "'"
+        Set ADORs = New ADODB.RecordSet
+        ADORs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If Not ADORs.EOF Then
+            
+            If IsNull(ADORs!수신일자) Or ADORs!수신일자 = "" Then
+                ADORs!수신일자 = Format(Now, "YYYY-MM-DD hh:mm:ss") & "|"
+            Else
+                If Len(ADORs!수신일자) >= 180 Then
+                    '200 자리수가 넘어서리...
+                Else
+                    ADORs!수신일자 = ADORs!수신일자 & Format(Now, "YYYY-MM-DD hh:mm:ss") & "|"
+                End If
+            End If
+            
+            ADORs!수신여부 = "Y"
+            ADORs!본사전송여부 = "N"
+            
+            ADORs.Update
+        End If
+        
+        ADORs.Close:    Set ADORs = Nothing
+        
+        .Col = 3: .Text = "확인"
+        
+    End With
+    
+    btnNotice(2).Enabled = False
+
+End Sub
+
+Private Function CheckKSNET_OCX() As Boolean
+    Dim sFullFileName   As String
+    Dim sVer            As String
+    
+    On Error GoTo ERR_RTN
+    
+    CheckKSNET_OCX = False
+    
+    sFullFileName = "C:\windows\system32\KiccPosIEX.ocx"
+    If Dir(sFullFileName, vbNormal) <> "" Then
+        sVer = CheckKSNET_OCX_Ver(sFullFileName)
+        sVer = Left(sVer, 10)
+        If sVer < "1, 0, 8, 3" Then
+            CheckKSNET_OCX = True
+            Call Shell(App.Path & "\OCX.BAT", vbNormalFocus)
+        End If
+        
+    End If
+    
+    sFullFileName = "C:\windows\SysWOW64\KiccPosIEX.ocx"
+    If Dir(sFullFileName, vbNormal) <> "" Then
+        sVer = CheckKSNET_OCX_Ver(sFullFileName)
+        sVer = Left(sVer, 10)
+        If sVer < "1, 0, 8, 9" Then
+            CheckKSNET_OCX = True
+            Call Shell(App.Path & "\OCX.BAT", vbNormalFocus)
+        End If
+    End If
+
+    Exit Function
+    
+ERR_RTN:
+    MsgBox Err.description
+End Function
+
+

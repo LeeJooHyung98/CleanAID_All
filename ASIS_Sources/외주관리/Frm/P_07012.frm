@@ -1,0 +1,1032 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Begin VB.Form P_07012 
+   Caption         =   "외주 입고 등록"
+   ClientHeight    =   10185
+   ClientLeft      =   1320
+   ClientTop       =   1395
+   ClientWidth     =   16695
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9.75
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "P_07012.frx":0000
+   LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
+   MDIChild        =   -1  'True
+   ScaleHeight     =   10185
+   ScaleWidth      =   16695
+   WindowState     =   2  '최대화
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   10185
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   16695
+      _ExtentX        =   29448
+      _ExtentY        =   17965
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "P_07012.frx":058A
+      Begin Threed.SSPanel SSPanel 
+         Height          =   570
+         Index           =   1
+         Left            =   5310
+         TabIndex        =   1
+         Top             =   1740
+         Width           =   11370
+         _ExtentX        =   20055
+         _ExtentY        =   1005
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin MSComCtl2.DTPicker dtInput 
+            Height          =   390
+            Index           =   1
+            Left            =   1800
+            TabIndex        =   19
+            Top             =   90
+            Width           =   2820
+            _ExtentX        =   4974
+            _ExtentY        =   688
+            _Version        =   393216
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            CalendarBackColor=   16777215
+            Format          =   56819712
+            CurrentDate     =   36686
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   0
+            Left            =   90
+            TabIndex        =   20
+            Top             =   120
+            Width           =   1710
+            _ExtentX        =   3016
+            _ExtentY        =   556
+            _Version        =   262144
+            BackColor       =   16777215
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Caption         =   "지사 외주 처리일자:"
+            BorderWidth     =   0
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   345
+            Index           =   1
+            Left            =   4620
+            TabIndex        =   24
+            Top             =   90
+            Width           =   1455
+            _ExtentX        =   2566
+            _ExtentY        =   609
+            _Version        =   262144
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+      End
+      Begin Threed.SSPanel panInput 
+         Height          =   780
+         Left            =   15
+         TabIndex        =   2
+         Top             =   540
+         Width           =   16665
+         _ExtentX        =   29395
+         _ExtentY        =   1376
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         Begin VB.ComboBox cboOffice 
+            Height          =   315
+            Left            =   1245
+            Style           =   2  '드롭다운 목록
+            TabIndex        =   3
+            Top             =   60
+            Width           =   2850
+         End
+         Begin MSComCtl2.DTPicker dtInput 
+            Height          =   315
+            Index           =   0
+            Left            =   1245
+            TabIndex        =   4
+            Top             =   405
+            Width           =   2850
+            _ExtentX        =   5027
+            _ExtentY        =   556
+            _Version        =   393216
+            Format          =   56819712
+            CurrentDate     =   36686
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   2
+            Left            =   60
+            TabIndex        =   5
+            Top             =   405
+            Width           =   1155
+            _ExtentX        =   2037
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "스캔일자"
+            BorderWidth     =   0
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   7
+            Left            =   60
+            TabIndex        =   6
+            Top             =   60
+            Width           =   1155
+            _ExtentX        =   2037
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "지사코드"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+      End
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   510
+         Left            =   15
+         TabIndex        =   7
+         Top             =   15
+         Width           =   8445
+         _ExtentX        =   14896
+         _ExtentY        =   900
+         _Version        =   262144
+         Font3D          =   1
+         ForeColor       =   255
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 외주 입고 등록 (P_07012)"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_07012.frx":067C
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   510
+         Index           =   0
+         Left            =   8475
+         TabIndex        =   8
+         Top             =   15
+         Width           =   8205
+         _ExtentX        =   14473
+         _ExtentY        =   900
+         _Version        =   262144
+         Font3D          =   3
+         ForeColor       =   192
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_07012.frx":087E
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   7
+            Left            =   6660
+            TabIndex        =   9
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "종료"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_07012.frx":0A80
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   6
+            Left            =   5730
+            TabIndex        =   10
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "화면"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_07012.frx":101A
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   5
+            Left            =   4800
+            TabIndex        =   11
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "인쇄"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_07012.frx":15B4
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   4
+            Left            =   3750
+            TabIndex        =   12
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "취소"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_07012.frx":1B4E
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   3
+            Left            =   2820
+            TabIndex        =   13
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "삭제"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_07012.frx":20E8
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   2
+            Left            =   1890
+            TabIndex        =   14
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "저장"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_07012.frx":2682
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   1
+            Left            =   960
+            TabIndex        =   15
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "신규"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_07012.frx":2C1C
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   0
+            Left            =   30
+            TabIndex        =   16
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "조회"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_07012.frx":31B6
+         End
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   390
+         Index           =   2
+         Left            =   5310
+         TabIndex        =   17
+         Top             =   1335
+         Width           =   11370
+         _ExtentX        =   20055
+         _ExtentY        =   688
+         _Version        =   262144
+         Font3D          =   3
+         ForeColor       =   16711680
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 지사 외주 현황"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_07012.frx":3750
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.ProgressBar ProgressBar 
+            Height          =   270
+            Left            =   5910
+            TabIndex        =   18
+            Top             =   45
+            Visible         =   0   'False
+            Width           =   3270
+            _Version        =   851970
+            _ExtentX        =   5768
+            _ExtentY        =   476
+            _StockProps     =   93
+            Scrolling       =   1
+            Appearance      =   6
+            UseVisualStyle  =   0   'False
+         End
+      End
+      Begin XtremeSuiteControls.TabControl TabControl 
+         Height          =   7845
+         Left            =   5310
+         TabIndex        =   21
+         Top             =   2325
+         Width           =   11370
+         _Version        =   851970
+         _ExtentX        =   20055
+         _ExtentY        =   13838
+         _StockProps     =   68
+         Appearance      =   3
+         Color           =   64
+         PaintManager.BoldSelected=   -1  'True
+         PaintManager.ShowIcons=   -1  'True
+         PaintManager.ButtonMargin=   "2,3,2,3"
+         ItemCount       =   1
+         Item(0).Caption =   " PDA 스캔 현황 "
+         Item(0).ControlCount=   1
+         Item(0).Control(0)=   "TabControlPage(0)"
+         Begin XtremeSuiteControls.TabControlPage TabControlPage 
+            Height          =   7365
+            Index           =   0
+            Left            =   30
+            TabIndex        =   22
+            Top             =   450
+            Width           =   11310
+            _Version        =   851970
+            _ExtentX        =   19950
+            _ExtentY        =   12991
+            _StockProps     =   1
+            Page            =   0
+            Begin FPSpreadADO.fpSpread spdViewScan 
+               Height          =   8235
+               Left            =   30
+               TabIndex        =   23
+               Top             =   690
+               Width           =   10875
+               _Version        =   524288
+               _ExtentX        =   19182
+               _ExtentY        =   14526
+               _StockProps     =   64
+               BackColorStyle  =   1
+               EditEnterAction =   5
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               GrayAreaBackColor=   16777215
+               GridSolid       =   0   'False
+               MaxCols         =   16
+               MaxRows         =   35
+               ScrollBars      =   0
+               SpreadDesigner  =   "P_07012.frx":3BB2
+               UserResize      =   1
+               Appearance      =   1
+               HighlightHeaders=   1
+               HighlightStyle  =   1
+            End
+            Begin XtremeSuiteControls.PushButton cmdBtn 
+               Height          =   450
+               Index           =   9
+               Left            =   120
+               TabIndex        =   26
+               Top             =   90
+               Width           =   3105
+               _Version        =   851970
+               _ExtentX        =   5477
+               _ExtentY        =   794
+               _StockProps     =   79
+               Caption         =   " PDA 스캔 - 외주 입고 등록"
+               ForeColor       =   -2147483640
+               BackColor       =   -2147483636
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               Picture         =   "P_07012.frx":4547
+            End
+         End
+      End
+      Begin FPSpreadADO.fpSpread spdView 
+         Height          =   8835
+         Left            =   15
+         TabIndex        =   25
+         Top             =   1335
+         Width           =   5280
+         _Version        =   524288
+         _ExtentX        =   9313
+         _ExtentY        =   15584
+         _StockProps     =   64
+         BackColorStyle  =   1
+         EditEnterAction =   5
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   3
+         MaxRows         =   35
+         ScrollBars      =   2
+         SpreadDesigner  =   "P_07012.frx":4C41
+         UserResize      =   1
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+   End
+End
+Attribute VB_Name = "P_07012"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Dim RS01 As ADODB.Recordset
+Dim sValue() As String
+
+Dim Err_Num As Long
+Dim Err_Dec As String
+Dim m_SearchType As String
+
+
+Private Sub SPR_Resize()
+    On Error GoTo ErrRtn
+    
+    spdViewScan.Width = Me.Width - 5610
+    spdViewScan.Height = Me.Height - 3900
+
+    Exit Sub
+    
+ErrRtn:
+
+End Sub
+
+Private Sub cboOffice_Click()
+    If cboOffice.ListIndex < 0 Then Exit Sub
+    
+    Call Data_Display
+End Sub
+
+'-----------------------------------------------------------------
+'
+'-----------------------------------------------------------------
+Private Sub Data_Display()
+    On Error GoTo ErrRtn
+
+    ReDim sValue(2)
+    Dim nCnt    As Long
+    
+    spdViewScan.MaxRows = 0
+    spdView.MaxRows = 0
+    
+    nCnt = 0
+    sValue(0) = Store.Code
+    sValue(1) = Trim(Mid(cboOffice.Text, 2, 4)) & "%"
+    sValue(2) = Format(dtInput(0).Value, "YYYYMMDD")
+    
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("[SP_M_07012_00]", sValue(), Err_Num, Err_Dec)
+    
+    With spdView
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            
+            .Col = 1: .Text = RS01!코드 & ""
+            .Col = 2: .Text = RS01!지사명 & ""
+            .Col = 3: .Text = RS01!스캔수량 & ""
+            nCnt = nCnt + Val(RS01!스캔수량 & "")
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+    
+    
+        If .DataRowCnt >= 1 Then
+            .MaxRows = .MaxRows + 1
+            .Row = 1
+            .Action = SS_ACTION_INSERT_ROW
+            
+            .Col = 1: .Text = ""
+            .Col = 2: .Text = "전   체"
+            .Col = 3: .Text = Format(nCnt, "#,##0")
+        End If
+    
+        .Redraw = True
+    End With
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub cmdBtn_Click(Index As Integer)
+    On Error GoTo ErrRtn
+    
+    cmdBtn(Index).Enabled = False
+    
+    
+    
+    Select Case Index
+        Case 0: Call Data_Display    ' 조회
+        Case 1: 'Call DataAdd        ' 신규
+        Case 2: 'Call DataSave       ' 저장
+        Case 3: 'Call DataDelete     ' 삭제
+        Case 4: 'Call DataCancel     ' 취소
+        Case 5: 'Call DataPrint      ' 인쇄
+        Case 6: 'Call DataScreen     '
+        Case 7
+            Unload Me            ' 종료
+            Exit Sub
+        Case 9: Call Data_Update
+    End Select
+    
+'    Me.MousePointer = 0
+    cmdBtn(Index).Enabled = True
+    
+    Exit Sub
+    
+ErrRtn:
+    Me.MousePointer = 0
+    
+    If Err.Number = "0" Then
+        
+    ElseIf Err.Number = "91" Then
+        End
+    Else
+        Resume Next
+    End If
+End Sub
+
+Private Sub Data_Update()
+    Dim nRow      As Long
+    Dim SSQL        As String
+    
+    On Error GoTo ERR_RTN
+    
+    ' INORDER_TB 은 임시 테이블로 처리하면 모두 지운다.
+    ' ORDER_INOUT2_TB 은 INORDER_TB->ORDER_INOUT2_TB 테이블로 옮긴다.
+    ' INORDER_TB에 등록되면 트리거로 SCAN_INORDER_LOG_TB 테이블로 로그를 보관한다.
+    
+'    If spdView.ActiveRow <> 1 Or spdViewScan.DataRowCnt <= 0 Then
+'        MsgBox "전체를 선택한 후 작업 하여 주십시요", vbInformation, "확인"
+'        Exit Sub
+'    End If
+ 
+    ADOCon.BeginTrans
+    With spdViewScan
+        ReDim sValue(11)
+        For nRow = 1 To .DataRowCnt
+            .Row = nRow
+            
+            
+            
+'            .Col = 3: .Text = RS01!의류코드 & ""  '
+'            .Col = 4: .Text = RS01!의류명 & ""    '
+'            .Col = 5: .Text = RS01!금액 & ""    '
+'            .Col = 6: .Text = RS01!IPRICE & ""    '
+'
+'            .Col = 7: .Text = RS01!INDATE & ""      'KEY
+'            .Col = 8: .Text = RS01!SCANDT & "" '
+'            .Col = 9: .Text = RS01!PDANO & ""    '
+'            .Col = 10: .Text = RS01!OUTCD & ""    'KEY
+'            .Col = 11: .Text = RS01!MASTERCD & ""    'KEY
+'            .Col = 12: .Text = RS01!iCnt & ""    'KEY
+'            .Col = 13: .Text = RS01!ADDTYPE & ""    '
+'            .Col = 14: .Text = RS01!IGCODE & ""    '
+'            .Col = 15: .Text = RS01!IGDNM & ""    '
+            
+            
+            
+            sValue(0) = Store.Code & ""             ' OUTCD
+            
+            
+            .Col = 1
+            If .Value = 1 Then
+                .Col = 2: sValue(4) = Replace(.Text & "", "-", "")  ' TAGNO
+                
+                .Col = 8: sValue(2) = Replace(.Text & "", "-", "")  ' INDATE
+                .Col = 9: sValue(8) = .Text & ""        ' INSCANDT
+                .Col = 10: sValue(9) = .Text & ""        ' PDANO
+                
+                .Col = 12: sValue(1) = .Text & ""        ' MASTERCD
+                .Col = 13: sValue(3) = panCaption(1).Tag & ""       ' ICNT
+                .Col = 14: sValue(10) = .Text & ""      ' ADDTYPE
+                .Col = 15: sValue(5) = .Text & ""        ' IGCODE
+                .Col = 16: sValue(6) = .Text & ""        ' IGDNM
+                .Col = 7: sValue(7) = .Value & ""       ' IPRICE
+                
+                sValue(11) = Format(dtInput(1).Value, "yyyy-MM-dd") & ""       ' INACTIONDATE
+                
+                '------------------------------------------------------------
+                ' 외주 입고 등록 - SP_M_07012_04
+                ' ORDER_INOUT2_TB 로 입고 저장
+                '------------------------------------------------------------
+                Set RS01 = New ADODB.Recordset
+                Set RS01 = ExecPro("SP_M_07012_04", sValue(), Err_Num, Err_Dec)
+                
+                If Err_Num <> 0 Then
+                    ADOCon.RollbackTrans
+                    MsgBox Err_Dec
+                    Exit Sub
+                End If
+            End If
+        Next nRow
+    End With
+    ADOCon.CommitTrans
+    
+    Call Data_Display2
+    Call Data_Display
+    
+    MsgBox "저장 완료", vbInformation, "확인"
+    
+    Exit Sub
+
+ERR_RTN:
+    ADOCon.RollbackTrans
+    MsgBox Err.Description
+    
+End Sub
+
+Private Sub dtInput_Change(Index As Integer)
+    dtInput(Index).Enabled = False
+    
+    ReDim sValue(0)
+    'sValue(0) = Format(dtInput(Index).Value, "yyyy-MM-dd")
+    sValue(0) = Format(dtInput(1).Value, "yyyy-MM-dd")
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_M_07012_05", sValue(), Err_Num, Err_Dec)
+    
+    If Not RS01.EOF Then
+        panCaption(1).Tag = RS01.Fields("CNT") & ""
+        panCaption(1).Caption = RS01.Fields("CNT") & " 회차 입고"
+    End If
+    
+    Call Data_Display
+    
+    dtInput(Index).Enabled = True
+End Sub
+
+Private Sub Form_Activate()
+    cmdBtn(0).Enabled = True
+    cmdBtn(5).Enabled = False
+    
+    pnlHeader.Caption = " " & Me.Caption & " (" & Me.Name & ")"
+    
+    If P_07012_Flag = False Then
+        Dim i As Integer
+        dtInput(0).Value = Date
+        dtInput(1).Value = Date
+
+        '
+        Call OrderComboAdd(cboOffice)
+        
+        With cboOffice
+            For i = 0 To .ListCount - 1
+                If Mid(.List(i), 2, 4) = HeadOffice Then
+                    .ListIndex = i
+                    
+                    Exit For
+                End If
+            Next i
+        End With
+        
+        ' 회차를 구해온다.
+        Call dtInput_Change(0)
+        
+        P_07012_Flag = True
+    End If
+
+End Sub
+
+Private Sub Form_Load()
+    On Error GoTo ErrRtn
+    
+    With spdView
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+                
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+    
+    Dim i As Integer
+    
+    With spdViewScan
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+                
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeNormal
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+        .Col = 2: .Lock = True
+        .Col = 3: .Lock = True
+        .Col = 4: .Lock = True
+        .Col = 5: .Lock = True
+        .Col = 6: .Lock = True
+        .Col = 7: .Lock = True
+        
+        .Col = 8:  .Lock = True
+
+    
+    End With
+    
+    Call SPR_Resize
+    
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Form_Resize()
+    Call SPR_Resize
+End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+    P_07012_Flag = False
+End Sub
+
+Private Sub Data_Display2()
+    On Error GoTo ErrRtn
+    
+    ReDim sValue(2)
+    
+    If m_SearchType <> "전체" Then
+        spdViewScan.MaxRows = 0
+    End If
+    
+    
+    spdView.Row = spdView.ActiveRow
+    If spdView.Row < 2 Then Exit Sub
+        
+    sValue(0) = Store.Code
+    spdView.Col = 1:        sValue(1) = spdView.Text ' + "%"
+    sValue(2) = Format(dtInput(0).Value, "YYYYMMDD")
+    
+    Dim Query As String
+    
+    '------------------------------------------------------------
+    ' 외주 출고 등록 - SP_M_07012_01
+    '------------------------------------------------------------
+    Set RS01 = New ADODB.Recordset
+    'Set RS01 = ExecPro("SP_M_07012_01", sValue(), Err_Num, Err_Dec)
+    Query = ""
+    
+    Query = Query + " SELECT "
+    Query = Query + "   SUBSTRING(a.TAGNO,1,3) + '-' + SUBSTRING(a.TAGNO,4,2) + '-' + SUBSTRING(a.TAGNO,6,4) 'TAGNO'        "
+    Query = Query + "   , d.가맹점명"
+    Query = Query + "   , c.의류코드"
+    Query = Query + "   , c.의류명"
+    Query = Query + "   , c.금액"
+    Query = Query + "   , c.내용"
+    Query = Query + "   , c.상표"
+    Query = Query + "   , a.IGCODE"
+    Query = Query + "   , a.IGDNM"
+    Query = Query + "   , a.IPRICE "
+    Query = Query + "   , CONVERT(CHAR(10),CONVERT(DATETIME,a.INDATE),120)     'INDATE'"
+    Query = Query + "   , a.SCANDT     "
+    Query = Query + "   , a.PDANO      "
+    Query = Query + "   , a.OUTCD      "
+    Query = Query + "   , a.MASTERCD   "
+    Query = Query + "   , a.ICNT       "
+    Query = Query + "   , a.IGCODE     "
+    Query = Query + "   , a.ADDTYPE    "
+    Query = Query + " FROM INORDER_TB AS a INNER JOIN master_tb AS b ON a.mastercd = b.mastercd"
+    Query = Query + "                      LEFT  JOIN LAUNDRY" & sValue(1) & "..tb_입출고 AS c on a.TAGNO = c.택번호 and c.판매취소 <> 'Y'"
+    Query = Query + "                      LEFT  JOIN LAUNDRY1000..tb_가맹점 AS d on c.지사코드 = d.지사코드 and c.가맹점코드 = d.가맹점코드  and 반품환불일자=''"
+    Query = Query + " WHERE "
+    Query = Query + "       A.MASTERCD ='" & sValue(1) & "'"
+    Query = Query + " AND   A.INDATE = '" & sValue(2) & "'"
+    Query = Query + " ORDER BY a.INDATE, a.TAGNO ASC"
+    Set RS01 = ExecQuery(Query, Err_Num, Err_Dec)
+    
+    With spdViewScan
+        If m_SearchType <> "전체" Then
+            .MaxRows = 0
+        End If
+        
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            .Col = 1: .Value = 1
+            .Col = 2: .Text = RS01!TAGNO & ""    'KEY
+            .Col = 3: .Text = RS01!가맹점명 & ""  '
+            
+            .Col = 4: .Text = RS01!의류코드 & ""  '
+            .Col = 5: .Text = RS01!의류명 & ""    '
+            .Col = 6: .Text = RS01!금액 & ""    '
+            .Col = 7: .Text = RS01!IPRICE & ""    '
+            
+            .Col = 8: .Text = RS01!INDATE & ""      'KEY
+            .Col = 9: .Text = RS01!SCANDT & "" '
+            .Col = 10: .Text = RS01!PDANO & ""    '
+            .Col = 11: .Text = RS01!OUTCD & ""    'KEY
+            .Col = 12: .Text = RS01!MASTERCD & ""    'KEY
+            .Col = 13: .Text = RS01!iCnt & ""    'KEY
+            .Col = 14: .Text = RS01!ADDTYPE & ""    '
+            .Col = 15: .Text = RS01!IGCODE & ""    '
+            .Col = 16: .Text = RS01!IGDNM & ""    '
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+        
+    Exit Sub
+    
+ErrRtn:
+    MsgBox Err.Description
+    Resume
+End Sub
+
+
+Private Sub spdView_Click(ByVal Col As Long, ByVal Row As Long)
+    'If Row <= 0 Then Exit Sub
+    'Call Data_Display2
+    
+    Dim nRow    As Long
+    Dim vText   As Variant
+    
+    If spdView.MaxRows <= 0 Then Exit Sub
+    
+    If Row = 1 Then
+        
+        m_SearchType = "전체"
+        spdViewScan.MaxRows = 0
+        
+        With spdView
+            For nRow = 1 To .MaxRows
+                .GetText 1, nRow, vText
+                If Len(vText) = 4 And IsNumeric(vText) Then
+                    .Col = 1: .Row = nRow
+                    .Action = ActionActiveCell
+                    
+                    DoEvents
+                    Call Data_Display2
+                    
+                End If
+            
+            Next nRow
+            .Col = 1
+            .Row = 1
+            .Action = ActionActiveCell
+        End With
+    Else
+        m_SearchType = ""
+        Call Data_Display2
+    End If
+    
+    
+End Sub
+
+Private Sub spdView_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+    'Call spdView_Click(NewCol, NewRow)
+End Sub
+

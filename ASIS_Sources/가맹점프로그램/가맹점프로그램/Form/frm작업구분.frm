@@ -1,0 +1,673 @@
+VERSION 5.00
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Begin VB.Form frm작업구분 
+   BorderStyle     =   1  '단일 고정
+   Caption         =   "작업구분"
+   ClientHeight    =   3660
+   ClientLeft      =   960
+   ClientTop       =   5340
+   ClientWidth     =   5280
+   ClipControls    =   0   'False
+   ControlBox      =   0   'False
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "frm작업구분.frx":0000
+   LinkTopic       =   "Form27"
+   LockControls    =   -1  'True
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   3660
+   ScaleWidth      =   5280
+   Begin SSSplitter.SSSplitter SSSplitter 
+      Height          =   3660
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   5280
+      _ExtentX        =   9313
+      _ExtentY        =   6456
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   0
+      PaneTree        =   "frm작업구분.frx":058A
+      Begin Threed.SSPanel SSPanel2 
+         Height          =   570
+         Left            =   0
+         TabIndex        =   14
+         Top             =   3090
+         Width           =   5280
+         _ExtentX        =   9313
+         _ExtentY        =   1005
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton cmdOK 
+            Height          =   480
+            Left            =   3960
+            TabIndex        =   15
+            Top             =   45
+            Width           =   1260
+            _Version        =   851970
+            _ExtentX        =   2222
+            _ExtentY        =   847
+            _StockProps     =   79
+            Caption         =   " 확인(&O)"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm작업구분.frx":05DC
+         End
+         Begin XtremeSuiteControls.PushButton btnExit 
+            Height          =   480
+            Left            =   45
+            TabIndex        =   16
+            Top             =   45
+            Width           =   1260
+            _Version        =   851970
+            _ExtentX        =   2222
+            _ExtentY        =   847
+            _StockProps     =   79
+            Caption         =   " 취소(&C)"
+            ForeColor       =   0
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm작업구분.frx":0B76
+         End
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   3075
+         Left            =   0
+         TabIndex        =   1
+         Top             =   0
+         Width           =   5280
+         _ExtentX        =   9313
+         _ExtentY        =   5424
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin VB.TextBox txtTagNo 
+            Alignment       =   2  '가운데 맞춤
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   510
+            Left            =   120
+            Locked          =   -1  'True
+            TabIndex        =   17
+            Top             =   2430
+            Width           =   2295
+         End
+         Begin VB.ComboBox Combo1 
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   12
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            ItemData        =   "frm작업구분.frx":1110
+            Left            =   2850
+            List            =   "frm작업구분.frx":1112
+            Style           =   2  '드롭다운 목록
+            TabIndex        =   2
+            Top             =   135
+            Width           =   2310
+         End
+         Begin Threed.SSPanel pnlTitle 
+            Height          =   360
+            Left            =   120
+            TabIndex        =   3
+            Top             =   135
+            Width           =   2700
+            _ExtentX        =   4763
+            _ExtentY        =   635
+            _Version        =   262144
+            Windowless      =   -1  'True
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   12
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BorderWidth     =   0
+            BevelOuter      =   1
+            BevelInner      =   2
+            RoundedCorners  =   0   'False
+         End
+         Begin XtremeSuiteControls.PushButton btn1 
+            Height          =   855
+            Left            =   120
+            TabIndex        =   4
+            Top             =   585
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "1"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn2 
+            Height          =   855
+            Left            =   1140
+            TabIndex        =   5
+            Top             =   585
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "2"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn3 
+            Height          =   855
+            Left            =   2160
+            TabIndex        =   6
+            Top             =   585
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "3"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn4 
+            Height          =   855
+            Left            =   3180
+            TabIndex        =   7
+            Top             =   585
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "4"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn5 
+            Height          =   855
+            Left            =   4200
+            TabIndex        =   8
+            Top             =   585
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "5"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn6 
+            Height          =   855
+            Left            =   120
+            TabIndex        =   9
+            Top             =   1500
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "6"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn7 
+            Height          =   855
+            Left            =   1140
+            TabIndex        =   10
+            Top             =   1500
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "7"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn8 
+            Height          =   855
+            Left            =   2160
+            TabIndex        =   11
+            Top             =   1500
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "8"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn9 
+            Height          =   855
+            Left            =   3180
+            TabIndex        =   12
+            Top             =   1500
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "9"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btn0 
+            Height          =   855
+            Left            =   4200
+            TabIndex        =   13
+            Top             =   1500
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   1508
+            _StockProps     =   79
+            Caption         =   "0"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Tahoma"
+               Size            =   15.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+         Begin XtremeSuiteControls.PushButton btnDel 
+            Height          =   525
+            Left            =   2475
+            TabIndex        =   18
+            Top             =   2430
+            Width           =   975
+            _Version        =   851970
+            _ExtentX        =   1720
+            _ExtentY        =   926
+            _StockProps     =   79
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   15.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm작업구분.frx":1114
+         End
+         Begin XtremeSuiteControls.PushButton btnClear 
+            Height          =   525
+            Left            =   4200
+            TabIndex        =   19
+            Top             =   2430
+            Width           =   960
+            _Version        =   851970
+            _ExtentX        =   1693
+            _ExtentY        =   926
+            _StockProps     =   79
+            Caption         =   "다시"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림"
+               Size            =   11.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+         End
+      End
+   End
+End
+Attribute VB_Name = "frm작업구분"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Dim strFlags As String
+
+Public Sub SetFlags(strTemp As String)
+    If Len(strTemp) > 0 Then
+        strFlags = strTemp
+        pnlTitle.Caption = strFlags
+    End If
+End Sub
+
+Public Function GetFlags() As String
+    GetFlags = strFlags
+End Function
+
+Private Sub btn0_Click()
+   If Len(txtTAGNo.Text) > 6 Then
+      Beep
+      Exit Sub
+   End If
+   
+   txtTAGNo.Text = txtTAGNo.Text + btn0.Caption
+   
+   If Len(Trim(txtTAGNo.Text)) = 2 Then
+      txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+   End If
+End Sub
+
+Private Sub btn1_Click()
+    If Len(txtTAGNo.Text) > 6 Then
+        Beep
+        Exit Sub
+    End If
+   
+    txtTAGNo.Text = txtTAGNo.Text + btn1.Caption
+   
+    If Len(Trim(txtTAGNo.Text)) = 2 Then
+        txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+    End If
+End Sub
+
+Private Sub btn2_Click()
+    If Len(txtTAGNo.Text) > 6 Then
+        Beep
+        Exit Sub
+    End If
+    
+    txtTAGNo.Text = txtTAGNo.Text + btn2.Caption
+    
+    If Len(Trim(txtTAGNo.Text)) = 2 Then
+        txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+    End If
+End Sub
+
+Private Sub btn3_Click()
+    If Len(txtTAGNo.Text) > 6 Then
+       Beep
+       Exit Sub
+    End If
+    
+    txtTAGNo.Text = txtTAGNo.Text + btn3.Caption
+    
+    If Len(Trim(txtTAGNo.Text)) = 2 Then
+       txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+    End If
+End Sub
+
+Private Sub btn4_Click()
+   If Len(txtTAGNo.Text) > 6 Then
+      Beep
+      Exit Sub
+   End If
+   
+   txtTAGNo.Text = txtTAGNo.Text + btn4.Caption
+   
+   If Len(Trim(txtTAGNo.Text)) = 2 Then
+      txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+   End If
+End Sub
+
+Private Sub btn5_Click()
+   If Len(txtTAGNo.Text) > 6 Then
+      Beep
+      Exit Sub
+   End If
+   
+   txtTAGNo.Text = txtTAGNo.Text + btn5.Caption
+   
+   If Len(Trim(txtTAGNo.Text)) = 2 Then
+      txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+   End If
+End Sub
+
+Private Sub btn6_Click()
+   If Len(txtTAGNo.Text) > 6 Then
+      Beep
+      Exit Sub
+   End If
+   
+   txtTAGNo.Text = txtTAGNo.Text + btn6.Caption
+   
+   If Len(Trim(txtTAGNo.Text)) = 2 Then
+      txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+   End If
+End Sub
+
+Private Sub btn7_Click()
+   If Len(txtTAGNo.Text) > 6 Then
+      Beep
+      Exit Sub
+   End If
+   
+   txtTAGNo.Text = txtTAGNo.Text + btn7.Caption
+   
+   If Len(Trim(txtTAGNo.Text)) = 2 Then
+      txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+   End If
+End Sub
+
+Private Sub btn8_Click()
+   If Len(txtTAGNo.Text) > 6 Then
+      Beep
+      Exit Sub
+   End If
+   
+   txtTAGNo.Text = txtTAGNo.Text + btn8.Caption
+   
+   If Len(Trim(txtTAGNo.Text)) = 2 Then
+      txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+   End If
+End Sub
+
+Private Sub btn9_Click()
+   If Len(txtTAGNo.Text) > 6 Then
+      Beep
+      Exit Sub
+   End If
+   
+   txtTAGNo.Text = txtTAGNo.Text + btn9.Caption
+   
+   If Len(Trim(txtTAGNo.Text)) = 2 Then
+      txtTAGNo.Text = Mid(txtTAGNo.Text, 1, 2) & "-"
+   End If
+End Sub
+
+Private Sub btnClear_Click()
+   txtTAGNo.Text = ""
+End Sub
+
+Private Sub btnDel_Click()
+    Dim intCount As Integer
+      
+    intCount = Len(txtTAGNo.Text)
+    
+    If intCount < 1 Then Exit Sub
+    
+    intCount = intCount - 1
+    
+    txtTAGNo.Text = Mid(txtTAGNo.Text, 1, intCount)
+End Sub
+
+Private Sub btnExit_Click()
+'    Dim 내용 As String
+    
+    
+'    frm접수.sprGrid.Row = frm접수.sprGrid.ActiveRow
+'
+'    frm접수.sprGrid.Col = 5: 내용 = frm접수.sprGrid.Text & ""
+'
+'    Select Case pnlTitle.Caption
+'        Case "사고품 구분":   내용 = Replace(내용, "사", "")
+'        Case "재다림질 구분": 내용 = Replace(내용, "재다", "")
+'        Case "반품 구분":     내용 = Replace(내용, "반", "")
+'        Case "재세탁 구분":   내용 = Replace(내용, "재", "")
+'    End Select
+'
+'    frm접수.sprGrid.Col = 5: frm접수.sprGrid.Text = 내용 & ""
+'    frm접수.sprGrid.Col = 7: frm접수.sprGrid.Text = ""
+    
+
+    ' 이전 내용및 가격으로 다시 돌린다.
+    frm접수.sprGrid.Row = frm접수.sprGrid.ActiveRow
+    
+    frm접수.sprGrid.Col = 5: frm접수.sprGrid.Text = frm작업.m_sOldStats
+    frm접수.sprGrid.Col = 7: frm접수.sprGrid.Text = ""
+    frm접수.sprGrid.Col = 6:  frm접수.sprGrid.Text = frm작업.m_sOldPrice                   '금액
+    frm접수.sprGrid.Col = 14: frm접수.sprGrid.Text = Replace(frm작업.m_sOldPrice, ",", "") '원금액을 기록한다.
+    
+    
+    Unload Me
+End Sub
+
+Private Sub cmdOK_Click()
+    If Combo1.ListIndex = -1 Then
+        MsgBox GetFlags & "을 선택하십시오..", vbInformation
+        Combo1.SetFocus
+        Exit Sub
+    End If
+    
+    If Len(txtTAGNo.Text) = 7 Then
+       frm접수.sprGrid.Row = frm접수.sprGrid.ActiveRow  '현재 선택된 줄에 입력 한다. iCur
+       frm접수.sprGrid.Col = 7: frm접수.sprGrid.Text = txtTAGNo.Text & " " & Combo1.Text
+       Unload Me
+    Else
+       Beep
+       Exit Sub
+    End If
+End Sub
+
+Private Sub Form_Load()
+    frm작업구분.Top = frmMain.Top   '400
+    frm작업구분.Left = frmMain.Left '5400
+
+    With Combo1
+        .AddItem "오염"
+        .AddItem "이염"
+        .AddItem "수축"
+        .AddItem "늘어짐"
+        .AddItem "경화"
+        .AddItem "파손"
+        .AddItem "탈색"
+        .AddItem "기타"
+    End With
+End Sub
+

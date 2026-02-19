@@ -1,0 +1,1592 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{A5CC20C4-B5F5-11CD-98EC-0020AF234C9D}#4.1#0"; "CSText32.ocx"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Begin VB.Form frm본사출고현황 
+   Caption         =   "본사출고현황"
+   ClientHeight    =   10665
+   ClientLeft      =   1455
+   ClientTop       =   3390
+   ClientWidth     =   16410
+   ControlBox      =   0   'False
+   KeyPreview      =   -1  'True
+   LinkTopic       =   "Form20"
+   LockControls    =   -1  'True
+   MDIChild        =   -1  'True
+   ScaleHeight     =   10665
+   ScaleWidth      =   16410
+   WindowState     =   2  '최대화
+   Begin Threed.SSPanel pnlProg 
+      Height          =   1215
+      Left            =   2460
+      TabIndex        =   10
+      Top             =   1665
+      Visible         =   0   'False
+      Width           =   3105
+      _ExtentX        =   5477
+      _ExtentY        =   2143
+      _Version        =   262144
+      BackColor       =   16777215
+      PictureFrames   =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "굴림체"
+         Size            =   9
+         Charset         =   129
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Picture         =   "frm본사출고현황.frx":0000
+      Caption         =   " "
+      BorderWidth     =   0
+      BevelOuter      =   1
+      BevelInner      =   2
+      Alignment       =   4
+      RoundedCorners  =   0   'False
+      FloodShowPct    =   -1  'True
+      Begin VB.Label lblCount 
+         Alignment       =   2  '가운데 맞춤
+         AutoSize        =   -1  'True
+         BackStyle       =   0  '투명
+         Caption         =   "0"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H0000FFFF&
+         Height          =   375
+         Left            =   1455
+         TabIndex        =   12
+         Top             =   765
+         Width           =   210
+      End
+   End
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   10665
+      Left            =   0
+      TabIndex        =   2
+      Top             =   0
+      Width           =   16410
+      _ExtentX        =   28945
+      _ExtentY        =   18812
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "frm본사출고현황.frx":2FCB
+      Begin Threed.SSPanel SSPanel1 
+         Height          =   750
+         Left            =   15
+         TabIndex        =   3
+         Top             =   450
+         Width           =   16380
+         _ExtentX        =   28893
+         _ExtentY        =   1323
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin VB.ComboBox cboOffice 
+            Height          =   300
+            Left            =   3225
+            Style           =   2  '드롭다운 목록
+            TabIndex        =   34
+            Top             =   60
+            Width           =   3285
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   3
+            Left            =   10335
+            TabIndex        =   5
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 엑셀(&E)"
+            Appearance      =   6
+            Picture         =   "frm본사출고현황.frx":307D
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   5
+            Left            =   13410
+            TabIndex        =   6
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 닫기(&X)"
+            ForeColor       =   0
+            Appearance      =   6
+            Picture         =   "frm본사출고현황.frx":37F7
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   4
+            Left            =   11880
+            TabIndex        =   7
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 출력(&P)"
+            Appearance      =   6
+            Picture         =   "frm본사출고현황.frx":4889
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   630
+            Index           =   2
+            Left            =   8310
+            TabIndex        =   9
+            Top             =   60
+            Width           =   1995
+            _Version        =   851970
+            _ExtentX        =   3519
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 가맹점 입고완료"
+            Appearance      =   6
+            Picture         =   "frm본사출고현황.frx":4F83
+         End
+         Begin MSComCtl2.DTPicker dtpDay 
+            Height          =   315
+            Left            =   915
+            TabIndex        =   0
+            Top             =   60
+            Width           =   1425
+            _ExtentX        =   2514
+            _ExtentY        =   556
+            _Version        =   393216
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            CustomFormat    =   "yyyy-MM-dd"
+            Format          =   56229891
+            CurrentDate     =   40279
+         End
+         Begin XtremeSuiteControls.PushButton cmdList 
+            Height          =   630
+            Left            =   6780
+            TabIndex        =   1
+            Top             =   60
+            Width           =   1500
+            _Version        =   851970
+            _ExtentX        =   2646
+            _ExtentY        =   1111
+            _StockProps     =   79
+            Caption         =   " 조회(&F)"
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Appearance      =   6
+            Picture         =   "frm본사출고현황.frx":567D
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  '투명
+            Caption         =   "지사 이동이 있을 경우 출고지사를 변경하여 입고를 확인하여 주십시요"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H000000FF&
+            Height          =   180
+            Index           =   1
+            Left            =   60
+            TabIndex        =   36
+            Top             =   450
+            Width           =   6495
+         End
+         Begin VB.Label Label2 
+            Alignment       =   1  '오른쪽 맞춤
+            AutoSize        =   -1  'True
+            BackStyle       =   0  '투명
+            Caption         =   "출고지사:"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   180
+            Index           =   0
+            Left            =   2385
+            TabIndex        =   35
+            Top             =   105
+            Width           =   810
+         End
+         Begin VB.Label Label2 
+            Alignment       =   1  '오른쪽 맞춤
+            AutoSize        =   -1  'True
+            BackStyle       =   0  '투명
+            Caption         =   "출고일자:"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   180
+            Index           =   2
+            Left            =   45
+            TabIndex        =   4
+            Top             =   120
+            Width           =   840
+         End
+      End
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   420
+         Left            =   15
+         TabIndex        =   8
+         Top             =   15
+         Width           =   16380
+         _ExtentX        =   28893
+         _ExtentY        =   741
+         _Version        =   262144
+         Font3D          =   1
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   "      본사출고 현황 (가맹점 입고작업)"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "frm본사출고현황.frx":5D77
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin VB.Image Image 
+            Height          =   480
+            Index           =   0
+            Left            =   0
+            Picture         =   "frm본사출고현황.frx":5F9D
+            Top             =   -15
+            Width           =   765
+         End
+      End
+      Begin FPSpreadADO.fpSpread sprGrid 
+         Height          =   8610
+         Left            =   2430
+         TabIndex        =   11
+         Top             =   1215
+         Width           =   13965
+         _Version        =   524288
+         _ExtentX        =   24633
+         _ExtentY        =   15187
+         _StockProps     =   64
+         AutoCalc        =   0   'False
+         BackColorStyle  =   1
+         ColsFrozen      =   2
+         DAutoCellTypes  =   0   'False
+         DAutoHeadings   =   0   'False
+         DAutoSave       =   0   'False
+         DAutoSizeCols   =   0
+         DInformActiveRowChange=   0   'False
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         FormulaSync     =   0   'False
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   21
+         MaxRows         =   200
+         MoveActiveOnFocus=   0   'False
+         OperationMode   =   1
+         SpreadDesigner  =   "frm본사출고현황.frx":6B67
+         UserResize      =   1
+         VisibleCols     =   12
+         VisibleRows     =   50
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin FPSpreadADO.fpSpread sprCount 
+         Height          =   9435
+         Left            =   15
+         TabIndex        =   13
+         Top             =   1215
+         Width           =   2400
+         _Version        =   524288
+         _ExtentX        =   4233
+         _ExtentY        =   16642
+         _StockProps     =   64
+         AutoCalc        =   0   'False
+         BackColorStyle  =   1
+         ColsFrozen      =   2
+         DAutoCellTypes  =   0   'False
+         DAutoHeadings   =   0   'False
+         DAutoSave       =   0   'False
+         DAutoSizeCols   =   0
+         DInformActiveRowChange=   0   'False
+         DisplayRowHeaders=   0   'False
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         FormulaSync     =   0   'False
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   3
+         MaxRows         =   100
+         OperationMode   =   1
+         ScrollBars      =   2
+         SpreadDesigner  =   "frm본사출고현황.frx":7811
+         UserResize      =   1
+         VisibleCols     =   3
+         VisibleRows     =   50
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   810
+         Index           =   2
+         Left            =   2430
+         TabIndex        =   14
+         Top             =   9840
+         Width           =   13965
+         _ExtentX        =   24633
+         _ExtentY        =   1429
+         _Version        =   262144
+         BackColor       =   16777215
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   3
+            Left            =   45
+            TabIndex        =   15
+            Top             =   45
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "의류"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   1
+            Left            =   870
+            TabIndex        =   16
+            Top             =   45
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   2
+            Left            =   2655
+            TabIndex        =   17
+            Top             =   45
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   3
+            Left            =   4440
+            TabIndex        =   18
+            Top             =   45
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   4
+            Left            =   870
+            TabIndex        =   19
+            Top             =   390
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   5
+            Left            =   2655
+            TabIndex        =   20
+            Top             =   390
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   6
+            Left            =   4440
+            TabIndex        =   21
+            Top             =   390
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   4
+            Left            =   45
+            TabIndex        =   22
+            Top             =   390
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "정상"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   5
+            Left            =   1830
+            TabIndex        =   23
+            Top             =   45
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "소품"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   6
+            Left            =   3615
+            TabIndex        =   24
+            Top             =   45
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "기타"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   7
+            Left            =   1830
+            TabIndex        =   25
+            Top             =   390
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "반품"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   8
+            Left            =   3615
+            TabIndex        =   26
+            Top             =   390
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "확인"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   7
+            Left            =   6225
+            TabIndex        =   27
+            Top             =   390
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   9
+            Left            =   5400
+            TabIndex        =   28
+            Top             =   390
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "품명"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   8
+            Left            =   8010
+            TabIndex        =   29
+            Top             =   390
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   10
+            Left            =   7185
+            TabIndex        =   30
+            Top             =   390
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "재세탁"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin CSTextLibCtl.sidbEdit txtNum 
+            Height          =   360
+            Index           =   0
+            Left            =   8010
+            TabIndex        =   31
+            Top             =   45
+            Width           =   945
+            _Version        =   262145
+            _ExtentX        =   1667
+            _ExtentY        =   635
+            _StockProps     =   125
+            Text            =   " 0"
+            ForeColor       =   192
+            BackColor       =   -2147483643
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            DataProperty    =   2
+            Modified        =   0   'False
+            HideSelection   =   -1  'True
+            RawData         =   ""
+            Text            =   " 0"
+            StartText.x     =   2
+            StartText.y     =   2
+            FirstVisPos     =   0
+            HiAnchor        =   0
+            HiNew           =   0
+            CaretHeight     =   20
+            CurNumDataChars =   0
+            MaxDataChars    =   0
+            FirstDataPos    =   0
+            CurPos          =   0
+            MaxLen          =   0
+            DataReadOnly    =   0   'False
+            Mask            =   ""
+            Justification   =   1
+            FmtControl      =   1
+            NumDecDigits    =   0
+            Undo            =   0
+            Data            =   0
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   0
+            Left            =   7185
+            TabIndex        =   32
+            Top             =   45
+            Width           =   840
+            _ExtentX        =   1482
+            _ExtentY        =   635
+            _Version        =   262144
+            Caption         =   "출고수량"
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+         Begin Threed.SSPanel SSPanel 
+            Height          =   360
+            Index           =   1
+            Left            =   5400
+            TabIndex        =   33
+            Top             =   45
+            Width           =   1770
+            _ExtentX        =   3122
+            _ExtentY        =   635
+            _Version        =   262144
+            BackColor       =   16777215
+            BevelOuter      =   0
+            RoundedCorners  =   0   'False
+            Outline         =   -1  'True
+            FloodShowPct    =   -1  'True
+         End
+      End
+   End
+End
+Attribute VB_Name = "frm본사출고현황"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Dim m_ACTIVE As Boolean
+
+Dim sValue() As String
+
+Dim Err_Num As Long
+Dim Err_Desc As String
+
+Private Sub Data_Display(iCount As Integer)
+'    On Error GoTo ErrRtn
+'
+'    If Server_Connection(HostCon) = False Then
+'        MsgBox "DB 서버와 접속이 되지 않아 본사출고 자료를 조회할수 없습니다.", vbCritical, "확인"
+'
+'        Exit Sub
+'    End If
+    
+    Dim 지사코드 As String
+    
+    On Error GoTo ErrRtn
+    
+    지사코드 = "LAUNDRY" & Left(cboOffice.Text, 4)
+    
+    If Server_Connection(HostCon, 지사코드) = False Then
+        MsgBox "DB 서버와 접속이 되지 않아 본사출고 자료를 조회할수 없습니다.", vbCritical, "확인"
+        
+        Exit Sub
+    End If
+    
+    lblCount.Caption = "0"
+    pnlProg.Visible = True
+    DoEvents
+    
+    For i = 0 To 8
+        txtNum(i).Value = 0
+    Next i
+    
+    '-----------------------------------------------------------------------------------------------
+    ' SCANOUTPUT_LOG_TB
+    '-----------------------------------------------------------------------------------------------
+    Query = "SELECT * FROM SCANOUTPUT_LOG_TB"
+    Query = Query & " WHERE STORE_CD                 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & "   AND SUBSTRING(OUT_DATE,1,10) = '" & Format(dtpDay.Value, "YYYY-MM-DD") & "'"
+    Query = Query & "   AND OUT_COUNT                =  " & iCount
+    Query = Query & " ORDER BY TAG_NO ASC"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+    
+    With sprGrid
+        .MaxRows = 0
+        .ReDraw = False
+        
+        Do Until ADORs.EOF
+            Query = "SELECT    B.접수번호"
+            Query = Query & ", B.출고일자"
+            Query = Query & ", ISNULL(B.가맹점입고일자, '') AS 가맹점입고일자"
+            Query = Query & ", B.지사출고일자"
+            Query = Query & ", B.지사출고번호"
+            Query = Query & ", B.지사출고물품"
+            Query = Query & ", B.지사출고상태"
+            Query = Query & ", B.의류명"
+            Query = Query & ", A.택번호"
+            Query = Query & ", A.접수일자"
+            Query = Query & ", B.부모택번호"
+            Query = Query & ", B.색상"
+            Query = Query & ", B.무늬"
+            Query = Query & ", B.내용"
+            Query = Query & ", B.금액"
+            Query = Query & ", B.결제여부"
+            Query = Query & ", B.상표"
+            Query = Query & ", C.성명"
+            Query = Query & ", C.휴대전화"
+            Query = Query & ", C.전화번호"
+            Query = Query & ", B.가맹점입고구분"
+            Query = Query & " FROM (SELECT 택번호"
+            Query = Query & "            , MAX(접수일자) AS 접수일자"
+            Query = Query & "       FROM TB_입출고"
+            Query = Query & "       WHERE 접수일자 <= '" & Format(dtpDay.Value, "YYYY-MM-DD") & "'"
+'            Query = Query & "         AND 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+            Query = Query & "         AND 택번호    = '" & ADORs!Tag_No & "'"
+            Query = Query & "         AND 판매취소 <> 'Y'"
+            Query = Query & "       GROUP BY 택번호"
+            Query = Query & "      ) AS A LEFT OUTER JOIN TB_입출고   AS B ON A.택번호   = B.택번호"
+            Query = Query & "                                             AND A.접수일자 = B.접수일자"
+            Query = Query & "                                             AND B.판매취소 <> 'Y'"
+            Query = Query & "             LEFT OUTER JOIN TB_고객정보 AS C ON B.고객코드 = C.고객코드"
+            Set SUBRs = New ADODB.Recordset
+            SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+            
+            Debug.Print Now
+                                             
+                                             
+            ' 출고한 품목이 없을 경우
+            If SUBRs.EOF Then
+                .MaxRows = .MaxRows + 1
+                .Row = .MaxRows
+            
+                .Col = 1:  .Text = "1"                                           ' 1
+                .Col = 2:  .Text = Format(ADORs!Tag_No, "000-00-0000")           ' 2
+                .Col = 3:  .Text = ""                                            ' 3
+                .Col = 4:  .Text = iCount & ""                                   ' 4 지사출고번호
+                
+                Select Case ADORs!SCAN_FLAG1
+                    Case "1": .Col = 5: .Text = "[" & ADORs!SCAN_FLAG1 & "]의류" ' 5
+                    Case "2": .Col = 5: .Text = "[" & ADORs!SCAN_FLAG1 & "]소품" ' 5
+                    Case "3": .Col = 5: .Text = "[" & ADORs!SCAN_FLAG1 & "]기타" ' 5
+                End Select
+                
+                Select Case ADORs!SCAN_FLAG2
+                    Case "1": .Col = 6: .Text = "[" & ADORs!SCAN_FLAG2 & "]정상" ' 6
+                    Case "2": .Col = 6: .Text = "[" & ADORs!SCAN_FLAG2 & "]반품" ' 6
+                    Case "3": .Col = 6: .Text = "[" & ADORs!SCAN_FLAG2 & "]확인" ' 6
+                    Case "4": .Col = 6: .Text = "[" & ADORs!SCAN_FLAG2 & "]품명" ' 6
+                End Select
+                
+                .Col = 7:  .Text = ""                                            ' 7
+                .Col = 8:  .Text = ""                                            ' 8
+                .Col = 9:  .Text = ""                                            ' 9
+                .Col = 10: .Text = ""                            '10
+                .Col = 11: .Text = ""                              '11
+                .Col = 12: .Text = ""                                '12
+                .Col = 13: .Text = ""                                '13
+                .Col = 14: .Text = ""                                '14
+                .Col = 15: .Text = ""                                '15
+                .Col = 16: .Text = ""                                '16
+                .Col = 17: .Text = ADORs!OUT_DATE & ""                           '17 SUBRs!지사출고일자 & ""
+                .Col = 18: .Text = ""                            '18
+                .Col = 19: .Text = "0"                                       '19
+                .Col = 20: .Text = ""                                       '19
+                .Col = 21: .Text = ""                                       '19
+                
+            Else
+                .MaxRows = .MaxRows + 1
+                .Row = .MaxRows
+            
+                .Col = 1:  .Text = "1"                                           ' 1
+                .Col = 2:  .Text = Format(SUBRs!택번호, "000-00-0000")           ' 2
+                .Col = 3:  .Text = Format(SUBRs!부모택번호, "000-00-0000")       ' 3
+                .Col = 4:  .Text = iCount & ""                                   ' 4 지사출고번호
+                
+                Select Case ADORs!SCAN_FLAG1
+                    Case "1": .Col = 5: .Text = "[" & ADORs!SCAN_FLAG1 & "]의류" ' 5
+                    Case "2": .Col = 5: .Text = "[" & ADORs!SCAN_FLAG1 & "]소품" ' 5
+                    Case "3": .Col = 5: .Text = "[" & ADORs!SCAN_FLAG1 & "]기타" ' 5
+                End Select
+                
+                Select Case ADORs!SCAN_FLAG2
+                    Case "1": .Col = 6: .Text = "[" & ADORs!SCAN_FLAG2 & "]정상" ' 6
+                    Case "2": .Col = 6: .Text = "[" & ADORs!SCAN_FLAG2 & "]반품" ' 6
+                    Case "3": .Col = 6: .Text = "[" & ADORs!SCAN_FLAG2 & "]확인" ' 6
+                    Case "4": .Col = 6: .Text = "[" & ADORs!SCAN_FLAG2 & "]품명" ' 6
+                End Select
+                
+                .Col = 7:  .Text = SUBRs!접수일자 & ""                           ' 7
+                .Col = 8:  .Text = SUBRs!성명 & ""                               ' 8
+                .Col = 9:  .Text = SUBRs!전화번호 & ""                           ' 9
+                .Col = 10: .Text = SUBRs!휴대전화 & ""                           '10
+                .Col = 11: .Text = SUBRs!의류명 & ""                             '11
+                .Col = 12: .Text = SUBRs!색상 & ""                               '12
+                .Col = 13: .Text = SUBRs!무늬 & ""                               '13
+                .Col = 14: .Text = SUBRs!내용 & ""                               '14
+                .Col = 15: .Text = SUBRs!금액 & ""                               '15
+                .Col = 16: .Text = SUBRs!상표 & ""                               '16
+                .Col = 17: .Text = ADORs!OUT_DATE & ""                           '17 SUBRs!지사출고일자 & ""
+                .Col = 18: .Text = SUBRs!접수번호 & ""                           '18
+                    
+                If SUBRs!가맹점입고일자 = "" Or SUBRs!가맹점입고일자 = "00:00:00" Then
+                    .Col = 19: .Text = "0"                                       '19
+                Else
+                    .Col = 1:  .Text = "0"                                       ' 1
+                    .Col = 19: .Text = "1"                                       '19
+
+                    .Row = .MaxRows: .Row2 = .MaxRows
+                    .Col = 1: .Col2 = .MaxCols
+                    .BlockMode = True
+                    .BackColor = vbYellow
+                    .BlockMode = False
+                End If
+                
+                .Col = 20: .Text = SUBRs!가맹점입고구분 & ""                           '18
+                .Col = 21: .Text = SUBRs!가맹점입고일자 & ""                           '18
+                
+                Rtn = InStr(SUBRs!내용 & "", "재")
+                
+                If Rtn > 0 Then txtNum(8).Value = txtNum(8).Value + 1
+            End If
+            SUBRs.Close
+            Set SUBRs = Nothing
+            
+            If ADORs!SCAN_FLAG1 = "1" Then txtNum(1).Value = txtNum(1).Value + 1 '의류
+            If ADORs!SCAN_FLAG1 = "2" Then txtNum(2).Value = txtNum(2).Value + 1 '소품
+            If ADORs!SCAN_FLAG1 = "3" Then txtNum(3).Value = txtNum(3).Value + 1 '기타
+            
+            If ADORs!SCAN_FLAG2 = "1" Then txtNum(4).Value = txtNum(4).Value + 1 '정상
+            If ADORs!SCAN_FLAG2 = "2" Then txtNum(5).Value = txtNum(5).Value + 1 '반품
+            If ADORs!SCAN_FLAG2 = "3" Then txtNum(6).Value = txtNum(6).Value + 1 '확인
+            If ADORs!SCAN_FLAG2 = "4" Then txtNum(7).Value = txtNum(7).Value + 1 '품명
+                
+                
+            lblCount.Caption = CLng(lblCount.Caption) + 1
+            
+            DoEvents
+            
+            ADORs.MoveNext
+        Loop
+        ADORs.Close
+        Set ADORs = Nothing
+        
+        txtNum(0).Value = .MaxRows '전체수량
+        
+        .ReDraw = True
+    End With
+    
+    pnlProg.Visible = False
+    HostCon.Close:  Set HostCon = Nothing
+    
+    Exit Sub
+    
+ErrRtn:
+    pnlProg.Visible = False
+    HostCon.Close:  Set HostCon = Nothing
+
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+End Sub
+
+Private Sub cboOffice_Click()
+    cmdList_Click
+End Sub
+
+Private Sub cmdBtn_Click(Index As Integer)
+    On Error GoTo ErrRtn
+    
+    Select Case Index
+        Case 2
+        
+        
+            
+            With sprGrid
+                If .DataRowCnt <= 0 Then
+                    MsgBox "왼쪽의 내용을 클릭한 후 작업하여 주십시요", vbInformation, "확인"
+                    Exit Sub
+                End If
+            
+                Ret = MsgBox("가맹점 입고처리하시겠습니까?", vbQuestion + vbYesNo + vbDefaultButton2, "확인")
+                If Ret = vbNo Then Exit Sub
+                
+                For i = 1 To .MaxRows
+                    .Row = i
+                    
+                    .Col = 1
+                    If .Text = "1" Then
+                        '------------------------------------------
+                        ' 출고된 것중 가맹점 미입고된 것만...
+                        '------------------------------------------
+                        .Col = 19
+                        If .Text = "0" Then
+                                       Query = "UPDATE TB_입출고 SET 가맹점입고일자 = '" & Format(Now, "YYYY-MM-DD hh:mm:ss") & "'"
+                                       Query = Query & "           , 가맹점입고구분 = '자동'"
+                            .Col = 17: Query = Query & "           , 지사출고일자   = '" & Trim(.Text) & "'"
+                            .Col = 4:  Query = Query & "           , 지사출고번호   =  " & .Value
+                            .Col = 5:  Query = Query & "           , 지사출고물품   = '" & Mid(.Text, 2, 1) & "'"
+                            .Col = 6:  Query = Query & "           , 지사출고상태   = '" & Mid(.Text, 2, 1) & "'"
+                                       Query = Query & "           , 본사전송여부   = ''"
+                            .Col = 7:  Query = Query & " WHERE 접수일자 = '" & .Text & "'"
+                            .Col = 2:  Query = Query & "   AND 택번호   = '" & Replace(.Text, "-", "") & "'"
+                            Debug.Print Query
+                            'Call Error_Msg("", "내용", "9999", Query)
+                            ADOCon.Execute Query
+                        End If
+                    End If
+                Next i
+            End With
+            
+            Call sprCount_Click(1, sprCount.ActiveRow)
+            
+            MsgBox "가맹점 입고처리하였습니다.", vbInformation, "확인"
+            
+        Case 3:
+            Call Export_Excel(frmMain.cdgExcel, sprGrid)
+        
+        Case 4
+            Rtn = MsgBox("출력 미리보기를 하시겠습니까?", vbQuestion + vbYesNo, "출력")
+            
+            If Rtn = vbYes Then
+                Call Data_Print(True)
+            Else
+                Call Data_Print(False)
+            End If
+            
+        Case 5: Unload Me
+    End Select
+    
+    Exit Sub
+    
+ErrRtn:
+    pnlProg.Visible = False
+
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+End Sub
+
+Private Sub Data_Print(Print_PreView As Boolean)
+    On Error GoTo ErrRtn
+    
+    If sprGrid.MaxRows = 0 Then Exit Sub
+
+    If Dir(AppPath & "XML", vbDirectory) = "" Then
+        MkDir AppPath & "XML"
+    End If
+
+    Open AppPath & "XML\본사출고현황.XML" For Output As #1
+    
+    Print #1, "<?xml version=""1.0"" encoding=""EUC-KR""?>"
+    Print #1, "<root>"
+    
+          XML = "    <조건>"
+    XML = XML & "        <검색조건>출고일자 : " & Format(dtpDay.Value, "YYYY-MM-DD") & "</검색조건>"
+    XML = XML & "        <가맹점>크린에이드 - " & Func_Replace(가맹점정보.가맹점명) & "</가맹점>"
+    XML = XML & "        <의류>의류 : " & txtNum(1).Text & " 점</의류>"
+    XML = XML & "        <소품>소품 : " & txtNum(2).Text & " 점</소품>"
+    XML = XML & "        <기타>기타 : " & txtNum(3).Text & " 점</기타>"
+    XML = XML & "        <정상>정상 : " & txtNum(4).Text & " 점</정상>"
+    XML = XML & "        <반품>반품 : " & txtNum(5).Text & " 점</반품>"
+    XML = XML & "        <확인>확인 : " & txtNum(6).Text & " 점</확인>"
+    XML = XML & "        <품명>품명 : " & txtNum(7).Text & " 점</품명>"
+    XML = XML & "        <재세탁>재세탁 : " & txtNum(8).Text & " 점</재세탁>"
+    XML = XML & "        <출고수량>출고수량 : " & txtNum(8).Text & " 점</출고수량>"
+    XML = XML & "   </조건>"
+    Print #1, XML
+    
+    With sprGrid
+        For i = 1 To .MaxRows
+            .Row = i
+            
+                             XML = "    <Data>"
+            .Col = 1:  XML = XML & "        <선택>" & .Text & "</선택>"
+            .Col = 2:  XML = XML & "        <택번호>" & .Text & "</택번호>"
+            .Col = 3:  XML = XML & "        <출고번호>" & .Text & "</출고번호>"
+            .Col = 7:  XML = XML & "        <접수일자>" & .Text & "</접수일자>"
+            .Col = 8:  XML = XML & "        <성명>" & Func_Replace(.Text) & "</성명>"
+            .Col = 9:  XML = XML & "        <전화번호>" & Func_Replace(.Text) & "</전화번호>"
+            .Col = 10:  XML = XML & "        <휴대전화>" & Func_Replace(.Text) & "</휴대전화>"
+            .Col = 11: XML = XML & "        <품명>" & Func_Replace(.Text) & "</품명>"
+            .Col = 12: XML = XML & "        <색상>" & Func_Replace(.Text) & "</색상>"
+            .Col = 13: XML = XML & "        <무늬>" & Func_Replace(.Text) & "</무늬>"
+            .Col = 14: XML = XML & "        <내용>" & Func_Replace(.Text) & "</내용>"
+            .Col = 15: XML = XML & "        <금액>" & .Text & "</금액>"
+            .Col = 16: XML = XML & "        <상표>" & Func_Replace(.Text) & "</상표>"
+                       XML = XML & "   </Data>"
+                       Print #1, XML
+        Next i
+        
+        Print #1, "</root>"
+        Close #1
+    End With
+    
+    If Print_PreView = True Then
+        With rpt본사출고현황
+            .dc.FileURL = AppPath & "XML\본사출고현황.XML"
+            .Show 1
+        End With
+    Else
+        With rpt본사출고현황
+            .dc.FileURL = AppPath & "XML\본사출고현황.XML"
+            .PrintReport False
+        End With
+        
+        Unload rpt본사출고현황
+    End If
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+End Sub
+
+Private Sub cmdList_Click()
+    Dim 지사코드 As String
+    
+    On Error GoTo ErrRtn
+    
+    DoEvents
+    
+    지사코드 = "LAUNDRY" & Left(cboOffice.Text, 4)
+    
+    If Len(Trim(지사코드)) <> 11 Then Exit Sub
+    
+    
+    If Server_Connection(HostCon, 지사코드) = True Then
+        sprGrid.MaxRows = 0
+        
+        For i = 0 To 8
+            txtNum(i).Value = 0
+        Next i
+            
+'        frmMain.CommandBars.StatusBar.IdleText = "진행 1"
+'        DoEvents
+        '
+        Query = "SELECT    OUT_COUNT"
+        Query = Query & ", COUNT(TAG_NO)"
+        Query = Query & " FROM SCANOUTPUT_LOG_TB"
+        Query = Query & " WHERE STORE_CD                 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & "   AND SUBSTRING(OUT_DATE,1,10) = '" & Format(dtpDay.Value, "YYYY-MM-DD") & "'"
+        Query = Query & " GROUP BY OUT_COUNT"
+        Set ADORs = New ADODB.Recordset
+        ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+ '       frmMain.CommandBars.StatusBar.IdleText = "진행 2"
+ '       DoEvents
+        
+    
+        With sprCount
+            .MaxRows = 0
+            .ReDraw = False
+            
+            Do Until ADORs.EOF
+                .MaxRows = .MaxRows + 1
+                .Row = .MaxRows
+            
+                .Col = 1: .Text = ADORs(0) & ""
+                .Col = 2: .Text = ADORs(1) & ""
+                
+                '---------------------------------------------------------------------------------------------------
+                Query = "SELECT ISNULL(COUNT(택번호),0)"
+                Query = Query & " FROM TB_입출고"
+                Query = Query & " WHERE 지사출고일자 BETWEEN '" & Format(dtpDay.Value, "YYYY-MM-DD") & " 00:00:00'"
+                Query = Query & "           and '" & Format(dtpDay.Value, "YYYY-MM-DD") & " 23:59:59'"
+                Query = Query & "   AND 지사출고번호                 =  " & ADORs(0)
+                Query = Query & "   AND 판매취소 <> 'Y'"
+                Set SUBRs = New ADODB.Recordset
+                SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+                
+                If SUBRs.EOF Then
+                    .Col = 3: .Text = ""
+                Else
+                    .Col = 3: .Text = SUBRs(0) & ""
+                End If
+                SUBRs.Close
+                Set SUBRs = Nothing
+                
+                ADORs.MoveNext
+            Loop
+            ADORs.Close
+            Set ADORs = Nothing
+            
+            .ReDraw = True
+        End With
+    
+        HostCon.Close
+        Set HostCon = Nothing
+    Else
+        MsgBox "본사 서버와 연결할 수 없습니다.  인터넷을 확인 하여 주십시요.", vbInformation, "확인"
+        Exit Sub
+    End If
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description & "  " & 지사코드)
+End Sub
+
+Private Sub dtpDay_Change()
+    cmdList_Click
+End Sub
+
+Private Sub Form_Activate()
+
+    If m_ACTIVE Then Exit Sub
+    m_ACTIVE = True
+    ' 다시 조회 처리한다.
+    Call cmdList_Click
+End Sub
+
+Private Sub Form_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        SendKeys "{Tab}"
+        KeyAscii = 0
+    End If
+End Sub
+
+Private Sub Form_Load()
+    Dim bSear As Boolean
+    
+    m_ACTIVE = False
+    
+    With sprCount
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+    
+    With sprGrid
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeNormal
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+    
+    dtpDay.Value = Format(Date, "YYYY-MM-DD")
+    
+    '-----------------------------------------------------------
+    '
+    '-----------------------------------------------------------
+'    Query = "SELECT DISTINCT 지사코드 FROM TB_입출고  where 가맹점입고일자 =  '' "
+    Query = ""
+    Query = Query & " select AA.지사코드, bb.지사명 "
+    Query = Query & " from (SELECT DISTINCT 지사코드 FROM TB_입출고  where 가맹점입고일자 =  '') AA "
+    Query = Query & "  left outer join tb_지사 BB "
+    Query = Query & "  on AA.지사코드 = bb.지사코드 "
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+    
+    
+    With cboOffice
+        .Clear
+        bSear = False
+        
+        Do Until ADORs.EOF
+            .AddItem ADORs!지사코드 & " : " & ADORs!지사명 & ""
+            
+            If ADORs!지사코드 & "" = 가맹점정보.지사코드 Then
+                bSear = True
+            
+            End If
+            
+            ADORs.MoveNext
+        Loop
+        ADORs.Close:    Set ADORs = Nothing
+        
+        ' 현재 지사가 없을 경우(접수를 한품목도 안한 경우)
+        If bSear = False Then .AddItem 가맹점정보.지사코드, 0
+        
+        If .ListCount > 0 Then
+            
+            For i = 0 To .ListCount - 1
+                If Left(.List(i), 4) = 가맹점정보.지사코드 Then
+                    .ListIndex = i
+                    Exit For
+                End If
+            Next i
+        End If
+        
+    End With
+End Sub
+
+Private Sub Form_Resize()
+    On Error Resume Next
+    
+    cmdBtn(5).Left = Me.Width - cmdBtn(5).Width - 200
+End Sub
+
+Private Sub sprCount_Click(ByVal Col As Long, ByVal Row As Long)
+    If Row <= 0 Then Exit Sub
+    
+    
+    sprCount.Row = Row
+    sprCount.Col = 1
+    
+    dtpDay.Enabled = False
+    cmdBtn(2).Enabled = False
+    sprCount.Enabled = False
+    
+    Call Data_Display(sprCount.Value)
+    
+    dtpDay.Enabled = True
+    cmdBtn(2).Enabled = True
+    sprCount.Enabled = True
+End Sub
+

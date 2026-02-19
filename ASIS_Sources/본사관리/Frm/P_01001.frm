@@ -1,0 +1,4694 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Object = "{A5CC20C4-B5F5-11CD-98EC-0020AF234C9D}#4.1#0"; "CSText32.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Begin VB.Form P_01001 
+   Caption         =   "가맹점 현황"
+   ClientHeight    =   12495
+   ClientLeft      =   2985
+   ClientTop       =   2640
+   ClientWidth     =   16125
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9.75
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "P_01001.frx":0000
+   LinkTopic       =   "Form1"
+   MDIChild        =   -1  'True
+   ScaleHeight     =   12495
+   ScaleWidth      =   16125
+   WindowState     =   2  '최대화
+   Begin SSSplitter.SSSplitter SSSplitter1 
+      Height          =   12495
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   16125
+      _ExtentX        =   28443
+      _ExtentY        =   22040
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "P_01001.frx":058A
+      Begin XtremeSuiteControls.TabControl TabControl 
+         Height          =   11160
+         Left            =   3555
+         TabIndex        =   1
+         Top             =   1320
+         Width           =   12555
+         _Version        =   851970
+         _ExtentX        =   22146
+         _ExtentY        =   19685
+         _StockProps     =   68
+         Appearance      =   3
+         Color           =   16
+         PaintManager.BoldSelected=   -1  'True
+         PaintManager.HotTracking=   -1  'True
+         PaintManager.ButtonMargin=   "2,3,2,3"
+         ItemCount       =   6
+         Item(0).Caption =   " 기본정보 "
+         Item(0).ControlCount=   1
+         Item(0).Control(0)=   "TabControlPage(0)"
+         Item(1).Caption =   " 상세정보 "
+         Item(1).ControlCount=   1
+         Item(1).Control(0)=   "TabControlPage(1)"
+         Item(2).Caption =   "바코드택 사용현황"
+         Item(2).ControlCount=   1
+         Item(2).Control(0)=   "TabControlPage1"
+         Item(3).Caption =   " 지사 변경 "
+         Item(3).ControlCount=   1
+         Item(3).Control(0)=   "TabControlPage2"
+         Item(4).Caption =   "사고품 SMS"
+         Item(4).ControlCount=   1
+         Item(4).Control(0)=   "TabControlPage3"
+         Item(5).Caption =   "통합 정보"
+         Item(5).ControlCount=   1
+         Item(5).Control(0)=   "TabControlPage5"
+         Begin XtremeSuiteControls.TabControlPage TabControlPage5 
+            Height          =   9225
+            Left            =   -69970
+            TabIndex        =   188
+            Top             =   420
+            Visible         =   0   'False
+            Width           =   11610
+            _Version        =   851970
+            _ExtentX        =   20479
+            _ExtentY        =   16272
+            _StockProps     =   1
+            Page            =   5
+            Begin SSSplitter.SSSplitter SSSplitter3 
+               Height          =   9225
+               Left            =   0
+               TabIndex        =   189
+               Top             =   0
+               Width           =   11610
+               _ExtentX        =   20479
+               _ExtentY        =   16272
+               _Version        =   262144
+               AutoSize        =   1
+               PaneTree        =   "P_01001.frx":063C
+               Begin FPSpreadADO.fpSpread spdStoreList 
+                  Height          =   9165
+                  Left            =   30
+                  TabIndex        =   190
+                  Top             =   30
+                  Width           =   11550
+                  _Version        =   524288
+                  _ExtentX        =   20373
+                  _ExtentY        =   16166
+                  _StockProps     =   64
+                  BackColorStyle  =   1
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "굴림체"
+                     Size            =   9
+                     Charset         =   129
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  GrayAreaBackColor=   16777215
+                  GridSolid       =   0   'False
+                  MaxCols         =   14
+                  ScrollBars      =   2
+                  SpreadDesigner  =   "P_01001.frx":066E
+                  HighlightHeaders=   1
+                  HighlightStyle  =   1
+               End
+            End
+         End
+         Begin XtremeSuiteControls.TabControlPage TabControlPage3 
+            Height          =   9225
+            Left            =   -69970
+            TabIndex        =   178
+            Top             =   420
+            Visible         =   0   'False
+            Width           =   11610
+            _Version        =   851970
+            _ExtentX        =   20479
+            _ExtentY        =   16272
+            _StockProps     =   1
+            Page            =   4
+            Begin SSSplitter.SSSplitter SSSplitter2 
+               Height          =   9225
+               Left            =   0
+               TabIndex        =   179
+               Top             =   0
+               Width           =   11610
+               _ExtentX        =   20479
+               _ExtentY        =   16272
+               _Version        =   262144
+               AutoSize        =   1
+               SplitterBarWidth=   1
+               SplitterBarAppearance=   1
+               PaneTree        =   "P_01001.frx":0E00
+               Begin XtremeSuiteControls.TabControlPage TabControlPage4 
+                  Height          =   1365
+                  Left            =   30
+                  TabIndex        =   181
+                  Top             =   7830
+                  Width           =   11550
+                  _Version        =   851970
+                  _ExtentX        =   20373
+                  _ExtentY        =   2408
+                  _StockProps     =   1
+                  Begin XtremeSuiteControls.PushButton cmdSubBtn 
+                     Height          =   450
+                     Index           =   4
+                     Left            =   9420
+                     TabIndex        =   182
+                     Top             =   240
+                     Width           =   1095
+                     _Version        =   851970
+                     _ExtentX        =   1931
+                     _ExtentY        =   794
+                     _StockProps     =   79
+                     Caption         =   " 적용"
+                     ForeColor       =   -2147483640
+                     BackColor       =   -2147483636
+                     Enabled         =   0   'False
+                     Appearance      =   6
+                     Picture         =   "P_01001.frx":0E52
+                  End
+                  Begin XtremeSuiteControls.PushButton cmdBtn 
+                     Height          =   450
+                     Index           =   9
+                     Left            =   7500
+                     TabIndex        =   183
+                     Top             =   240
+                     Width           =   1710
+                     _Version        =   851970
+                     _ExtentX        =   3016
+                     _ExtentY        =   794
+                     _StockProps     =   79
+                     Caption         =   "담당자 등록"
+                     ForeColor       =   -2147483640
+                     BackColor       =   -2147483636
+                     Appearance      =   6
+                     Picture         =   "P_01001.frx":13EC
+                  End
+               End
+               Begin FPSpreadADO.fpSpread spdViewSMS 
+                  Height          =   7785
+                  Left            =   30
+                  TabIndex        =   180
+                  Top             =   30
+                  Width           =   11550
+                  _Version        =   524288
+                  _ExtentX        =   20373
+                  _ExtentY        =   13732
+                  _StockProps     =   64
+                  BackColorStyle  =   1
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "굴림체"
+                     Size            =   9
+                     Charset         =   129
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  GrayAreaBackColor=   16777215
+                  GridSolid       =   0   'False
+                  MaxCols         =   4
+                  ScrollBars      =   2
+                  SpreadDesigner  =   "P_01001.frx":1986
+                  Appearance      =   1
+                  HighlightHeaders=   1
+                  HighlightStyle  =   1
+               End
+            End
+         End
+         Begin XtremeSuiteControls.TabControlPage TabControlPage2 
+            Height          =   9225
+            Left            =   -69970
+            TabIndex        =   2
+            Top             =   420
+            Visible         =   0   'False
+            Width           =   11610
+            _Version        =   851970
+            _ExtentX        =   20479
+            _ExtentY        =   16272
+            _StockProps     =   1
+            Page            =   3
+            Begin VB.ComboBox cboOffice2 
+               Height          =   315
+               Left            =   1290
+               Style           =   2  '드롭다운 목록
+               TabIndex        =   4
+               Top             =   4200
+               Width           =   3015
+            End
+            Begin VB.ComboBox cboOffice3 
+               Height          =   315
+               Left            =   1290
+               Style           =   2  '드롭다운 목록
+               TabIndex        =   3
+               Top             =   4560
+               Width           =   3015
+            End
+            Begin FPSpreadADO.fpSpread spdView2 
+               Height          =   3720
+               Left            =   90
+               TabIndex        =   5
+               Top             =   90
+               Width           =   8220
+               _Version        =   524288
+               _ExtentX        =   14499
+               _ExtentY        =   6562
+               _StockProps     =   64
+               BackColorStyle  =   1
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               GrayAreaBackColor=   16777215
+               GridSolid       =   0   'False
+               MaxCols         =   6
+               ScrollBars      =   2
+               SpreadDesigner  =   "P_01001.frx":1F7B
+               Appearance      =   1
+               HighlightHeaders=   1
+               HighlightStyle  =   1
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   0
+               Left            =   105
+               TabIndex        =   6
+               Top             =   4215
+               Width           =   1155
+               _ExtentX        =   2037
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "이전지사"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   2
+               Left            =   105
+               TabIndex        =   7
+               Top             =   3855
+               Width           =   1155
+               _ExtentX        =   2037
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "시작일자"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   3
+               Left            =   105
+               TabIndex        =   8
+               Top             =   4935
+               Width           =   1155
+               _ExtentX        =   2037
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "종료일자"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+            Begin MSComCtl2.DTPicker dtInput 
+               Height          =   315
+               Index           =   5
+               Left            =   1290
+               TabIndex        =   9
+               Top             =   3855
+               Width           =   3015
+               _ExtentX        =   5318
+               _ExtentY        =   556
+               _Version        =   393216
+               Format          =   61997056
+               CurrentDate     =   36686
+            End
+            Begin MSComCtl2.DTPicker dtInput 
+               Height          =   315
+               Index           =   6
+               Left            =   1290
+               TabIndex        =   10
+               Top             =   4920
+               Width           =   3015
+               _ExtentX        =   5318
+               _ExtentY        =   556
+               _Version        =   393216
+               CheckBox        =   -1  'True
+               DateIsNull      =   -1  'True
+               Format          =   61997056
+               CurrentDate     =   36686
+            End
+            Begin XtremeSuiteControls.PushButton cmdSubBtn 
+               Height          =   450
+               Index           =   3
+               Left            =   3210
+               TabIndex        =   11
+               Top             =   5325
+               Width           =   1095
+               _Version        =   851970
+               _ExtentX        =   1931
+               _ExtentY        =   794
+               _StockProps     =   79
+               Caption         =   " 삭제"
+               ForeColor       =   -2147483640
+               BackColor       =   -2147483636
+               Enabled         =   0   'False
+               Appearance      =   6
+               Picture         =   "P_01001.frx":25CF
+            End
+            Begin XtremeSuiteControls.PushButton cmdSubBtn 
+               Height          =   450
+               Index           =   2
+               Left            =   2055
+               TabIndex        =   12
+               Top             =   5325
+               Width           =   1095
+               _Version        =   851970
+               _ExtentX        =   1931
+               _ExtentY        =   794
+               _StockProps     =   79
+               Caption         =   " 적용"
+               ForeColor       =   -2147483640
+               BackColor       =   -2147483636
+               Enabled         =   0   'False
+               Appearance      =   6
+               Picture         =   "P_01001.frx":2B69
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   1
+               Left            =   105
+               TabIndex        =   13
+               Top             =   4575
+               Width           =   1155
+               _ExtentX        =   2037
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "신규지사"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+         End
+         Begin XtremeSuiteControls.TabControlPage TabControlPage1 
+            Height          =   9225
+            Left            =   -69970
+            TabIndex        =   14
+            Top             =   420
+            Visible         =   0   'False
+            Width           =   11610
+            _Version        =   851970
+            _ExtentX        =   20479
+            _ExtentY        =   16272
+            _StockProps     =   1
+            Page            =   2
+            Begin VB.TextBox txtInput 
+               Height          =   315
+               Index           =   16
+               Left            =   1290
+               MaxLength       =   50
+               TabIndex        =   17
+               Top             =   4560
+               Width           =   795
+            End
+            Begin VB.TextBox txtInput 
+               Height          =   315
+               Index           =   14
+               Left            =   1290
+               MaxLength       =   6
+               TabIndex        =   16
+               Top             =   4200
+               Width           =   795
+            End
+            Begin VB.TextBox txtInput 
+               Enabled         =   0   'False
+               Height          =   315
+               Index           =   15
+               Left            =   2115
+               MaxLength       =   50
+               TabIndex        =   15
+               Top             =   4200
+               Width           =   2190
+            End
+            Begin FPSpreadADO.fpSpread spdView1 
+               Height          =   3720
+               Left            =   90
+               TabIndex        =   18
+               Top             =   90
+               Width           =   7590
+               _Version        =   524288
+               _ExtentX        =   13388
+               _ExtentY        =   6562
+               _StockProps     =   64
+               BackColorStyle  =   1
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               GrayAreaBackColor=   16777215
+               GridSolid       =   0   'False
+               MaxCols         =   5
+               ScrollBars      =   2
+               SpreadDesigner  =   "P_01001.frx":3103
+               Appearance      =   1
+               HighlightHeaders=   1
+               HighlightStyle  =   1
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   36
+               Left            =   105
+               TabIndex        =   19
+               Top             =   4215
+               Width           =   1155
+               _ExtentX        =   2037
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "지    사"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   37
+               Left            =   105
+               TabIndex        =   20
+               Top             =   4575
+               Width           =   1155
+               _ExtentX        =   2037
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "택 코 드"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   38
+               Left            =   105
+               TabIndex        =   21
+               Top             =   3855
+               Width           =   1155
+               _ExtentX        =   2037
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "시작일자"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+            Begin Threed.SSPanel panCaption 
+               Height          =   315
+               Index           =   39
+               Left            =   105
+               TabIndex        =   22
+               Top             =   4935
+               Width           =   1155
+               _ExtentX        =   2037
+               _ExtentY        =   556
+               _Version        =   262144
+               Caption         =   "종료일자"
+               BevelOuter      =   1
+               RoundedCorners  =   0   'False
+            End
+            Begin MSComCtl2.DTPicker dtInput 
+               Height          =   315
+               Index           =   3
+               Left            =   1290
+               TabIndex        =   23
+               Top             =   3855
+               Width           =   3015
+               _ExtentX        =   5318
+               _ExtentY        =   556
+               _Version        =   393216
+               Format          =   61997056
+               CurrentDate     =   36686
+            End
+            Begin MSComCtl2.DTPicker dtInput 
+               Height          =   315
+               Index           =   4
+               Left            =   1290
+               TabIndex        =   24
+               Top             =   4920
+               Width           =   3015
+               _ExtentX        =   5318
+               _ExtentY        =   556
+               _Version        =   393216
+               CheckBox        =   -1  'True
+               DateIsNull      =   -1  'True
+               Format          =   61997056
+               CurrentDate     =   36686
+            End
+            Begin XtremeSuiteControls.PushButton cmdSubBtn 
+               Height          =   450
+               Index           =   1
+               Left            =   3210
+               TabIndex        =   25
+               Top             =   5295
+               Width           =   1095
+               _Version        =   851970
+               _ExtentX        =   1931
+               _ExtentY        =   794
+               _StockProps     =   79
+               Caption         =   " 삭제"
+               ForeColor       =   -2147483640
+               BackColor       =   -2147483636
+               Enabled         =   0   'False
+               Appearance      =   6
+               Picture         =   "P_01001.frx":36E3
+            End
+            Begin XtremeSuiteControls.PushButton cmdSubBtn 
+               Height          =   450
+               Index           =   0
+               Left            =   2055
+               TabIndex        =   26
+               Top             =   5295
+               Width           =   1095
+               _Version        =   851970
+               _ExtentX        =   1931
+               _ExtentY        =   794
+               _StockProps     =   79
+               Caption         =   " 적용"
+               ForeColor       =   -2147483640
+               BackColor       =   -2147483636
+               Enabled         =   0   'False
+               Appearance      =   6
+               Picture         =   "P_01001.frx":3C7D
+            End
+         End
+         Begin XtremeSuiteControls.TabControlPage TabControlPage 
+            Height          =   9225
+            Index           =   1
+            Left            =   -69970
+            TabIndex        =   27
+            Top             =   420
+            Visible         =   0   'False
+            Width           =   11610
+            _Version        =   851970
+            _ExtentX        =   20479
+            _ExtentY        =   16272
+            _StockProps     =   1
+            BackColor       =   16777215
+            Page            =   1
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   2100
+               Index           =   6
+               Left            =   120
+               TabIndex        =   28
+               Top             =   5775
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   3704
+               _StockProps     =   79
+               Caption         =   "※ SMS "
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.TextBox txtSMSIPAddress 
+                  Height          =   315
+                  Left            =   1530
+                  TabIndex        =   32
+                  Top             =   300
+                  Width           =   4125
+               End
+               Begin VB.TextBox txtSMSDBName 
+                  Height          =   315
+                  Left            =   1530
+                  TabIndex        =   31
+                  Top             =   660
+                  Width           =   4125
+               End
+               Begin VB.TextBox txtSMSUserName 
+                  Height          =   315
+                  Left            =   1530
+                  TabIndex        =   30
+                  Top             =   1020
+                  Width           =   4125
+               End
+               Begin VB.TextBox txtSMSUserPass 
+                  Height          =   315
+                  IMEMode         =   3  '사용 못함
+                  Left            =   1530
+                  PasswordChar    =   "*"
+                  TabIndex        =   29
+                  Top             =   1380
+                  Width           =   4125
+               End
+               Begin XtremeSuiteControls.CheckBox chkSMSEMART 
+                  Height          =   285
+                  Left            =   1530
+                  TabIndex        =   33
+                  Top             =   1710
+                  Width           =   3030
+                  _Version        =   851970
+                  _ExtentX        =   5345
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "E-MART 문자 서비스(SMS)"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "서버 IP:"
+                  Height          =   195
+                  Index           =   7
+                  Left            =   630
+                  TabIndex        =   37
+                  Top             =   360
+                  Width           =   840
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "데이터베이스:"
+                  Height          =   195
+                  Index           =   8
+                  Left            =   105
+                  TabIndex        =   36
+                  Top             =   720
+                  Width           =   1365
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "사용자 ID:"
+                  Height          =   195
+                  Index           =   9
+                  Left            =   420
+                  TabIndex        =   35
+                  Top             =   1080
+                  Width           =   1050
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "암호:"
+                  Height          =   195
+                  Index           =   10
+                  Left            =   945
+                  TabIndex        =   34
+                  Top             =   1440
+                  Width           =   525
+               End
+            End
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   1740
+               Index           =   1
+               Left            =   120
+               TabIndex        =   38
+               Top             =   2055
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   3069
+               _StockProps     =   79
+               Caption         =   "※ 할인 "
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.ComboBox cboReturn 
+                  Height          =   315
+                  ItemData        =   "P_01001.frx":4217
+                  Left            =   1860
+                  List            =   "P_01001.frx":4221
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   41
+                  Top             =   1335
+                  Width           =   1365
+               End
+               Begin VB.ComboBox cboCoupon 
+                  Height          =   315
+                  ItemData        =   "P_01001.frx":4231
+                  Left            =   1860
+                  List            =   "P_01001.frx":423B
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   40
+                  Top             =   645
+                  Width           =   1365
+               End
+               Begin VB.ComboBox cboSale 
+                  Height          =   315
+                  ItemData        =   "P_01001.frx":424B
+                  Left            =   1860
+                  List            =   "P_01001.frx":4255
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   39
+                  Top             =   300
+                  Width           =   1365
+               End
+               Begin MSComCtl2.DTPicker dtpSaleStart 
+                  Height          =   315
+                  Left            =   4335
+                  TabIndex        =   42
+                  Top             =   300
+                  Width           =   1530
+                  _ExtentX        =   2699
+                  _ExtentY        =   556
+                  _Version        =   393216
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "굴림체"
+                     Size            =   9.75
+                     Charset         =   129
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  CustomFormat    =   "yyyy-MM-dd"
+                  Format          =   61997057
+                  CurrentDate     =   40066
+               End
+               Begin MSComCtl2.DTPicker dtpSaleEnd 
+                  Height          =   315
+                  Left            =   6075
+                  TabIndex        =   43
+                  Top             =   300
+                  Width           =   1530
+                  _ExtentX        =   2699
+                  _ExtentY        =   556
+                  _Version        =   393216
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "굴림체"
+                     Size            =   9.75
+                     Charset         =   129
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  CustomFormat    =   "yyyy-MM-dd"
+                  Format          =   61997057
+                  CurrentDate     =   40066
+               End
+               Begin MSComCtl2.DTPicker dtpCouponStart 
+                  Height          =   315
+                  Left            =   4335
+                  TabIndex        =   44
+                  Top             =   645
+                  Width           =   1530
+                  _ExtentX        =   2699
+                  _ExtentY        =   556
+                  _Version        =   393216
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "굴림체"
+                     Size            =   9.75
+                     Charset         =   129
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  CustomFormat    =   "yyyy-MM-dd"
+                  Format          =   61997057
+                  CurrentDate     =   40066
+               End
+               Begin MSComCtl2.DTPicker dtpCouponEnd 
+                  Height          =   315
+                  Left            =   6075
+                  TabIndex        =   45
+                  Top             =   645
+                  Width           =   1530
+                  _ExtentX        =   2699
+                  _ExtentY        =   556
+                  _Version        =   393216
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "굴림체"
+                     Size            =   9.75
+                     Charset         =   129
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  CustomFormat    =   "yyyy-MM-dd"
+                  Format          =   61997057
+                  CurrentDate     =   40066
+               End
+               Begin CSTextLibCtl.sidbEdit txtSale 
+                  Height          =   315
+                  Left            =   3255
+                  TabIndex        =   46
+                  Top             =   300
+                  Width           =   750
+                  _Version        =   262145
+                  _ExtentX        =   1323
+                  _ExtentY        =   556
+                  _StockProps     =   125
+                  Text            =   " 0"
+                  ForeColor       =   -2147483640
+                  BackColor       =   -2147483643
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "Tahoma"
+                     Size            =   9.76
+                     Charset         =   0
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  DataProperty    =   2
+                  FocusSelect     =   -1  'True
+                  Insert          =   0   'False
+                  Modified        =   -1  'True
+                  HideSelection   =   -1  'True
+                  RawData         =   ""
+                  Text            =   " 0"
+                  StartText.x     =   2
+                  StartText.y     =   2
+                  FirstVisPos     =   0
+                  HiAnchor        =   0
+                  HiNew           =   0
+                  CaretHeight     =   16
+                  CurNumDataChars =   0
+                  MaxDataChars    =   0
+                  FirstDataPos    =   0
+                  CurPos          =   0
+                  MaxLen          =   0
+                  DataReadOnly    =   0   'False
+                  Mask            =   ""
+                  Justification   =   2
+                  FmtControl      =   1
+                  NumDecDigits    =   0
+                  Undo            =   0
+                  Data            =   0
+               End
+               Begin CSTextLibCtl.sidbEdit txtCoupon 
+                  Height          =   315
+                  Left            =   3255
+                  TabIndex        =   47
+                  Top             =   645
+                  Width           =   750
+                  _Version        =   262145
+                  _ExtentX        =   1323
+                  _ExtentY        =   556
+                  _StockProps     =   125
+                  Text            =   " 0"
+                  ForeColor       =   -2147483640
+                  BackColor       =   -2147483643
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "Tahoma"
+                     Size            =   9.76
+                     Charset         =   0
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  DataProperty    =   2
+                  FocusSelect     =   -1  'True
+                  Insert          =   0   'False
+                  Modified        =   -1  'True
+                  HideSelection   =   -1  'True
+                  RawData         =   ""
+                  Text            =   " 0"
+                  StartText.x     =   2
+                  StartText.y     =   2
+                  FirstVisPos     =   0
+                  HiAnchor        =   0
+                  HiNew           =   0
+                  CaretHeight     =   16
+                  CurNumDataChars =   0
+                  MaxDataChars    =   0
+                  FirstDataPos    =   0
+                  CurPos          =   0
+                  MaxLen          =   0
+                  DataReadOnly    =   0   'False
+                  Mask            =   ""
+                  Justification   =   2
+                  FmtControl      =   1
+                  NumDecDigits    =   0
+                  Undo            =   0
+                  Data            =   0
+               End
+               Begin CSTextLibCtl.sidbEdit txtLuxury 
+                  Height          =   315
+                  Left            =   1860
+                  TabIndex        =   48
+                  Top             =   990
+                  Width           =   1080
+                  _Version        =   262145
+                  _ExtentX        =   1905
+                  _ExtentY        =   556
+                  _StockProps     =   125
+                  Text            =   " 0"
+                  ForeColor       =   -2147483640
+                  BackColor       =   -2147483643
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "Tahoma"
+                     Size            =   9.76
+                     Charset         =   0
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  DataProperty    =   2
+                  FocusSelect     =   -1  'True
+                  Insert          =   0   'False
+                  Modified        =   -1  'True
+                  HideSelection   =   -1  'True
+                  RawData         =   ""
+                  Text            =   " 0"
+                  StartText.x     =   2
+                  StartText.y     =   2
+                  FirstVisPos     =   0
+                  HiAnchor        =   0
+                  HiNew           =   0
+                  CaretHeight     =   16
+                  CurNumDataChars =   0
+                  MaxDataChars    =   0
+                  FirstDataPos    =   0
+                  CurPos          =   0
+                  MaxLen          =   0
+                  DataReadOnly    =   0   'False
+                  Mask            =   ""
+                  Justification   =   2
+                  FmtControl      =   1
+                  NumDecDigits    =   0
+                  Undo            =   0
+                  Data            =   0
+               End
+               Begin VB.Label Label1 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "%"
+                  Height          =   195
+                  Index           =   5
+                  Left            =   4050
+                  TabIndex        =   57
+                  Top             =   360
+                  Width           =   105
+               End
+               Begin VB.Label Label1 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "%"
+                  Height          =   195
+                  Index           =   6
+                  Left            =   3030
+                  TabIndex        =   56
+                  Top             =   1050
+                  Width           =   105
+               End
+               Begin VB.Label Label1 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "%"
+                  Height          =   195
+                  Index           =   7
+                  Left            =   4050
+                  TabIndex        =   55
+                  Top             =   705
+                  Width           =   105
+               End
+               Begin VB.Label Label1 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "~"
+                  Height          =   195
+                  Index           =   10
+                  Left            =   5895
+                  TabIndex        =   54
+                  Top             =   705
+                  Width           =   105
+               End
+               Begin VB.Label Label1 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "~"
+                  Height          =   195
+                  Index           =   9
+                  Left            =   5895
+                  TabIndex        =   53
+                  Top             =   360
+                  Width           =   105
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "지정할인 사용:"
+                  Height          =   255
+                  Index           =   29
+                  Left            =   30
+                  TabIndex        =   52
+                  Top             =   345
+                  Width           =   1785
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "세탁비환불 사용:"
+                  Height          =   255
+                  Index           =   31
+                  Left            =   30
+                  TabIndex        =   51
+                  Top             =   1395
+                  Width           =   1785
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "고가세탁 비율:"
+                  Height          =   255
+                  Index           =   32
+                  Left            =   30
+                  TabIndex        =   50
+                  Top             =   1065
+                  Width           =   1785
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "특정할인 사용:"
+                  Height          =   255
+                  Index           =   33
+                  Left            =   30
+                  TabIndex        =   49
+                  Top             =   705
+                  Width           =   1785
+               End
+            End
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   1785
+               Index           =   0
+               Left            =   120
+               TabIndex        =   58
+               Top             =   120
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   3149
+               _StockProps     =   79
+               Caption         =   "※ 마일리지 "
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.ComboBox cboMileage 
+                  Height          =   315
+                  ItemData        =   "P_01001.frx":4265
+                  Left            =   2115
+                  List            =   "P_01001.frx":426F
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   59
+                  Top             =   300
+                  Width           =   1500
+               End
+               Begin CSTextLibCtl.sidbEdit txtMileage 
+                  Height          =   315
+                  Index           =   2
+                  Left            =   2010
+                  TabIndex        =   60
+                  Top             =   1020
+                  Width           =   1230
+                  _Version        =   262145
+                  _ExtentX        =   2170
+                  _ExtentY        =   556
+                  _StockProps     =   125
+                  Text            =   " 0"
+                  ForeColor       =   -2147483640
+                  BackColor       =   -2147483643
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "Tahoma"
+                     Size            =   9.76
+                     Charset         =   0
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  DataProperty    =   2
+                  FocusSelect     =   -1  'True
+                  Insert          =   0   'False
+                  Modified        =   -1  'True
+                  HideSelection   =   -1  'True
+                  RawData         =   ""
+                  Text            =   " 0"
+                  StartText.x     =   2
+                  StartText.y     =   2
+                  FirstVisPos     =   0
+                  HiAnchor        =   0
+                  HiNew           =   0
+                  CaretHeight     =   16
+                  CurNumDataChars =   0
+                  MaxDataChars    =   0
+                  FirstDataPos    =   0
+                  CurPos          =   0
+                  MaxLen          =   0
+                  DataReadOnly    =   0   'False
+                  Mask            =   ""
+                  Justification   =   2
+                  FmtControl      =   1
+                  NumDecDigits    =   0
+                  Undo            =   0
+                  Data            =   0
+               End
+               Begin CSTextLibCtl.sidbEdit txtMileage 
+                  Height          =   315
+                  Index           =   0
+                  Left            =   2760
+                  TabIndex        =   61
+                  Top             =   660
+                  Width           =   1140
+                  _Version        =   262145
+                  _ExtentX        =   2011
+                  _ExtentY        =   556
+                  _StockProps     =   125
+                  Text            =   " 0"
+                  ForeColor       =   -2147483640
+                  BackColor       =   -2147483643
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "Tahoma"
+                     Size            =   9.76
+                     Charset         =   0
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  DataProperty    =   2
+                  FocusSelect     =   -1  'True
+                  Insert          =   0   'False
+                  Modified        =   -1  'True
+                  HideSelection   =   -1  'True
+                  RawData         =   ""
+                  Text            =   " 0"
+                  StartText.x     =   2
+                  StartText.y     =   2
+                  FirstVisPos     =   0
+                  HiAnchor        =   0
+                  HiNew           =   0
+                  CaretHeight     =   16
+                  CurNumDataChars =   0
+                  MaxDataChars    =   0
+                  FirstDataPos    =   0
+                  CurPos          =   0
+                  MaxLen          =   0
+                  DataReadOnly    =   0   'False
+                  Mask            =   ""
+                  Justification   =   2
+                  FmtControl      =   1
+                  NumDecDigits    =   0
+                  Undo            =   0
+                  Data            =   0
+               End
+               Begin CSTextLibCtl.sidbEdit txtMileage 
+                  Height          =   315
+                  Index           =   1
+                  Left            =   4455
+                  TabIndex        =   62
+                  Top             =   660
+                  Width           =   1005
+                  _Version        =   262145
+                  _ExtentX        =   1773
+                  _ExtentY        =   556
+                  _StockProps     =   125
+                  Text            =   " 0"
+                  ForeColor       =   -2147483640
+                  BackColor       =   -2147483643
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "Tahoma"
+                     Size            =   9.76
+                     Charset         =   0
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  DataProperty    =   2
+                  FocusSelect     =   -1  'True
+                  Insert          =   0   'False
+                  Modified        =   -1  'True
+                  HideSelection   =   -1  'True
+                  RawData         =   ""
+                  Text            =   " 0"
+                  StartText.x     =   2
+                  StartText.y     =   2
+                  FirstVisPos     =   0
+                  HiAnchor        =   0
+                  HiNew           =   0
+                  CaretHeight     =   16
+                  CurNumDataChars =   0
+                  MaxDataChars    =   0
+                  FirstDataPos    =   0
+                  CurPos          =   0
+                  MaxLen          =   0
+                  DataReadOnly    =   0   'False
+                  Mask            =   ""
+                  Justification   =   2
+                  FmtControl      =   1
+                  NumDecDigits    =   0
+                  Undo            =   0
+                  Data            =   0
+               End
+               Begin VB.Label Label2 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "마일리지 금액은 '100'일이 지나면 자동삭제됩니다."
+                  ForeColor       =   &H00C00000&
+                  Height          =   195
+                  Index           =   4
+                  Left            =   165
+                  TabIndex        =   66
+                  Top             =   1485
+                  Width           =   5040
+               End
+               Begin VB.Label Label2 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "마일리지 적립은 이용요금            원에           원 적립 됩니다."
+                  Height          =   195
+                  Index           =   30
+                  Left            =   165
+                  TabIndex        =   65
+                  Top             =   720
+                  Width           =   6930
+               End
+               Begin VB.Label Label2 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "적립된 마일리지는             원 이상 적립 되어야 사용이 가능합니다."
+                  Height          =   195
+                  Index           =   5
+                  Left            =   165
+                  TabIndex        =   64
+                  Top             =   1080
+                  Width           =   7140
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   2  '가운데 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "마일리지 사용여부:"
+                  Height          =   255
+                  Index           =   16
+                  Left            =   165
+                  TabIndex        =   63
+                  Top             =   360
+                  Width           =   1935
+               End
+            End
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   1500
+               Index           =   7
+               Left            =   120
+               TabIndex        =   67
+               Top             =   3990
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   2646
+               _StockProps     =   79
+               Caption         =   "※ 로얄티 관련"
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.ComboBox cboRovalty 
+                  Height          =   315
+                  Index           =   1
+                  ItemData        =   "P_01001.frx":427F
+                  Left            =   1860
+                  List            =   "P_01001.frx":4289
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   167
+                  Top             =   690
+                  Width           =   1365
+               End
+               Begin VB.TextBox txtRovalty 
+                  Alignment       =   1  '오른쪽 맞춤
+                  Height          =   315
+                  Index           =   1
+                  Left            =   3360
+                  TabIndex        =   166
+                  Top             =   660
+                  Width           =   1515
+               End
+               Begin VB.TextBox txtRovalty 
+                  Alignment       =   1  '오른쪽 맞춤
+                  Height          =   315
+                  Index           =   2
+                  Left            =   3360
+                  TabIndex        =   165
+                  Top             =   1050
+                  Width           =   1515
+               End
+               Begin VB.TextBox txtRovalty 
+                  Alignment       =   1  '오른쪽 맞춤
+                  Height          =   315
+                  Index           =   0
+                  Left            =   3360
+                  TabIndex        =   164
+                  Top             =   270
+                  Width           =   1515
+               End
+               Begin VB.ComboBox cboRovalty 
+                  Height          =   315
+                  Index           =   0
+                  ItemData        =   "P_01001.frx":4299
+                  Left            =   1860
+                  List            =   "P_01001.frx":42A3
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   69
+                  Top             =   300
+                  Width           =   1365
+               End
+               Begin VB.ComboBox cboRovalty 
+                  Height          =   315
+                  Index           =   2
+                  ItemData        =   "P_01001.frx":42B3
+                  Left            =   1860
+                  List            =   "P_01001.frx":42BD
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   68
+                  Top             =   1065
+                  Width           =   1365
+               End
+               Begin VB.Label Label1 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "% ex. 1.5 (매장 매출분의 적용 비율)"
+                  Height          =   195
+                  Index           =   1
+                  Left            =   4890
+                  TabIndex        =   169
+                  Top             =   750
+                  Width           =   3675
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "로얄티 적용 2:"
+                  Height          =   255
+                  Index           =   1
+                  Left            =   30
+                  TabIndex        =   168
+                  Top             =   705
+                  Width           =   1785
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "수수료 지원 적용:"
+                  Height          =   255
+                  Index           =   0
+                  Left            =   30
+                  TabIndex        =   73
+                  Top             =   1125
+                  Width           =   1785
+               End
+               Begin VB.Label Label2 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "로얄티 적용 1:"
+                  Height          =   255
+                  Index           =   3
+                  Left            =   30
+                  TabIndex        =   72
+                  Top             =   345
+                  Width           =   1785
+               End
+               Begin VB.Label Label1 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "% ex. 0.75 (카드 승인 수수료 지원 금액)"
+                  Height          =   195
+                  Index           =   2
+                  Left            =   4890
+                  TabIndex        =   71
+                  Top             =   1125
+                  Width           =   4095
+               End
+               Begin VB.Label Label1 
+                  AutoSize        =   -1  'True
+                  BackStyle       =   0  '투명
+                  Caption         =   "% ex. 5.5 (전체 매출분의 적용 비율)"
+                  Height          =   195
+                  Index           =   4
+                  Left            =   4890
+                  TabIndex        =   70
+                  Top             =   360
+                  Width           =   3675
+               End
+            End
+         End
+         Begin XtremeSuiteControls.TabControlPage TabControlPage 
+            Height          =   10710
+            Index           =   0
+            Left            =   30
+            TabIndex        =   74
+            Top             =   420
+            Width           =   12495
+            _Version        =   851970
+            _ExtentX        =   22040
+            _ExtentY        =   18891
+            _StockProps     =   1
+            BackColor       =   16777215
+            Page            =   0
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   3600
+               Index           =   5
+               Left            =   120
+               TabIndex        =   75
+               Top             =   4155
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   6350
+               _StockProps     =   79
+               Caption         =   "※ 추가 정보 "
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.TextBox txtInput 
+                  Enabled         =   0   'False
+                  Height          =   315
+                  Index           =   20
+                  Left            =   7260
+                  TabIndex        =   172
+                  Top             =   2430
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   11
+                  Left            =   7260
+                  TabIndex        =   85
+                  Top             =   660
+                  Width           =   3735
+               End
+               Begin VB.ComboBox cboInput 
+                  Height          =   315
+                  Index           =   5
+                  Left            =   1530
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   84
+                  Top             =   1020
+                  Width           =   3735
+               End
+               Begin VB.ComboBox cboInput 
+                  Height          =   315
+                  Index           =   1
+                  Left            =   1530
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   83
+                  Top             =   2100
+                  Width           =   3735
+               End
+               Begin VB.ComboBox cboInput 
+                  Height          =   315
+                  Index           =   0
+                  Left            =   1530
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   82
+                  Top             =   1380
+                  Width           =   3735
+               End
+               Begin VB.ComboBox cboInput 
+                  Height          =   315
+                  Index           =   4
+                  ItemData        =   "P_01001.frx":42CD
+                  Left            =   1530
+                  List            =   "P_01001.frx":42CF
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   81
+                  Top             =   300
+                  Width           =   3735
+               End
+               Begin VB.ComboBox cboInput 
+                  Height          =   315
+                  Index           =   7
+                  Left            =   7260
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   79
+                  Top             =   1740
+                  Width           =   3735
+               End
+               Begin VB.ComboBox cboInput 
+                  Height          =   315
+                  Index           =   2
+                  Left            =   1530
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   78
+                  Top             =   2430
+                  Width           =   3735
+               End
+               Begin VB.ComboBox cboInput 
+                  Height          =   315
+                  Index           =   3
+                  Left            =   1530
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   76
+                  Top             =   1740
+                  Width           =   3735
+               End
+               Begin RichTextLib.RichTextBox RichTextBox1 
+                  Height          =   795
+                  Left            =   1530
+                  TabIndex        =   77
+                  Top             =   2820
+                  Width           =   9465
+                  _ExtentX        =   16695
+                  _ExtentY        =   1402
+                  _Version        =   393217
+                  ScrollBars      =   2
+                  TextRTF         =   $"P_01001.frx":42D1
+               End
+               Begin XtremeSuiteControls.CheckBox chkWeek 
+                  Height          =   285
+                  Index           =   0
+                  Left            =   7275
+                  TabIndex        =   80
+                  Top             =   300
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "일"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin MSComCtl2.DTPicker dtInput 
+                  Height          =   315
+                  Index           =   0
+                  Left            =   7260
+                  TabIndex        =   86
+                  Top             =   1020
+                  Width           =   3735
+                  _ExtentX        =   6588
+                  _ExtentY        =   556
+                  _Version        =   393216
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "굴림체"
+                     Size            =   9.75
+                     Charset         =   129
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  CheckBox        =   -1  'True
+                  Format          =   61997056
+                  CurrentDate     =   36684
+               End
+               Begin MSComCtl2.DTPicker dtInput 
+                  Height          =   315
+                  Index           =   1
+                  Left            =   7260
+                  TabIndex        =   87
+                  Top             =   1380
+                  Width           =   3735
+                  _ExtentX        =   6588
+                  _ExtentY        =   556
+                  _Version        =   393216
+                  CheckBox        =   -1  'True
+                  Format          =   61997056
+                  CurrentDate     =   36684
+               End
+               Begin XtremeSuiteControls.CheckBox chkWeek 
+                  Height          =   285
+                  Index           =   1
+                  Left            =   7830
+                  TabIndex        =   88
+                  Top             =   300
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "월"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkWeek 
+                  Height          =   285
+                  Index           =   2
+                  Left            =   8370
+                  TabIndex        =   89
+                  Top             =   300
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "화"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkWeek 
+                  Height          =   285
+                  Index           =   3
+                  Left            =   8925
+                  TabIndex        =   90
+                  Top             =   300
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "수"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkWeek 
+                  Height          =   285
+                  Index           =   4
+                  Left            =   9465
+                  TabIndex        =   91
+                  Top             =   300
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "목"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkWeek 
+                  Height          =   285
+                  Index           =   5
+                  Left            =   10020
+                  TabIndex        =   92
+                  Top             =   300
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "금"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkWeek 
+                  Height          =   285
+                  Index           =   6
+                  Left            =   10560
+                  TabIndex        =   93
+                  Top             =   300
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "토"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkDay 
+                  Height          =   285
+                  Index           =   0
+                  Left            =   1545
+                  TabIndex        =   94
+                  Top             =   675
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "일"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkDay 
+                  Height          =   285
+                  Index           =   1
+                  Left            =   2100
+                  TabIndex        =   95
+                  Top             =   675
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "월"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkDay 
+                  Height          =   285
+                  Index           =   2
+                  Left            =   2640
+                  TabIndex        =   96
+                  Top             =   675
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "화"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkDay 
+                  Height          =   285
+                  Index           =   3
+                  Left            =   3195
+                  TabIndex        =   97
+                  Top             =   675
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "수"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkDay 
+                  Height          =   285
+                  Index           =   4
+                  Left            =   3735
+                  TabIndex        =   98
+                  Top             =   675
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "목"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkDay 
+                  Height          =   285
+                  Index           =   5
+                  Left            =   4290
+                  TabIndex        =   99
+                  Top             =   675
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "금"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin XtremeSuiteControls.CheckBox chkDay 
+                  Height          =   285
+                  Index           =   6
+                  Left            =   4830
+                  TabIndex        =   100
+                  Top             =   675
+                  Width           =   420
+                  _Version        =   851970
+                  _ExtentX        =   741
+                  _ExtentY        =   503
+                  _StockProps     =   79
+                  Caption         =   "토"
+                  BackColor       =   16777215
+                  Appearance      =   6
+               End
+               Begin MSComCtl2.DTPicker dtInput 
+                  Height          =   315
+                  Index           =   7
+                  Left            =   7260
+                  TabIndex        =   170
+                  Top             =   2100
+                  Width           =   3735
+                  _ExtentX        =   6588
+                  _ExtentY        =   556
+                  _Version        =   393216
+                  CheckBox        =   -1  'True
+                  Format          =   61997056
+                  CurrentDate     =   36684
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "최종 접속일자:"
+                  Height          =   225
+                  Index           =   32
+                  Left            =   5220
+                  TabIndex        =   173
+                  Top             =   2475
+                  Width           =   1980
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "P/G 사용 종료일:"
+                  Height          =   225
+                  Index           =   31
+                  Left            =   5490
+                  TabIndex        =   171
+                  ToolTipText     =   "종료일 까지 접속 가능 합니다."
+                  Top             =   2160
+                  Width           =   1710
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "세탁소요일:"
+                  Height          =   225
+                  Index           =   23
+                  Left            =   5730
+                  TabIndex        =   113
+                  Top             =   705
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "영수증프린터:"
+                  Height          =   225
+                  Index           =   22
+                  Left            =   0
+                  TabIndex        =   112
+                  Top             =   1065
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "영업 담당자:"
+                  Height          =   225
+                  Index           =   20
+                  Left            =   0
+                  TabIndex        =   111
+                  Top             =   1440
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "오픈일자:"
+                  Height          =   225
+                  Index           =   19
+                  Left            =   5730
+                  TabIndex        =   110
+                  Top             =   1080
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "기사:"
+                  Height          =   225
+                  Index           =   18
+                  Left            =   0
+                  TabIndex        =   109
+                  Top             =   2160
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "폐점일자:"
+                  Height          =   225
+                  Index           =   17
+                  Left            =   5730
+                  TabIndex        =   108
+                  Top             =   1440
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "가맹점구분:"
+                  Height          =   225
+                  Index           =   16
+                  Left            =   0
+                  TabIndex        =   107
+                  Top             =   345
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "세트상품세일:"
+                  Height          =   225
+                  Index           =   15
+                  Left            =   5730
+                  TabIndex        =   106
+                  Top             =   330
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "요일세일:"
+                  Height          =   225
+                  Index           =   11
+                  Left            =   0
+                  TabIndex        =   105
+                  Top             =   705
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "계약상태:"
+                  Height          =   225
+                  Index           =   25
+                  Left            =   5730
+                  TabIndex        =   104
+                  Top             =   1785
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "수금구분:"
+                  Height          =   225
+                  Index           =   14
+                  Left            =   0
+                  TabIndex        =   103
+                  Top             =   2475
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "메모:"
+                  Height          =   225
+                  Index           =   29
+                  Left            =   0
+                  TabIndex        =   102
+                  Top             =   2910
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "관리 담당자:"
+                  Height          =   225
+                  Index           =   30
+                  Left            =   0
+                  TabIndex        =   101
+                  Top             =   1830
+                  Width           =   1470
+               End
+            End
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   1815
+               Index           =   4
+               Left            =   120
+               TabIndex        =   114
+               Top             =   120
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   3201
+               _StockProps     =   79
+               Caption         =   "※ 기본 정보 "
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   21
+                  Left            =   6930
+                  TabIndex        =   186
+                  Top             =   270
+                  Width           =   3735
+               End
+               Begin VB.CommandButton Command1 
+                  Caption         =   "..."
+                  Height          =   315
+                  Left            =   10200
+                  TabIndex        =   177
+                  Top             =   990
+                  Width           =   465
+               End
+               Begin VB.ComboBox cboMaster 
+                  Height          =   315
+                  Left            =   1530
+                  Style           =   2  '드롭다운 목록
+                  TabIndex        =   174
+                  Top             =   1350
+                  Width           =   3765
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   5
+                  Left            =   1530
+                  TabIndex        =   119
+                  Top             =   1005
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   4
+                  Left            =   6960
+                  TabIndex        =   118
+                  Top             =   1005
+                  Width           =   3225
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   3
+                  Left            =   6930
+                  TabIndex        =   117
+                  Top             =   645
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   2
+                  Left            =   1530
+                  TabIndex        =   116
+                  Top             =   645
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   0
+                  Left            =   1530
+                  TabIndex        =   115
+                  Top             =   285
+                  Width           =   3735
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "점 주 명:"
+                  Height          =   225
+                  Index           =   34
+                  Left            =   5415
+                  TabIndex        =   187
+                  Top             =   315
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  BackStyle       =   0  '투명
+                  Caption         =   "http://sms.uplus.co.kr/에 등록된 번호만 입력 가능 합니다. 반드시 전산실에 먼저 등록 하여 주십시요."
+                  ForeColor       =   &H000000FF&
+                  Height          =   585
+                  Index           =   33
+                  Left            =   5550
+                  TabIndex        =   176
+                  Top             =   1320
+                  Width           =   5430
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "지사 정보:"
+                  Height          =   225
+                  Index           =   28
+                  Left            =   0
+                  TabIndex        =   175
+                  Top             =   1425
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "휴대전화:"
+                  Height          =   225
+                  Index           =   5
+                  Left            =   15
+                  TabIndex        =   124
+                  Top             =   1050
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "문자발신전화:"
+                  Height          =   225
+                  Index           =   4
+                  Left            =   5430
+                  TabIndex        =   123
+                  Top             =   1050
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "매장전화:"
+                  Height          =   225
+                  Index           =   3
+                  Left            =   5415
+                  TabIndex        =   122
+                  Top             =   690
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "가맹점명:"
+                  Height          =   225
+                  Index           =   1
+                  Left            =   0
+                  TabIndex        =   121
+                  Top             =   690
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "가맹점코드:"
+                  Height          =   225
+                  Index           =   0
+                  Left            =   0
+                  TabIndex        =   120
+                  Top             =   345
+                  Width           =   1470
+               End
+            End
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   1050
+               Index           =   3
+               Left            =   120
+               TabIndex        =   125
+               Top             =   7800
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   1852
+               _StockProps     =   79
+               Caption         =   "※ 바코드택 정보"
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   13
+                  Left            =   6930
+                  TabIndex        =   127
+                  Top             =   660
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   12
+                  Left            =   1530
+                  TabIndex        =   126
+                  Top             =   660
+                  Width           =   3735
+               End
+               Begin MSComCtl2.DTPicker dtInput 
+                  Height          =   315
+                  Index           =   2
+                  Left            =   1530
+                  TabIndex        =   128
+                  Top             =   300
+                  Width           =   3735
+                  _ExtentX        =   6588
+                  _ExtentY        =   556
+                  _Version        =   393216
+                  BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                     Name            =   "굴림체"
+                     Size            =   9.75
+                     Charset         =   129
+                     Weight          =   400
+                     Underline       =   0   'False
+                     Italic          =   0   'False
+                     Strikethrough   =   0   'False
+                  EndProperty
+                  CheckBox        =   -1  'True
+                  Format          =   61997056
+                  CurrentDate     =   36684
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "TAG 적용일자:"
+                  Height          =   225
+                  Index           =   21
+                  Left            =   15
+                  TabIndex        =   131
+                  Top             =   360
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "TAG 색상:"
+                  Height          =   225
+                  Index           =   13
+                  Left            =   5415
+                  TabIndex        =   130
+                  Top             =   705
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "TAG 코드:"
+                  Height          =   225
+                  Index           =   12
+                  Left            =   0
+                  TabIndex        =   129
+                  Top             =   705
+                  Width           =   1470
+               End
+            End
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   2145
+               Index           =   2
+               Left            =   120
+               TabIndex        =   132
+               Top             =   1950
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   3784
+               _StockProps     =   79
+               Caption         =   "※ 사업자등록 정보 "
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   1
+                  Left            =   6915
+                  TabIndex        =   184
+                  Top             =   270
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   9
+                  Left            =   1530
+                  MaxLength       =   50
+                  TabIndex        =   140
+                  Top             =   1020
+                  Width           =   6915
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   8
+                  Left            =   6930
+                  TabIndex        =   139
+                  Top             =   630
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   10
+                  Left            =   9660
+                  TabIndex        =   138
+                  Top             =   1005
+                  Width           =   1000
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   7
+                  Left            =   1530
+                  TabIndex        =   137
+                  Top             =   660
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   6
+                  Left            =   1530
+                  TabIndex        =   136
+                  Top             =   300
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   17
+                  Left            =   1530
+                  TabIndex        =   135
+                  Top             =   1380
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   18
+                  Left            =   1530
+                  TabIndex        =   134
+                  Top             =   1740
+                  Width           =   3735
+               End
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   19
+                  Left            =   6930
+                  TabIndex        =   133
+                  Top             =   1380
+                  Width           =   3735
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "대표자명:"
+                  Height          =   225
+                  Index           =   2
+                  Left            =   5400
+                  TabIndex        =   185
+                  Top             =   330
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "종목:"
+                  Height          =   225
+                  Index           =   10
+                  Left            =   5415
+                  TabIndex        =   148
+                  Top             =   690
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "우편번호:"
+                  Height          =   225
+                  Index           =   9
+                  Left            =   8145
+                  TabIndex        =   147
+                  Top             =   1080
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "사업장주소:"
+                  Height          =   225
+                  Index           =   8
+                  Left            =   0
+                  TabIndex        =   146
+                  Top             =   1080
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "업태:"
+                  Height          =   225
+                  Index           =   7
+                  Left            =   0
+                  TabIndex        =   145
+                  Top             =   690
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "사업자번호:"
+                  Height          =   225
+                  Index           =   6
+                  Left            =   0
+                  TabIndex        =   144
+                  Top             =   345
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "VAN IP:"
+                  Height          =   225
+                  Index           =   24
+                  Left            =   0
+                  TabIndex        =   143
+                  Top             =   1425
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "VAN PORT:"
+                  Height          =   225
+                  Index           =   26
+                  Left            =   0
+                  TabIndex        =   142
+                  Top             =   1770
+                  Width           =   1470
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "단말기번호:"
+                  Height          =   225
+                  Index           =   27
+                  Left            =   5415
+                  TabIndex        =   141
+                  Top             =   1440
+                  Width           =   1470
+               End
+            End
+            Begin XtremeSuiteControls.GroupBox GroupBox 
+               Height          =   1050
+               Index           =   8
+               Left            =   105
+               TabIndex        =   191
+               Top             =   8970
+               Width           =   11430
+               _Version        =   851970
+               _ExtentX        =   20161
+               _ExtentY        =   1852
+               _StockProps     =   79
+               Caption         =   "※ 바코드택 정보"
+               BackColor       =   16777215
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "굴림체"
+                  Size            =   9
+                  Charset         =   129
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Appearance      =   6
+               BorderStyle     =   1
+               Begin VB.TextBox txtInput 
+                  Height          =   315
+                  Index           =   22
+                  Left            =   1530
+                  TabIndex        =   192
+                  Top             =   315
+                  Width           =   3735
+               End
+               Begin VB.Label lblTitle 
+                  Alignment       =   1  '오른쪽 맞춤
+                  BackStyle       =   0  '투명
+                  Caption         =   "전산사용료:"
+                  Height          =   225
+                  Index           =   37
+                  Left            =   0
+                  TabIndex        =   193
+                  Top             =   360
+                  Width           =   1470
+               End
+            End
+         End
+      End
+      Begin FPSpreadADO.fpSpread spdView 
+         Height          =   11160
+         Left            =   15
+         TabIndex        =   149
+         Top             =   1320
+         Width           =   3525
+         _Version        =   524288
+         _ExtentX        =   6218
+         _ExtentY        =   19685
+         _StockProps     =   64
+         BackColorStyle  =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   3
+         ScrollBars      =   2
+         SpreadDesigner  =   "P_01001.frx":4376
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin Threed.SSPanel panInput 
+         Height          =   765
+         Left            =   15
+         TabIndex        =   150
+         Top             =   540
+         Width           =   16095
+         _ExtentX        =   28390
+         _ExtentY        =   1349
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         Begin VB.ComboBox cboOffice 
+            Height          =   315
+            Left            =   1245
+            TabIndex        =   152
+            Text            =   "cboOffice"
+            Top             =   75
+            Width           =   3405
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   8
+            Left            =   4890
+            TabIndex        =   151
+            Top             =   90
+            Width           =   1710
+            _Version        =   851970
+            _ExtentX        =   3016
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "매장 찾기"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_01001.frx":4860
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   11
+            Left            =   60
+            TabIndex        =   153
+            Top             =   75
+            Width           =   1155
+            _ExtentX        =   2037
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "지 사 명"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+      End
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   510
+         Left            =   15
+         TabIndex        =   154
+         Top             =   15
+         Width           =   7605
+         _ExtentX        =   13414
+         _ExtentY        =   900
+         _Version        =   262144
+         Font3D          =   1
+         ForeColor       =   255
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 가맹점 현황 (P_01001)"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_01001.frx":4DFA
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   510
+         Left            =   7635
+         TabIndex        =   155
+         Top             =   15
+         Width           =   8475
+         _ExtentX        =   14949
+         _ExtentY        =   900
+         _Version        =   262144
+         Font3D          =   3
+         ForeColor       =   192
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_01001.frx":4FFC
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   7
+            Left            =   6660
+            TabIndex        =   156
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "종료"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_01001.frx":51FE
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   6
+            Left            =   5730
+            TabIndex        =   157
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "엑셀"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01001.frx":5798
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   5
+            Left            =   4800
+            TabIndex        =   158
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "인쇄"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01001.frx":5D32
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   4
+            Left            =   3750
+            TabIndex        =   159
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "취소"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01001.frx":62CC
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   3
+            Left            =   2820
+            TabIndex        =   160
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "삭제"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01001.frx":6866
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   2
+            Left            =   1890
+            TabIndex        =   161
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "저장"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01001.frx":6E00
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   1
+            Left            =   960
+            TabIndex        =   162
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "신규"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01001.frx":739A
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   0
+            Left            =   30
+            TabIndex        =   163
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "조회"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_01001.frx":7934
+         End
+      End
+   End
+End
+Attribute VB_Name = "P_01001"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Dim RS01 As ADODB.Recordset
+Dim sValue() As String
+
+Dim Err_Num As Long
+Dim Err_Dec As String
+
+Dim sPrintOption As String
+
+Private Sub SPR_Resize()
+    On Error GoTo ErrRtn
+    
+    spdView1.Width = Me.Width - 3900
+
+    Exit Sub
+    
+ErrRtn:
+
+End Sub
+
+Private Sub Text_Clear()
+    On Error GoTo ErrRtn
+    
+    Dim i As Integer
+    
+    For i = 0 To 16
+        txtInput(i).Text = ""
+        txtInput(i).Tag = ""
+    Next i
+    
+    For i = 0 To 6
+        chkWeek(i).Value = xtpUnchecked
+        chkDay(i).Value = xtpUnchecked
+    Next i
+    
+    dtInput(0).Value = Date
+    dtInput(1).Value = Date
+    dtInput(4).Value = Date
+    
+    dtInput(0).Value = ""
+    dtInput(1).Value = ""
+    dtInput(4).Value = ""
+    
+    
+    dtInput(2).Tag = ""   '택적용일자
+    
+    For i = 0 To txtInput.Count - 1
+        txtInput(i).Text = ""
+    Next i
+    
+    For i = 0 To cboInput.Count - 1
+        If i = 2 Or i = 3 Or i = 6 Then
+            '3번째 지사 ComboBox 삭제...
+        Else
+            cboInput(i).ListIndex = -1
+        End If
+    Next i
+    
+    '바코드택 사용현황
+    spdView1.MaxRows = 0
+    
+    '지사변경
+    spdView2.MaxRows = 0
+    
+    dtInput(5).Value = Date
+    
+    cboOffice2.ListIndex = -1
+    cboOffice3.ListIndex = -1
+    
+    dtInput(6).Value = Date
+    dtInput(6).Value = ""
+    
+    dtInput(7).Value = Date
+    dtInput(7).Value = ""
+    
+    RichTextBox1.Text = ""
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Data_Display(지사코드 As String, Optional 가맹점코드 As String)
+    On Error GoTo ErrRtn
+    
+    ReDim sValue(2)
+    Dim nCnt    As Long
+    Dim vTemp   As Variant
+    
+    sValue(0) = 지사코드
+    sValue(1) = Format(Date, "YYYY-MM-DD")
+    sValue(2) = Format(Date, "YYYY-MM-DD")
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01001_10", sValue(), Err_Num, Err_Dec)
+    
+    With spdView
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1: .Text = RS01!가맹점코드 & "" ' 1
+            .Col = 2: .Text = RS01!가맹점명 & ""   ' 2
+            .Col = 3: .Text = RS01!지사코드 & ""   ' 2
+            
+            If RS01!가맹점상태 = "1" Then
+                .Col = -1: .ForeColor = vbBlue ': .FontUnderline = True
+                .RowHeight(.Row) = 14
+            
+            ElseIf RS01!가맹점상태 = "2" Then
+                .Col = -1: .ForeColor = vbRed ': .FontUnderline = True
+                .RowHeight(.Row) = 14
+            
+            ElseIf RS01!가맹점상태 = "3" Then
+                .Col = -1: .ForeColor = vbGreen ': .FontUnderline = True
+                .RowHeight(.Row) = 14
+            End If
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+        
+        If 가맹점코드 <> "" Then
+            cboOffice.Tag = 가맹점코드
+            Rtn = .SearchCol(1, 1, .MaxRows, 가맹점코드, SearchFlagsValue)
+            
+            If Rtn > -1 Then
+                .SetSelection 1, Rtn, .MaxCols, Rtn
+            End If
+        End If
+    End With
+    
+    Call Text_Clear
+    
+    ' 조회에서 매장 코드가 설정된 경우 해당 매장이 선택 되도록 한다.
+    DoEvents
+    If Trim(cboOffice.Tag) = "" Then Exit Sub
+    
+    With spdView
+        
+        Rtn = .SearchCol(1, 1, .MaxRows, Trim(cboOffice.Tag), SearchFlagsValue)
+        .Row = Rtn
+        .Action = ActionActiveCell
+        DoEvents
+        spdView_Click 1, Rtn
+        
+    End With
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub cmdPrint_Click()
+    Call DataScreen2
+'    panPrint.Visible = False
+End Sub
+
+Private Sub cboOffice_Click()
+
+    Call Data_Display(Mid(cboOffice.Text, 2, 4))
+    
+    Call Data_DisplayStoreList(Mid(cboOffice.Text, 2, 4))
+    
+End Sub
+
+ 
+Private Sub cboOffice_KeyPress(KeyAscii As Integer)
+    
+    If KeyAscii = vbKeyReturn Then
+        SearchString_한글 KeyAscii
+'    Else
+       ' SearchString KeyAscii
+    End If
+
+End Sub
+
+Private Sub cmdBtn_Click(Index As Integer)
+    On Error GoTo ErrRtn
+    
+    Select Case Index
+        Case 0
+            Call Data_Display(Mid(cboOffice.Text, 2, 4))  ' 조회
+            Call Data_DisplayStoreList(Mid(cboOffice.Text, 2, 4))  ' 조회
+            
+        Case 1: Call DataAdd        ' 신규
+        Case 2: Call DataSave       ' 저장
+        Case 3: Call DataDelete     ' 삭제
+        Case 4: Call DataCancel     ' 취소
+        Case 5: 'Call DataPrint      ' 인쇄
+        Case 6: Call Export_Excel(P_00000.cdgExcel, spdStoreList)      ' 엑셀
+        Case 7: Unload Me           ' 종료
+        Case 8: Call StoreFind      ' 매장찾기
+        Case 9
+            Load P_06010
+            P_06010.SetFocus
+            
+    End Select
+    
+'    Me.MousePointer = 0
+    
+    Exit Sub
+    
+ErrRtn:
+    Me.MousePointer = 0
+    
+    If Err.Number = "0" Then
+        
+    ElseIf Err.Number = "91" Then
+        End
+    Else
+        Resume Next
+    End If
+End Sub
+
+Private Sub cmdSubBtn_Click(Index As Integer)
+
+    If HeadOffice <> MASTER_OFFICE_CODE Then
+        MsgBox "사용권한이 없습니다.", vbInformation, "확인"
+        Exit Sub
+    End If
+
+
+    Select Case Index
+        Case 0: Call DataSubSave '택변경 저장
+        Case 1: Call DataSubDel  '택변경 삭제
+        
+        Case 2
+            Call DataMasterSave '지사변경 저장
+            Call spdView_Click(spdView.ActiveCol, spdView.ActiveRow)
+        
+        Case 3: Call DataMasterDel  '지사변경 삭제
+        
+        Case 4: Call DataSMSSave    'SMS 사용자 저장
+        
+    End Select
+End Sub
+
+' SMS 사용자 저장
+Private Sub DataSMSSave()
+    Dim nRow    As Long
+    
+    Rtn = MsgBox("저장하시겠습니까?", vbYesNo + vbInformation, "확인")
+    If Rtn = vbNo Then Exit Sub
+    
+    
+    '----------------------------------------------------------------------------
+    ReDim sValue(4)
+    
+    With spdViewSMS
+        For nRow = 1 To .DataRowCnt
+            .Row = nRow
+                            sValue(0) = Store.Code              '1 자사코드
+                            sValue(1) = txtInput(0).Text        '2 가맹점코드
+            .Col = 2:       sValue(2) = .Text                   '3 담당자코드
+            .Col = 1:       sValue(3) = IIf(.Text = "1", "Y", "N")                '4 전송여부
+    
+            If Trim(sValue(1)) = "" Then
+                MsgBox "매장을 선택하여 주십시요", vbInformation, "확인"
+                Exit Sub
+            End If
+            
+            Call ExecPro("SP_01001_SMS_01", sValue(), Err_Num, Err_Dec)
+            DoEvents
+    
+        Next nRow
+    
+        If Err_Num = 0 Then
+            MsgBox "해당되는 데이터가 정상적으로 저장이 되었습니다.", vbInformation
+        End If
+
+    End With
+
+End Sub
+
+' 가맹점 지사변경 저장
+Private Sub DataMasterSave()
+    
+    
+    ' TB_가맹점지사변경 수정 - SP_01001_06
+    '----------------------------------------------------------------------------
+    ReDim sValue(4)
+    
+    sValue(0) = txtInput(0).Text                                    '1 가맹점코드
+    sValue(1) = Format(dtInput(5).Value, "YYYY-MM-DD")              '2 시작일자
+    sValue(2) = Mid(cboOffice2.Text, 2, 4)                          '3 이전지사코드
+    sValue(3) = Mid(cboOffice3.Text, 2, 4)                          '4 신규지사코드
+    
+    If Trim(sValue(0)) = "" Then
+        MsgBox "매장을 선택하여 주십시요", vbInformation, "확인"
+        Exit Sub
+    End If
+    
+    If Trim(sValue(2)) < "1000" Then
+        MsgBox "이전 지사를 선택하여 주십시요", vbInformation, "확인"
+        Exit Sub
+    End If
+    If Trim(sValue(3)) < "1000" Then
+        MsgBox "신규 지사를 선택하여 주십시요", vbInformation, "확인"
+        Exit Sub
+    End If
+    
+    
+    Rtn = MsgBox("저장하시겠습니까?", vbYesNo + vbInformation, "확인")
+    
+    If Rtn = vbNo Then Exit Sub
+    
+    
+    If IsNull(dtInput(6).Value) Then
+        sValue(4) = "2099-12-31"                                    '5 종료일자
+    Else
+        sValue(4) = Format(dtInput(6).Value, "YYYY-MM-DD")          '5
+    End If
+            
+    Call ExecPro("SP_01001_06", sValue(), Err_Num, Err_Dec)
+    DoEvents
+    
+    If Err_Num = 0 Then
+        MsgBox "해당되는 데이터가 정상적으로 저장이 되었습니다.", vbInformation
+    End If
+    
+    Call Data_Display4(txtInput(0).Text)
+End Sub
+
+' 가맹점 지사변경 삭제
+Private Sub DataMasterDel()
+    Rtn = MsgBox("삭제하시겠습니까?", vbYesNo + vbInformation, "확인")
+    
+    If Rtn = vbNo Then Exit Sub
+    
+    ReDim sValue(1)
+    
+    PanelsMsg ""
+    
+    If Trim(txtInput(0).Text) = "" Or Trim(Format(dtInput(5).Value, "YYYY-MM-DD")) = "" Then
+        MsgBox "해당되는 데이터가 삭제하지 못했습니다.", vbInformation, "확인"
+        
+        Call Data_Display4(txtInput(0).Text)
+        Exit Sub
+    End If
+    
+    sValue(0) = txtInput(0).Text                        ' 가맹점코드
+    sValue(1) = Format(dtInput(5).Value, "YYYY-MM-DD")  ' 시작일자
+    
+    '2011-03-25 수정 - LAUNDRY1000, 해당지사 DB, 2곳에 삭제
+    Call ExecPro("SP_01001_07", sValue(), Err_Num, Err_Dec)
+    DoEvents
+    
+    '2011-03-25 추가
+    If DBOpen_Master(Mid(cboOffice3.Text, 2, 4)) = True Then
+        Call ExecProMaster("SP_01001_07", sValue(), Err_Num, Err_Dec)
+    End If
+    
+    If Err_Num = 0 Then
+        MsgBox "해당되는 데이터가 정상적으로 삭제 되었습니다.", vbInformation
+    End If
+    
+    Call Data_Display4(txtInput(0).Text)
+End Sub
+
+' 가맹점 택변경 저장
+Private Sub DataSubSave()
+    Rtn = MsgBox("저장하시겠습니까?", vbYesNo + vbInformation, "확인")
+    
+    If Rtn = vbNo Then Exit Sub
+    
+    '----------------------------------------------------------------------------
+    ' TB_가맹점택 수정 - SP_01001_04_ALL
+    '----------------------------------------------------------------------------
+    ReDim sValue(4)
+    
+    sValue(0) = txtInput(0).Text                                    '1 가맹점코드
+    sValue(1) = Format(dtInput(3).Value, "YYYY-MM-DD")              '2 시작일자
+    sValue(2) = txtInput(14).Text                                   '3 지사코드
+    sValue(3) = txtInput(16).Text                                   '4 택코드
+    
+    If Trim(sValue(0)) = "" Then
+        MsgBox "매장을 선택하여 주십시요", vbInformation, "확인"
+        Exit Sub
+    End If
+    If Trim(sValue(2)) = "" Or Trim(sValue(3)) = "" Then
+        MsgBox "지사코드 및 택번호를 선택하여 주십시요", vbInformation, "확인"
+        Exit Sub
+    End If
+    
+    If IsNull(dtInput(4).Value) Then
+        sValue(4) = "2099-12-31"                                    '5 종료일자
+    Else
+        sValue(4) = Format(dtInput(4).Value, "YYYY-MM-DD")          '5
+    End If
+            
+    '2011-03-25 수정 - LAUNDRY1000, 해당지사 DB, 2곳에 저장
+    Call ExecPro("SP_01001_04_ALL", sValue(), Err_Num, Err_Dec)
+    DoEvents
+    
+    
+    '----------------------------------------------------------------------------
+    ' TB_가맹점택변경 - SP_STORE_CHANGE
+    '----------------------------------------------------------------------------
+    ReDim sValue(12)
+    
+    sValue(0) = "1"                                     ' 1
+    
+    With spdView1
+        .Row = .ActiveRow
+        .Col = 1: sValue(1) = .Text & ""                ' 2 시작일자
+        .Col = 3: sValue(2) = .Text & ""                ' 3 지사코드
+        .Col = 5: sValue(3) = .Text & ""                ' 4 택코드
+    End With
+        
+    sValue(4) = txtInput(0).Text & ""                   ' 5 가맹점코드
+    sValue(5) = txtInput(2).Text & ""                   ' 6 가맹점명
+    sValue(6) = Format(dtInput(4).Value, "YYYY-MM-DD")  ' 7
+    sValue(7) = txtInput(14).Text                       ' 8
+    sValue(8) = txtInput(16).Text                       ' 9
+    sValue(9) = txtInput(0).Text                        '10
+    sValue(10) = txtInput(2).Text                       '11
+    sValue(11) = UserID & ": " & USERNAME               '12
+    sValue(12) = Now & " EDIT"
+    
+    '2011-03-25 수정 - LAUNDRY1000, 해당지사 DB, 2곳에 저장
+    Call ExecPro("SP_STORE_CHANGE", sValue(), Err_Num, Err_Dec)
+    
+    '2011-03-25 추가
+    If DBOpen_Master(txtInput(14).Text) = True Then
+        Call ExecProMaster("SP_STORE_CHANGE", sValue(), Err_Num, Err_Dec)
+    End If
+    
+    If Err_Num = 0 Then
+        MsgBox "해당되는 데이터가 정상적으로 저장이 되었습니다.", vbInformation
+    End If
+    
+    Call Data_Display3(txtInput(0).Text)
+End Sub
+
+' 가맹점 택변경 삭제
+Private Sub DataSubDel()
+    Rtn = MsgBox("삭제하시겠습니까?", vbYesNo + vbInformation, "확인")
+    
+    If Rtn = vbNo Then Exit Sub
+    
+    ReDim sValue(1)
+    
+    If Trim(txtInput(0).Text) = "" Or Trim(Format(dtInput(3).Value, "YYYY-MM-DD")) = "" Then
+        MsgBox "해당되는 데이터가 삭제하지 못했습니다.", vbInformation, "확인"
+        
+        Call Data_Display3(txtInput(0).Text)
+        Exit Sub
+    End If
+    
+    sValue(0) = txtInput(0).Text                        ' 가맹점코드
+    sValue(1) = Format(dtInput(3).Value, "YYYY-MM-DD")  ' 시작일자
+    
+    '2011-03-25 수정 - LAUNDRY1000, 해당지사 DB, 2곳에 삭제
+    Call ExecPro("SP_01001_05_ALL", sValue(), Err_Num, Err_Dec)
+    DoEvents
+    
+    '2011-03-25 추가
+    If DBOpen_Master(txtInput(14).Text) = True Then
+        Call ExecProMaster("SP_01001_05_ALL", sValue(), Err_Num, Err_Dec)
+    End If
+    
+    If Err_Num = 0 Then
+        MsgBox "해당되는 데이터가 정상적으로 삭제 되었습니다.", vbInformation
+    End If
+    
+    Call Data_Display3(txtInput(0).Text)
+End Sub
+
+Private Sub Command1_Click()
+    Dim sMsg    As String
+    
+    sMsg = "전기통신사업법 제84조에 의하여 문자 발신 번호는 반드시 입력 하여야 합니다." & vbNewLine
+    sMsg = sMsg & vbNewLine
+    sMsg = sMsg & " 주요내용" & vbNewLine
+    sMsg = sMsg & " - 발신번호 없이 문자 전송 불가" & vbNewLine
+    sMsg = sMsg & " - 발신번호는 수신자가 실제 발신(통화)이 가능한 번호만 허용" & vbNewLine
+    sMsg = sMsg & " - 일반번호의 경우 지역번호(02,031등)를 앞자리에 포함한 번호만 허용" & vbNewLine
+    sMsg = sMsg & " - 대표번호는 8자리만 입력 허용되며,내선번호 포함불가" & vbNewLine
+    sMsg = sMsg & " - 030 번호의 경우 12자리까지 허용" & vbNewLine
+    
+    Call MsgBox(sMsg, vbInformation, "입력확인")
+
+End Sub
+
+Private Sub Form_Activate()
+    cmdBtn(5).Enabled = True
+    cmdBtn(6).Enabled = True
+    
+    '본사 여부
+    If HeadOffice = MASTER_OFFICE_CODE Then
+        cmdBtn(0).Enabled = True
+        cmdBtn(1).Enabled = True
+        cmdBtn(2).Enabled = True
+        cmdBtn(3).Enabled = True
+        cmdBtn(4).Enabled = True
+        
+        cmdSubBtn(0).Enabled = True
+        cmdSubBtn(1).Enabled = True
+        cmdSubBtn(2).Enabled = True
+        cmdSubBtn(3).Enabled = True
+        cmdSubBtn(4).Enabled = True
+        
+        
+        cboOffice.Locked = False
+    Else
+        cmdBtn(8).Visible = False
+        cboOffice.Locked = True
+    End If
+    
+    pnlHeader.Caption = " " & Me.Caption & " (" & Me.Name & ")"
+    
+    panInput.Caption = ""
+    DoEvents
+End Sub
+
+Private Sub Form_Load()
+    On Error GoTo ErrRtn
+    
+    With spdView
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        ' 지사코드 숨기기
+        .Col = 3:   .ColHidden = True
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+
+    With spdView1
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+
+    With spdView2
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+
+    Call Get_지사리스트(cboOffice)
+        
+    Dim i As Integer
+    
+    With cboOffice
+        For i = 0 To .ListCount - 1
+            If Mid(.List(i), 2, 4) = HeadOffice Then
+                .ListIndex = i
+                
+                Exit For
+            End If
+        Next i
+    End With
+    
+    Call ComboAdd                   '
+        
+    Call Get_지사리스트(cboOffice2) '
+    Call Get_지사리스트(cboOffice3) '
+    Call Get_지사리스트(cboMaster) '
+        
+    Call SPR_Resize
+    
+    TabControl.SelectedItem = 0
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Form_Resize()
+    Call SPR_Resize
+End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+    P_01001_Flag = False
+End Sub
+
+Private Sub Data_Display2(Optional iRow As Long = 0)
+    Dim i As Integer
+    
+    ReDim sValue(1)
+    
+    If iRow = 0 Then
+        spdView.Row = spdView.ActiveRow
+    Else
+        spdView.Row = iRow
+    End If
+    
+    spdView.Col = 1: sValue(0) = spdView.Text & "" '가맹점코드
+    
+'    If HeadOffice = MASTER_OFFICE_CODE Then
+'        If DBOpen_Master(Mid(cboOffice.Text, 2, 4)) = False Then Exit Sub
+'
+'        Set RS01 = New ADODB.Recordset
+'        Set RS01 = ExecProMaster("SP_01001_01", sValue(), Err_Num, Err_Dec)
+'    Else
+'        Set RS01 = New ADODB.Recordset
+'        Set RS01 = ExecPro("SP_01001_01", sValue(), Err_Num, Err_Dec)
+'    End If
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01001_01", sValue(), Err_Num, Err_Dec)
+    
+    If Not RS01.EOF Then
+        txtInput(0).Text = RS01!가맹점코드 & ""                          ' 1
+        txtInput(1).Text = RS01!대표자명 & ""                            ' 2
+        txtInput(2).Text = RS01!가맹점명 & ""                            ' 3
+        txtInput(21).Text = RS01!점주명 & ""                            ' 3
+        
+        txtInput(3).Text = RS01!매장전화번호 & ""                        ' 4
+        txtInput(4).Text = RS01!문자발신전화 & ""                        ' 5
+        txtInput(5).Text = RS01!휴대전화번호 & ""                        ' 6
+        
+        txtInput(6).Text = RS01!사업자번호 & ""                          ' 7
+        txtInput(7).Text = RS01!업태 & ""                                ' 8
+        txtInput(8).Text = RS01!종목 & ""                                ' 9
+        txtInput(9).Text = RS01!사업장주소 & ""                          '10
+        txtInput(10).Text = RS01!우편번호 & ""                           '11
+        
+        txtInput(17).Text = RS01!VAN_IP & ""                             '
+        txtInput(18).Text = RS01!VAN_PORT & ""                           '
+        txtInput(19).Text = RS01!단말기번호 & ""                         '
+        txtInput(22).Text = RS01!전산사용료 & ""
+        '------------------------------------------------------------
+        ' 가맹점구분
+        '------------------------------------------------------------
+        If IsNull(RS01!가맹점구분) Then
+            cboInput(4).ListIndex = -1                                   '12
+        Else
+            cboInput(4).ListIndex = -1
+            
+            For i = 0 To cboInput(4).ListCount - 1
+                If RS01!가맹점구분 = Mid(cboInput(4).List(i), 2, 1) Then '12
+                    cboInput(4).ListIndex = i
+                    Exit For
+                End If
+            Next i
+        End If
+                        
+        '------------------------------------------------------------
+        ' 요일세일                                                       '13
+        '------------------------------------------------------------
+        If IsNull(RS01!요일할인) Then
+            chkDay(0).Value = xtpUnchecked
+            chkDay(1).Value = xtpUnchecked
+            chkDay(2).Value = xtpUnchecked
+            chkDay(3).Value = xtpUnchecked
+            chkDay(4).Value = xtpUnchecked
+            chkDay(5).Value = xtpUnchecked
+            chkDay(6).Value = xtpUnchecked
+        Else
+            If Mid(RS01!요일할인, 1, 1) = "1" Then chkDay(0).Value = xtpChecked Else chkDay(0).Value = xtpUnchecked
+            If Mid(RS01!요일할인, 2, 1) = "1" Then chkDay(1).Value = xtpChecked Else chkDay(1).Value = xtpUnchecked
+            If Mid(RS01!요일할인, 3, 1) = "1" Then chkDay(2).Value = xtpChecked Else chkDay(2).Value = xtpUnchecked
+            If Mid(RS01!요일할인, 4, 1) = "1" Then chkDay(3).Value = xtpChecked Else chkDay(3).Value = xtpUnchecked
+            If Mid(RS01!요일할인, 5, 1) = "1" Then chkDay(4).Value = xtpChecked Else chkDay(4).Value = xtpUnchecked
+            If Mid(RS01!요일할인, 6, 1) = "1" Then chkDay(5).Value = xtpChecked Else chkDay(5).Value = xtpUnchecked
+            If Mid(RS01!요일할인, 7, 1) = "1" Then chkDay(6).Value = xtpChecked Else chkDay(6).Value = xtpUnchecked
+        End If
+        
+        '------------------------------------------------------------
+        ' 세트상품세일                                                   '14
+        '------------------------------------------------------------
+        If IsNull(RS01!세트상품세일) Then
+            chkWeek(0).Value = xtpUnchecked
+            chkWeek(1).Value = xtpUnchecked
+            chkWeek(2).Value = xtpUnchecked
+            chkWeek(3).Value = xtpUnchecked
+            chkWeek(4).Value = xtpUnchecked
+            chkWeek(5).Value = xtpUnchecked
+            chkWeek(6).Value = xtpUnchecked
+        Else
+            If Mid(RS01!세트상품세일, 1, 1) = "1" Then chkWeek(0).Value = xtpChecked Else chkWeek(0).Value = xtpUnchecked
+            If Mid(RS01!세트상품세일, 2, 1) = "1" Then chkWeek(1).Value = xtpChecked Else chkWeek(1).Value = xtpUnchecked
+            If Mid(RS01!세트상품세일, 3, 1) = "1" Then chkWeek(2).Value = xtpChecked Else chkWeek(2).Value = xtpUnchecked
+            If Mid(RS01!세트상품세일, 4, 1) = "1" Then chkWeek(3).Value = xtpChecked Else chkWeek(3).Value = xtpUnchecked
+            If Mid(RS01!세트상품세일, 5, 1) = "1" Then chkWeek(4).Value = xtpChecked Else chkWeek(4).Value = xtpUnchecked
+            If Mid(RS01!세트상품세일, 6, 1) = "1" Then chkWeek(5).Value = xtpChecked Else chkWeek(5).Value = xtpUnchecked
+            If Mid(RS01!세트상품세일, 7, 1) = "1" Then chkWeek(6).Value = xtpChecked Else chkWeek(6).Value = xtpUnchecked
+        End If
+        
+        '------------------------------------------------------------
+        ' 프린터
+        '------------------------------------------------------------
+        If IsNull(RS01!프린터) Then
+            cboInput(5).ListIndex = -1                                   '15
+        Else
+            cboInput(5).ListIndex = -1
+            
+            For i = 0 To cboInput(5).ListCount - 1
+                If RS01!프린터 = Mid(cboInput(5).List(i), 2, 1) Then
+                    cboInput(5).ListIndex = i                            '15
+                    Exit For
+                End If
+            Next i
+        End If
+        
+        txtInput(11).Text = RS01!세탁소요일 & ""                         '16
+        
+        '------------------------------------------------------------
+        ' 영업 담당자
+        '------------------------------------------------------------
+        If IsNull(RS01!담당자명) Then
+            cboInput(0).ListIndex = -1                                   '17
+        Else
+            cboInput(0).ListIndex = -1
+            
+            For i = 0 To cboInput(0).ListCount - 1
+                If RS01!담당자명 = Trim(Mid(cboInput(0).List(i), 6)) Then
+                    cboInput(0).ListIndex = i                            '17
+                    Exit For
+                End If
+            Next i
+        End If
+        
+        '------------------------------------------------------------
+        ' 관리 담당자
+        '------------------------------------------------------------
+        If IsNull(RS01!관리담당자명) Then
+            cboInput(3).ListIndex = -1                                   '17
+        Else
+            cboInput(3).ListIndex = -1
+            
+            For i = 0 To cboInput(0).ListCount - 1
+                If RS01!관리담당자명 = Trim(Mid(cboInput(3).List(i), 6)) Then
+                    cboInput(3).ListIndex = i                            '17
+                    Exit For
+                End If
+            Next i
+        End If
+        
+        '------------------------------------------------------------
+        ' 기사명
+        '------------------------------------------------------------
+        If IsNull(RS01!기사명) Then
+            cboInput(1).ListIndex = -1                                   '18
+        Else
+            cboInput(1).ListIndex = -1
+            
+            For i = 0 To cboInput(1).ListCount - 1
+                If RS01!기사명 = Mid(cboInput(1).List(i), 2, 3) Then
+                    cboInput(1).ListIndex = i                            '18
+                    Exit For
+                End If
+            Next i
+        End If
+        
+        '------------------------------------------------------------
+        ' 계약일자
+        '------------------------------------------------------------
+        If Trim(RS01!계약일자) = "" Then
+            dtInput(0).Value = ""                                         '19
+        Else
+            dtInput(0).Value = Format(RS01!계약일자, "YYYY-MM-DD")        '19
+        End If
+        
+        '------------------------------------------------------------
+        ' 해지일자
+        '------------------------------------------------------------
+        If Trim(RS01!해지일자) = "" Then
+            dtInput(1).Value = ""                                         '20
+        Else
+            dtInput(1).Value = Format(RS01!해지일자, "YYYY-MM-DD")        '20
+        End If
+        
+        
+        '------------------------------------------------------------
+        ' 프로그램 사용 종료일
+        '------------------------------------------------------------
+        If Trim(RS01!pg사용종료일) = "" Then
+            dtInput(7).Value = ""                                         '20
+        Else
+            dtInput(7).Value = Format(RS01!pg사용종료일, "YYYY-MM-DD")        '20
+        End If
+        
+        txtInput(20).Text = Trim(RS01!PG접속일자 & "")
+        
+        '------------------------------------------------------------
+        ' 가맹점상태
+        '------------------------------------------------------------
+        If IsNull(RS01!가맹점상태) Then
+            cboInput(7).ListIndex = -1                                    '21
+        Else
+            cboInput(7).ListIndex = -1
+            
+            For i = 0 To cboInput(7).ListCount - 1
+                If RS01!가맹점상태 = Mid(cboInput(7).List(i), 2, 1) Then
+                    cboInput(7).ListIndex = i                             '21
+                    Exit For
+                End If
+            Next i
+        End If
+        
+        If IsNull(RS01!적용일자) Then
+            dtInput(2).Value = Format(Date, "YYYY-MM-DD")                 '22
+            dtInput(2).Value = ""
+            dtInput(2).Tag = ""
+        Else
+            dtInput(2).Value = Format(RS01!적용일자, "YYYY-MM-DD")        '22
+            
+            dtInput(2).Tag = Format(RS01!적용일자, "YYYY-MM-DD")          '
+        End If
+        
+        txtInput(12).Text = RS01!택코드 & ""                              '23
+        txtInput(12).Tag = RS01!택코드 & ""                               '23
+        
+        txtInput(13).Text = RS01!택색상 & ""                              '24
+        RichTextBox1.Text = RS01!메모 & ""                             '24
+        
+        '------------------------------------------------------------
+        ' 수금구분
+        '------------------------------------------------------------
+        If IsNull(RS01!수금구분) Then
+            cboInput(2).ListIndex = -1                                   '12
+        Else
+            cboInput(2).ListIndex = -1
+            
+            For i = 0 To cboInput(2).ListCount - 1
+                If RS01!수금구분 = Mid(cboInput(2).List(i), 2, 1) Then '12
+                    cboInput(2).ListIndex = i
+                    Exit For
+                End If
+            Next i
+        End If
+                
+        '*******************************************************************************************
+        
+        '------------------------------------------------------------
+        ' 마일리지여부
+        '------------------------------------------------------------
+        If IsNull(RS01!마일리지여부) Then
+            cboInput(7).ListIndex = -1                                    '25
+        Else
+            For i = 0 To cboMileage.ListCount - 1
+                If RS01!마일리지여부 = Mid(cboMileage.List(i), 2, 1) Then
+                    cboMileage.ListIndex = i                              '26
+                    Exit For
+                End If
+            Next i
+        End If
+                
+        txtMileage(0).Value = RS01!기준금액 & ""                          '27
+        txtMileage(1).Value = RS01!적립마일리지 & ""                      '28
+        txtMileage(2).Value = RS01!최소마일리지 & ""                      '29
+        
+        If IsNull(RS01!지정할인여부) Then
+            cboSale.ListIndex = 1                                         '30
+        Else
+            cboSale.ListIndex = IIf(RS01!지정할인여부 = "Y", 0, 1)        '30
+        End If
+        
+        txtSale.Text = RS01!지정할인비율                                  '31
+        dtpSaleStart.Value = Format(RS01!지정할인시작일, "YYYY-MM-DD")    '32
+        dtpSaleEnd.Value = Format(RS01!지정할인종료일, "YYYY-MM-DD")      '33
+                
+        If IsNull(RS01!특정할인여부) Then
+            cboCoupon.ListIndex = 1                                       '34
+        Else
+            cboCoupon.ListIndex = IIf(RS01!특정할인여부 = "Y", 0, 1)      '34
+        End If
+        
+        txtCoupon.Text = RS01!특정할인비율 & ""                           '35 특정할인비율
+        dtpCouponStart.Value = Format(RS01!특정할인시작일, "YYYY-MM-DD")  '36 특정할인시작일
+        dtpCouponEnd.Value = Format(RS01!특정할인종료일, "YYYY-MM-DD")    '37 특정할인종료일
+        txtLuxury.Text = RS01!고가세탁비율 & ""                           '38 고가세탁비율
+        
+        If IsNull(RS01!세탁환불여부) Then
+            cboReturn.ListIndex = 1                                       '39 세탁환불여부
+        Else
+            cboReturn.ListIndex = IIf(RS01!세탁환불여부 = "Y", 0, 1)      '39
+        End If
+        
+        
+        If IsNull(RS01!SMS_IP) = True Then
+            txtSMSIPAddress.Text = "store.clean-aid.co.kr,8657"           '40 SMS_IP
+        Else
+            txtSMSIPAddress.Text = Trim(RS01!SMS_IP & "")                 '40
+        End If
+        
+        If IsNull(RS01!SMS_DB) = True Then
+            txtSMSDBName.Text = "Laundry"                                 '41 SMS_DB
+        Else
+            txtSMSDBName.Text = Trim(RS01!SMS_DB & "")                    '41
+        End If
+        
+        If IsNull(RS01!SMS_ID) = True Then
+            txtSMSUserName.Text = "sa"                                    '42 SMS_ID
+        Else
+            txtSMSUserName.Text = Trim(RS01!SMS_ID & "")                  '42
+        End If
+        
+        If IsNull(RS01!SMS_PWD) = True Then
+            txtSMSUserPass.Text = ""                                      '43 SMS_PWD
+        Else
+            txtSMSUserPass.Text = Trim(RS01!SMS_PWD & "")                 '43
+        End If
+        
+        If IsNull(RS01!SMS_EMART) = True Then
+            chkSMSEMART.Value = xtpUnchecked                                            '44 SMS_EMART
+        Else
+            chkSMSEMART.Value = IIf(RS01!SMS_EMART = "Y", xtpChecked, xtpUnchecked)
+        End If
+        
+        
+        If IsNull(RS01!로열티여부1) Then
+            cboRovalty(0).ListIndex = 1
+        Else
+            cboRovalty(0).ListIndex = IIf(RS01!로열티여부1 = "Y", 0, 1)
+        End If
+        
+        txtRovalty(0).Text = RS01!로열티비율1 & ""
+        
+        If IsNull(RS01!로열티여부2) Then
+            cboRovalty(1).ListIndex = 1
+        Else
+            cboRovalty(1).ListIndex = IIf(RS01!로열티여부2 = "Y", 0, 1)
+        End If
+        
+        txtRovalty(1).Text = RS01!로열티비율2 & ""
+        
+        If IsNull(RS01!수수료지원여부) Then
+            cboRovalty(2).ListIndex = 1
+        Else
+            cboRovalty(2).ListIndex = IIf(RS01!수수료지원여부 = "Y", 0, 1)
+        End If
+        
+        txtRovalty(2).Text = RS01!수수료지원비율 & ""
+        
+    End If
+    RS01.Close
+    Set RS01 = Nothing
+End Sub
+
+Private Sub Data_Display3(가맹점코드 As String)
+    On Error GoTo ErrRtn
+    
+    ReDim sValue(0)
+    
+    sValue(0) = 가맹점코드
+        
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01001_01_ALL", sValue(), Err_Num, Err_Dec)
+    
+    With spdView1
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1: .Text = RS01!시작일자 & ""
+            .Col = 2: .Text = RS01!종료일자 & ""
+            .Col = 3: .Text = RS01!지사코드 & ""
+            .Col = 4: .Text = RS01!지사명 & ""
+            .Col = 5: .Text = RS01!택코드 & ""
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Data_Display4(가맹점코드 As String)
+    On Error GoTo ErrRtn
+    
+    ReDim sValue(0)
+    
+    sValue(0) = 가맹점코드
+        
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01001_06_ALL", sValue(), Err_Num, Err_Dec)
+    
+    With spdView2
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1: .Text = RS01!시작일자 & ""     '1
+            .Col = 2: .Text = RS01!종료일자 & ""     '2
+            .Col = 3: .Text = RS01!이전지사코드 & "" '3
+            .Col = 4: .Text = RS01!이전지사명 & ""   '4
+            .Col = 5: .Text = RS01!신규지사코드 & "" '5
+            .Col = 6: .Text = RS01!신규지사명 & ""   '6
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Data_DisplaySMS(가맹점코드 As String)
+    On Error GoTo ErrRtn
+    
+    ReDim sValue(1)
+    
+    sValue(0) = Store.Code
+    sValue(1) = 가맹점코드
+        
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01001_SMS_00", sValue(), Err_Num, Err_Dec)
+    
+    With spdViewSMS
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1: .Text = RS01!전송여부 & ""        '1
+            .Col = 2: .Text = RS01!담당자코드 & ""      '2
+            .Col = 3: .Text = Trim(RS01!담당자명 & "")  '3
+            .Col = 4: .Text = Trim(RS01!휴대폰번호 & "") '4
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+
+Private Sub DataAdd()
+    Call Text_Clear
+        
+    '-------------------------------------------------------------------
+    ' 가맹점코드 가져오기 - SP_01001_04
+    '-------------------------------------------------------------------
+    ReDim sValue(0)
+    
+    sValue(0) = "0"
+    
+'    If HeadOffice = MASTER_OFFICE_CODE Then
+'        If DBOpen_Master(Mid(cboOffice.Text, 2, 4)) = False Then Exit Sub
+'
+'        Set RS01 = New ADODB.Recordset
+'        Set RS01 = ExecProMaster("SP_01001_04", sValue(), Err_Num, Err_Dec)
+'    Else
+'        Set RS01 = New ADODB.Recordset
+'        Set RS01 = ExecPro("SP_01001_04", sValue(), Err_Num, Err_Dec)
+'    End If
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01001_04", sValue(), Err_Num, Err_Dec)
+    
+    If IsNull(RS01!가맹점코드) Then
+        txtInput(0).Text = "000001"
+    Else
+        txtInput(0).Text = RS01!가맹점코드
+    End If
+    
+    cboMaster.Tag = "NEW"
+    'txtInput(0).SetFocus
+End Sub
+
+Private Sub DataCancel()
+    Call Text_Clear
+    
+    cboOffice_Click
+End Sub
+
+Private Sub StoreFind()
+    cboOffice.Tag = ""
+    
+    Set P_01001_A1.m_FormObj = Me
+    P_01001_A1.Show vbModal
+    
+    
+    ' 조회에서 매장 코드가 설정된 경우 해당 매장이 선택 되도록 한다.
+    DoEvents
+    If Trim(cboOffice.Tag) = "" Then Exit Sub
+    
+    With spdView
+        
+        Rtn = .SearchCol(1, 0, .MaxRows, Trim(cboOffice.Tag), SearchFlagsValue)
+        .Row = Rtn
+        .Action = ActionActiveCell
+        DoEvents
+        spdView_Click 1, Rtn
+        
+    End With
+
+End Sub
+
+
+Private Sub DataDelete()
+    Rtn = MsgBox("'" & txtInput(2).Text & "' 가맹점을 삭제하시겠습니까?", vbYesNo + vbInformation + vbDefaultButton2, "데이터 삭제")
+    
+    If Rtn = vbNo Then Exit Sub
+    
+    ReDim sValue(0)
+    
+    sValue(0) = Trim(txtInput(0).Text) '가맹점코드
+    
+'    If HeadOffice = MASTER_OFFICE_CODE Then
+'        If DBOpen_Master(Mid(cboOffice.Text, 2, 4)) = False Then Exit Sub
+'
+'        Call ExecProMaster("SP_01001_02", sValue(), Err_Num, Err_Dec)
+'    Else
+'        Call ExecPro("SP_01001_02", sValue(), Err_Num, Err_Dec)
+'    End If
+    
+    Call ExecPro("SP_01001_02", sValue(), Err_Num, Err_Dec)
+    
+    If Err_Num = 0 Then
+        MsgBox "해당 데이터가 정상적으로 삭제가 되었습니다.", vbInformation
+        
+        Call Text_Clear
+        
+        Call Data_Display(Mid(cboOffice.Text, 2, 4))
+    End If
+End Sub
+
+Private Sub ComboAdd()
+    ReDim sValue(1)
+    
+    '-------------------------------------------------------------------
+    ' 담당자
+    '-------------------------------------------------------------------
+    sValue(0) = "0"
+    
+''    If HeadOffice = MASTER_OFFICE_CODE Then
+''        If DBOpen_Master(Mid(cboOffice.Text, 2, 4)) = False Then Exit Sub
+''
+''        Set RS01 = New ADODB.Recordset
+''        Set RS01 = ExecProMaster("SP_00001", sValue(), Err_Num, Err_Dec)
+''    Else
+''        Set RS01 = New ADODB.Recordset
+''        Set RS01 = ExecPro("SP_00001", sValue(), Err_Num, Err_Dec)
+''    End If
+
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_00001", sValue(), Err_Num, Err_Dec)
+        
+    cboInput(0).AddItem ""
+    cboInput(3).AddItem ""
+    Do While Not RS01.EOF
+        cboInput(0).AddItem "[" & RS01!담당자코드 & "] " & RS01!담당자명
+        cboInput(3).AddItem "[" & RS01!담당자코드 & "] " & RS01!담당자명
+        RS01.MoveNext
+    Loop
+
+    '-------------------------------------------------------------------
+    ' 기사
+    '-------------------------------------------------------------------
+    sValue(0) = "0"
+    
+''    If HeadOffice = MASTER_OFFICE_CODE Then
+''        If DBOpen_Master(Mid(cboOffice.Text, 2, 4)) = False Then Exit Sub
+''
+''        Set RS01 = New ADODB.Recordset
+''        Set RS01 = ExecProMaster("SP_00002", sValue(), Err_Num, Err_Dec)
+''    Else
+''        Set RS01 = New ADODB.Recordset
+''        Set RS01 = ExecPro("SP_00002", sValue(), Err_Num, Err_Dec)
+''    End If
+
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_00002", sValue(), Err_Num, Err_Dec)
+
+    Do While Not RS01.EOF
+        cboInput(1).AddItem "[" & RS01!기사코드 & "] " & RS01!기사명
+        
+        RS01.MoveNext
+    Loop
+        
+    '-------------------------------------------------------------------
+    ' 가맹점구분
+    '-------------------------------------------------------------------
+    sValue(0) = "0"
+    
+''    If HeadOffice = MASTER_OFFICE_CODE Then
+''        If DBOpen_Master(Mid(cboOffice.Text, 2, 4)) = False Then Exit Sub
+''
+''        Set RS01 = New ADODB.Recordset
+''        Set RS01 = ExecProMaster("SP_01004_A_06", sValue(), Err_Num, Err_Dec)
+''    Else
+''        Set RS01 = New ADODB.Recordset
+''        Set RS01 = ExecPro("SP_01004_A_06", sValue(), Err_Num, Err_Dec)
+''    End If
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01004_A_06", sValue(), Err_Num, Err_Dec)
+    
+    Do Until RS01.EOF
+        cboInput(4).AddItem "[" & RS01!가맹점구분코드 & "] " & RS01!가맹점구분명
+        
+        RS01.MoveNext
+    Loop
+    RS01.Close
+    Set RS01 = Nothing
+    
+    '-------------------------------------------------------------------
+    ' 프린터
+    '-------------------------------------------------------------------
+    With cboInput(5)
+        .AddItem "[0] 일반 프린터 (잉크, 레이저)"
+        .AddItem "[1] 미니 프린터"
+    End With
+    
+    '-------------------------------------------------------------------
+    ' 마일리지 사용여부
+    '-------------------------------------------------------------------
+    With cboMileage
+        .Clear
+        .AddItem "[Y] 사용"
+        .AddItem "[N] 미사용"
+        
+        .ListIndex = -1
+    End With
+
+    
+    '-------------------------------------------------------------------
+    ' 세트상품세일
+    '-------------------------------------------------------------------
+    Dim i As Integer
+    
+    For i = 0 To 6
+        chkWeek(i).Value = xtpUnchecked
+    Next i
+    
+    '-------------------------------------------------------------------
+    ' 가맹점상태 -
+    '-------------------------------------------------------------------
+    With cboInput(7)
+        .Clear
+        .AddItem "[0] 영업중"
+        .AddItem "[1] 폐점준비중"
+        .AddItem "[2] 폐점"
+        .AddItem "[3] 특이사항"
+        
+        .ListIndex = -1
+    End With
+    
+    '-------------------------------------------------------------------
+    ' 수금구분 -
+    '-------------------------------------------------------------------
+    With cboInput(2)
+        .Clear
+        .AddItem "[1] 일수금"
+        .AddItem "[2] 월수금"
+        
+        .ListIndex = -1
+    End With
+End Sub
+
+Private Sub DataSave()
+    Dim sSale As String
+    Dim NewMasterCode   As String
+    Dim sMsg            As String
+    Dim sSendTel()     As String
+     
+    ' 택번호가 변경 되었을 경우
+    If txtInput(12).Text <> txtInput(12).Tag Then
+        If Format(dtInput(2).Value, "yyyy-MM-dd") < Format(Date, "yyyy-mm-dd") Then
+            MsgBox "택번호 변경을 하였습니다. 적용일자를 오늘 이후로 변경 하여 주십시요.", vbInformation, "확인"
+            Exit Sub
+        End If
+    End If
+    
+    txtInput(0).Text = Trim(txtInput(0).Text)
+    If Trim(txtInput(0).Text) = "" Or Len(txtInput(0).Text) <> 6 Then
+        MsgBox "가맹점 코드를 확인하여 주십시요.", vbInformation, "확인"
+        Exit Sub
+    End If
+    
+    
+    NewMasterCode = Mid(cboMaster.Text, 2, 4)
+    If Len(NewMasterCode) <> 4 Then
+        MsgBox "지사 코드를 확인하여 주십시요.", vbInformation, "확인"
+        Exit Sub
+    End If
+    
+    txtInput(12).Text = Trim(txtInput(12).Text)
+    If Len(txtInput(12).Text) <> 3 Then
+        MsgBox "택번호를 확인하여 주십시요.", vbInformation, "확인"
+        Exit Sub
+    End If
+    
+     '21 계약해지상태
+    If Mid(cboInput(7).Text, 2, 1) = "2" Then
+        If IsDate(dtInput(1).Value) = False Then
+            MsgBox "해지일자를 설정하여 주십시요.", vbInformation, "확인"
+            Exit Sub
+        End If
+        
+        If IsDate(dtInput(7).Value) = False Then
+            MsgBox "프로그램 사용 종료일자를 설정하여 주십시요.", vbInformation, "확인"
+            Exit Sub
+        End If
+        
+        
+        ReDim sValue(0)
+        sValue(0) = Trim(txtInput(0).Text) & ""
+            
+        Set RS01 = New ADODB.Recordset
+        Set RS01 = ExecPro("SP_01001_01_ALL", sValue(), Err_Num, Err_Dec)
+        
+        Do Until RS01.EOF
+            If IsDate(RS01!종료일자 & "") = False Or RS01!종료일자 & "" = "2099-12-31" Then
+                MsgBox "바코드택 사용현황의 종료일자를 먼저 설정하여 주십시요.", vbInformation, "확인"
+                Exit Sub
+            End If
+            RS01.MoveNext
+        Loop
+        RS01.Close: Set RS01 = Nothing
+    
+        
+        Set RS01 = New ADODB.Recordset
+        Set RS01 = ExecPro("SP_01001_06_ALL", sValue(), Err_Num, Err_Dec)
+        
+            
+        Do Until RS01.EOF
+            If IsDate(RS01!종료일자 & "") = False Or RS01!종료일자 & "" = "2099-12-31" Then
+                MsgBox "지사 변경 현황의 종료일자를 먼저 설정하여 주십시요.", vbInformation, "확인"
+                Exit Sub
+            
+            End If
+            RS01.MoveNext
+        Loop
+        RS01.Close: Set RS01 = Nothing
+    
+    End If
+    
+    ' SMS 문자 발신 번호 확인 201
+    '  전기통신사업법 제84조
+    If GetCheckSMSSendTel(txtInput(4).Text, sSendTel, True) = False Then
+        sMsg = "전기통신사업법 제84조에 의하여 문자 발신 번호는 반드시 입력 하여야 합니다." & vbNewLine
+        sMsg = sMsg & vbNewLine
+        sMsg = sMsg & " 주요내용" & vbNewLine
+        sMsg = sMsg & " - 발신번호 없이 문자 전송 불가" & vbNewLine
+        sMsg = sMsg & " - 발신번호는 수신자가 실제 발신(통화)이 가능한 번호만 허용" & vbNewLine
+        sMsg = sMsg & " - 일반번호의 경우 지역번호(02,031등)를 앞자리에 포함한 번호만 허용" & vbNewLine
+        sMsg = sMsg & " - 대표번호는 8자리만 입력 허용되며,내선번호 포함불가" & vbNewLine
+        sMsg = sMsg & " - 030 번호의 경우 12자리까지 허용" & vbNewLine
+        
+        Call MsgBox(sMsg, vbInformation, "입력확인")
+        Exit Sub
+    
+    End If
+    
+    
+    
+    
+    
+    
+    Rtn = MsgBox("가맹점정보를 저장하시겠습니까?", vbYesNo + vbInformation, "데이터 저장")
+    
+    If Rtn = vbNo Then Exit Sub
+    
+    ReDim sValue(58)
+    
+    PanelsMsg ""
+    
+    sValue(0) = NewMasterCode                        ' 1 지사코드
+    sValue(1) = Trim(txtInput(0).Text) & ""                         ' 2 가맹점코드
+    sValue(2) = Trim(txtInput(1).Text) & ""                         ' 3 대표자명
+    sValue(3) = Trim(txtInput(2).Text) & ""                         ' 4 가맹점명
+    sValue(4) = Trim(txtInput(3).Text) & ""                         ' 5 매장전화
+    sValue(5) = Trim(txtInput(4).Text) & ""                         ' 6 문자발신전화
+    sValue(6) = Trim(txtInput(5).Text) & ""                         ' 7 휴대전화
+    sValue(7) = Trim(txtInput(6).Text) & ""                         ' 8 사업자번호
+    sValue(8) = Trim(txtInput(7).Text) & ""                         ' 9 업태
+    sValue(9) = Trim(txtInput(8).Text) & ""                         '10 종목
+    sValue(10) = Trim(txtInput(9).Text) & ""                        '11 주소
+    sValue(11) = Trim(txtInput(10).Text) & ""                       '12 우편번호
+    sValue(12) = Mid(cboInput(4).Text, 2, 1)                        '13 가맹점구분
+        
+    '---------------------------------------------------------------------------------
+    sSale = ""
+    
+    If chkWeek(0).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkWeek(1).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkWeek(2).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkWeek(3).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkWeek(4).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkWeek(5).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkWeek(6).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    
+    sValue(13) = sSale                                              '13 세트상품세일
+    
+    '---------------------------------------------------------------------------------
+    sSale = ""
+    
+    If chkDay(0).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkDay(1).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkDay(2).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkDay(3).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkDay(4).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkDay(5).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    If chkDay(6).Value = xtpChecked Then sSale = sSale & "1" Else sSale = sSale & "0"
+    
+    sValue(14) = sSale                                              '14 요일세일
+    sValue(15) = Trim(txtInput(11).Text) & ""                       '15 세탁소요일
+    
+    sValue(16) = Mid(cboInput(5).Text, 2, 1)                        '16 프린터
+    sValue(17) = Mid(cboInput(0).Text, 2, 3)                        '17 담당자코드
+    sValue(18) = Mid(cboInput(1).Text, 2, 3)                        '18 기사코드
+    sValue(19) = Format(dtInput(0).Value, "YYYY-MM-DD")             '19 계약일자
+    sValue(20) = Format(dtInput(1).Value, "YYYY-MM-DD")             '20 종료일자
+    sValue(21) = Mid(cboInput(7).Text, 2, 1)                        '21 계약해지상태
+    sValue(22) = Format(dtInput(2).Value, "YYYY-MM-DD")             '22 TAG 적용일자
+    sValue(23) = Trim(txtInput(12).Text) & ""                       '23 TAG 코드
+    sValue(24) = Trim(txtInput(13).Text) & ""                       '24 TAG 색상
+    
+    '*********************************************************************************
+    
+    sValue(25) = Mid(cboMileage.Text, 2, 1)                         '25 마일리지 여부
+    sValue(26) = txtMileage(0).Value                                '26 기준금액
+    sValue(27) = txtMileage(1).Value                                '27 적립마일리지
+    sValue(28) = txtMileage(2).Value                                '28 최소마일리지
+                
+    If cboSale.ListIndex = 1 Then
+        sValue(29) = "N"                                            '29 지정할인여부
+    Else
+        sValue(29) = "Y"                                            '29 지정할인여부
+    End If
+            
+    sValue(30) = txtSale.Value                                      '31 지정할인비율
+    sValue(31) = Format(dtpSaleStart.Value, "YYYY-MM-DD")           '32 지정할인시작일
+    sValue(32) = Format(dtpSaleEnd.Value, "YYYY-MM-DD")             '33 지정할인종료일
+                
+    If cboCoupon.ListIndex = 1 Then
+        sValue(33) = "N"                                            '34 특정할인여부
+    Else
+        sValue(33) = "Y"                                            '34 특정할인여부
+    End If
+        
+    sValue(34) = txtCoupon.Value                                    '35 특정할인비율
+    sValue(35) = Format(dtpCouponStart.Value, "YYYY-MM-DD")         '36 특정할인시작일
+    sValue(36) = Format(dtpCouponEnd.Value, "YYYY-MM-DD")           '37 특정할인종료일
+    
+    sValue(37) = txtLuxury.Value                                    '38 고가세탁비율
+                
+    sValue(38) = IIf(cboReturn.ListIndex = 1, "N", "Y")             '39 세탁환불여부
+    sValue(39) = txtSMSIPAddress.Text & ""                          '40 SMS_IP
+    sValue(40) = txtSMSDBName.Text & ""                             '41 SMS_DB
+    sValue(41) = txtSMSUserName.Text & ""                           '42 SMS_ID
+    sValue(42) = txtSMSUserPass.Text & ""                           '43 SMS_PWD
+    
+    sValue(43) = IIf(chkSMSEMART.Value = xtpChecked, "Y", "N")                   '44 SMS_EMART
+    
+    sValue(44) = Mid(cboInput(2).Text, 2, 1)                        '16 수금구분 (일수금, 월수금)
+    sValue(45) = Trim(txtInput(17).Text) & ""                       '  VAN IP
+    sValue(46) = Trim(txtInput(18).Text) & ""                       '  VAN PORT
+    sValue(47) = Trim(txtInput(19).Text) & ""                       '  단말기번호
+    sValue(48) = Trim(RichTextBox1.Text) & ""                       '  메모
+    
+    sValue(49) = Mid(cboInput(3).Text, 2, 3)                        ' 관리담당자코드
+    
+    
+    sValue(50) = IIf(cboRovalty(0).ListIndex = 0, "Y", "N")         ' 로열티 적용 여부1
+    sValue(51) = txtRovalty(0).Text
+    sValue(52) = IIf(cboRovalty(1).ListIndex = 0, "Y", "N")         ' 로열티 적용 여부2
+    sValue(53) = txtRovalty(1).Text
+    sValue(54) = IIf(cboRovalty(2).ListIndex = 0, "Y", "N")         ' 수수료지원 적용 여부
+    sValue(55) = txtRovalty(2).Text
+    
+    sValue(56) = Format(dtInput(7).Value, "YYYY-MM-DD")             ' 프로그램 사용 종료일
+    sValue(57) = Trim(txtInput(21).Text) & ""                       '  점주명
+    sValue(58) = Trim(txtInput(22).Text) & ""                       '  점주명
+    
+        
+    Call ExecPro("SP_01001_03_NEW3", sValue(), Err_Num, Err_Dec)
+    DoEvents
+    
+' 2014-01-28일 주석처리 왜 저장하는지 알수가 없음 ㅡㅡ
+'    '2011-03-25 추가
+'    If DBOpen_Master(Trim(txtInput(20).Text)) = True Then
+'        Call ExecProMaster("SP_01001_03_NEW", sValue(), Err_Num, Err_Dec)
+'    End If
+    
+    If Err_Num = 0 Then
+        MsgBox "해당되는 데이터가 정상적으로 저장이 되었습니다.", vbInformation
+    End If
+    
+        
+    If (txtInput(12).Tag <> "") And (txtInput(12).Text <> txtInput(12).Tag) Then
+        '----------------------------------------------------------------------------
+        ' TB_가맹점택 수정 - SP_01001_04_ALL
+        '----------------------------------------------------------------------------
+        ReDim sValue(4)
+        
+        sValue(0) = txtInput(0).Text & ""                                '1 가맹점코드
+        sValue(1) = Format(dtInput(2).Tag, "YYYY-MM-DD")                 '2 이전시작일자
+        sValue(2) = NewMasterCode                           '3 지사코드
+        sValue(3) = txtInput(12).Tag & ""                                '4 이전택코드
+        sValue(4) = Format(dtInput(2).Value, "YYYY-MM-DD")               '5 종료일자        Format(DateAdd("d", -1, dtInput(2).Value), "YYYY-MM-DD")
+        
+        Call ExecPro("SP_01001_04_ALL", sValue(), Err_Num, Err_Dec)
+        DoEvents
+        
+        '2011-03-25 추가
+        If DBOpen_Master(Mid(cboMaster.Text, 2, 4)) = True Then
+            Call ExecProMaster("SP_01001_04_ALL", sValue(), Err_Num, Err_Dec)
+        End If
+        
+        '----------------------------------------------------------------------------
+        ' TB_가맹점택 추가 - SP_01001_04_ALL
+        '----------------------------------------------------------------------------
+        ReDim sValue(4)
+        
+        sValue(0) = txtInput(0).Text & ""                               '1 가맹점코드
+        sValue(1) = Format(dtInput(2).Value, "YYYY-MM-DD")              '2 시작일자
+        sValue(2) = NewMasterCode                          '3 지사코드
+        sValue(3) = txtInput(12).Text & ""                              '4 택코드
+        sValue(4) = "2099-12-31"                                        '5 종료일자
+                
+        Call ExecPro("SP_01001_04_ALL", sValue(), Err_Num, Err_Dec)
+        DoEvents
+        
+        '2011-03-25 추가
+        If DBOpen_Master(Mid(cboMaster.Text, 2, 4)) = True Then
+            Call ExecProMaster("SP_01001_04_ALL", sValue(), Err_Num, Err_Dec)
+        End If
+        
+    
+        ''----------------------------------------------------------------------------
+        '' TB_가맹점택변경 - 택번호 변경 저장
+        ''----------------------------------------------------------------------------
+        'ReDim sValue(11)
+        '
+        'sValue(0) = dtInput(2).Tag & ""                     ' 2 변경전 시작일
+        'sValue(1) = Mid(cboOffice.Text, 2, 4) & ""          ' 3 변경전 지사코드
+        'sValue(2) = txtInput(12).Tag & ""                   ' 4 변경전 택코드
+        'sValue(3) = txtInput(0).Text & ""                   ' 5 변경전 가맹점코드
+        'sValue(4) = txtInput(2).Text & ""                   ' 6 변경전 명칭
+        '
+        'sValue(5) = Format(dtInput(2).Value, "YYYY-MM-DD")  ' 7 변경후 시작일자
+        'sValue(6) = Mid(cboOffice.Text, 2, 4)               ' 8 변경후 지사코드
+        'sValue(7) = txtInput(12).Text & ""                  ' 9 변경후 택코드
+        'sValue(8) = txtInput(0).Text & ""                   '10 변경후 가맹점코드
+        'sValue(9) = txtInput(2).Text & ""                   '11 변경후 명칭
+        'sValue(10) = UserID & ": " & USERNAME               '12 변경자
+        'sValue(11) = Now & " EDIT"                          '13 기타
+        '
+        'Call ExecPro("SP_STORE_CHANGE", sValue(), Err_Num, Err_Dec)
+    End If
+    
+    '최초 일경우 지사 등록을 한다. 하지 않으면 목록에 안보인다.
+    If cboMaster.Tag = "NEW" And Len(NewMasterCode) = 4 Then
+        sValue(0) = txtInput(0).Text & ""                   '1 가맹점코드
+        sValue(1) = Format(Date, "YYYY-MM-DD")              '2 시작일자
+        sValue(2) = ""                                      '3 이전지사코드
+        sValue(3) = NewMasterCode              '4 신규지사코드
+        sValue(4) = "2099-12-31"                            '5 종료일자
+                
+        Call ExecPro("SP_01001_06_NEW", sValue(), Err_Num, Err_Dec)
+        DoEvents
+    
+    End If
+    
+    
+    Call Data_Display(Mid(cboOffice.Text, 2, 4), Trim(txtInput(0).Text))
+End Sub
+
+Private Sub DataPrint()
+
+End Sub
+
+Private Sub lblTitle_Click(Index As Integer)
+
+    If Index = 28 Then
+         P_00000.Enabled = False
+         P_00000.CommandBars.Item(2).Controls(7).Enabled = False
+    End If
+End Sub
+
+Private Sub spdView_Click(ByVal Col As Long, ByVal Row As Long)
+    If Row <= 0 Then Exit Sub
+    
+    Dim i           As Long
+    Dim 가맹점코드 As String
+    
+    spdView.Row = Row
+    spdView.Col = 1: 가맹점코드 = spdView.Text & ""
+    
+    spdView.Col = 3  ' 지사코드
+    For i = 0 To cboMaster.ListCount - 1
+        If spdView.Text = Mid(cboMaster.List(i), 2, 4) Then
+            cboMaster.ListIndex = i
+            Exit For
+        End If
+    Next i
+    
+    Call Data_Display2(Row)        '
+    Call Data_Display3(가맹점코드) '
+    Call Data_Display4(가맹점코드) '
+    Call Data_DisplaySMS(가맹점코드) '
+    
+    txtInput(0).Text = 가맹점코드
+    cboMaster.Tag = 가맹점코드
+
+'    spdView.Col = 3: txtInput(20).Text = spdView.Text & "" ' 지사코드
+'
+End Sub
+
+Private Sub spdView_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+    Call spdView_Click(NewCol, NewRow)
+End Sub
+
+Private Sub DataScreen()
+'    panPrint.Visible = True
+    
+    sPrintOption = "2"
+End Sub
+
+Private Sub DataScreen2()
+'    Dim ReportFP As String
+'    Dim ReportFile As String
+'
+'    ReportFP = GetIniStr("REPORT", "FilePath", "", m_iniFile)
+'    ReportFile = ReportFP & "\" & Me.Name & ".rpt"
+'
+'    Dim i As Integer
+'    For i = 0 To 30
+'        P_00000.crPrint.Formulas(i) = ""
+'    Next
+'
+'    P_00000.crPrint.StoredProcParam(0) = "0"
+'
+'    If optPrint(0).Value = True Then
+'        P_00000.crPrint.StoredProcParam(1) = "0"
+'    ElseIf optPrint(1).Value = True Then
+'        P_00000.crPrint.StoredProcParam(1) = "1"
+'    ElseIf optPrint(2).Value = True Then
+'        P_00000.crPrint.StoredProcParam(1) = "2"
+'    End If
+'
+'    P_00000.crPrint.WindowTitle = Me.Caption
+'
+'    If sPrintOption = "2" Then
+'        Call ReportPrint(ReportFile, "2")
+'    ElseIf sPrintOption = "1" Then
+'        Call ReportPrint(ReportFile, "1")
+'    End If
+End Sub
+
+Private Sub spdView1_Click(ByVal Col As Long, ByVal Row As Long)
+    If Row <= 0 Then Exit Sub
+    
+    With spdView1
+        .Row = Row
+        
+        .Col = 1: dtInput(3).Value = .Text & ""
+        .Col = 2: dtInput(4).Value = .Text & ""
+        
+        .Col = 3: txtInput(14).Text = .Text & ""
+        .Col = 4: txtInput(15).Text = .Text & ""
+        .Col = 5: txtInput(16).Text = .Text & ""
+    End With
+End Sub
+
+Private Sub spdView2_Click(ByVal Col As Long, ByVal Row As Long)
+    Dim i            As Long
+    Dim 이전지사코드 As String
+    Dim 신규지사코드 As String
+    
+    If Row <= 0 Then Exit Sub
+    
+    With spdView2
+        .Row = Row
+        
+        .Col = 1: dtInput(5).Value = .Text & ""
+        .Col = 2: dtInput(6).Value = .Text & ""
+        
+        .Col = 3: 이전지사코드 = .Text & ""
+        .Col = 5: 신규지사코드 = .Text & ""
+    End With
+
+    cboOffice2.ListIndex = -1
+    cboOffice3.ListIndex = -1
+    
+    For i = 0 To cboOffice2.ListCount - 1
+        If 이전지사코드 = Mid(cboOffice2.List(i), 2, 4) Then
+            cboOffice2.ListIndex = i
+            Exit For
+        End If
+    Next i
+    
+    For i = 0 To cboOffice3.ListCount - 1
+        If 신규지사코드 = Mid(cboOffice3.List(i), 2, 4) Then
+            cboOffice3.ListIndex = i
+            Exit For
+        End If
+    Next i
+End Sub
+
+Private Sub TabControl_SelectedChanged(ByVal Item As XtremeSuiteControls.ITabControlItem)
+    Select Case Trim(Item.Caption)
+        Case "지사 변경", "바코드택 사용현황"
+            cmdBtn(2).Enabled = False
+            
+        Case Else
+            cmdBtn(2).Enabled = True
+    End Select
+End Sub
+
+Private Sub txtInput_KeyPress(Index As Integer, KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        SendKeys "{TAB}"
+    End If
+End Sub
+
+Private Sub txtRovalty_GotFocus(Index As Integer)
+    txtRovalty(Index).SelStart = 0
+    txtRovalty(Index).SelLength = 100
+End Sub
+ 
+
+
+
+Private Sub Data_DisplayStoreList(지사코드 As String)
+    On Error GoTo ErrRtn
+    
+    ReDim sValue(2)
+    Dim nCnt    As Long
+    Dim vTemp   As Variant
+    
+    sValue(0) = 지사코드
+    sValue(1) = Format(Date, "YYYY-MM-DD")
+    sValue(2) = Format(Date, "YYYY-MM-DD")
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecPro("SP_01001_11", sValue(), Err_Num, Err_Dec)
+    
+    With spdStoreList
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1: .Text = RS01!지사코드 & ""    'KEY
+            .Col = 2: .Text = RS01!가맹점코드 & ""  '
+            .Col = 3: .Text = RS01!가맹점명 & ""    '
+            .Col = 4: .Text = RS01!가맹점상태 & ""    '
+            .Col = 5: .Text = RS01!가맹점구분명 & ""    '
+            .Col = 6: .Text = RS01!택코드 & ""    '
+            .Col = 7: .Text = RS01!매장전화번호 & ""      'KEY
+            .Col = 8: .Text = RS01!문자발신전화 & "" '
+            .Col = 9: .Text = RS01!휴대전화번호 & ""    '
+            .Col = 10: .Text = RS01!사업자번호 & ""    'KEY
+            .Col = 11: .Text = RS01!단말기번호 & ""    'KEY
+            .Col = 12: .Text = RS01!사업장주소 & ""    'KEY
+            .Col = 13: .Text = RS01!대표자명 & ""    '
+            .Col = 14: .Text = RS01!메모 & ""    '
+            
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        .Redraw = True
+    End With
+        
+    Exit Sub
+
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub

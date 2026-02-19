@@ -1,0 +1,4339 @@
+Attribute VB_Name = "basDBUpdate"
+Option Explicit
+
+Dim sValue() As String
+Dim Err_Num As Long
+Dim Err_Desc As String
+
+Public Function SetDataBaseTable() As Boolean
+    Dim Cnt     As Integer
+    
+    On Error GoTo ErrRtn
+    
+    SetDataBaseTable = False
+    
+    Cnt = 0
+    
+RE_CHECK:
+    Query = "SELECT * FROM TB_DataBaseUpdate "
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+    
+    SetDataBaseTable = True
+    
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    Exit Function
+    
+ErrRtn:
+    ' 테이블이 없을 경우
+    If Err.Number = 3078 And Cnt < 3 Then
+        Query = "CREATE TABLE TB_DataBaseUpdate"
+        Query = Query & " (idx INT NOT NULL"
+        Query = Query & ", 작업일자  VARCHAR(20) NOT NULL)"
+        ADOCon.Execute Query
+        
+        Cnt = Cnt + 1
+        
+        GoSub RE_CHECK
+    End If
+End Function
+
+'----------------------------------------------------
+' DB가 기존 DB일 경우 필드를 추가한다.
+' bMode = true  : 전체를 무조건 실행한다.
+' bMode = false : 업그레이드가 안된 내용만 실행한다.
+'----------------------------------------------------
+Public Sub Database_Check(bProcMode As Boolean)
+    Dim bMode    As Boolean
+    
+    On Error GoTo ErrRtn
+    
+    If SetDataBaseTable = False Then Exit Sub
+        
+    For i = 0 To 21 ' 업데이트 갯수
+        If bProcMode = False Then ' 업그레이드 안된 경우에 실행한다.
+            Query = "SELECT idx FROM TB_DataBaseUpdate "
+            Query = Query & " WHERE idx = " & i
+            Set ADORs = New ADODB.Recordset
+            ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+            
+            If ADORs.EOF Then
+                ADORs.Close
+                Set ADORs = Nothing
+                
+                If Set_TableEdit(i) = True Then
+                    bMode = True
+                End If
+            Else
+                ADORs.Close
+                Set ADORs = Nothing
+            End If
+        Else
+            If Set_TableEdit(i) Then ' 무조건 실행한다. (조회 ->DB 관리에서 실행)
+                bMode = True
+            End If
+        End If
+    Next i
+    
+    If bMode Then
+        bMsgMode = True
+        strMessage = "데이터베이스를 수정하였습니다."
+    End If
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("Database_Check", Err.Source, Err.Number, Err.description)
+End Sub
+
+Private Function Set_TableEdit(iCount As Long) As Boolean
+    On Error Resume Next
+    
+    Set_TableEdit = False
+    
+    Select Case iCount
+        Case 1
+            'TB_의류
+            Query = "ALTER TABLE TB_고객정보 ADD 초기미수금 INT DEFAULT (0)"
+            ADOCon.Execute Query
+            DoEvents
+        
+            Query = "UPDATE TB_고객정보 SET 초기미수금 = 0"
+            ADOCon.Execute Query
+            DoEvents
+        
+            'TB_의류
+'            Query = "ALTER TABLE TB_의류 ADD 본사전송여부 VARCHAR(1) DEFAULT ''"
+'            ADOCon.Execute Query
+'            DoEvents
+'
+'            Query = "UPDATE TB_의류 SET 본사전송여부 = ''"
+'            ADOCon.Execute Query
+'            DoEvents
+'
+'            'TB_의류분류
+'            Query = "ALTER TABLE TB_의류분류 ADD 본사전송여부 VARCHAR(1) DEFAULT ''"
+'            ADOCon.Execute Query
+'            DoEvents
+'
+'            Query = "UPDATE TB_의류분류 SET 본사전송여부 = ''"
+'            ADOCon.Execute Query
+'            DoEvents
+            
+            GoSub SUB_OK
+        
+        Case 2
+'            '--------------------------------------------------------
+'            '목요세일
+'            '--------------------------------------------------------
+'            Query = "ALTER TABLE [CleanAID].[dbo].[TB_기본정보]"
+'            Query = Query & " DROP Constraint DF_TB_기본정보_목요세일"
+'            ADOCon.Execute Query
+'
+'            Query = "ALTER TABLE [CleanAID].[dbo].[TB_기본정보]"
+'            Query = Query & " DROP COLUMN [목요세일]"
+'            ADOCon.Execute Query
+'
+'            '--------------------------------------------------------
+'            '금요세일
+'            '--------------------------------------------------------
+'            Query = "ALTER TABLE [CleanAID].[dbo].[TB_기본정보]"
+'            Query = Query & " DROP Constraint DF_TB_기본정보_금요세일"
+'            ADOCon.Execute Query
+'
+'            Query = "ALTER TABLE [CleanAID].[dbo].[TB_기본정보]"
+'            Query = Query & " DROP COLUMN [금요세일]"
+'            ADOCon.Execute Query
+'
+'            '요일할인
+'            Query = "ALTER TABLE [CleanAID].[dbo].[TB_기본정보]"
+'            Query = Query & " ADD [요일할인] VARCHAR(7) DEFAULT '0000000'"
+'            ADOCon.Execute Query
+            
+            GoSub SUB_OK
+        
+        Case 3
+            Query = "ALTER TABLE TB_고객정보 ADD 이전고객 VARCHAR(1) DEFAULT ('')"
+            ADOCon.Execute Query
+            DoEvents
+        
+            Query = "UPDATE TB_고객정보 SET 이전고객 = ''"
+            ADOCon.Execute Query
+            DoEvents
+            
+            '2010-12-30 택번호와 부모택번호가 같은 경우 부모택번호 삭제
+            Query = "UPDATE TB_입출고 SET 부모택번호   = ''"
+            Query = Query & "           , 본사전송여부 = ''"
+            Query = Query & " WHERE 택번호 = 부모택번호"
+            ADOCon.Execute Query
+            DoEvents
+            
+            GoSub SUB_OK
+        
+        Case 4
+            Query = "CREATE TABLE TB_미수금수정 ("
+            Query = Query & "    [고객코드]   [varchar](6) NOT NULL,"
+            Query = Query & "    [수정일자]   [varchar](20) NOT NULL,"
+            Query = Query & "    [수정미수금] [int] NULL,"
+            Query = Query & "    [이전미수금] [int] NULL,"
+            Query = Query & " CONSTRAINT [PK_TB_미수금수정] PRIMARY KEY CLUSTERED"
+            Query = Query & " ("
+            Query = Query & "    [고객코드] ASC,"
+            Query = Query & "    [수정일자] Asc"
+            Query = Query & " )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]"
+            Query = Query & " ) ON [PRIMARY]"
+            ADOCon.Execute Query
+            DoEvents
+            
+            GoSub SUB_OK
+            
+        Case 5
+            '
+            GoSub SUB_OK
+        Case 6
+            Query = "DROP TABLE TB_사고품내역"
+            ADOCon.Execute Query
+            
+            Query = "CREATE TABLE [dbo].[TB_사고품내역]("
+            Query = Query & "    [지사코드] [varchar](4) NULL,"
+            Query = Query & "    [가맹점코드] [varchar](6) NOT NULL,"
+            Query = Query & "    [일련번호] [int] NOT NULL,"
+            Query = Query & "    [사고접수일자] [varchar](20) NULL,"
+            Query = Query & "    [담당자명] [varchar](20) NULL,"
+            Query = Query & "    [고객코드] [varchar](6) NULL,"
+            Query = Query & "    [성명] [varchar](30) NOT NULL,"
+            Query = Query & "    [전화번호] [varchar](20) NOT NULL,"
+            Query = Query & "    [휴대전화] [varchar](20) NULL,"
+            Query = Query & "    [주소] [varchar](50) NULL,"
+            Query = Query & "    [접수일자] [varchar](20) NULL,"
+            Query = Query & "    [택번호] [varchar](10) NULL,"
+            Query = Query & "    [출고일자] [varchar](20) NULL,"
+            Query = Query & "    [인도일자] [varchar](20) NULL,"
+            Query = Query & "    [의류명] [varchar](50) NULL,"
+            Query = Query & "    [상표] [varchar](50) NULL,"
+            Query = Query & "    [색상] [varchar](10) NULL,"
+            Query = Query & "    [구입일자] [varchar](10) NULL,"
+            Query = Query & "    [구입처] [varchar](50) NULL,"
+            Query = Query & "    [구입형태] [varchar](50) NULL,"
+            Query = Query & "    [구입가격] [int] NULL,"
+            Query = Query & "    [품목] [varchar](20) NULL,"
+            Query = Query & "    [용도] [varchar](20) NULL,"
+            Query = Query & "    [소재] [varchar](20) NULL,"
+            Query = Query & "    [내용연수] [int] NULL,"
+            Query = Query & "    [경과일수] [int] NULL,"
+            Query = Query & "    [환산일수] [int] NULL,"
+            Query = Query & "    [배상비율] [int] NULL,"
+            Query = Query & "    [배상금액] [int] NULL,"
+            Query = Query & "    [크레임구분] [varchar](20) NULL,"
+            Query = Query & "    [보상구분] [varchar](20) NULL,"
+            Query = Query & "    [처리구분] [varchar](20) NULL,"
+            Query = Query & "    [보상금액] [int] NULL,"
+            Query = Query & "    [처리일자] [varchar](20) NULL,"
+            Query = Query & "    [비고] [varchar](100) NULL,"
+            Query = Query & "    [가맹점의견] [text] NULL,"
+            Query = Query & "    [지사의견] [text] NULL,"
+            Query = Query & "    [본사의견] [text] NULL,"
+            Query = Query & "    [지사승인] [varchar](1) NULL,"
+            Query = Query & "    [지사승인일시] [varchar](30) NULL,"
+            Query = Query & "    [본사승인] [varchar](1) NULL,"
+            Query = Query & "    [본사승인일시] [varchar](30) NULL,"
+            Query = Query & "    [본사전송여부] [varchar](1) NULL,"
+            Query = Query & "    [본사전송일자] [varchar](20) NULL,"
+            Query = Query & " CONSTRAINT [PK_TB_사고품내역] PRIMARY KEY CLUSTERED"
+            Query = Query & " ("
+            Query = Query & "    [일련번호] ASC,"
+            Query = Query & "    [가맹점코드] Asc"
+            Query = Query & " )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]"
+            Query = Query & " ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]"
+            ADOCon.Execute Query
+            DoEvents
+            
+            GoSub SUB_OK
+            
+        Case 7
+            Query = "ALTER TABLE TB_미수금수정 ADD 지사코드 VARCHAR(4) DEFAULT ('')"
+            ADOCon.Execute Query
+            DoEvents
+            
+            Query = "ALTER TABLE TB_미수금수정 ADD 가맹점코드 VARCHAR(6) DEFAULT ('')"
+            ADOCon.Execute Query
+            DoEvents
+                        
+            GoSub SUB_OK
+        
+        Case 8
+            Query = "CREATE TABLE [dbo].[TB_오점내용]("
+            Query = Query & "    [오점코드] [int] NOT NULL,"
+            Query = Query & "    [오점내용] [varchar](50) NULL,"
+            Query = Query & "    [순서] [int] NULL,"
+            Query = Query & " CONSTRAINT [PK_TB_오점내용] PRIMARY KEY CLUSTERED"
+            Query = Query & " ("
+            Query = Query & "    [오점코드] Asc"
+            Query = Query & " )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]"
+            Query = Query & " ) ON [PRIMARY]"
+            ADOCon.Execute Query
+            DoEvents
+                        
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (1, '탈색', 1)"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (2, '이염', 2)"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (3, '얼룩', 3)"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (4, '수축', 4)"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (5, '구멍', 5);"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (6, '찢어짐', 6)"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (7, '부착물손실', 7)"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (8, '부착물파손', 8)"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (9, '단추파손', 9)"
+            ADOCon.Execute "INSERT INTO dbo.TB_오점내용  (오점코드, 오점내용, 순서) VALUES  (10, '단추손실', 10)"
+            DoEvents
+                        
+            Query = "ALTER TABLE TB_입출고 ADD 오점이미지 image"
+            ADOCon.Execute Query
+            DoEvents
+                        
+            GoSub SUB_OK
+            
+        Case 9
+            Query = "CREATE TABLE [dbo].[TB_마일리지수정]("
+            Query = Query & "   [고객코드] [varchar](6) NOT NULL,"
+            Query = Query & "   [수정일자] [varchar](20) NOT NULL,"
+            Query = Query & "   [수정누적마일리지] [int] NULL,"
+            Query = Query & "   [이전누적마일리지] [int] NULL,"
+            Query = Query & "   [수정사용가능마일리지] [int] NULL,"
+            Query = Query & "   [이전사용가능마일리지] [int] NULL,"
+            Query = Query & "   [지사코드] [varchar](4) NULL DEFAULT (''),"
+            Query = Query & "   [가맹점코드] [varchar](6) NULL DEFAULT (''),"
+            Query = Query & " CONSTRAINT [PK_TB_마일리지수정] PRIMARY KEY CLUSTERED"
+            Query = Query & " ("
+            Query = Query & "     [고객코드] ASC,"
+            Query = Query & "     [수정일자] Asc"
+            Query = Query & " )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]"
+            Query = Query & " ) ON [PRIMARY]"
+            ADOCon.Execute Query
+        
+            GoSub SUB_OK
+        
+        Case 10
+            Query = "ALTER TABLE TB_현금영수증 ADD 취소승인번호 VARCHAR(10) DEFAULT ('')"
+            ADOCon.Execute Query
+            DoEvents
+        
+            Query = "ALTER TABLE TB_현금영수증 ADD 취소일자 VARCHAR(10) DEFAULT ('')"
+            ADOCon.Execute Query
+            DoEvents
+        
+            Query = "ALTER TABLE TB_현금영수증 ADD 취소시간 VARCHAR(10) DEFAULT ('')"
+            ADOCon.Execute Query
+            DoEvents
+        
+            Query = "UPDATE TB_현금영수증 SET 취소승인번호 = ''"
+            ADOCon.Execute Query
+            DoEvents
+        
+            Query = "UPDATE TB_현금영수증 SET 취소일자 = ''"
+            ADOCon.Execute Query
+            DoEvents
+        
+            Query = "UPDATE TB_현금영수증 SET 취소시간 = ''"
+            ADOCon.Execute Query
+            DoEvents
+        
+            GoSub SUB_OK
+            
+        Case 11
+            Query = "ALTER TABLE TB_입출고 ADD 환불확정일자 VARCHAR(20) DEFAULT ('')"
+            ADOCon.Execute Query
+            DoEvents
+                                    
+            GoSub SUB_OK
+    
+        Case 12
+            Query = "ALTER TABLE TB_신용카드승인 DROP CONSTRAINT PK_TB_신용카드승인"
+            ADOCon.Execute Query
+            DoEvents
+            
+            Query = "ALTER TABLE dbo.TB_신용카드승인 ADD CONSTRAINT PK_TB_신용카드승인 PRIMARY KEY (승인번호,승인일자,승인시간)"
+            ADOCon.Execute Query
+            DoEvents
+            
+            Query = "ALTER TABLE TB_현금영수증 DROP CONSTRAINT PK_TB_현금영수증"
+            ADOCon.Execute Query
+            DoEvents
+            
+            Query = "ALTER TABLE TB_현금영수증 ADD CONSTRAINT PK_TB_현금영수증 PRIMARY KEY (승인번호,승인일자,승인시간)"
+            ADOCon.Execute Query
+            DoEvents
+                                    
+            GoSub SUB_OK
+    
+        Case 13
+            Query = "ALTER TABLE TB_신용카드승인 DROP CONSTRAINT PK_TB_신용카드승인"
+            ADOCon.Execute Query
+            DoEvents
+        
+            '승인시간이 Null 이라서 'PK_TB_신용카드승인' 이 생성되지 않았다. 그래서 승인시간 수정
+            Query = "ALTER TABLE TB_신용카드승인 ALTER COLUMN 승인시간 VARCHAR(10) NOT NULL"
+            ADOCon.Execute Query
+            DoEvents
+            
+            Query = "ALTER TABLE dbo.TB_신용카드승인 ADD CONSTRAINT PK_TB_신용카드승인 PRIMARY KEY (승인번호,승인일자,승인시간)"
+            ADOCon.Execute Query
+            DoEvents
+            
+            '
+            Query = "ALTER TABLE TB_현금영수증 DROP CONSTRAINT PK_TB_현금영수증"
+            ADOCon.Execute Query
+            DoEvents
+            
+            '승인시간이 Null 이라서 'PK_TB_현금영수증' 이 생성되지 않았다. 그래서 승인시간 수정
+            Query = "ALTER TABLE TB_현금영수증 ALTER COLUMN 승인시간 VARCHAR(10) NOT NULL"
+            ADOCon.Execute Query
+            DoEvents
+            
+            Query = "ALTER TABLE TB_현금영수증 ADD CONSTRAINT PK_TB_현금영수증 PRIMARY KEY (승인번호,승인일자,승인시간)"
+            ADOCon.Execute Query
+            DoEvents
+                                    
+            GoSub SUB_OK
+        
+        Case 14
+            Query = " CREATE  PROCEDURE [dbo].[SP_TAG]" & vbNewLine
+            Query = Query & "          @Cnt          INT                 -- 접수수량" & vbNewLine
+            Query = Query & "        , @ReceiptDate  VARCHAR(10)         -- 접수일자" & vbNewLine
+            Query = Query & "        , @ReceiptTime  VARCHAR(10)         -- 접수시간" & vbNewLine
+            Query = Query & "        , @TagCode      VARCHAR(3)          -- 택코드" & vbNewLine
+            Query = Query & "        , @BranchCode   VARCHAR(4)          -- 지사코드" & vbNewLine
+            Query = Query & "        , @AgencyCode   VARCHAR(6)          -- 가맹점코드" & vbNewLine
+            Query = Query & "        , @Rtn          VARCHAR(5000) OUTPUT" & vbNewLine
+            Query = Query & " AS" & vbNewLine
+            Query = Query & " BEGIN" & vbNewLine
+            Query = Query & "    BEGIN TRANSACTION" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "    DECLARE @PadChar        CHAR(1)" & vbNewLine
+            Query = Query & "    DECLARE @FinalLength    INTEGER" & vbNewLine
+            Query = Query & "    DECLARE @TAG_List       VARCHAR(5000)" & vbNewLine
+            Query = Query & "    DECLARE @Receipt_No     INT" & vbNewLine
+            Query = Query & "    DECLARE @I              INT" & vbNewLine
+            Query = Query & "    DECLARE @Tmp_TAG        VARCHAR(9)" & vbNewLine
+            Query = Query & "    DECLARE @Tmp_No         INT" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "    SET @PadChar      = '0'" & vbNewLine
+            Query = Query & "    SET @FinalLength  = 6" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "    -- 택번호, 접수번호" & vbNewLine
+            Query = Query & "    SELECT @Tmp_TAG = ISNULL(택번호, @TagCode + '000001')" & vbNewLine
+            Query = Query & "         , @Receipt_No = ISNULL(접수번호, 0) + 1" & vbNewLine
+            Query = Query & "    FROM TB_기본정보" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "    SET @TAG_List = CONVERT(VARCHAR(10), @Receipt_No) + ':'" & vbNewLine
+            Query = Query & "    SET @I = 1" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "    WHILE @I <= @Cnt" & vbNewLine
+            Query = Query & "        BEGIN" & vbNewLine
+            Query = Query & "            IF SUBSTRING(@Tmp_TAG,4,6) = '999999'" & vbNewLine
+            Query = Query & "                BEGIN" & vbNewLine
+            Query = Query & "                    SET @Tmp_TAG = @TagCode + '000000'" & vbNewLine
+            Query = Query & "                END" & vbNewLine
+            Query = Query & "            Else" & vbNewLine
+            Query = Query & "                BEGIN" & vbNewLine
+            Query = Query & "                    SET @Tmp_No = CONVERT(INT, SUBSTRING(@Tmp_TAG,4,6)) + 1" & vbNewLine
+            Query = Query & "                    SET @Tmp_TAG = @TagCode + RIGHT( REPLICATE(@PadChar, @FinalLength - LEN(@FinalLength)) + CONVERT(VARCHAR(6), @Tmp_No), 6)" & vbNewLine
+            Query = Query & "            END" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "            INSERT INTO TB_입출고(지사코드" & vbNewLine
+            Query = Query & "                                , 가맹점코드" & vbNewLine
+            Query = Query & "                                , 접수번호" & vbNewLine
+            Query = Query & "                                , 택번호" & vbNewLine
+            Query = Query & "                                , 접수일자" & vbNewLine
+            Query = Query & "                                , 접수시간" & vbNewLine
+            Query = Query & "                                ) VALUES (" & vbNewLine
+            Query = Query & "                                  @BranchCode  -- 지사코드" & vbNewLine
+            Query = Query & "                                , @AgencyCode  -- 가맹점코드" & vbNewLine
+            Query = Query & "                                , @Receipt_No    -- 접수번호" & vbNewLine
+            Query = Query & "                                , @Tmp_TAG     -- 택번호" & vbNewLine
+            Query = Query & "                                , @ReceiptDate -- 접수일자" & vbNewLine
+            Query = Query & "                                , @ReceiptTime -- 접수시간" & vbNewLine
+            Query = Query & "                                )" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "            SET @TAG_List = @TAG_List + @Tmp_TAG + ','" & vbNewLine
+            Query = Query & "            SET @I = @I + 1" & vbNewLine
+            Query = Query & "    END" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "    IF @@ERROR > 0" & vbNewLine
+            Query = Query & "        BEGIN" & vbNewLine
+            Query = Query & "            SET @Rtn = ''" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "            Rollback TRANSACTION" & vbNewLine
+            Query = Query & "        END" & vbNewLine
+            Query = Query & "    Else" & vbNewLine
+            Query = Query & "        BEGIN" & vbNewLine
+            Query = Query & "            -- 마지막택번호, 접수번호 저장" & vbNewLine
+            Query = Query & "            UPDATE TB_기본정보 SET 택번호   = @Tmp_TAG" & vbNewLine
+            Query = Query & "                                 , 접수번호 = @Receipt_No" & vbNewLine
+            Query = Query & " " & vbNewLine
+            Query = Query & "            SET @Rtn = @TAG_List" & vbNewLine
+            Query = Query & "" & vbNewLine
+            Query = Query & "            Commit TRANSACTION" & vbNewLine
+            Query = Query & "        END" & vbNewLine
+            Query = Query & "END"
+            ADOCon.Execute Query
+            DoEvents
+                                    
+            GoSub SUB_OK
+        
+        Case 15
+            Query = "SELECT    A.매출일자"
+            Query = Query & ", A.고객코드"
+            Query = Query & ", A.접수번호"
+            Query = Query & ", ISNULL(COUNT(B.택번호),0) AS 접수수량"
+            Query = Query & " FROM TB_매출 AS A LEFT OUTER JOIN TB_입출고 AS B ON A.고객코드 = B.고객코드 AND A.접수번호 = B.접수번호"
+            Query = Query & " WHERE A.매출일자 >= '2011-08-11'"
+            Query = Query & "   AND A.일련번호  = 0"
+            Query = Query & " GROUP BY A.매출일자, A.고객코드, A.접수번호"
+            Set SUBRs = New ADODB.Recordset
+            SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+            
+            Do Until SUBRs.EOF
+                Query = "UPDATE TB_매출 SET 접수수량 = " & SUBRs!접수수량
+                Query = Query & " WHERE 고객코드 = '" & SUBRs!고객코드 & "'"
+                Query = Query & "   AND 매출일자 = '" & SUBRs!매출일자 & "'"
+                Query = Query & "   AND 접수번호 =  " & SUBRs!접수번호
+                Query = Query & "   AND 일련번호 = 0"
+                ADOCon.Execute Query
+                
+                SUBRs.MoveNext
+            Loop
+            SUBRs.Close
+            Set SUBRs = Nothing
+        
+            GoSub SUB_OK
+            
+        Case 16
+            Query = "ALTER TABLE TB_미수금수정 ADD 내용 VARCHAR(20) DEFAULT ('')"
+            ADOCon.Execute Query
+            
+            Query = "ALTER TABLE TB_미수금수정 ADD 본사전송여부 VARCHAR(1) DEFAULT ('')"
+            ADOCon.Execute Query
+            DoEvents
+            
+            Query = "ALTER TABLE TB_쿠폰자료 ADD 지사코드 VARCHAR(4) DEFAULT ('')"
+            ADOCon.Execute Query
+            
+            
+            GoSub SUB_OK
+            
+        Case 17
+            ' 가맹점 db 속도 향상을 위하여 반드시 필요한 쿼리
+            Query = ""
+            Query = Query & "CREATE NONCLUSTERED INDEX [IDX_PRG1] ON [dbo].[TB_입출고]" & vbNewLine
+            Query = Query & "(" & vbNewLine
+            Query = Query & "[접수일자] ASC," & vbNewLine
+            Query = Query & "[판매취소] ASC," & vbNewLine
+            Query = Query & "[반품환불일자] ASC," & vbNewLine
+            Query = Query & "[세탁환불일자] ASC," & vbNewLine
+            Query = Query & "[고객코드] Asc" & vbNewLine
+            Query = Query & ")WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]" & vbNewLine
+
+            Query = Query & ""
+            Query = Query & "CREATE NONCLUSTERED INDEX [IDX_PRG1] ON [dbo].[TB_매출]" & vbNewLine
+            Query = Query & "(" & vbNewLine
+            Query = Query & "[고객코드] Asc" & vbNewLine
+            Query = Query & ")WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]" & vbNewLine
+            
+            Query = Query & ""
+            Query = Query & "CREATE NONCLUSTERED INDEX [IDX_PRG2] ON [dbo].[TB_매출]" & vbNewLine
+            Query = Query & "(" & vbNewLine
+            Query = Query & "[고객코드] ASC," & vbNewLine
+            Query = Query & "[접수금액] ASC," & vbNewLine
+            Query = Query & "[입금합계] ASC," & vbNewLine
+            Query = Query & "[세트할인] ASC," & vbNewLine
+            Query = Query & "[에누리] Asc" & vbNewLine
+            Query = Query & ")WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]" & vbNewLine
+            ADOCon.Execute Query
+            DoEvents
+            
+            GoSub SUB_OK
+            
+        Case 18
+            
+            Query = "UPDATE TB_기본정보 SET 지정할인여부 = 'Y', 지정할인비율 = 50, 지정할인시작일 = '2011-10-27', 지정할인종료일 = '2011-11-30' WHERE 가맹점명 LIKE '%이마트%' "
+            ADOCon.Execute Query
+            
+            Query = "UPDATE TB_작업 SET 작업명 = '특정할인' WHERE 작업코드 = 'w07' "
+            ADOCon.Execute Query
+            
+            Query = "UPDATE TB_작업 SET 사용여부 = 'Y' WHERE 작업코드 IN('w06','w07') "
+            ADOCon.Execute Query
+            
+            GoSub SUB_OK
+        
+        Case 19
+            Query = Query & ""
+            Query = Query & "CREATE NONCLUSTERED INDEX [IDX_지점입고] ON [dbo].[TB_입출고]"
+            Query = Query & "("
+            Query = Query & "    [접수일자] ASC,"
+            Query = Query & "    [택번호] ASC,"
+            Query = Query & "    [판매취소] ASC,"
+            Query = Query & "    [고객코드] Asc"
+            Query = Query & ")WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]"
+            ADOCon.Execute Query
+            
+            GoSub SUB_OK
+            
+        Case 20
+            '--------------------------------------------------------------
+            ' 품명 순서를 가저 온다.
+            '--------------------------------------------------------------
+            Query = "SELECT 의류코드, 순서 FROM TB_의류"
+            Set SUBRs = New ADODB.Recordset
+            SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+            
+            Do Until SUBRs.EOF
+                Query = "UPDATE TB_할인정보 SET 순서 = " & SUBRs!순서
+                Query = Query & " WHERE 의류코드 = '" & SUBRs!의류코드 & "'"
+                ADOCon.Execute Query
+                
+                
+                Query = "UPDATE TB_요일할인 SET 순서 = " & SUBRs!순서
+                Query = Query & " WHERE 의류코드 = '" & SUBRs!의류코드 & "'"
+                ADOCon.Execute Query
+                SUBRs.MoveNext
+            Loop
+            SUBRs.Close
+            Set SUBRs = Nothing
+            
+            GoSub SUB_OK
+
+
+        Case 21
+            '--------------------------------------------------------------
+            ' 보안상 카드 번호 9-12자리 **** 로 표시
+            ' 유효 기간 삭제
+            '--------------------------------------------------------------
+            Query = "update TB_신용카드승인 set 카드번호 = SUBSTRING(카드번호,1,8) + '****' + SUBSTRING(카드번호,13,4) "
+            ADOCon.Execute Query
+            
+            GoSub SUB_OK
+
+            
+    End Select
+    
+    Set_TableEdit = True
+    
+    Exit Function
+    
+SUB_OK:
+        
+    Query = "SELECT * FROM TB_DataBaseUpdate"
+    Query = Query & " WHERE idx = " & iCount
+    Set Rs = New ADODB.Recordset
+    Rs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+    If Rs.EOF Then Rs.AddNew
+    
+    Rs!idx = iCount                          '
+    Rs!작업일자 = Format(Now, "YYYY-MM-DD hh:mm:ss") '
+    
+    Rs.Update
+    
+    Rs.Close
+    Set Rs = Nothing
+    
+    Return
+End Function
+
+'--------------------------------------------------------------------------
+' 함수명 : ServerData_Receive
+'
+'
+'--------------------------------------------------------------------------
+Public Sub ServerData_Receive()
+    Dim ADORs01 As ADODB.Recordset
+    Dim sStartDate  As String
+    Dim sEndDate    As String
+    Dim 적용일자    As String
+    Dim RecordCount As Long
+    Dim i   As Long
+    
+    On Error GoTo ErrRtn
+
+    frmSplash.lblMsg.Caption = "잠시만 기다려 주세요...."
+    frmSplash.ProgressBar1.Visible = True
+    DoEvents
+    
+    If Get_가맹점정보 = "Error" Then
+        MsgBox "가맹점 정보가 올바르지 않습니다. 확인후 저장하여 주십시요.", vbInformation, "확인"
+        
+        frm환경설정.Show 1
+        End
+    End If
+    
+    If Trim(가맹점정보.가맹점코드) = "" Then
+        MsgBox "가맹점 정보가 올바르지 않습니다.", vbCritical, "경고"
+        Exit Sub
+    End If
+    
+    If Server_Connection(HostCon, "LAUNDRY1000") = False Then Exit Sub
+    
+'-------------------------------------------------------------------
+' @@ 접속 정보를 저장한다.
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "접속 정보 확인중......"
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    ReDim sValue(1)
+    sValue(0) = 가맹점정보.가맹점코드       ' 가맹점코드
+    sValue(1) = "정상"                      ' 접속방법
+    
+    Set ADORs = New ADODB.Recordset
+    Set ADORs = SP_Exec(HostCon, "SP_R_CONNECT_INS", sValue(), Err_Num, Err_Desc)
+    
+'-------------------------------------------------------------------
+' TB_가맹점
+'-------------------------------------------------------------------
+'    Query = "SELECT   dbo.F_StoreToCompanyInfo (가맹점코드,'','CODE') as 지사코드 "
+  
+    Query = "SELECT   지사코드"
+    Query = Query & ",가맹점코드"
+    Query = Query & ",가맹점명"
+    Query = Query & ",업태"
+    Query = Query & ",종목"
+    Query = Query & ",우편번호"
+    Query = Query & ",주소"
+    Query = Query & ",적용일자"
+    Query = Query & ",택코드"
+    Query = Query & ",택색상"
+    Query = Query & ",수선"
+    Query = Query & ",택번호"
+    Query = Query & ",접수번호"
+    Query = Query & ",비율"
+    Query = Query & ",요일할인"
+    Query = Query & ",세트상품세일"
+    Query = Query & ",프린터"
+    Query = Query & ",세탁소요일"
+    Query = Query & ",매장전화번호"
+    Query = Query & ",문자발신전화"
+    Query = Query & ",휴대전화번호"
+    Query = Query & ",SMS_IP"
+    Query = Query & ",SMS_DB"
+    Query = Query & ",SMS_ID"
+    Query = Query & ",SMS_PWD"
+    Query = Query & ",ISNULL(TimeOut,30) AS TIMEOUT"
+    Query = Query & ",프로그램버전"
+    Query = Query & ",업데이트버전"
+    Query = Query & ",TRANS_CHK"
+    Query = Query & ",TRANS_DT"
+    Query = Query & ",SMS_EMART"
+    Query = Query & ",외주마진"
+    Query = Query & ",특정할인여부"
+    Query = Query & ",특정할인비율"
+    Query = Query & ",특정할인시작일"
+    Query = Query & ",특정할인종료일"
+    Query = Query & ",쿠폰할인여부"
+    Query = Query & ",쿠폰할인비율"
+    Query = Query & ",쿠폰할인시작일"
+    Query = Query & ",쿠폰할인종료일"
+    Query = Query & ",지정할인여부"
+    Query = Query & ",지정할인비율"
+    Query = Query & ",지정할인시작일"
+    Query = Query & ",지정할인종료일"
+    Query = Query & ",고가세탁비율"
+    Query = Query & ",세탁환불여부"
+    Query = Query & ",마일리지여부"
+    Query = Query & ",ISNULL(기준금액,0) AS 기준금액"
+    Query = Query & ",ISNULL(적립마일리지,0) AS 적립마일리지"
+    Query = Query & ",ISNULL(최소마일리지,0) AS 최소마일리지"
+    Query = Query & ",VAN_IP"
+    Query = Query & ",VAN_PORT"
+    Query = Query & ",사업자번호"
+    Query = Query & ",단말기번호"
+    Query = Query & ",사업장주소"
+    Query = Query & ",대표자명"
+    Query = Query & ",가맹점구분"
+    Query = Query & ",담당자코드"
+    Query = Query & ",기사코드"
+    Query = Query & ",계약일자"
+    Query = Query & ",해지일자"
+    Query = Query & ",이전가맹점코드"
+    Query = Query & ",가맹점상태"
+    Query = Query & ",비밀번호"
+    Query = Query & ",본사수신일자"
+    Query = Query & ",본사전송여부"
+    Query = Query & ",본사전송일자"
+    Query = Query & ",수금구분"
+    Query = Query & ",로열티여부1"
+    Query = Query & ",로열티비율1"
+    Query = Query & ",로열티여부2"
+    Query = Query & ",로열티비율2"
+    Query = Query & ",수수료지원여부"
+    Query = Query & ",수수료지원비율"
+    Query = Query & ",PG사용종료일"
+    
+    Query = Query & " FROM TB_가맹점"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+    
+    If Not ADORs.EOF Then
+        Query = "UPDATE TB_기본정보 SET"
+        Query = Query & "  지사코드       = '" & Trim(ADORs!지사코드) & "'"
+        
+        '지사가 변경된 경우 CleanAID.ini 파일에 변경된 지사코드 반영
+        Call SetIniStr("SERVER", "DATABASE", Set_Encrypt("LAUNDRY" & Trim(ADORs!지사코드), ""), iniFile)
+        
+        
+        Query = Query & ", 가맹점명       = '" & Trim(ADORs!가맹점명) & "'"
+        Query = Query & ", 업태           = '" & Trim(ADORs!업태) & "'"
+        Query = Query & ", 종목           = '" & Trim(ADORs!종목) & "'"
+        Query = Query & ", 우편번호       = '" & Trim(ADORs!우편번호) & "'"
+        Query = Query & ", 주소           = '" & Trim(ADORs!주소) & "'"
+        Query = Query & ", 적용일자       = '" & Trim(ADORs!적용일자) & "'"
+        Query = Query & ", 택코드         = '" & Trim(ADORs!택코드) & "'"
+        Query = Query & ", 택색상         = '" & Trim(ADORs!택색상) & "'"
+        
+        If Len(ADORs!요일할인) < 7 Then
+            Query = Query & ", 요일할인       = '0000000'"
+        Else
+            Query = Query & ", 요일할인       = '" & Trim(ADORs!요일할인) & "'"
+        End If
+        
+        If Len(ADORs!세트상품세일) < 7 Then
+            Query = Query & ", 세트상품세일   = '0000000'"
+        Else
+            Query = Query & ", 세트상품세일   = '" & Trim(ADORs!세트상품세일) & "'"
+        End If
+        
+        'Query = Query & ", 세탁소요일     = '" & Trim(ADORs!세탁소요일) & "'" '* 가맹점에서 수정하는 경우가 있으므로 다운받지 않는다.
+        
+        Query = Query & ", 매장전화번호   = '" & Trim(ADORs!매장전화번호) & "'"
+        Query = Query & ", 문자발신전화   = '" & Trim(ADORs!문자발신전화) & "'"
+        Query = Query & ", 휴대전화번호   = '" & Trim(ADORs!휴대전화번호) & "'"
+        Query = Query & ", SMS_IP         = '" & Trim(ADORs!SMS_IP) & "'"
+        Query = Query & ", SMS_DB         = '" & Trim(ADORs!SMS_DB) & "'"
+        Query = Query & ", SMS_ID         = '" & Trim(ADORs!SMS_ID) & "'"
+        Query = Query & ", SMS_PWD        = '" & Trim(ADORs!SMS_PWD) & "'"
+        Query = Query & ", [TIMEOUT]      =  " & ADORs!timeout
+        Query = Query & ", SMS_EMART      = '" & Trim(ADORs!SMS_EMART) & "'"
+        Query = Query & ", 외주마진       = '" & Trim(ADORs!외주마진) & "'"
+        Query = Query & ", 특정할인여부   = '" & Trim(ADORs!특정할인여부) & "'"
+        Query = Query & ", 특정할인비율   = '" & Trim(ADORs!특정할인비율) & "'"
+        Query = Query & ", 특정할인시작일 = '" & Trim(ADORs!특정할인시작일) & "'"
+        Query = Query & ", 특정할인종료일 = '" & Trim(ADORs!특정할인종료일) & "'"
+        Query = Query & ", 쿠폰할인여부   = '" & Trim(ADORs!쿠폰할인여부) & "'"
+        Query = Query & ", 쿠폰할인비율   = '" & Trim(ADORs!쿠폰할인비율) & "'"
+        Query = Query & ", 쿠폰할인시작일 = '" & Trim(ADORs!쿠폰할인시작일) & "'"
+        Query = Query & ", 쿠폰할인종료일 = '" & Trim(ADORs!쿠폰할인종료일) & "'"
+        Query = Query & ", 지정할인여부   = '" & Trim(ADORs!지정할인여부) & "'"
+        Query = Query & ", 지정할인비율   = '" & Trim(ADORs!지정할인비율) & "'"
+        Query = Query & ", 지정할인시작일 = '" & Trim(ADORs!지정할인시작일) & "'"
+        Query = Query & ", 지정할인종료일 = '" & Trim(ADORs!지정할인종료일) & "'"
+        Query = Query & ", 고가세탁비율   = '" & Trim(ADORs!고가세탁비율) & "'"
+        Query = Query & ", 세탁환불여부   = '" & Trim(ADORs!세탁환불여부) & "'"
+        Query = Query & ", 마일리지여부   = '" & Trim(ADORs!마일리지여부) & "'"
+        Query = Query & ", 기준금액       =  " & ADORs!기준금액
+        Query = Query & ", 적립마일리지   =  " & ADORs!적립마일리지
+        Query = Query & ", 최소마일리지   =  " & ADORs!최소마일리지
+        Query = Query & ", 가맹점구분     = '" & Trim(ADORs!가맹점구분) & "'"
+        Query = Query & ", 담당자코드     = '" & Trim(ADORs!담당자코드) & "'"
+        Query = Query & ", 기사코드       = '" & Trim(ADORs!기사코드) & "'"
+        Query = Query & ", 계약일자       = '" & Trim(ADORs!계약일자) & "'"
+        Query = Query & ", 해지일자       = '" & Trim(ADORs!해지일자) & "'"
+        Query = Query & ", 이전가맹점코드 = '" & Trim(ADORs!이전가맹점코드) & "'"
+        Query = Query & ", 가맹점상태     = '" & Trim(ADORs!가맹점상태) & "'"
+        Query = Query & ", 본사수신일자   = '" & Format(Now, "YYYY-MM-DD hh:mm:ss") & "'"
+        Query = Query & ", 본사전송여부   = 'N'"
+        Query = Query & ", 본사전송일자   = ''"
+        
+        Query = Query & ", 로열티여부1     = '" & Trim(ADORs!로열티여부1) & "'"
+        Query = Query & ", 로열티비율1     = '" & Trim(ADORs!로열티비율1) & "'"
+        Query = Query & ", 로열티여부2     = '" & Trim(ADORs!로열티여부2) & "'"
+        Query = Query & ", 로열티비율2     = '" & Trim(ADORs!로열티비율2) & "'"
+        Query = Query & ", 수수료지원여부     = '" & Trim(ADORs!수수료지원여부) & "'"
+        Query = Query & ", 수수료지원비율     = '" & Trim(ADORs!수수료지원비율) & "'"
+        
+        Query = Query & ", PG사용종료일     = '" & Trim(ADORs!PG사용종료일) & "'"
+        
+        Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        ADOCon.Execute Query
+    End If
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    Call Get_가맹점정보 '가맹점 정보
+    
+    
+'-------------------------------------------------------------------
+' TB_작업 - 적용일자를 가져온다.
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "작업정보 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT TOP 1 수정일자 FROM TB_작업"
+    Query = Query & " ORDER BY 수정일자 DESC"
+    Set SUBRs = New ADODB.Recordset
+    SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    If SUBRs.EOF Then
+        적용일자 = ""
+    Else
+        적용일자 = SUBRs(0) & ""
+    End If
+    SUBRs.Close:    Set SUBRs = Nothing
+        
+'-------------------------------------------------------------------
+' 0) TB_작업 - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    
+    Query = "SELECT    작업코드"
+    Query = Query & ", 작업명"
+    Query = Query & ", 사용여부"
+    Query = Query & ", 순서"
+    Query = Query & ", 수정일자"
+    Query = Query & " FROM TB_작업"
+    
+    If 적용일자 = "" Then
+    
+    Else
+        Query = Query & "   WHERE 수정일자 = (SELECT MAX(수정일자) FROM TB_작업"
+        Query = Query & "                   WHERE 수정일자  > '" & Format(적용일자, "YYYY-MM-DD") & "'"
+        Query = Query & "                  ) "
+    End If
+    
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    If Not ADORs.EOF Then
+        ADOCon.Execute "DELETE FROM TB_작업" '이전 자료 삭제
+    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_작업"
+        Query = Query & " WHERE 작업코드 = '" & ADORs!작업코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!작업코드 = ADORs!작업코드 & ""
+        SUBRs!작업명 = Trim(ADORs!작업명) & ""
+        SUBRs!사용여부 = ADORs!사용여부 & ""
+        SUBRs!순서 = ADORs!순서 & ""
+        SUBRs!수정일자 = ADORs!수정일자 & ""
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+    
+'-------------------------------------------------------------------
+' TB_의류분류 - 적용일자를 가져온다.
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "의류분류정보 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    적용일자 = ""
+    
+    Query = "SELECT TOP 1 ISNULL(적용일자,'2000-01-01') AS 적용일자 FROM TB_의류분류"
+    Query = Query & " ORDER BY 적용일자 DESC"
+    Set SUBRs = New ADODB.Recordset
+    SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    If SUBRs.EOF Then
+        ' 자료없을 경우 가장 최근일자를 무조건 다운로드를 한다.
+        Query = " SELECT MAX(적용일자) FROM TB_가맹점의류분류"
+        Query = Query & "                   WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & "                     AND 적용일자  <= '" & Format(Date, "YYYY-MM-DD") & "'"
+        
+    Else
+        ' 수신이 안된 내용을 기준으로 다운로드를 한다.
+        Query = " SELECT MAX(적용일자) FROM TB_가맹점의류분류"
+        Query = Query & "                   WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & "                     AND (적용일자  >= '" & Format(SUBRs(0) & "", "YYYY-MM-DD") & "'"
+        Query = Query & "                     AND  적용일자 <= '" & Format(Date, "YYYY-MM-DD") & "')"
+        Query = Query & "                     AND  수신여부 = 'N' "
+    
+    End If
+    
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+
+        If Not ADORs.EOF Then
+            적용일자 = ADORs(0) & ""
+            ADORs.Close
+        End If
+    
+    Set ADORs = Nothing
+    
+    
+    SUBRs.Close
+    Set SUBRs = Nothing
+        
+            
+'-------------------------------------------------------------------
+' 0) TB_가맹점의류분류 - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    If 적용일자 <> "" Then
+    
+    
+        '-------------------------------------------------------------------
+        ' 이전 순서를 가저온다.
+        Dim OldCode(30) As String
+        Dim nCnt        As Integer
+        
+        Query = "SELECT * FROM TB_의류분류"
+        Query = Query & " ORDER BY 의류분류코드 ASC "
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+        
+        nCnt = 0
+        Do Until SUBRs.EOF
+            OldCode(nCnt) = SUBRs.Fields("의류분류코드") & "|" & SUBRs.Fields("순서")
+            
+            nCnt = nCnt + 1
+            SUBRs.MoveNext
+        Loop
+        SUBRs.Close
+        Set SUBRs = Nothing
+        '-------------------------------------------------------------------
+
+    
+        Query = "SELECT    가맹점코드"
+        Query = Query & ", 적용일자"
+        Query = Query & ", 의류분류코드"
+        Query = Query & ", 의류분류명"
+        Query = Query & ", ISNULL(세탁마진,0) AS 세탁마진"
+        Query = Query & ", ISNULL(외주마진,0) AS 외주마진"
+        Query = Query & ", ISNULL(수선마진,0) AS 수선마진"
+        Query = Query & " FROM TB_가맹점의류분류"
+        Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & "   AND 적용일자  = '" & 적용일자 & "'"
+        
+        Set ADORs = New ADODB.Recordset
+        ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+            
+        i = 0
+        
+        If Not ADORs.EOF Then
+            ADOCon.Execute "DELETE FROM TB_의류분류" '이전 자료 삭제
+        End If
+        
+        Do Until ADORs.EOF
+            i = i + 1
+            
+            frmSplash.lblCount.Caption = i
+            'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+            DoEvents
+            
+            '--------------------------------------------------------------
+            ' TB_의류 - 의류금액 정보 다운로드
+            '--------------------------------------------------------------
+            Query = "SELECT * FROM TB_의류분류"
+            Query = Query & " WHERE 의류분류코드 = '" & ADORs!의류분류코드 & "'"
+            Set SUBRs = New ADODB.Recordset
+            SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+            
+            If SUBRs.EOF Then SUBRs.AddNew
+            
+            SUBRs!의류분류코드 = ADORs!의류분류코드 & ""        ' 1 의류분류코드
+            SUBRs!의류분류명 = Trim(ADORs!의류분류명) & ""      ' 2 의류분류명
+            SUBRs!세탁마진 = ADORs!세탁마진 & ""                ' 3 세탁마진
+            SUBRs!외주마진 = ADORs!외주마진 & ""                ' 4 외주마진
+            SUBRs!수선마진 = ADORs!수선마진 & ""                ' 5 수선마진
+            SUBRs!순서 = Get의류분류코드순서(OldCode, ADORs!의류분류코드 & "")                          ' 6 순서
+            SUBRs!적용일자 = ADORs!적용일자 & ""                ' 7 적용일자
+            SUBRs!수신일자 = Format(Now, "YYYY-MM-DD hh:mm:ss") ' 8 수신일자
+            
+            SUBRs.Update
+            
+            SUBRs.Close
+            Set SUBRs = Nothing
+            
+            ADORs.MoveNext
+        Loop
+        ADORs.Close
+        Set ADORs = Nothing
+        
+        ' 서버에 다운로드한 기록을 남긴다.
+        Query = " UPDATE TB_가맹점의류분류 SET 수신여부 = 'Y', 수신일자 = '" & Format(Now(), "yyyy-MM-dd hh:mm:ss") & "' "
+        Query = Query & "                   WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & "                     AND 적용일자 = '" & 적용일자 & "'"
+        Query = Query & "                     AND 수신여부 = 'N' "
+        HostCon.Execute Query
+        
+    End If
+'-------------------------------------------------------------------
+' TB_의류분류코드 - 임의 변경을 위하여 다른곳에 저장을 한다.
+'-------------------------------------------------------------------
+'    Call Check_세탁마진_다운로드
+'    If Check_세탁마진 = False Then End
+    
+    
+    
+'-------------------------------------------------------------------
+' TB_의류 - 적용일자를 가져온다.
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "의류정보 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT TOP 1 적용일자 FROM TB_의류"
+    Query = Query & " ORDER BY 적용일자 DESC"
+    Set SUBRs = New ADODB.Recordset
+    SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    If SUBRs.EOF Then
+        적용일자 = ""
+    Else
+        적용일자 = SUBRs(0) & ""
+    End If
+    SUBRs.Close
+    Set SUBRs = Nothing
+        
+'-------------------------------------------------------------------
+' 1) TB_가맹점의류 - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    Query = "SELECT    가맹점코드"
+    Query = Query & ", 적용일자"
+    Query = Query & ", 의류코드"
+    Query = Query & ", 의류명"
+    Query = Query & ", ISNULL(금액,0) AS 금액"
+    Query = Query & ", 순서"
+    Query = Query & " FROM TB_가맹점의류"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & "   AND 사용여부   = 'Y'"
+    
+    If 적용일자 = "" Then
+    ' 가격 자료가 없을 경우 마지막 가격 자료를 무조건 가지고 온다.
+        Query = Query & "   AND 적용일자 = (SELECT MAX(적용일자) FROM TB_가맹점의류"
+        Query = Query & "                   WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & "                     AND 적용일자  <= '" & Format(Date, "YYYY-MM-DD") & "'"
+        Query = Query & "                  ) "
+    Else
+    ' 가격 자료가 있을 경우 수신일자를 적용하여 처리한다.
+        Query = Query & "   AND (수신일자 IS NULL OR RTRIM(수신일자) = '') "  '<-- 수신하지 않은 내용만 다운로드를 한다.
+        Query = Query & "   AND 적용일자 = (SELECT MAX(적용일자) FROM TB_가맹점의류"
+        Query = Query & "                   WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & "                     AND (적용일자 >= '" & Format(적용일자, "YYYY-MM-DD") & "'"
+        Query = Query & "                     AND  적용일자 <= '" & Format(Date, "YYYY-MM-DD") & "')"
+        Query = Query & "                  ) "
+    End If
+    
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    '--------------------------------------------------------------
+    ' TB_의류 - '삭제하기 전에 최종 사용한 의류 순서를 읽어 온다
+    '--------------------------------------------------------------
+    Call GetGoodsInfo
+    
+    If Not ADORs.EOF Then
+        ADOCon.Execute "DELETE FROM TB_의류" '이전 자료 삭제
+    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_의류"
+        Query = Query & " WHERE 의류코드 = '" & ADORs!의류코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!의류코드 = ADORs!의류코드 & ""                ' 1 의류코드
+        SUBRs!의류명 = Trim(ADORs!의류명) & ""              ' 2 의류명
+        SUBRs!금액 = ADORs!금액 & ""                        ' 3 금액
+        SUBRs!순서 = GetGoodsOrderby(ADORs!의류코드 & "")   ' 4 순서
+        SUBRs!적용일자 = ADORs!적용일자 & ""                ' 5 적용일자
+        SUBRs!수신일자 = Format(Now, "YYYY-MM-DD hh:mm:ss") ' 6 수신일자
+        
+        적용일자 = ADORs!적용일자 & ""
+        
+        SUBRs.Update
+        SUBRs.Close:        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:    Set ADORs = Nothing
+    
+    ' 다운로드한 부분의 자료를 수신일자 설정한다.
+    Query = " UPDATE  TB_가맹점의류 SET 수신일자 = convert(varchar(20), getdate(), 120)  "
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & "   AND 사용여부   = 'Y'"
+    Query = Query & "   AND 적용일자   = '" & 적용일자 & "'"
+    Query = Query & "   AND (수신일자 IS NULL OR RTRIM(수신일자) = '') "   '<-- 수신하지 않은 내용만 설정 한다.
+    HostCon.Execute Query
+
+'-------------------------------------------------------------------
+' 2) TB_가맹점입금 - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "가맹점 입금 정보 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT * FROM TB_가맹점입금"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & "   AND (입금확정 IS NULL OR 입금확정 = '')"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+    
+    i = 0
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT    가맹점코드"
+        Query = Query & ", 입금일자"
+        Query = Query & ", 배송기사명"
+        Query = Query & ", ISNULL(입금액,0) AS 입금액"
+        Query = Query & ", 비고"
+        Query = Query & ", 입금확정"
+        Query = Query & ", 확정일자"
+        Query = Query & " FROM TB_가맹점입금"
+        Query = Query & " WHERE 입금일자 = '" & ADORs!입금일자 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        'SUBRs!입금코드 = ADORs!입금코드 & ""     ' 1
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & "" ' 2
+        SUBRs!입금일자 = ADORs!입금일자 & ""     ' 3
+        SUBRs!배송기사명 = ADORs!배송기사명 & "" ' 4
+        SUBRs!입금액 = ADORs!입금액 & ""         ' 5
+        SUBRs!비고 = ADORs!비고 & ""             ' 6
+        SUBRs!입금확정 = ADORs!입금확정 & ""     ' 7
+        SUBRs!확정일자 = ADORs!확정일자 & ""     ' 8
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+        
+    
+'-------------------------------------------------------------------
+' 3) TB_부자재주문- 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "부자재 주문 정보 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT * FROM TB_부자재주문"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & "   AND (출고일자 IS NOT NULL OR 출고일자 <> '')"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+    
+    i = 0
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_부자재주문"
+        Query = Query & " WHERE 주문코드 = " & ADORs!주문코드
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If Not SUBRs.EOF Then
+            SUBRs!출고일자 = ADORs!출고일자 & ""     ' 1
+            
+            SUBRs.Update
+        End If
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+        
+        
+'-------------------------------------------------------------------
+' 4) TB_세트상품 - 시작일자를 가져온다.
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "세트상품 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT TOP 1 시작일자 FROM TB_세트상품"
+    Query = Query & " ORDER BY 시작일자 DESC"
+    Set SUBRs = New ADODB.Recordset
+    SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    If SUBRs.EOF Then
+        적용일자 = ""
+    Else
+        적용일자 = SUBRs(0) & ""
+    End If
+    SUBRs.Close
+    Set SUBRs = Nothing
+        
+    '-------------------------------------------------------------------
+    ' TB_세트상품 - 크린에이드 서버에서 수신
+    '-------------------------------------------------------------------
+    Query = "SELECT    시작일자"
+    Query = Query & ", 종료일자"
+    Query = Query & ", SET2_1"
+    Query = Query & ", SET2_2"
+    Query = Query & " FROM TB_세트상품"
+    
+    If 적용일자 = "" Then
+        Query = Query & " WHERE 시작일자 = (SELECT MAX(시작일자) FROM TB_세트상품"
+        Query = Query & "                   WHERE 시작일자  <= '" & Format(Date, "YYYY-MM-DD") & "'"
+        Query = Query & "                  ) "
+    Else
+        Query = Query & " WHERE 시작일자 = (SELECT MAX(시작일자) FROM TB_세트상품"
+        Query = Query & "                   WHERE (시작일자  > '" & Format(적용일자, "YYYY-MM-DD") & "'"
+        Query = Query & "                     AND  시작일자 <= '" & Format(Date, "YYYY-MM-DD") & "')"
+        Query = Query & "                  ) "
+    End If
+    
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_세트상품"
+        Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!시작일자 = Format(ADORs!시작일자, "YYYY-MM-DD") & "" ' 1 시작일자
+        SUBRs!종료일자 = Format(ADORs!종료일자, "YYYY-MM-DD") & "" ' 2 종료일자
+        SUBRs!SET2_1 = Trim(ADORs!SET2_1) & ""                     ' 3 세트2_1
+        SUBRs!SET2_2 = Trim(ADORs!SET2_2) & ""                     ' 4 세트2_2
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+                    
+                    
+'-------------------------------------------------------------------
+' 5) TB_요일할인 - 시작일자를 가져온다.
+'-------------------------------------------------------------------
+    Call GetReceive_요일할인
+ 
+    
+'-------------------------------------------------------------------
+' 6) TB_할인 - 시작일자를 가져온다.
+'-------------------------------------------------------------------
+    Call GetReceive_할인
+
+                    
+'-------------------------------------------------------------------
+' 7) TB_고객등급 - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "고객등급 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT    고객등급코드"
+    Query = Query & ", 고객등급명"
+    Query = Query & ", ISNULL(순서,0) AS 순서"
+    Query = Query & " FROM TB_고객등급"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    If Not ADORs.EOF Then
+        ADOCon.Execute "DELETE FROM TB_고객등급" '이전 자료 삭제
+    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_고객등급"
+        Query = Query & " WHERE 고객등급코드 = '" & ADORs!고객등급코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!고객등급코드 = ADORs!고객등급코드 & ""        ' 1 고객등급코드
+        SUBRs!고객등급명 = Trim(ADORs!고객등급명) & ""      ' 2 고객등급명
+        SUBRs!순서 = ADORs!순서 & ""                        ' 4 순서
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+                    
+                    
+'-------------------------------------------------------------------
+' 8) TB_미입고사유 - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "미입고사유 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    Query = "SELECT    미입고사유코드"
+    Query = Query & ", 미입고사유"
+    Query = Query & ", ISNULL(순서,0) AS 순서"
+    Query = Query & " FROM TB_미입고사유"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    If Not ADORs.EOF Then
+        ADOCon.Execute "DELETE FROM TB_미입고사유" '이전 자료 삭제
+    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_미입고사유"
+        Query = Query & " WHERE 미입고사유코드 = '" & ADORs!미입고사유코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!미입고사유코드 = ADORs!미입고사유코드 & ""    ' 1 미입고사유코드
+        SUBRs!미입고사유 = Trim(ADORs!미입고사유) & ""      ' 2 미입고사유
+        SUBRs!순서 = ADORs!순서 & ""                        ' 4 순서
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+                    
+                    
+'-------------------------------------------------------------------
+' 9) TB_환불사유 - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "환불사유 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    Query = "SELECT    환불사유코드"
+    Query = Query & ", 환불사유"
+    Query = Query & ", ISNULL(순서,0) AS 순서"
+    Query = Query & " FROM TB_환불사유"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    If Not ADORs.EOF Then
+        ADOCon.Execute "DELETE FROM TB_환불사유" '이전 자료 삭제
+    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_환불사유"
+        Query = Query & " WHERE 환불사유코드 = '" & ADORs!환불사유코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!환불사유코드 = ADORs!환불사유코드 & ""    ' 1 환불사유코드
+        SUBRs!환불사유 = Trim(ADORs!환불사유) & ""      ' 2 환불사유
+        SUBRs!순서 = ADORs!순서 & ""                    ' 4 순서
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+
+'-------------------------------------------------------------------
+' 10) TB_사고품내역 - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "사고품 내역 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    ReDim sValue(0)
+    sValue(0) = 가맹점정보.가맹점코드                 ' 가맹점코드
+    
+    i = 0
+    
+    Set ADORs = New ADODB.Recordset
+    Set ADORs = SP_Exec(HostCon, "SP_R_COMPLAIN_SEL", sValue(), Err_Num, Err_Desc)
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_사고품내역"
+        Query = Query & " WHERE 가맹점코드 = '" & ADORs!가맹점코드 & "'"
+        Query = Query & "   AND 일련번호     = '" & ADORs!일련번호 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""
+        SUBRs!가맹점코드 = ADORs!가맹점코드 & ""
+        SUBRs!일련번호 = ADORs!일련번호 & ""
+        SUBRs!사고접수일자 = ADORs!사고접수일자 & ""
+        SUBRs!담당자명 = ADORs!담당자명 & ""
+        SUBRs!고객코드 = ADORs!고객코드 & ""
+        SUBRs!성명 = ADORs!성명 & ""
+        SUBRs!전화번호 = ADORs!전화번호 & ""
+        SUBRs!휴대전화 = ADORs!휴대전화 & ""
+        SUBRs!주소 = ADORs!주소 & ""
+        
+        SUBRs!접수일자 = ADORs!접수일자 & ""
+        SUBRs!택번호 = ADORs!택번호 & ""
+        SUBRs!출고일자 = ADORs!출고일자 & ""
+        SUBRs!인도일자 = ADORs!인도일자 & ""
+        SUBRs!의류명 = ADORs!의류명 & ""
+        SUBRs!상표 = ADORs!상표 & ""
+        SUBRs!색상 = ADORs!색상 & ""
+        SUBRs!구입일자 = ADORs!구입일자 & ""
+        SUBRs!구입처 = ADORs!구입처 & ""
+        SUBRs!구입형태 = ADORs!구입형태 & ""
+        SUBRs!구입가격 = ADORs!구입가격 & ""
+        SUBRs!품목 = ADORs!품목 & ""
+        
+        SUBRs!용도 = ADORs!용도 & ""
+        SUBRs!소재 = ADORs!소재 & ""
+        SUBRs!내용연수 = ADORs!내용연수 & ""
+        SUBRs!경과일수 = ADORs!경과일수 & ""
+        SUBRs!환산일수 = ADORs!환산일수 & ""
+        SUBRs!배상비율 = ADORs!배상비율 & ""
+        SUBRs!배상금액 = ADORs!배상금액 & ""
+        SUBRs!크레임구분 = ADORs!크레임구분 & ""
+        SUBRs!보상구분 = ADORs!보상구분 & ""
+        SUBRs!처리구분 = ADORs!처리구분 & ""
+        SUBRs!보상금액 = ADORs!보상금액 & ""
+        
+        SUBRs!처리일자 = ADORs!처리일자 & ""
+        SUBRs!비고 = Trim(ADORs!비고 & "")
+        SUBRs!가맹점의견 = ADORs!가맹점의견 & ""
+        SUBRs!지사의견 = ADORs!지사의견 & ""
+        SUBRs!본사의견 = ADORs!본사의견 & ""
+        SUBRs!지사승인 = ADORs!지사승인 & ""
+        SUBRs!지사승인일시 = ADORs!지사승인일시 & ""
+        SUBRs!본사승인 = ADORs!본사승인 & ""
+        SUBRs!본사승인일시 = ADORs!본사승인일시 & ""
+        SUBRs!본사전송여부 = "Y"
+        SUBRs!본사전송일자 = ""
+        
+        SUBRs!가맹점명 = ADORs!가맹점명 & ""
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    
+    ADORs.Close:    Set ADORs = Nothing
+    
+    If i > 0 Then
+    
+        ReDim sValue(0)
+        sValue(0) = 가맹점정보.가맹점코드                 ' 가맹점코드
+        
+        Set ADORs = New ADODB.Recordset
+        Set ADORs = SP_Exec(HostCon, "SP_R_COMPLAIN_INS", sValue(), Err_Num, Err_Desc)
+        Set ADORs = Nothing
+    End If
+    
+                    
+'-------------------------------------------------------------------
+' 11) TB_사고품품목  - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "사고품 관련내용(품목) 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    Query = "SELECT   품목코드, 품목명"
+    Query = Query & " FROM TB_사고품품목"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    If Not ADORs.EOF Then
+        ADOCon.Execute "DELETE FROM TB_사고품품목" '이전 자료 삭제
+    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_사고품품목"
+        Query = Query & " WHERE 품목코드 = '" & ADORs!품목코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!품목코드 = ADORs!품목코드 & ""    ' 1 품목코드
+        SUBRs!품목명 = Trim(ADORs!품목명) & ""      ' 2 품목명
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+    
+                    
+'-------------------------------------------------------------------
+' 12) TB_사고품용도  - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "사고품 관련내용(용도) 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    Query = "SELECT    용도코드, 용도내용"
+    Query = Query & " FROM TB_사고품용도"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    If Not ADORs.EOF Then
+        ADOCon.Execute "DELETE FROM TB_사고품용도" '이전 자료 삭제
+    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_사고품용도"
+        Query = Query & " WHERE 용도코드 = '" & ADORs!용도코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!용도코드 = ADORs!용도코드 & ""    ' 1 용도코드
+        SUBRs!용도내용 = Trim(ADORs!용도내용) & ""      ' 2 용도내용
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+                    
+'-------------------------------------------------------------------
+' 13) TB_사고품소재  - 크린에이드 서버에서 수신
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "사고품 관련내용(소재) 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    Query = "SELECT    소재코드, 소재명"
+    Query = Query & " FROM TB_사고품소재"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    If Not ADORs.EOF Then
+        ADOCon.Execute "DELETE FROM TB_사고품소재" '이전 자료 삭제
+    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_사고품소재"
+        Query = Query & " WHERE 소재코드 = '" & ADORs!소재코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!소재코드 = ADORs!소재코드 & ""    ' 1 소재코드
+        SUBRs!소재명 = Trim(ADORs!소재명) & ""      ' 2 소재명
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+    
+'-------------------------------------------------------------------
+' 14) TB_지사  - 지사 정보 다운로드
+'-------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "지사 정보 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    Query = "SELECT   *"
+    Query = Query & " FROM TB_지사"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+'    If Not ADORs.EOF Then
+'        ADOCon.Execute "DELETE FROM TB_지사" '이전 자료 삭제
+'    End If
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_지사"
+        Query = Query & " WHERE 지사코드 = '" & ADORs!지사코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!지사코드 = ADORs!지사코드 & ""
+        SUBRs!지사명 = Trim(ADORs!지사명) & ""
+        SUBRs!지사상태 = Trim(ADORs!지사상태) & ""
+        SUBRs!지사장명 = Trim(ADORs!지사장명) & ""
+        SUBRs!전화번호 = Trim(ADORs!전화번호) & ""
+        SUBRs!휴대전화 = Trim(ADORs!휴대전화) & ""
+        SUBRs!주소 = Trim(ADORs!주소) & ""
+        SUBRs!메모 = Trim(ADORs!메모) & ""
+        SUBRs!영업팀 = Trim(ADORs!영업팀) & ""
+        
+        SUBRs.Update
+        
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+
+'-------------------------------------------------------------------
+' 15) TB_SMS080  - 080 자료 다운로드중...
+'-------------------------------------------------------------------
+    ' 이전수신일자부터 어제까지의 내용을 다운로드 한다.
+    ' 등록 시간에 따라 수신이 되지 않는 문제가 발생할 수 있어 어제까지만 다운로드 한다.
+    sStartDate = GetIniStr("SMS080", "END_DOWNLOAD_DATE", "20160101000001", iniFile)   '데이터베이스
+    sEndDate = Format(DateAdd("d", -1, Date), "yyyyMMdd235959") 'Format(Now, "yyyyMMddhhmmss")
+    
+    frmSplash.lblMsg.Caption = "080 자료 다운로드중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    Query = "SELECT   *"
+    Query = Query & " FROM TB_SMS080 "
+    Query = Query & " WHERE 등록시간 BETWEEN '" & sStartDate & "' AND '" & sEndDate & "' "
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    i = 0
+    
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_SMS080  정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_SMS080"
+        Query = Query & " WHERE 휴대폰번호  = '" & ADORs!휴대폰번호 & "' "
+        
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!휴대폰번호 = ADORs!휴대폰번호 & ""
+        SUBRs!발신전화번호 = Trim(ADORs!발신전화번호) & ""
+        SUBRs!등록시간 = Trim(ADORs!등록시간) & ""
+        SUBRs!적용여부 = "N"
+        
+        SUBRs.Update
+        
+        SUBRs.Close:    Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+'*******************************************************************
+    HostCon.Close:  Set HostCon = Nothing
+    
+    Call SetIniStr("SMS080", "END_DOWNLOAD_DATE", sEndDate, iniFile)    '데이터베이스
+
+    frmSplash.lblMsg.Caption = "080 자료를 적용중 입니다. 잠시만 기다려 주세요....."
+
+    Query = " UPDATE TB_고객정보 SET 문자080거부여부 = 'Y',문자발송여부='N' from TB_고객정보"
+    Query = Query & " inner join tb_sms080"
+    Query = Query & " on TB_SMS080.휴대폰번호 = TB_고객정보.휴대전화"
+    Query = Query & " where TB_SMS080.적용여부 = 'N'"
+    ADOCon.Execute Query
+
+    Query = " UPDATE tb_sms080 SET 적용여부 = 'Y' WHERE 적용여부 = 'N' "
+    ADOCon.Execute Query
+
+
+    frmSplash.lblMsg.Caption = "잠시만 기다려 주세요....."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+
+    Exit Sub
+
+ErrRtn:
+    Call Error_Msg("ServerData_Receive", Err.Source, Err.Number, Err.description)
+
+End Sub
+
+
+
+
+'*******************************************************************
+    'Call Set_고객최종거래일자 '2010-12-23 까지 임시로 실행
+    
+'    '--------------------------------------------------------------
+'    frmSplash.lblMsg.Caption = "세탁마진 작업중..."
+'    frmSplash.lblCount.Caption = ""
+'    DoEvents
+'
+'    Call Set_세탁마진          '2010-12-28 까지 임시로 실행
+    
+'    '--------------------------------------------------------------
+'    '
+'    '--------------------------------------------------------------
+'    Dim 마감일자   As String
+'    Dim 마감여부   As String
+'
+'    마감여부 = GetIniStr("WORK", "DAYCLOSE2", "", iniFile)
+'
+'    If 마감여부 = "" Then
+'        Query = "DELETE FROM TB_매출"
+'        Query = Query & " WHERE 적요 = '[마일리지 삭제]'"
+'        ADOCon.Execute Query
+'
+'        '--------------------------------------------------------------
+'        frmSplash.lblMsg.Caption = "고객정보 수정 작업중..."
+'        frmSplash.lblCount.Caption = ""
+'        DoEvents
+'
+'        Call Set_고객마일리지       '2010-12-31 까지 임시로 실행
+'
+'        '--------------------------------------------------------------
+'        frmSplash.lblMsg.Caption = "일일마감 작업중..."
+'        frmSplash.lblCount.Caption = ""
+'        DoEvents
+'
+'        Call Set_일일마감          '2010-12-31 까지 임시로 실행
+'    End If
+'
+'    '--------------------------------------------------------------
+'    '
+'    '--------------------------------------------------------------
+'    마감여부 = GetIniStr("WORK", "DAYCLOSE3", "", iniFile)
+'
+'    If 마감여부 <> "Y" Then
+'        마감일자 = "2010-12-15"
+'
+'        Do Until 마감일자 >= Format(Date, "YYYY-MM-DD")
+'            frmSplash.lblMsg.Caption = "일일마감 정보 송신중..."
+'            frmSplash.lblCount.Caption = ""
+'            DoEvents
+'
+'            Call 마감정보_Send(마감일자)
+'
+'            마감일자 = Format(DateAdd("d", 1, 마감일자), "YYYY-MM-DD")
+'        Loop
+'    End If
+'
+'
+'    '--------------------------------------------------------------
+'    ' 마일리지스토리 -> 매출에 적용
+'    '--------------------------------------------------------------
+'    Dim 마일리지 As String
+'
+'    마일리지 = GetIniStr("WORK", "MILEAGE", "", iniFile)
+'
+'    If 마일리지 <> "Y" Then
+'        '--------------------------------------------------------------
+'        frmSplash.lblMsg.Caption = "마일리지 수정 작업중..."
+'        frmSplash.lblCount.Caption = ""
+'        DoEvents
+'
+'        Call Set_매출마일리지
+'    End If
+'
+'
+'    '--------------------------------------------------------------
+'    ' TB_입출고 -> '반품환불일자' 적용
+'    '--------------------------------------------------------------
+'    Dim 반품환불 As String
+'
+'    반품환불 = GetIniStr("WORK", "RETURNDAY", "", iniFile)
+'
+'    If 반품환불 <> "Y" Then
+'        '--------------------------------------------------------------
+'        frmSplash.lblMsg.Caption = "반품환불 수정 작업중..."
+'        frmSplash.lblCount.Caption = ""
+'        DoEvents
+'
+'        Query = "UPDATE TB_입출고 SET 반품환불일자 = REPLACE(반품환불일자,'-','')"
+'        Query = Query & " WHERE 반품환불일자 <> ''"
+'        ADOCon.Execute Query
+'
+'        Query = "UPDATE TB_입출고 SET 반품환불일자 = REPLACE(반품환불일자,':','')"
+'        Query = Query & " WHERE 반품환불일자 <> ''"
+'        ADOCon.Execute Query
+'
+'        Query = "UPDATE TB_입출고 SET 반품환불일자 = REPLACE(반품환불일자,' ','')"
+'        Query = Query & " WHERE 반품환불일자 <> ''"
+'        ADOCon.Execute Query
+'
+'
+'        Query = "UPDATE TB_입출고 SET"
+'        Query = Query & " 반품환불일자 ="
+'        Query = Query & "   SUBSTRING(반품환불일자,1,4) + '-'"
+'        Query = Query & " + SUBSTRING(반품환불일자,5,2) + '-'"
+'        Query = Query & " + SUBSTRING(반품환불일자,7,2) + ' '"
+'        Query = Query & " + SUBSTRING(반품환불일자,9,2) + ':'"
+'        Query = Query & " + SUBSTRING(반품환불일자,11,2) + ':'"
+'        Query = Query & " + SUBSTRING(반품환불일자,13,2)"
+'        Query = Query & " WHERE 반품환불일자 <> ''"
+'        ADOCon.Execute Query
+'
+'        Query = "UPDATE TB_입출고 SET 판매취소     = ''"
+'        Query = Query & "           , 판매취소일자 = ''"
+'        Query = Query & " WHERE (반품환불일자 <> '')"
+'        Query = Query & "   AND (판매취소일자 = 반품환불일자)"
+'        ADOCon.Execute Query
+'
+'        Call SetIniStr("WORK", "RETURNDAY", "Y", iniFile)
+'    End If
+'
+'    If Server_Connection(HostCon, "") = True Then
+'        i = 0
+'
+'        '--------------------------------------------------------------
+'        ' SCANOUTPUT_LOG_TB
+'        '--------------------------------------------------------------
+'        Dim SCANOUT As String
+'
+'        SCANOUT = GetIniStr("WORK", "SCANOUT", "", iniFile)
+'
+'        If SCANOUT <> "Y" Then
+'            '--------------------------------------------------------------
+'            frmSplash.lblMsg.Caption = "지사출고 수정 작업중..."
+'            frmSplash.lblCount.Caption = ""
+'            DoEvents
+'
+'            Query = "SELECT * FROM SCANOUTPUT_LOG_TB"
+'            Query = Query & " WHERE STORE_CD = '" & 가맹점정보.가맹점코드 & "'"
+'            Query = Query & " ORDER BY OUT_DATE, OUT_COUNT, TAG_NO ASC"
+'            Set ADORs = New ADODB.Recordset
+'            ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+'
+'            Do Until ADORs.EOF
+'                i = i + 1
+'
+'                frmSplash.lblCount.Caption = i
+'                DoEvents
+'
+'                Query = "SELECT    A.택번호"
+'                Query = Query & ", A.접수일자"
+'                Query = Query & ", B.접수번호"
+'                Query = Query & ", B.출고일자"
+'                Query = Query & ", B.지사출고일자"
+'                Query = Query & ", B.지사출고번호"
+'                Query = Query & ", B.지사출고물품"
+'                Query = Query & ", B.지사출고상태"
+'                Query = Query & ", B.의류명"
+'                Query = Query & ", B.색상"
+'                Query = Query & ", B.무늬"
+'                Query = Query & ", B.내용"
+'                Query = Query & ", B.금액"
+'                Query = Query & ", B.결제여부"
+'                Query = Query & ", B.상표"
+'                Query = Query & " FROM (SELECT 택번호"
+'                Query = Query & "            , MAX(접수일자) AS 접수일자"
+'                Query = Query & "       FROM TB_입출고"
+'                Query = Query & "       WHERE 접수일자 <= '" & Format(Date, "YYYY-MM-DD") & "'"
+'                Query = Query & "         AND 택번호    = '" & ADORs!Tag_No & "'"
+'                Query = Query & "       GROUP BY 택번호"
+'                Query = Query & "      ) AS A LEFT OUTER JOIN TB_입출고   AS B ON A.택번호   = B.택번호"
+'                Query = Query & "                                             AND A.접수일자 = B.접수일자"
+'                Set SUBRs = New ADODB.Recordset
+'                SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'                If Not SUBRs.EOF Then
+'                    Query = "UPDATE TB_입출고 SET 지사출고일자 = '" & ADORs!OUT_DATE & "'"
+'                    Query = Query & "           , 지사출고번호 =  " & ADORs!OUT_COUNT
+'                    Query = Query & "           , 지사출고물품 = '" & ADORs!SCAN_FLAG1 & "'"
+'                    Query = Query & "           , 지사출고상태 = '" & ADORs!SCAN_FLAG2 & "'"
+'                    Query = Query & "           , 본사전송여부 = ''"
+'                    Query = Query & " WHERE 접수일자 = '" & SUBRs!접수일자 & "'"
+'                    Query = Query & "   AND 택번호   = '" & ADORs!Tag_No & "'"
+'                    Query = Query & "   AND 접수일자 >= '2010-12-15'"
+'                    Query = Query & "   AND (지사출고일자 <> '' OR 지사출고일자 IS NOT NULL)"
+'                    ADOCon.Execute Query
+'                End If
+'                SUBRs.Close
+'                Set SUBRs = Nothing
+'
+'                ADORs.MoveNext
+'            Loop
+'            ADORs.Close
+'            Set ADORs = Nothing
+'
+'            Call SetIniStr("WORK", "SCANOUT", "Y", iniFile)
+'        End If
+'
+'        HostCon.Close
+'        Set HostCon = Nothing
+'    End If
+    
+'*******************************************************************
+
+
+'--------------------------------------------------
+' 고객정보 변환 - 최종거래일자 변환 오류
+' 2010-12-23 까지 임시로 실행
+'--------------------------------------------------
+Private Sub Set_고객최종거래일자()
+    On Error GoTo ErrRtn
+    
+    If MDB_Connection(MDBCon) = False Then Exit Sub
+    
+    i = 0
+    DoEvents
+    
+    '
+    Query = "SELECT * FROM 마일리지현황"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, MDBCon, adOpenForwardOnly, adLockReadOnly
+
+    Do Until ADORs.EOF
+        i = i + 1
+        DoEvents
+        
+        '---------------------------------------------------------
+        ' TB_고객정보
+        '---------------------------------------------------------
+        Query = "SELECT * FROM TB_고객정보"
+        Query = Query & " WHERE 고객코드 = '" & Trim(ADORs!고객번호) & "'"
+        Query = Query & "   AND (최종거래일자 IS NULL OR 최종거래일자 = '')"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+
+        If Not SUBRs.EOF Then
+            SUBRs!최종거래일자 = Format(ADORs!최종거래일자, "0000-00-00") & " 00:00:00"
+            
+            SUBRs.Update
+        End If
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    MDBCon.Close
+    Set MDBCon = Nothing
+    
+    '
+    Query = "DELETE FROM TB_매출"
+    Query = Query & " WHERE 매출일자 <= '2010-12-20'"
+    Query = Query & "   AND 적요      = '[마일리지 삭제]'"
+    ADOCon.Execute Query
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+    Screen.MousePointer = 0
+End Sub
+
+'--------------------------------------------------
+' 고객정보 변환 - 최종거래일자 변환 오류
+' 2010-12-23 까지 임시로 실행
+'--------------------------------------------------
+Private Sub Set_세탁마진()
+    On Error GoTo ErrRtn
+        
+    i = 0
+    DoEvents
+    
+    '
+    Query = "SELECT * FROM TB_의류분류"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    Do Until ADORs.EOF
+        i = i + 1
+        DoEvents
+        
+        '---------------------------------------------------------
+        ' TB_고객정보
+        '---------------------------------------------------------
+        Query = "UPDATE TB_입출고 SET 세탁마진 = " & ADORs!세탁마진
+        Query = Query & "           , 외주마진 = " & ADORs!외주마진
+        Query = Query & "           , 수선마진 = " & ADORs!수선마진
+        Query = Query & " WHERE SUBSTRING(의류코드,1,2) = '" & ADORs!의류분류코드 & "'"
+        Query = Query & "   AND 세탁마진 = 0"
+        ADOCon.Execute Query
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.description)
+
+    Screen.MousePointer = 0
+End Sub
+
+Private Sub Set_매출마일리지()
+    Dim 매출일자         As String
+    
+    On Error GoTo ErrRtn
+    
+    If MDB_Connection(MDBCon) = False Then Exit Sub
+    
+    i = 0
+    DoEvents
+    
+    Query = "SELECT * FROM 마일리지스토리"
+    Query = Query & " ORDER BY 발생일자, 고객번호"
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, MDBCon, adOpenForwardOnly, adLockReadOnly
+
+    Do Until ADORs.EOF
+        i = i + 1
+        
+        frmSplash.lblCount.Caption = i
+        DoEvents
+        
+        매출일자 = Format(Left(ADORs!발생일자, 8), "0000-00-00")
+        
+        Query = "SELECT * FROM TB_매출"
+        Query = Query & " WHERE 고객코드 = '" & Trim(ADORs!고객번호) & "'"
+        Query = Query & "   AND 매출일자 = '" & 매출일자 & "'"
+        Query = Query & "   AND 일련번호 =  " & 0
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+                    
+        If Not SUBRs.EOF Then
+            Query = "UPDATE TB_매출 SET"
+            Query = Query & "  발생마일리지 =  " & ADORs!발생마일리지
+            Query = Query & ", 사용마일리지 =  " & ADORs!사용마일리지
+            Query = Query & ", 삭제마일리지 =  " & ADORs!삭제마일리지
+            Query = Query & " WHERE 고객코드 = '" & SUBRs!고객코드 & "'"
+            Query = Query & "   AND 매출일자 = '" & SUBRs!매출일자 & "'"
+            Query = Query & "   AND 접수번호 =  " & SUBRs!접수번호
+            Query = Query & "   AND 일련번호 =  " & SUBRs!일련번호
+            ADOCon.Execute Query
+        End If
+        SUBRs.Close
+        Set SUBRs = Nothing
+        
+        DoEvents
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+    
+    MDBCon.Close
+    Set MDBCon = Nothing
+        
+    Call SetIniStr("WORK", "MILEAGE", "Y", iniFile)
+
+    Screen.MousePointer = 0
+    Exit Sub
+    
+ErrRtn:
+    'Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+
+    Screen.MousePointer = 0
+End Sub
+'
+'Private Sub Set_고객마일리지()
+'    Dim 누적마일리지     As Long
+'    Dim 사용가능마일리지 As Long
+'    Dim 최종거래일자     As String
+'    Dim 총접수금액       As Long
+'    Dim 이용횟수         As Long
+'    Dim 미수금액         As Long
+'
+'    Dim 발생마일리지     As Long
+'    Dim 매출미수금액     As Long
+'    Dim 사용마일리지     As Long
+'
+'    Dim 최소마일리지     As Long
+'    Dim TmpValue         As Long
+'
+'    Dim 초기미수금       As Long
+'    Dim 이전고객         As String
+'
+'    On Error GoTo ErrRtn
+'
+'    If MDB_Connection(MDBCon) = False Then Exit Sub
+'
+'    i = 0
+'    DoEvents
+'
+'    '--------------------------------------------------------------------------------------------
+'    ' TB_고객정보
+'    '--------------------------------------------------------------------------------------------
+'    Query = "SELECT * FROM TB_고객정보"
+'    Query = Query & " ORDER BY 고객코드 ASC"
+'    Set ADORs = New ADODB.Recordset
+'    ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'    Do Until ADORs.EOF
+'        i = i + 1
+'
+'        frmSplash.lblCount.Caption = i & ""
+'        DoEvents
+'
+'        누적마일리지 = 0
+'        사용가능마일리지 = 0
+'        최종거래일자 = ""
+'        총접수금액 = 0
+'        이용횟수 = 0
+'        미수금액 = 0
+'
+'        '----------------------------------------------------------------------------
+'        ' MDB - 미수금액
+'        '----------------------------------------------------------------------------
+'        Query = "SELECT 미수금 FROM 고객정보"
+'        Query = Query & " WHERE 고객번호 = '" & Trim(ADORs!고객코드) & "'"
+'        Set SUBRs = New ADODB.Recordset
+'        SUBRs.Open Query, MDBCon, adOpenForwardOnly, adLockReadOnly
+'
+'        If SUBRs.EOF Then
+'            미수금액 = 0
+'            초기미수금 = 0
+'
+'            이전고객 = ""
+'        Else
+'            이전고객 = "Y"
+'
+'            If IsNull(SUBRs(0)) Then
+'                미수금액 = 0
+'                초기미수금 = 0
+'            Else
+'                미수금액 = Trim(SUBRs(0)) & ""
+'                초기미수금 = Trim(SUBRs(0)) & ""
+'            End If
+'        End If
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'
+'        '----------------------------------------------------------------------------
+'        ' MDB - 사용마일리지, 누적마일리지
+'        '----------------------------------------------------------------------------
+'        Query = "SELECT * FROM 마일리지현황"
+'        Query = Query & " WHERE 고객번호 = '" & Trim(ADORs!고객코드) & "'"
+'        Set SUBRs = New ADODB.Recordset
+'        SUBRs.Open Query, MDBCon, adOpenForwardOnly, adLockReadOnly
+'
+'        If SUBRs.EOF Then
+'            사용가능마일리지 = 0
+'            누적마일리지 = 0
+'        Else
+'            If SUBRs!총사용금액 <= 0 Then
+'                누적마일리지 = 0
+'            Else
+'                누적마일리지 = SUBRs!총사용금액 Mod 100000      '10만원 단위는 버린다.
+'                누적마일리지 = Int(누적마일리지 / 1000) * 30 '1000원에 30원 누적
+'            End If
+'
+'            사용가능마일리지 = SUBRs!마일리지 & ""
+'        End If
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'
+'        '----------------------------------------------------------------------------
+'        ' MDB - 최종거래일자
+'        '----------------------------------------------------------------------------
+'        Query = "SELECT MAX(입고일) FROM 입출고"
+'        Query = Query & " WHERE 고객번호 = '" & Trim(ADORs!고객코드) & "'"
+'        Set SUBRs = New ADODB.Recordset
+'        SUBRs.Open Query, MDBCon, adOpenForwardOnly, adLockReadOnly
+'
+'        If SUBRs.EOF Then
+'            최종거래일자 = ""
+'        Else
+'            If IsNull(SUBRs(0)) Then
+'                최종거래일자 = ""
+'            Else
+'                최종거래일자 = Format(SUBRs(0), "0000-00-00") & " 00:00:00"
+'            End If
+'        End If
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'
+'        '----------------------------------------------------------------------------
+'        ' MDB - 이용횟수, 총접수금액 201-12-27
+'        '----------------------------------------------------------------------------
+'        Query = "SELECT    SUM(이용횟수) AS 이용횟수"
+'        Query = Query & ", SUM(이용금액) AS 총접수금액"
+'        Query = Query & " FROM 이용실적"
+'        Query = Query & " WHERE 고객번호 = '" & Trim(ADORs!고객코드) & "'"
+'        Set SUBRs = New ADODB.Recordset
+'        SUBRs.Open Query, MDBCon, adOpenForwardOnly, adLockReadOnly
+'
+'        If SUBRs.EOF Then
+'            이용횟수 = 0
+'            총접수금액 = 0
+'        Else
+'            If IsNull(SUBRs!이용횟수) Then
+'                이용횟수 = 0
+'            Else
+'                이용횟수 = SUBRs!이용횟수 & ""
+'            End If
+'
+'            If IsNull(SUBRs!총접수금액) Then
+'                총접수금액 = 0
+'            Else
+'                총접수금액 = SUBRs!총접수금액 & ""
+'            End If
+'        End If
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'
+'
+'        '----------------------------------------------------------------------------
+'        ' SQL - 이용횟수, 총접수금액 201-12-27
+'        '----------------------------------------------------------------------------
+'        Query = "SELECT    접수번호"
+'        Query = Query & ", COUNT(*)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 고객코드  = '" & Trim(ADORs!고객코드) & "'"
+'        Query = Query & "   AND 접수일자 >= '2010-12-15'"
+'        Query = Query & "   AND 접수시간 <> ''"
+'        Query = Query & " GROUP BY 접수번호"
+'        Set SUBRs = New ADODB.Recordset
+'        SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        Do Until SUBRs.EOF
+'            이용횟수 = 이용횟수 + 1
+'
+'            SUBRs.MoveNext
+'        Loop
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'
+'
+'        '-----------------------------------------------------------
+'        ' TB_기본정보 - 최소마일리지
+'        '-----------------------------------------------------------
+'        Query = "SELECT ISNULL(최소마일리지,0) FROM TB_기본정보"
+'        Set SUBRs = New ADODB.Recordset
+'        SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        If SUBRs.EOF Then
+'            최소마일리지 = 0
+'        Else
+'            최소마일리지 = SUBRs(0)
+'        End If
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'
+'        '----------------------------------------------------------------------------
+'        ' SQL - 총접수금액 201-12-27
+'        '----------------------------------------------------------------------------
+'        Query = "SELECT * FROM TB_매출"
+'        Query = Query & " WHERE 고객코드  = '" & Trim(ADORs!고객코드) & "'"
+'        Query = Query & "   AND 매출일자 >= '2010-12-15'"
+'        Query = Query & "   AND 적요     <> '[미수금액 입금]'"
+'        Query = Query & "   AND 매출시간 <> '00:00:00'"
+'        Query = Query & " ORDER BY 매출일자, 매출시간"
+'        Set SUBRs = New ADODB.Recordset
+'        SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        발생마일리지 = 0
+'        매출미수금액 = 0
+'        사용마일리지 = 0
+'
+'        Do Until SUBRs.EOF
+'            If SUBRs!접수금액 <= 0 Then
+'                If SUBRs!접수금액 > SUBRs!입금합계 Then
+'                    '판매취소 - 접수금액보다 입금합계가 많은 경우
+'                    '접수금액(-2,500), 입금합계(-5,000 <- 카드입금)
+'
+'                    TmpValue = (SUBRs!입금합계 * -1) - (SUBRs!접수금액 * -1)
+'
+'                    Dim 일련번호 As Long
+'
+'                    '-----------------------------------------------------------
+'                    ' TB_매출
+'                    '-----------------------------------------------------------
+'                    Query = "SELECT ISNULL(MAX(일련번호),0) + 1 FROM TB_매출"
+'                    Query = Query & " WHERE 고객코드 = '" & Trim(SUBRs!고객코드) & "'"
+'                    Query = Query & "   AND 접수번호 =  " & SUBRs!접수번호
+'                    Set Rs = New ADODB.Recordset
+'                    Rs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'                    일련번호 = Rs(0)
+'
+'                    Rs.Close
+'                    Set Rs = Nothing
+'
+'                    '
+'                    Query = "SELECT * FROM TB_매출"
+'                    Query = Query & " WHERE 고객코드 = '" & Trim(SUBRs!고객코드) & "'"
+'                    Query = Query & "   AND 접수번호 =  " & SUBRs!접수번호
+'                    Query = Query & "   AND 일련번호 =  " & 일련번호
+'                    Set Rs = New ADODB.Recordset
+'                    Rs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+'
+'                    If Rs.EOF Then Rs.AddNew
+'
+'                    Rs!지사코드 = 가맹점정보.지사코드                  ' 1
+'                    Rs!가맹점코드 = 가맹점정보.가맹점코드              ' 2
+'                    Rs!고객코드 = Trim(SUBRs!고객코드) & ""            ' 3
+'                    Rs!접수번호 = SUBRs!접수번호 & ""                  ' 4
+'                    Rs!일련번호 = 일련번호                             ' 5
+'                    Rs!매출일자 = SUBRs!매출일자 & ""                  ' 6
+'                    Rs!매출시간 = SUBRs!매출시간 & ""                  ' 7
+'                    Rs!적요 = "[카드취소 현금입금] " & SUBRs!적요 & "" ' 8
+'                    Rs!접수금액 = 0                                    ' 9
+'                    Rs!입금합계 = TmpValue                             '12
+'                    Rs!현금입금 = TmpValue                             '10
+'                    Rs!카드입금 = 0                                    '11
+'                    Rs!쿠폰입금 = 0                                    '14
+'                    Rs!쿠폰번호 = ""                                   '15
+'                    Rs!사용마일리지 = 0                                '13
+'                    Rs!세트할인 = 0                                    '16
+'                    Rs!에누리 = 0                                      '17
+'                    Rs!접수수량 = 0                                    '18
+'                    Rs!반품수량 = 0                                    '19
+'                    Rs!발생마일리지 = 0                                '20
+'                    Rs!누적마일리지 = 0                                '21
+'                    Rs!사용가능마일리지 = 0                            '22
+'                    Rs!삭제마일리지 = 0                                '23
+'                    Rs!이전미수금 = 0                                  '24
+'                    Rs!본사전송여부 = ""                               '25
+'
+'                    Rs.Update
+'
+'                    Rs.Close
+'                    Set Rs = Nothing
+'                End If
+'            End If
+'
+'            총접수금액 = 총접수금액 + SUBRs!접수금액                         '
+'
+'            If SUBRs!접수금액 <> SUBRs!입금합계 Then
+'                If SUBRs!접수금액 < 0 Then
+'                    If SUBRs!접수금액 > SUBRs!입금합계 Then
+'                        '카드결제인데 판매취소한 경우...
+'                    Else
+'                        매출미수금액 = 매출미수금액 + (SUBRs!접수금액 - SUBRs!입금합계) '
+'                    End If
+'                Else
+'                    매출미수금액 = 매출미수금액 + (SUBRs!접수금액 - SUBRs!입금합계) '
+'                End If
+'            End If
+'
+'            사용마일리지 = 사용마일리지 + SUBRs!사용마일리지                 '
+'            발생마일리지 = 발생마일리지 + SUBRs!발생마일리지                 '
+'
+'            SUBRs.MoveNext
+'        Loop
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'
+'        TmpValue = 누적마일리지 + 발생마일리지
+'
+'        If TmpValue >= 최소마일리지 Then
+'            누적마일리지 = (TmpValue Mod 최소마일리지)
+'            사용가능마일리지 = 사용가능마일리지 + (TmpValue - (TmpValue Mod 최소마일리지))
+'        Else
+'            누적마일리지 = TmpValue
+'            사용가능마일리지 = 사용가능마일리지 - 사용마일리지
+'        End If
+'
+'        미수금액 = 미수금액 + 매출미수금액
+'
+'        '----------------------------------------------------------------------------
+'        ' TB_고객정보
+'        '----------------------------------------------------------------------------
+'        Query = "UPDATE TB_고객정보 SET"
+'        Query = Query & "  누적마일리지     =  " & 누적마일리지
+'        Query = Query & ", 사용가능마일리지 =  " & 사용가능마일리지
+'        Query = Query & ", 최종거래일자     = '" & 최종거래일자 & "'"
+'        Query = Query & ", 이용횟수         =  " & 이용횟수
+'        Query = Query & ", 총접수금액       =  " & 총접수금액
+'        Query = Query & ", 미수금액         =  " & 미수금액
+'        Query = Query & ", 초기미수금       =  " & 초기미수금
+'        Query = Query & ", 본사전송여부     = ''"
+'        Query = Query & ", 이전고객         = '" & 이전고객 & "'"
+'        Query = Query & " WHERE 고객코드 = '" & Trim(ADORs!고객코드) & "'"
+'        ADOCon.Execute Query
+'
+'        DoEvents
+'
+'        ADORs.MoveNext
+'    Loop
+'    ADORs.Close
+'    Set ADORs = Nothing
+'
+'    MDBCon.Close
+'    Set MDBCon = Nothing
+'
+'    Screen.MousePointer = 0
+'    Exit Sub
+'
+'ErrRtn:
+'    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+'
+'    Screen.MousePointer = 0
+'End Sub
+'
+'Private Sub Set_일일마감()
+'    Dim 마감일자   As String
+'    Dim 접수금액   As Long
+'    Dim 가맹점마진 As Long
+'    Dim 외주마진   As Long
+'
+'    Dim 미수금액   As Long
+'    Dim tmpData    As String
+'
+'    Dim strCancel  As String
+'    Dim strReturn  As String
+'    Dim strRepay   As String
+'
+'    On Error GoTo ErrRtn
+'
+'    Screen.MousePointer = 11
+'
+'    Call Get_가맹점정보
+'
+'    마감일자 = "2010-12-15"
+'
+'    Do Until 마감일자 >= Format(Date, "YYYY-MM-DD")
+'        Dim iNum(1 To 18)  As Long
+'        Dim iCost(1 To 27) As Long
+'        Dim strTag(0 To 1) As String
+'
+'        '----------------------------------------------------------------
+'        ' 1. 접수수량, 접수금액 구하기
+'        '----------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(택번호),0)"
+'        Query = Query & ", ISNULL(SUM(금액),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+'
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(1) = ADORs(0)  '접수건수
+'        iCost(1) = ADORs(1) '접수금액
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'
+'        '----------------------------------------------------------------
+'        ' 2. 출고수량 구하기
+'        '----------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(택번호),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 출고일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'
+'        iNum(2) = Recordset_Result(Query) '출고수량
+'
+'
+'        '----------------------------------------------------------------
+'        ' 2-1) 현금결제 구하기
+'        '----------------------------------------------------------------
+'        '선불결제
+'        'Query = "SELECT ISNULL(SUM(현금입금),0)"
+'        'Query = Query & " FROM TB_매출"
+'        'Query = Query & " WHERE 매출일자 = '" & 마감일자 & "'"
+'        'Query = Query & "   AND 접수금액 <> 0"
+'
+'        '매출중에 접수일자에 발생한 건만 처리
+'        Query = "SELECT SUM(A.현금입금)"
+'        Query = Query & " FROM TB_매출 AS A LEFT OUTER JOIN (SELECT DISTINCT 접수일자"
+'        Query = Query & "                                         , 고객코드"
+'        Query = Query & "                                         , 접수번호"
+'        Query = Query & "                                    FROM TB_입출고"
+'        Query = Query & "                  WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "            ) AS B ON A.고객코드 = B.고객코드"
+'        Query = Query & "                               AND A.접수번호 = B.접수번호"
+'        Query = Query & " WHERE A.매출일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND B.접수일자 IS NOT NULL"
+'        Query = Query & "   AND A.접수번호 <> 0"
+'        'Query = Query & "   AND A.접수금액 <> 0"
+'
+'        iCost(2) = Recordset_Result(Query) '
+'
+'        '----------------------------------------------------------------
+'        ' 미수입금
+'        '----------------------------------------------------------------
+'        Query = "SELECT ISNULL(SUM(현금입금),0)"
+'        Query = Query & " FROM TB_매출"
+'        Query = Query & " WHERE 매출일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND 접수금액 = 0"
+'
+'        iCost(5) = Recordset_Result(Query) '
+'
+'
+'        '----------------------------------------------------------------
+'        ' 2-2) 카드결제 구하기
+'        '----------------------------------------------------------------
+'        'Query = "SELECT    ISNULL(COUNT(카드입금),0)"
+'        'Query = Query & ", ISNULL(SUM(카드입금),0)"
+'        'Query = Query & " FROM TB_매출"
+'        'Query = Query & " WHERE 매출일자 = '" & 마감일자 & "'"
+'        'Query = Query & "   AND 카드입금 > 0"
+'        'Query = Query & "   AND 접수금액 <> 0"
+'
+'        Query = "SELECT    ISNULL(COUNT(A.카드입금),0)"
+'        Query = Query & ", ISNULL(SUM(A.카드입금),0)"
+'        Query = Query & " FROM TB_매출 AS A LEFT OUTER JOIN (SELECT DISTINCT 접수일자"
+'        Query = Query & "                                         , 고객코드"
+'        Query = Query & "                                         , 접수번호"
+'        Query = Query & "                                    FROM TB_입출고"
+'        Query = Query & "                  WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "            ) AS B ON A.고객코드 = B.고객코드"
+'        Query = Query & "                  AND A.접수번호 = B.접수번호"
+'        Query = Query & " WHERE A.매출일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND B.접수일자 IS NOT NULL"
+'        Query = Query & "   AND A.카드입금 > 0"
+'        Query = Query & "   AND A.접수번호 <> 0"
+'        'Query = Query & "   AND A.접수금액 <> 0"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(3) = ADORs(0)
+'        iCost(3) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'        '카드결제 취소
+'        'Query = "SELECT    ISNULL(COUNT(카드입금),0)"
+'        'Query = Query & ", ISNULL(SUM(카드입금) * -1,0)"
+'        'Query = Query & " FROM TB_매출"
+'        'Query = Query & " WHERE 매출일자 = '" & 마감일자 & "'"
+'        'Query = Query & "   AND 카드입금 < 0"
+'        'Query = Query & "   AND 접수금액 <> 0"
+'
+'        Query = "SELECT    ISNULL(COUNT(A.카드입금),0)"
+'        Query = Query & ", ISNULL(SUM(A.카드입금),0)"
+'        Query = Query & " FROM TB_매출 AS A LEFT OUTER JOIN (SELECT DISTINCT 접수일자"
+'        Query = Query & "                                         , 고객코드"
+'        Query = Query & "                                         , 접수번호"
+'        Query = Query & "                                    FROM TB_입출고"
+'        Query = Query & "                  WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "            ) AS B ON A.고객코드 = B.고객코드"
+'        Query = Query & "                  AND A.접수번호 = B.접수번호"
+'        Query = Query & " WHERE A.매출일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND B.접수일자 IS NOT NULL"
+'        Query = Query & "   AND A.카드입금 < 0"
+'        Query = Query & "   AND A.접수번호 <> 0"
+'        'Query = Query & "   AND A.접수금액 <> 0"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(3) = iNum(3) - ADORs(0)
+'        iCost(3) = iCost(3) - (ADORs(1) * -1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'        '----------------------------------------------------------------
+'        ' 2-2) 카드결제 구하기
+'        '----------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(카드입금),0)"
+'        Query = Query & ", ISNULL(SUM(카드입금),0)"
+'        Query = Query & " FROM TB_매출"
+'        Query = Query & " WHERE 매출일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND 카드입금 > 0"
+'        Query = Query & "   AND 접수금액 = 0"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(4) = ADORs(0)
+'        iCost(6) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'
+'        iCost(7) = iCost(2) + iCost(5) '현금결제합계
+'        iNum(5) = iNum(3) + iNum(4)    '카드결제건수 합계
+'        iCost(8) = iCost(3) + iCost(6) '카드결제합계
+'
+'        '----------------------------------------------------------------
+'        ' 3-1) 가맹점 마진
+'        '----------------------------------------------------------------
+'        Query = "SELECT ISNULL(SUM(금액 * 세탁마진/100),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+'        'Query = Query & "   AND SUBSTRING(의류코드,1,1) <> 'a'"                 '운동화
+'        'Query = Query & "   AND (내용 LIKE '%세%' OR 내용 LIKE '%건%'  OR 내용 LIKE '%습%')"
+'        Query = Query & "   AND 내용 NOT LIKE '%수%'"                            '수선 제외
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'
+'        iCost(9) = Recordset_Result(Query)
+'
+'
+'        '----------------------------------------------------------------
+'        ' 3-2) 외주 마진
+'        '----------------------------------------------------------------
+'        Query = "SELECT ISNULL(SUM(금액*외주마진/100),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND SUBSTRING(의류코드,1,1) = 'a'"                 '운동화
+'        'Query = Query & "   AND (내용 LIKE '%세%' OR 내용 LIKE '%건%'  OR 내용 LIKE '%습%')"
+'        Query = Query & "   AND 내용 NOT LIKE '%수%'"                            '수선 제외
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'
+'        iCost(17) = Recordset_Result(Query)
+'
+'        'iCost(10) = iCost(1) - iCost(9) - iCost(17) ' 지사 마진 = 접수금액 - 가맹점마진 - 외주마진 '
+'        iCost(10) = iCost(1) - iCost(9)              ' 지사 마진 = 접수금액 - 가맹점마진
+'
+'        '----------------------------------------------------------------
+'        ' 6) 판매취소 계산
+'        '----------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(택번호),0)"
+'        Query = Query & ", ISNULL(SUM(금액),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE SUBSTRING(판매취소일자,1,10) = '" & 마감일자 & "'"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(13) = ADORs(0)
+'        iCost(22) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'
+'        '----------------------------------------------------------------
+'        ' 7) 반품환불 계산
+'        '----------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(택번호),0)"
+'        Query = Query & ", ISNULL(SUM(금액),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE SUBSTRING(반품환불일자,1,10) = '" & 마감일자 & "'"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(14) = ADORs(0)
+'        iCost(23) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'        '----------------------------------------------------------------
+'        ' 8) 세탁환불 계산
+'        '----------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(택번호),0)"
+'        Query = Query & ", ISNULL(SUM(금액),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE SUBSTRING(세탁환불일자,1,10) = '" & 마감일자 & "'"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(15) = ADORs(0)
+'        iCost(24) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'    '=================================================================================
+'        '--------------------------------------------------------------
+'        ' 9-1) 수선수량 계산
+'        '--------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(택번호),0)"
+'        Query = Query & ", ISNULL(SUM(수선금액),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND (내용  = '드수' OR 내용 = '수') "
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(6) = ADORs(0)
+'        iCost(11) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'
+'        '----------------------------------------------------------------
+'        ' 9-1) 재세탁수량 계산
+'        '----------------------------------------------------------------
+'        Query = "SELECT ISNULL(COUNT(택번호),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND 내용     = '드재'"
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'
+'        iNum(7) = Recordset_Result(Query)
+'
+'
+'        '--------------------------------------------------------------------
+'        '운동화 매출을 불러온다.
+'        '--------------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(의류코드),0)" '운동화건수
+'        Query = Query & ", ISNULL(SUM(금액),0)"       '운동화금액
+'        Query = Query & " FROM TB_입출고 "
+'        Query = Query & " WHERE SUBSTRING(의류코드,1,2) = 'a0'"
+'        Query = Query & "   AND 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(8) = ADORs(0)
+'        iCost(13) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'
+'        '--------------------------------------------------------------------
+'        '가죽/무스탕 매출을 불러온다.
+'        '--------------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(의류코드),0)" '가죽건수
+'        Query = Query & ", ISNULL(SUM(금액),0)"       '가죽금액
+'        Query = Query & " FROM TB_입출고 "
+'        Query = Query & " WHERE SUBSTRING(의류코드,1,2) IN ('b0','n0')"
+'        Query = Query & "   AND 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(9) = ADORs(0)
+'        iCost(14) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'        '--------------------------------------------------------------------
+'        '카페트 매출을 불러온다.
+'        '--------------------------------------------------------------------
+'        Query = "SELECT    ISNULL(COUNT(의류코드),0)" '카페트건수
+'        Query = Query & ", ISNULL(SUM(금액),0) "      '카페트금액
+'        Query = Query & " FROM TB_입출고 "
+'        Query = Query & " WHERE SUBSTRING(의류코드,1,2) = 'x0'"
+'        Query = Query & "   AND 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(10) = ADORs(0)
+'        iCost(15) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'
+'        '----------------------------------------------------------------
+'        ' 반품수량
+'        '----------------------------------------------------------------
+'        Query = "SELECT ISNULL(COUNT(택번호),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND 내용     = '%반%'"
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'
+'        iNum(11) = Recordset_Result(Query)
+'
+'
+'        '--------------------------------------------------------------------
+'        ' 발생/사용/삭제 마일리지
+'        '--------------------------------------------------------------------
+'        Query = "SELECT    ISNULL(SUM(발생마일리지),0)"
+'        Query = Query & ", ISNULL(SUM(사용마일리지),0)"
+'        Query = Query & ", ISNULL(SUM(삭제마일리지),0)"
+'        Query = Query & " FROM TB_매출"
+'        Query = Query & " WHERE 매출일자 = '" & 마감일자 & "'"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iCost(18) = ADORs(0) '
+'        iCost(19) = ADORs(1) '사용마일리지
+'        iCost(20) = ADORs(2) '
+'
+'        iCost(27) = iCost(19) '사용마일리지
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'        '사용마일지가 있는 경우 지사:가맹점(6:4)로 빼준다.
+'        If iCost(19) > 0 Then
+'            iCost(9) = iCost(9) - CLng(iCost(19) * 0.4)   '가맹점
+'            iCost(10) = iCost(10) - CLng(iCost(19) * 0.6) '지사
+'        End If
+'
+'        '--------------------------------------------------------------------
+'        ' 쿠폰
+'        '--------------------------------------------------------------------
+'        Query = "SELECT    ISNULL(SUM(쿠폰입금),0)"
+'        Query = Query & ", ISNULL(COUNT(쿠폰번호),0)"
+'        Query = Query & " FROM TB_매출"
+'        Query = Query & " WHERE 매출일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND 쿠폰입금 > 0"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        iNum(12) = ADORs(0)
+'        iCost(21) = ADORs(1)
+'
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+''        '----------------------------------------------------------------
+''        ' 6) 판매취소 계산
+''        '----------------------------------------------------------------
+''        Query = "SELECT    택번호"
+''        Query = Query & " FROM TB_입출고"
+''        Query = Query & " WHERE SUBSTRING(판매취소일자,1,10) = '" & 마감일자 & "'"
+''        Query = Query & " ORDER BY 택번호 ASC"
+''
+''        Call Get_택번호(Query, cboCancel)
+''
+''
+''        '----------------------------------------------------------------
+''        ' 7) 반품환불 계산
+''        '----------------------------------------------------------------
+''        Query = "SELECT    택번호"
+''        Query = Query & " FROM TB_입출고"
+''        Query = Query & " WHERE SUBSTRING(반품환불일자,1,10) = '" & 마감일자 & "'"
+''
+''        Call Get_택번호(Query, cboReturn)
+''
+''
+''        '----------------------------------------------------------------
+''        ' 8) 세탁환불 계산
+''        '----------------------------------------------------------------
+''        Query = "SELECT    택번호"
+''        Query = Query & " FROM TB_입출고"
+''        Query = Query & " WHERE SUBSTRING(세탁환불일자,1,10) = '" & 마감일자 & "'"
+''
+''        Call Get_택번호(Query, cboRepay)
+'
+'
+'        '--------------------------------------------------------------------
+'        ' 누락TAG CHECK
+'        '--------------------------------------------------------------------
+'        Dim 시작택번호   As String
+'        Dim 마지막택번호 As String
+'
+'        Dim 택번호 As String
+'        Dim tmpTAG As String
+'
+'        Query = "SELECT    MIN(택번호)"
+'        Query = Query & ", MAX(택번호)"
+'        Query = Query & " FROM TB_입출고 "
+'        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        If Not ADORs.EOF Then
+'            시작택번호 = ADORs(0) & ""
+'            마지막택번호 = ADORs(1) & ""
+'        End If
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+''        '--------------------------------------------------------------------
+''        ' 누락택
+''        '--------------------------------------------------------------------
+''        cboMissTag.Clear
+''
+''        Dim iLoop As Long
+''
+''        Query = "SELECT 택번호 FROM TB_입출고"
+''        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+''        Query = Query & "   AND ((판매취소 <> 'Y')"
+''        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+''        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+''        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+''
+''        Query = Query & " ORDER BY 택번호 ASC"
+''        Set ADORs = New ADODB.Recordset
+''        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+''
+''        iLoop = 0
+''
+''        택번호 = ""
+''        tmpTAG = ""
+''
+''        If Val(마지막택번호) - Val(시작택번호) < 5000 Then
+''            Do Until ADORs.EOF
+''                If tmpTAG = "" Then
+''                    tmpTAG = ADORs!택번호
+''                Else
+''                    Do Until Format(CLng(tmpTAG) + 1, "000000000") >= ADORs!택번호
+''                        cboMissTag.AddItem Format(CLng(tmpTAG) + 1, "000-00-0000")
+''
+''                        tmpTAG = Format(CLng(tmpTAG) + 1, "000000000")
+''
+''                        '100 개가 넘으면 빠져 나옴
+''                        If iLoop >= 100 Then
+''                            cboMissTag.AddItem "Err"
+''
+''                            Exit Do
+''                        End If
+''
+''                        iLoop = iLoop + 1
+''                    Loop
+''
+''                    tmpTAG = Format(CLng(tmpTAG) + 1, "000000000")
+''                End If
+''
+''                ADORs.MoveNext
+''            Loop
+''            ADORs.Close
+''            Set ADORs = Nothing
+''
+''            If cboMissTag.ListCount = 0 Then
+''                iNum(16) = 0
+''            Else
+''                iNum(16) = cboMissTag.ListCount - 1
+''            End If
+''        End If
+'
+'        strTag(0) = Format(시작택번호, "000-00-0000") & ""
+'        strTag(1) = Format(마지막택번호, "000-00-0000") & ""
+'
+'        '--------------------------------------------------------------------
+'        ' 삼성 카드 할인 내용 추가
+'        '--------------------------------------------------------------------
+'        Dim 삼성카드고객수   As Long
+'        Dim 삼성카드할인건수 As Long
+'        Dim 삼성카드할인금액 As Long
+'
+'        삼성카드고객수 = 0
+'        삼성카드할인건수 = 0
+'        삼성카드할인금액 = 0
+'
+'        Query = "SELECT    고객코드"
+'        Query = Query & ", ISNULL(COUNT(금액),0)"
+'        Query = Query & ", ISNULL(SUM(금액),0)"
+'        Query = Query & " FROM TB_입출고"
+'        Query = Query & " WHERE 접수일자 = '" & 마감일자 & "'"
+'        Query = Query & "   AND 내용  LIKE '%삼%'"
+'        Query = Query & "   AND ((판매취소 <> 'Y')"
+'        'Query = Query & "   AND ((판매취소 = '') AND (판매취소일자 IS NULL OR 판매취소일자 = '')"
+'        Query = Query & "   AND (반품환불일자 IS NULL OR 반품환불일자 = '')"
+'        Query = Query & "   AND (세탁환불일자 IS NULL OR 세탁환불일자 = ''))"
+'        Query = Query & " GROUP BY 고객코드"
+'        Set ADORs = New ADODB.Recordset
+'        ADORs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        Do Until ADORs.EOF
+'            삼성카드고객수 = 삼성카드고객수 + 1
+'
+'            삼성카드할인건수 = 삼성카드할인건수 + ADORs(0)
+'            삼성카드할인금액 = 삼성카드할인금액 + ADORs(1)
+'
+'            ADORs.MoveNext
+'        Loop
+'        ADORs.Close
+'        Set ADORs = Nothing
+'
+'        iCost(26) = 삼성카드할인금액
+'        iNum(17) = 삼성카드할인건수
+'        iNum(18) = 삼성카드고객수
+'
+'        '미수금액 = 매출액 - 현금결제 - 카드결제 - 사용마일리지 - 쿠폰
+'        iCost(4) = iCost(1) - iCost(2) - iCost(3) - iCost(19) - iCost(21)
+'
+'        '-----------------------------------------------------------
+'        ' TB_일일마감
+'        '-----------------------------------------------------------
+'        Query = "DELETE FROM TB_일일마감 WHERE 마감일자 = '" & 마감일자 & "'"
+'        ADOCon.Execute Query
+'
+''*****************************************************************************
+'
+'        Dim chkWeekDay As Integer
+'        Dim chkSale    As String
+'
+'        '-----------------------------------------------------------
+'        ' TB_할인정보
+'        '-----------------------------------------------------------
+'        Query = "SELECT * FROM TB_할인정보"
+'        Query = Query & " WHERE 시작일자 <= '" & 마감일자 & "' "
+'        Query = Query & "   AND 종료일자 >= '" & 마감일자 & "' "
+'        Set SUBRs = New ADODB.Recordset
+'        SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'        If SUBRs.EOF Then
+'            Query = "SELECT 요일할인 FROM TB_기본정보"
+'            Set SUBRs = New ADODB.Recordset
+'            SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'            If Not SUBRs.EOF Then
+'                i = Weekday(Date)
+'
+'                If Mid(SUBRs(0), i, 1) = "1" Then
+'                    chkSale = "2"      ' 요일할인
+'                Else
+'                    chkSale = "3"      ' 정상
+'                End If
+'            End If
+'            SUBRs.Close
+'            Set SUBRs = Nothing
+'
+'        Else
+'            SUBRs.Close
+'            Set SUBRs = Nothing
+'
+'            chkSale = "1"              ' 기간할인
+'        End If
+'
+''*****************************************************************************
+'
+'        '--------------------------------------------------------------------
+'        '
+'        '--------------------------------------------------------------------
+'        Query = "INSERT INTO TB_일일마감("
+'        Query = Query & "  가맹점코드"         ' 1
+'        Query = Query & ", 마감일자"           ' 2
+'        Query = Query & ", 접수금액"           ' 3
+'        Query = Query & ", 접수수량"           ' 4
+'        Query = Query & ", 출고수량"           ' 5
+'        Query = Query & ", 반품수량"           ' 6
+'        Query = Query & ", 재세탁수량"         ' 7
+'        Query = Query & ", 수선금액"           ' 8
+'        Query = Query & ", 수선수량"           ' 9
+'        Query = Query & ", 판매구분"           '10
+'        Query = Query & ", 시작택번호"         '11
+'        Query = Query & ", 종료택번호"         '12
+'        Query = Query & ", 쿠폰금액"           '13
+'        Query = Query & ", 쿠폰건수"           '14
+'        Query = Query & ", 발생마일리지"       '15
+'        Query = Query & ", 사용마일리지"       '16
+'        Query = Query & ", 삭제마일리지"       '17
+'        Query = Query & ", 현금입금"           '18
+'        Query = Query & ", 카드금액"           '19
+'        Query = Query & ", 카드건수"           '20
+'        Query = Query & ", 반품환불금액"       '21
+'        Query = Query & ", 반품환불건수"       '22
+'        Query = Query & ", 세탁환불금액"       '23
+'        Query = Query & ", 세탁환불건수"       '24
+'        Query = Query & ", 삼성카드할인금액"   '25
+'        Query = Query & ", 삼성카드할인건수"   '26
+'        Query = Query & ", 삼성카드할인고객수" '27
+'        Query = Query & ", 근무자명"           '28
+'        Query = Query & ", 지사금액"           '29
+'        Query = Query & ", 가맹점금액"         '30
+'        Query = Query & ", 운동화금액"         '31
+'        Query = Query & ", 운동화건수"         '32
+'        Query = Query & ", 운동화비율"         '33
+'        Query = Query & ", 카페트금액"         '34
+'        Query = Query & ", 카페트건수"         '35
+'        Query = Query & ", 명품세탁금액"       '36
+'        Query = Query & ", 명품세탁건수"       '37
+'        Query = Query & ", 명품세탁비율"       '38
+'        Query = Query & ", 명품염색금액"       '39
+'        Query = Query & ", 명품염색건수"       '40
+'        Query = Query & ", 명품염색비율"       '41
+'        Query = Query & ", 마감여부"           '42
+'        Query = Query & ", 본사전송여부"       '43
+'        Query = Query & ", 지사코드"           '44
+'        Query = Query & ") VALUES ("
+'        Query = Query & "   '" & 가맹점정보.가맹점코드 & "'"       ' 1 가맹점코드
+'        Query = Query & ",  '" & 마감일자 & "'"                    ' 2 마감일자
+'        Query = Query & ",  " & iCost(1)                           ' 3 접수금액
+'        Query = Query & ",  " & iNum(1)                            ' 4 접수수량
+'        Query = Query & ",  " & iNum(2)                            ' 5 출고수량
+'        Query = Query & ",  " & iNum(11)                           ' 6 반품수량
+'        Query = Query & ",  " & iNum(7)                            ' 7 재세탁수량
+'        Query = Query & ",  " & iCost(11)                          ' 8 수선금액
+'        Query = Query & ",  " & iNum(6)                            ' 9 수선수량
+'        Query = Query & ", '" & chkSale & "'"                      '10 판매구분
+'        Query = Query & ", '" & Replace(strTag(0), "-", "") & "'"  '11 시작택번호
+'        Query = Query & ", '" & Replace(strTag(1), "-", "") & "'"  '12 종료택번호
+'        Query = Query & ",  " & iCost(21)                          '13 쿠폰금액
+'        Query = Query & ",  " & iNum(12)                           '14 쿠폰건수
+'        Query = Query & ",  " & iCost(18)                          '15 발생마일리지
+'        Query = Query & ",  " & iCost(19)                          '16 사용마일리지
+'        Query = Query & ",  " & iCost(20)                          '17 삭제마일리지
+'        Query = Query & ",  " & iCost(2)                           '18 현금입금
+'        Query = Query & ",  " & iCost(3)                           '19 카드금액
+'        Query = Query & ",  " & iNum(3)                            '20 카드건수
+'        Query = Query & ",  " & iCost(23)                          '21 반품환불금액
+'        Query = Query & ",  " & iNum(14)                           '22 반품환불건수
+'        Query = Query & ",  " & iCost(24)                          '23 세탁환불금액
+'        Query = Query & ",  " & iNum(15)                           '24 세탁환불건수
+'        Query = Query & ",  " & iCost(26)                          '25 삼성카드할인금액
+'        Query = Query & ",  " & iNum(17)                           '26 삼성카드할인건수
+'        Query = Query & ",  " & iNum(18)                           '27 삼성카드할인고객수
+'        Query = Query & ", '근무자'"                               '28 근무자명
+'        Query = Query & ",  " & iCost(10)                          '29 지사금액
+'        Query = Query & ",  " & iCost(9)                           '30 가맹점금액
+'        Query = Query & ",  " & iCost(13)                          '31 운동화금액
+'        Query = Query & ",  " & iNum(8)                            '32 운동화건수
+'        Query = Query & ",  0"                                     '33 운동화비율
+'        Query = Query & ",  " & iCost(15)                          '34 카페트금액
+'        Query = Query & ",  " & iNum(10)                           '35 카페트건수
+'        Query = Query & ",  0"                                     '36 명품세탁금액
+'        Query = Query & ",  0"                                     '37 명품세탁건수
+'        Query = Query & ",  0"                                     '38 명품세탁비율
+'        Query = Query & ",  0"                                     '39 명품염색금액
+'        Query = Query & ",  0"                                     '40 명품염색건수
+'        Query = Query & ",  0"                                     '41 명품염색비율
+'        Query = Query & ", 'Y'"                                    '42 마감여부
+'        Query = Query & ", 'N'"                                    '43 전송여부
+'        Query = Query & ", '" & 가맹점정보.지사코드 & "'"          '44 지사코드
+'        Query = Query & ")"
+'        ADOCon.Execute Query
+'
+'        '---------------------------------------------------------------------------------
+'
+'        Call 마감정보_Send(마감일자)
+'
+'        '---------------------------------------------------------------------------------
+'
+'        마감일자 = Format(DateAdd("d", 1, 마감일자), "YYYY-MM-DD")
+'    Loop
+'
+'    Call SetIniStr("WORK", "DAYCLOSE2", "Y", iniFile)
+'
+'    Screen.MousePointer = 0
+'
+'    Exit Sub
+'
+'ErrRtn:
+'    Screen.MousePointer = 0
+'
+'    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+'End Sub
+
+'
+'Public Sub 마감정보_Send(FinishDate As String)
+'    Dim iDay        As Integer
+'    Dim iTempDay    As String
+'    Dim ADORset     As New ADODB.Recordset
+'    Dim MyHost      As ADODB.Connection
+'    Dim sData(39)   As String
+'    Dim sCode(1)    As String
+'
+'    'Dim dblRatio    As Double
+'
+'    'Dim dblMil      As Double
+'    'Dim StoreMoney  As Double
+'    'Dim MasterMoney As Double
+'
+'    '-----------------------------------------------------
+'    Dim sMode As String
+'
+'    sMode = GetIniStr("RUNMODE", "MODE", "", iniFile) '
+'
+'    If sMode = "TEST" Then Exit Sub
+'    '-----------------------------------------------------
+'
+'    If ConnectMasterCheck(MyHost) = False Then Exit Sub
+'
+'    sCode(1) = 가맹점정보.택코드 & ""
+'
+'    Query = "SELECT * FROM TB_일일마감"
+'    Query = Query & " WHERE 마감일자 = '" & Format(FinishDate, "YYYY-MM-DD") & "'"
+'    Set SUBRs = New ADODB.Recordset
+'    SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+'
+'    If SUBRs.EOF Then
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'
+'        sData(0) = 가맹점정보.가맹점코드 & ""     ' 대리점정보.StoreCode
+'        sData(1) = Format(FinishDate, "YYYYMMDD") '
+'        sData(2) = "0"
+'        sData(3) = "0"
+'        sData(4) = "0"
+'        sData(5) = "0"
+'        sData(6) = "0"
+'        sData(7) = "0"
+'        sData(8) = "0"
+'        sData(9) = "0"
+'        sData(10) = ""
+'        sData(11) = ""
+'        sData(12) = ""
+'        sData(13) = ""
+'        sData(14) = ""
+'        sData(15) = "0"
+'        sData(16) = "0"
+'        sData(17) = "0"
+'        sData(18) = "0"
+'        sData(19) = "0"
+'        sData(20) = "0"
+'        sData(21) = "0"
+'        sData(22) = "0"
+'
+'        sData(23) = "0"
+'        sData(24) = "0"
+'        sData(25) = "0"
+'        sData(26) = "0"
+'        sData(27) = "0"
+'
+'        sData(28) = "0"
+'        sData(29) = "0"
+'        sData(30) = "0"
+'        sData(31) = "0"
+'        sData(32) = "0"
+'        sData(33) = "0"
+'        sData(34) = "0"
+'        sData(35) = "0"
+'        sData(36) = "0"
+'
+'        sData(37) = "0"
+'        sData(38) = "0"
+'        sData(39) = "0"
+'    Else
+'        sData(0) = 가맹점정보.지사코드 & ""            ' 대리점정보.StoreCode
+'        sData(1) = Format(SUBRs!마감일자, "YYYYMMDD")  '
+'        sData(2) = SUBRs!접수수량 & ""                 ' 총점수
+'        sData(3) = SUBRs!반품수량 & ""                 '
+'        sData(4) = SUBRs!재세탁수량 & ""               '
+'        sData(5) = SUBRs!수선수량 & ""                 '
+'        sData(6) = SUBRs!접수금액 & ""                 ' 총매출액
+'        sData(7) = SUBRs!지사금액 & ""                  ' MasterMoney
+'        sData(8) = SUBRs!가맹점금액 & ""                ' StoreMoney
+'        sData(9) = SUBRs!수선금액 & ""                 '
+'        sData(10) = SUBRs!판매구분 & ""                '
+'        sData(11) = SUBRs!시작택번호 & ""              ' 시작택
+'        sData(12) = SUBRs!종료택번호 & ""              ' 종료택
+'        sData(13) = SUBRs!마감여부 & ""                '
+'        sData(14) = SUBRs!본사전송여부 & ""            ' 전송여부
+'        sData(15) = SUBRs!발생마일리지 & ""            '
+'        sData(16) = SUBRs!사용마일리지 & ""            '
+'        sData(17) = SUBRs!삭제마일리지 & ""            '
+'        sData(18) = SUBRs!카드금액                     '
+'        sData(19) = SUBRs!카드건수                     '
+'
+'        sData(20) = SUBRs!운동화건수                   '
+'        sData(21) = SUBRs!운동화금액                   '
+'        sData(22) = SUBRs!운동화비율 & ""               ' 대리점정보.외주운동화마진
+'
+'        sData(23) = SUBRs!세탁환불건수                 ' 세탁비환불건수
+'        sData(24) = SUBRs!세탁환불금액                 ' 세탁비환불금액
+'
+'        sData(25) = SUBRs!삼성카드할인고객수           '
+'        sData(26) = SUBRs!삼성카드할인건수             '
+'        sData(27) = SUBRs!삼성카드할인금액             '
+'
+'        sData(28) = SUBRs!명품세탁건수                 '
+'        sData(29) = SUBRs!명품세탁금액                 '
+'        sData(30) = SUBRs!명품세탁비율                 '
+'
+'        sData(31) = SUBRs!명품염색건수                 '
+'        sData(32) = SUBRs!명품염색금액                 '
+'        sData(33) = SUBRs!명품염색비율                 '
+'
+'        sData(34) = 0                                   ' SUBRS!일반가죽건수
+'        sData(35) = 0                                   ' SUBRS!일반가죽금액
+'        sData(36) = 0                                   ' SUBRS!일반가죽비율
+'
+'        sData(37) = 0                                   ' SUBRS!가죽건수
+'        sData(38) = 0                                   ' SUBRS!가죽금액
+'        sData(39) = 0                                   ' SUBRS!가죽비율
+'
+'        ' 마감되지 않았을 경우 전송하지 않는다.
+'        If sData(13) <> "Y" Then sData(2) = "0"
+'
+'        SUBRs.Close
+'        Set SUBRs = Nothing
+'    End If
+'
+'    'If sData(6) = "0" Then Exit Sub
+'
+'    '---------------------------------------------------------------------------
+'    '
+'    '---------------------------------------------------------------------------
+'    Query = "SELECT STORE_CD, TRANS_CHK"
+'    Query = Query & " FROM SALE_TBL"
+'    Query = Query & " WHERE Store_CD = '" & 가맹점정보.가맹점코드 & "'"           ' 대리점정보.StoreCode
+'    Query = Query & "   AND SALE_DT  = '" & Format(FinishDate, "yyyyMMdd") & "'"  ' Format(iTempDay, "yyyyMMdd")
+'
+'    If ADORset.State = adStateOpen Then ADORset.Close
+'
+'    ADORset.CursorLocation = adUseClient
+'    ADORset.Open Query, MyHost, adOpenStatic, adLockBatchOptimistic, adCmdText
+'
+'    If ADORset.EOF = True Then
+'        Query = "INSERT INTO  SALE_TBL ("
+'        Query = Query & "  SALE_DT"            '1
+'        Query = Query & ", STORE_CD"           '2
+'        Query = Query & ", MASTER_CD"          '3
+'        Query = Query & ", TAG_NB"             '4
+'        Query = Query & ", START_TAG"          '5
+'        Query = Query & ", END_TAG"            '6
+'        Query = Query & ", SALE_AMT"           '7
+'        Query = Query & ", MASTER_AMT"         '8
+'        Query = Query & ", STORE_AMT"          '9
+'        Query = Query & ", IN_CNT"             '10
+'        Query = Query & ", JAES_CNT"           '11
+'        Query = Query & ", SU_CNT"             '12
+'        Query = Query & ", BAN_CNT"            '13
+'        Query = Query & ", OUT_CNT"            '14
+'        Query = Query & ", CARD_AMT"           '15
+'        Query = Query & ", CARD_CNT"           '16
+'        Query = Query & ", SU_AMT"             '17
+'        Query = Query & ", SALE_CHK"           '18
+'        Query = Query & ", CREATE_MIL"         '19
+'        Query = Query & ", USE_MIL"            '20
+'        Query = Query & ", DELETE_MIL"         '21
+'        Query = Query & ", RunningCnt"         '22
+'        Query = Query & ", RunningMoney"       '23
+'        Query = Query & ", RunningPer"         '24
+'        Query = Query & ", SALERETURN_CNT"     '25
+'        Query = Query & ", SALERETURN_AMT"     '26
+'        Query = Query & ", SAMSUNGCARDMEM_CNT" '27
+'        Query = Query & ", SAMSUNGCARD_CNT"    '28
+'        Query = Query & ", SAMSUNGCARD_AMT"    '29
+'
+'        ' 20100525 명품관련추가 2줄 추가
+'        ' 20100722 명품관련추가 1줄 추가
+'        Query = Query & ", LuxuryLAU_CNT"      '30
+'        Query = Query & ", LuxuryLAU_AMT"      '31
+'        Query = Query & ", LuxuryLAU_PER"      '32
+'        Query = Query & ", LuxuryDYE_CNT"      '33
+'        Query = Query & ", LuxuryDYE_AMT"      '34
+'        Query = Query & ", LuxuryDYE_PER"      '35
+'        Query = Query & ", LuxuryDEF_CNT"      '36
+'        Query = Query & ", LuxuryDEF_AMT"      '37
+'        Query = Query & ", LuxuryDEF_PER"      '38
+'        Query = Query & ", Leather_CNT"        '39
+'        Query = Query & ", Leather_AMT"        '40
+'        Query = Query & ", Leather_PER"        '41
+'        Query = Query & ", TRANS_CHK"          '42
+'        Query = Query & ", TRANS_DT)"          '43
+'
+'        Query = Query & " VALUES ("
+'        Query = Query & "  '" & sData(1) & "'"                  ' 1 마감일자
+'        Query = Query & ", '" & 가맹점정보.가맹점코드 & "'"     ' 2 가맹점코드
+'        Query = Query & ", '" & sData(0) & "'"                  ' 3 지사코드 sCode(0)
+'        Query = Query & ", '" & sCode(1) & "'"                  ' 4 택코드
+'        Query = Query & ", '" & Right(sData(11), 4) & "'"       ' 5 START_TAG
+'        Query = Query & ", '" & Right(sData(11), 4) & "'"       ' 6 END_TAG
+'
+'        Query = Query & ", " & sData(6)                         ' 7 SALE_AMT
+'        Query = Query & ", " & sData(7)                         ' 8 MASTER_AMT
+'
+'        Query = Query & ", " & sData(8)                         ' 9 STORE_AMT
+'        Query = Query & ", " & sData(2)                         '10 IN_CNT
+'
+'        Query = Query & ", " & sData(4)                         '11 JAES_CNT
+'        Query = Query & ", " & sData(5)                         '12 SU_CNT
+'
+'        Query = Query & ", " & sData(3)                         '13 BAN_CNT
+'        Query = Query & ", " & "0"                              '14 OUT_CNT
+'
+'        Query = Query & ", " & sData(18)                        '15 CARD_AMT
+'        Query = Query & ", " & sData(19)                        '16 CARD_CNT
+'
+'        Query = Query & ", " & sData(9)                         '17 SU_AMT
+'        Query = Query & ", '" & sData(10) & "'"                 '18 SALE_CHK
+'
+'        Query = Query & ", " & sData(15)                        '19 CREATE_MIL
+'        Query = Query & ", " & sData(16)                        '20 USE_MIL
+'        Query = Query & ", " & sData(17)                        '21 DELETE_MIL
+'
+'        Query = Query & ", " & sData(20)                        '22 RunningCnt
+'        Query = Query & ", " & sData(21)                        '23 RunningMoney
+'        Query = Query & ", " & sData(22)                        '24 RunningPer
+'
+'        Query = Query & ", " & sData(23)                        '25 세탁환불 관련
+'        Query = Query & ", " & sData(24)                        '26
+'
+'        Query = Query & ", " & sData(25)                        '27 삼성카드 관련
+'        Query = Query & ", " & sData(26)                        '28
+'        Query = Query & ", " & sData(27)                        '29
+'
+'        Query = Query & ", " & sData(28)                        '30
+'        Query = Query & ", " & sData(29)                        '31
+'        Query = Query & ", " & sData(30)                        '32 명품세탁 관련
+'
+'        Query = Query & ", " & sData(31)                        '33 명품염색 관련
+'        Query = Query & ", " & sData(32)                        '34
+'        Query = Query & ", " & sData(33)                        '35
+'
+'        Query = Query & ", " & sData(34)                        '36 일반가죽 관련
+'        Query = Query & ", " & sData(35)                        '37
+'        Query = Query & ", " & sData(36)                        '38
+'
+'        Query = Query & ", " & sData(37)                        '39 L가죽 관련
+'        Query = Query & ", " & sData(38)                        '40
+'        Query = Query & ", " & sData(39)                        '41
+'
+'        Query = Query & ", 'Y'"                                 '42 TRANS_CHK
+'        Query = Query & ", '" & Format(Date, "yyyyMMdd") & "'"  '43 TRANS_DT
+'        Query = Query & ")"
+'        MyHost.Execute Query
+'
+'    Else
+'        If ADORset.Fields("TRANS_CHK") = "N" Then
+'            Query = "UPDATE SALE_TBL SET"
+'            Query = Query & "  MASTER_CD    = '" & sData(0) & "'"            'sCode(0)
+'            Query = Query & ", TAG_NB       = '" & sCode(1) & "'"
+'            Query = Query & ", START_TAG    = '" & Right(sData(11), 4) & "'"
+'            Query = Query & ", END_TAG      = '" & Right(sData(12), 4) & "'"
+'            Query = Query & ", SALE_AMT     =  " & sData(6)
+'            Query = Query & ", MASTER_AMT   =  " & sData(7)
+'            Query = Query & ", STORE_AMT    =  " & sData(8)
+'            Query = Query & ", IN_CNT       =  " & sData(2)
+'            Query = Query & ", JAES_CNT     =  " & sData(4)
+'            Query = Query & ", SU_CNT       =  " & sData(5)
+'            Query = Query & ", BAN_CNT      =  " & sData(3)
+'            Query = Query & ", OUT_CNT      =  " & "0"
+'            Query = Query & ", CARD_AMT     =  " & sData(18)
+'            Query = Query & ", CARD_CNT     =  " & sData(19)
+'            Query = Query & ", SU_AMT       =  " & sData(9)
+'            Query = Query & ", SALE_CHK     = '" & sData(10) & "'"
+'            Query = Query & ", CREATE_MIL   =  " & sData(15)
+'            Query = Query & ", USE_MIL      =  " & sData(16)
+'            Query = Query & ", DELETE_MIL   =  " & sData(17)
+'            Query = Query & ", RunningCnt   =  " & sData(20)
+'            Query = Query & ", RunningMoney =  " & sData(21)
+'            Query = Query & ", RunningPer   =  " & sData(22)
+'
+'            Query = Query & ", SALERETURN_CNT     = " & sData(23)
+'            Query = Query & ", SALERETURN_AMT     = " & sData(24)
+'            Query = Query & ", SAMSUNGCARDMEM_CNT = " & sData(25)
+'            Query = Query & ", SAMSUNGCARD_CNT    = " & sData(26)
+'            Query = Query & ", SAMSUNGCARD_AMT    = " & sData(27)
+'
+'            ' 20100525 명품관련추가 6줄 추가
+'            Query = Query & ", LuxuryLAU_CNT = " & sData(28)
+'            Query = Query & ", LuxuryLAU_AMT = " & sData(29)
+'            Query = Query & ", LuxuryLAU_PER = " & sData(30)
+'            Query = Query & ", LuxuryDYE_CNT = " & sData(31)
+'            Query = Query & ", LuxuryDYE_AMT = " & sData(32)
+'            Query = Query & ", LuxuryDYE_PER = " & sData(33)
+'
+'            ' 20100722 일반가죽 관련추가 3줄 추가
+'            Query = Query & ", LuxuryDEF_CNT = " & sData(34)
+'            Query = Query & ", LuxuryDEF_AMT = " & sData(35)
+'            Query = Query & ", LuxuryDEF_PER = " & sData(36)
+'
+'            ' 20101015 L가죽 관련추가 3줄 추가
+'            Query = Query & ", Leather_CNT = " & sData(37)
+'            Query = Query & ", Leather_AMT = " & sData(38)
+'            Query = Query & ", Leather_PER = " & sData(39)
+'
+'            Query = Query & ", TRANS_CHK =  'Y'"
+'            Query = Query & ", TRANS_DT =  '" & Format(Date, "yyyyMMdd") & "'  "
+'            Query = Query & " WHERE Store_CD = '" & 가맹점정보.가맹점코드 & "' "          '대리점정보.StoreCode
+'            Query = Query & "   AND SALE_DT  = '" & Format(FinishDate, "yyyyMMdd") & "' " 'Format(iTempDay, "yyyyMMdd")
+'            MyHost.Execute Query
+'        End If
+'    End If
+'End Sub
+
+Private Function ConnectMasterCheck(MyHost As ADODB.Connection) As Boolean
+    On Error GoTo ErrRtn
+    
+    Dim HostConn As String
+    
+    Dim Server_Connect As String
+    
+    '서버에 접속여부
+    Server_Connect = GetIniStr("SERVER", "Server_Connect", "", iniFile)                  '
+    
+    If Server_Connect = "N" Then
+        ConnectMasterCheck = False
+    Else
+        HostConn = ""
+        HostConn = HostConn & "Provider=SQLOLEDB.1;"
+        HostConn = HostConn & "Persist Security Info=False;"
+        HostConn = HostConn & "User ID=sa;"
+        HostConn = HostConn & "Password=;"
+        HostConn = HostConn & "Initial Catalog=Laundry;"
+        HostConn = HostConn & "Data Source=store.clean-aid.co.kr,8657"
+        
+        Set MyHost = Nothing
+        Set MyHost = New ADODB.Connection
+    
+        If MyHost.State = adStateOpen Then MyHost.Close
+        MyHost.CommandTimeout = 30
+        MyHost.Open HostConn
+    
+        ConnectMasterCheck = True
+    End If
+    
+    Exit Function
+
+ErrRtn:
+    ConnectMasterCheck = False
+
+    MsgBox "Error " & Err.Number & " (" & Err.description & ") in procedure ConnectMasterCheck of Module Global"
+End Function
+
+'-----------------------------------------------------------------------------------------------------------------------------------------
+' Function명  : SP_Exec
+' 작  성  자  :
+' 작  성  일  :
+' 파 라 미 터 : ProcName - 프로시저명
+'               sValue   - 프로시저 파라미터
+'               Err_Num  - 에러번호
+'               Err_Desc - 에러명
+' 리  턴  값  : Recordset
+' 비      고  : Server에 있는 스토어드 프로시저를 실행하기 위한 함수
+'-----------------------------------------------------------------------------------------------------------------------------------------
+Public Function SP_Exec(SP_Con As ADODB.Connection, ByVal ProcName As String, ByRef sValue() As String, Err_Num As Long, Err_Desc As String) As ADODB.Recordset
+    Dim MyCom As ADODB.Command
+    
+    On Error GoTo ErrRtn
+
+    Set SP_Exec = New ADODB.Recordset
+    Set MyCom = New ADODB.Command
+    
+    MyCom.ActiveConnection = SP_Con 'HostCon
+    MyCom.CommandTimeout = 0
+    MyCom.CommandText = ProcName
+    MyCom.CommandType = adCmdStoredProc
+    
+    For i = 1 To MyCom.Parameters.Count - 1
+        If IsNull(sValue(i - 1)) Then
+            MyCom.Parameters(i).Size = -1
+        ElseIf sValue(i - 1) = "" Then
+            MyCom.Parameters(i).Size = -1
+        Else
+            MyCom.Parameters(i).Size = LenH(sValue(i - 1))
+        End If
+        
+        MyCom.Parameters(i) = sValue(i - 1)
+    Next i
+    
+    Set SP_Exec = MyCom.Execute
+    Set MyCom = Nothing
+    
+    Err_Num = 0
+    Err_Desc = ""
+    
+    Exit Function
+    
+ErrRtn:
+    
+    Err_Num = Err.Number
+    Err_Desc = Err.description
+    
+    Set MyCom = Nothing
+End Function
+
+'*****************************************************************************
+'기    능 : 한글을 2Byte로 처리하여 Mid함수로 처리한다.
+'인    수 : sInStr As String Mid처리할 스트링
+'           iStart As Integer 시작위치
+'           iCnt As Integer Mid할 스트링 숫
+'리 턴 값 : Mid된 결과 스트링
+'사 용 예 : strTemp = gfMid("무궁화꽃이피었습니다",3,6)
+'*****************************************************************************
+Public Function MidH(sInStr As String, iStart As Integer, iCnt As Integer) As String
+    MidH = StrConv(MidB(StrConv(sInStr, vbFromUnicode), iStart, iCnt), vbUnicode)
+End Function
+
+'*****************************************************************************
+'기 능    : 한글을 2Byte로 처리하여 Len함수로 처리한다.
+'인 수    : strString As String Length를 구할 스트링
+'리 턴 값 : 2바이트로 처리된 Length
+'사 용 예 : intLen = gfLen("무궁화꽃이피었습니다")
+'*****************************************************************************
+Public Function LenH(strString As String) As Integer
+    LenH = LenB(StrConv(strString, vbFromUnicode))
+End Function
+
+
+
+Public Function GetGoodsInfo() As Boolean
+    Dim nRCnt   As Long
+    Dim Query   As String
+    Dim ADORs01 As ADODB.Recordset
+     
+    On Error GoTo ErrRtn
+
+    '--------------------------------------------------------------
+    ' 품명 순서를 가저 온다.
+    '--------------------------------------------------------------
+    Query = "SELECT 의류코드, 순서 FROM TB_의류"
+    Query = Query & " ORDER BY 의류코드 ASC "
+    Set ADORs01 = New ADODB.Recordset
+    ADORs01.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+    
+    If ADORs01.EOF Then
+        ReDim m_의류정보(0)
+        Exit Function
+    End If
+    
+    nRCnt = 0
+    ReDim m_의류정보(ADORs01.RecordCount)
+    
+    While Not ADORs01.EOF
+        m_의류정보(nRCnt).Code = ADORs01.Fields("의류코드") & ""
+        m_의류정보(nRCnt).Order = ADORs01.Fields("순서") & ""
+        
+        nRCnt = nRCnt + 1
+        ADORs01.MoveNext
+    Wend
+    
+    ADORs01.Close
+    Exit Function
+        
+ErrRtn:
+    
+    MsgBox "Error " & Err.Number & " (" & Err.description & ") in procedure GetGoodsInfo of Module Global"
+        
+End Function
+
+' 전달된 코드의 의류 순번을 리턴한다.
+Public Function GetGoodsOrderby(sCode As String) As String
+    Dim nRCnt   As Long
+    
+    On Error GoTo ErrRtn
+    GetGoodsOrderby = ""
+    
+    For nRCnt = 0 To UBound(m_의류정보)
+        If m_의류정보(nRCnt).Code = sCode Then
+            GetGoodsOrderby = m_의류정보(nRCnt).Order
+            Exit Function
+        End If
+    Next nRCnt
+    Exit Function
+        
+ErrRtn:
+    
+    MsgBox "Error " & Err.Number & " (" & Err.description & ") in procedure GetGoodsOrderby of Module Global"
+        
+End Function
+
+'-------------------------------------------------------------------
+' 5) TB_요일할인 - 시작일자를 가져온다.
+'-------------------------------------------------------------------
+Private Function GetReceive_요일할인() As Boolean
+    Dim 적용일자    As String
+    Dim Query       As String
+    Dim ADORs       As ADODB.Recordset
+    Dim SUBRs       As ADODB.Recordset
+    Dim SUBRs2      As ADODB.Recordset
+    Dim nCnt        As Long
+    Dim RecordCount As Long
+    
+    Dim errMsg  As String
+    
+    
+    On Error GoTo ERR_RTN
+    
+
+    errMsg = "1"
+    '--------------------------------------------------------------
+    ' TB_의류 - 미 수신 자료 수신
+    '--------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "요일할인 수신중......"
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT TOP 1 시작일자 FROM TB_요일할인"
+    Query = Query & " ORDER BY 시작일자 DESC"
+    Set SUBRs = New ADODB.Recordset
+    SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    If SUBRs.EOF Then
+        적용일자 = ""
+    Else
+        적용일자 = SUBRs(0) & ""
+    End If
+    SUBRs.Close:    Set SUBRs = Nothing
+    
+    errMsg = "2"
+    '-------------------------------------------------------------------
+    ' TB_가맹점요일할인 - 크린에이드 서버에서 수신
+    '-------------------------------------------------------------------
+    Query = "SELECT    시작일자"
+    Query = Query & ", 종료일자"
+    Query = Query & ", 요일"
+    Query = Query & ", 의류코드"
+    Query = Query & ", 의류명"
+    Query = Query & ", ISNULL(금액,0)     AS 금액"
+    Query = Query & ", ISNULL(할인금액,0) AS 할인금액"
+    Query = Query & ", ISNULL(할인율,0)   AS 할인율"
+    Query = Query & " FROM TB_가맹점요일할인"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    
+    If 적용일자 = "" Then
+        ' Query = Query & "  AND 시작일자 = '" & 적용일자 & "' "
+    
+    Else
+        Query = Query & "   AND (수신여부 IS NULL OR 수신여부 <> 'Y')"
+    End If
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenStatic, adLockOptimistic
+    'ADORs.Open Query, HostCon, adOpenForwardOnly, adLockReadOnly
+        
+    errMsg = "3"
+    If Not ADORs.EOF Then
+        nCnt = 0
+        ADORs.MoveLast
+        RecordCount = ADORs.RecordCount
+        ADORs.MoveFirst
+    End If
+    
+    errMsg = "4"
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        frmSplash.lblCount.Caption = nCnt
+        'frmSplash.ProgressBar1.Value = (i / RecordCount) * 100
+        DoEvents
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_요일할인"
+        Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+        Query = Query & "   AND 요일     = '" & ADORs!요일 & "'"
+        Query = Query & "   AND 의류코드 = '" & ADORs!의류코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!시작일자 = Format(ADORs!시작일자, "YYYY-MM-DD") & "" ' 1 시작일자
+        SUBRs!종료일자 = Format(ADORs!종료일자, "YYYY-MM-DD") & "" ' 2 종료일자
+        SUBRs!요일 = ADORs!요일 & ""                               ' 3
+        SUBRs!의류코드 = ADORs!의류코드 & ""                       ' 4
+        SUBRs!의류명 = ADORs!의류명 & ""                           ' 5
+        SUBRs!금액 = ADORs!금액 & ""                               ' 6
+        SUBRs!할인금액 = ADORs!할인금액 & ""                       ' 7
+        SUBRs!할인율 = ADORs!할인율 & ""                           ' 8
+        SUBRs!순서 = GetGoodsOrderby(ADORs!의류코드 & "")          ' 9
+        
+        SUBRs.Update
+        
+        
+        
+        SUBRs.Close:    Set SUBRs = Nothing
+        
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close
+    Set ADORs = Nothing
+                    
+    errMsg = "5"
+    If nCnt > 0 Then
+    '---------------------------------------------------------------------------------------------
+    ' 서버 - 수신여부 (생성을 하는 과정에 다운로드가 되면 처음 생성한 것과 수신 정보가 일지 하지않아
+    '                  나머지 부분이 다운로드가 안되는 문제가 있어서 수신한 내용만 업데이트로 변경
+    '---------------------------------------------------------------------------------------------
+        Query = "UPDATE TB_가맹점요일할인 SET 수신여부 = 'Y'"
+        Query = Query & "                   , 수신일자 = '" & Format(Now, "YYYY-MM-DD hh:mm:ss") & "'"
+        Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+        Query = Query & "   AND (수신여부 IS NULL OR 수신여부 <> 'Y')"
+        
+        HostCon.Execute Query
+    '---------------------------------------------------------------------------------------------
+    End If
+    
+    errMsg = "6"
+    '---------------------------------------------------------------------------------------------
+    ' 서버 - 삭제 자료 여부 확인 하여 로컬자료를 먼저 삭제하고 서버 자료를 삭제 한다.
+    '        서버에서는 삭제 설정만 되어 있고 가맹점pg에서 삭제 처리가 최종 이루어 진다.
+    '---------------------------------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "요일할인 삭제 확인중......"
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT 시작일자, 종료일자, 요일 FROM TB_가맹점요일할인 "
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & "   AND ISNULL(삭제,'N') = 'Y' "
+    Query = Query & " GROUP BY 시작일자, 종료일자, 요일 "
+    
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenStatic, adLockOptimistic
+    
+    nCnt = 0
+    RecordCount = ADORs.RecordCount
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        frmSplash.lblCount.Caption = nCnt
+        DoEvents
+        
+                errMsg = "4-5"
+        Query = "SELECT TOP 1 시작일자 FROM TB_요일할인 "
+        Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+        Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+        Query = Query & "   AND 요일     = '" & ADORs!요일 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+        
+        '--------------------------------------------------------------
+        ' 해당 자료가 정상적으로 있을 경우에만 삭제 하도록 처리
+        ' 다른 곳에서 임시 설정이나 이런 문제로 해당 자료가 있을 경우 엉뚱한 곳만 삭제 하는 문제가 발생하기 때문
+        '--------------------------------------------------------------
+        If Not SUBRs.EOF Then
+            
+                errMsg = "4-2"
+            '--------------------------------------------------------------
+            ' TB_의류 - 삭제 내용을 삭제 처리한다.
+            '--------------------------------------------------------------
+            Query = "DELETE FROM TB_요일할인"
+            Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+            Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+            Query = Query & "   AND 요일     = '" & ADORs!요일 & "'"
+            ADOCon.Execute Query
+            
+            Call LOG_SaleDelete_SAVE("매장삭제: " & Query)
+            
+                errMsg = "4-1"
+            Query = "SELECT TOP 1 시작일자 FROM TB_요일할인 "
+            Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+            Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+            Query = Query & "   AND 요일     = '" & ADORs!요일 & "'"
+            Set SUBRs2 = New ADODB.Recordset
+            SUBRs2.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+            
+            If SUBRs2.EOF Then
+                Query = "DELETE FROM TB_가맹점요일할인"
+                Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+                Query = Query & "   AND ISNULL(삭제,'N') = 'Y' "
+                Query = Query & "   AND 시작일자 = '" & ADORs!시작일자 & "'"
+                Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+                Query = Query & "   AND 요일     = '" & ADORs!요일 & "'"
+                HostCon.Execute Query
+                Call LOG_SaleDelete_SAVE("본사삭제: " & Query)
+            End If
+            SUBRs2.Close:    Set SUBRs2 = Nothing
+        Else
+                errMsg = "4"
+                Query = "DELETE FROM TB_가맹점요일할인"
+                Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+                Query = Query & "   AND ISNULL(삭제,'N') = 'Y' "
+                Query = Query & "   AND 시작일자 = '" & ADORs!시작일자 & "'"
+                Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+                Query = Query & "   AND 요일     = '" & ADORs!요일 & "'"
+                HostCon.Execute Query
+                Call LOG_SaleDelete_SAVE("본사삭제 NOT : " & Query)
+        
+        
+        End If
+        SUBRs.Close:    Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:    Set ADORs = Nothing
+    '-------------------------------------------------------------------
+    
+    Exit Function
+    
+    
+ERR_RTN:
+    
+
+    MsgBox "Error " & Err.Number & " (" & errMsg & " " & Err.description & ") in procedure GetReceive_요일할인 of Module basDBUpdate"
+
+End Function
+
+
+'-------------------------------------------------------------------
+' 5) TB_요일할인 - 시작일자를 가져온다.
+'-------------------------------------------------------------------
+Private Function GetReceive_할인() As Boolean
+    Dim 적용일자    As String
+    Dim Query       As String
+    Dim ADORs       As ADODB.Recordset
+    Dim SUBRs       As ADODB.Recordset
+    Dim SUBRs2      As ADODB.Recordset
+    Dim nCnt        As Long
+    Dim RecordCount As Long
+    
+    On Error GoTo ERR_RTN
+    
+    '--------------------------------------------------------------
+    ' TB_의류 - 미 수신 자료 수신
+    '--------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "할인정보 수신중..."
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT TOP 1 시작일자 FROM TB_할인정보"
+    Query = Query & " ORDER BY 시작일자 DESC"
+    Set SUBRs = New ADODB.Recordset
+    SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+
+    If SUBRs.EOF Then
+        적용일자 = ""
+    Else
+        적용일자 = SUBRs(0) & ""
+    End If
+    SUBRs.Close:    Set SUBRs = Nothing
+    
+    '-------------------------------------------------------------------
+    ' TB_가맹점할인 - 크린에이드 서버에서 수신
+    '-------------------------------------------------------------------
+    Query = "SELECT    시작일자"
+    Query = Query & ", 종료일자"
+    Query = Query & ", 의류코드"
+    Query = Query & ", 의류명"
+    Query = Query & ", ISNULL(금액,0)     AS 금액"
+    Query = Query & ", ISNULL(할인금액,0) AS 할인금액"
+    Query = Query & ", ISNULL(할인율,0)   AS 할인율"
+    Query = Query & " FROM TB_가맹점할인"
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    
+    If 적용일자 = "" Then
+        'Query = Query & " AND 시작일자 = '" & 적용일자 & "' "
+    
+    Else
+        Query = Query & "   AND (수신여부 IS NULL OR 수신여부 <> 'Y')"
+    End If
+    
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenStatic, adLockOptimistic
+    
+    If Not ADORs.EOF Then
+        nCnt = 0
+        ADORs.MoveLast
+        RecordCount = ADORs.RecordCount
+        ADORs.MoveFirst
+    End If
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        frmSplash.lblCount.Caption = nCnt
+        DoEvents
+        
+        
+        '--------------------------------------------------------------
+        ' TB_의류 - 의류금액 정보 다운로드
+        '--------------------------------------------------------------
+        Query = "SELECT * FROM TB_할인정보"
+        Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+        Query = Query & "   AND 의류코드 = '" & ADORs!의류코드 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenDynamic, adLockOptimistic
+        
+        If SUBRs.EOF Then SUBRs.AddNew
+        
+        SUBRs!시작일자 = Format(ADORs!시작일자, "YYYY-MM-DD") & "" ' 1 시작일자
+        SUBRs!종료일자 = Format(ADORs!종료일자, "YYYY-MM-DD") & "" ' 2 종료일자
+        SUBRs!의류코드 = ADORs!의류코드 & ""                       ' 4
+        SUBRs!의류명 = ADORs!의류명 & ""                           ' 5
+        SUBRs!금액 = ADORs!금액 & ""                               ' 6
+        SUBRs!할인금액 = ADORs!할인금액 & ""                       ' 7
+        SUBRs!할인율 = ADORs!할인율 & ""                           ' 8
+        SUBRs!순서 = GetGoodsOrderby(ADORs!의류코드 & "")          ' 9
+        
+        SUBRs.Update
+        
+        
+        
+        SUBRs.Close:    Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:        Set ADORs = Nothing
+                    
+    If nCnt > 0 Then
+        '---------------------------------------------------------------------------------------------
+        ' 서버 - 수신여부 (생성을 하는 과정에 다운로드가 되면 처음 생성한 것과 수신 정보가 일지 하지않아
+        '                  나머지 부분이 다운로드가 안되는 문제가 있어서 수신한 내용만 업데이트로 변경
+        '---------------------------------------------------------------------------------------------
+            Query = "UPDATE TB_가맹점할인 SET 수신여부 = 'Y'"
+            Query = Query & "               , 수신일자 = '" & Format(Now, "YYYY-MM-DD hh:mm:ss") & "'"
+            Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+            Query = Query & "   AND (수신여부 IS NULL OR 수신여부 <> 'Y')"
+            HostCon.Execute Query
+        '---------------------------------------------------------------------------------------------
+    End If
+    
+    '---------------------------------------------------------------------------------------------
+    ' 서버 - 삭제 자료 여부 확인 하여 로컬자료를 먼저 삭제하고 서버 자료를 삭제 한다.
+    '        서버에서는 삭제 설정만 되어 있고 가맹점pg에서 삭제 처리가 최종 이루어 진다.
+    '---------------------------------------------------------------------------------------------
+    frmSplash.lblMsg.Caption = "할인정보 삭제 확인중......"
+    frmSplash.lblCount.Caption = ""
+    DoEvents
+    
+    Query = "SELECT 시작일자, 종료일자  FROM TB_가맹점할인 "
+    Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+    Query = Query & "   AND ISNULL(삭제,'N') = 'Y' "
+    Query = Query & " GROUP BY 시작일자, 종료일자  "
+    
+    Set ADORs = New ADODB.Recordset
+    ADORs.Open Query, HostCon, adOpenStatic, adLockOptimistic
+    
+    nCnt = 0
+    RecordCount = ADORs.RecordCount
+    
+    Do Until ADORs.EOF
+        nCnt = nCnt + 1
+        
+        frmSplash.lblCount.Caption = nCnt
+        DoEvents
+        
+        Query = "SELECT TOP 1 시작일자 FROM TB_할인정보 "
+        Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+        Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+        Set SUBRs = New ADODB.Recordset
+        SUBRs.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+        
+        '--------------------------------------------------------------
+        ' 해당 자료가 정상적으로 있을 경우에만 삭제 하도록 처리
+        ' 다른 곳에서 임시 설정이나 이런 문제로 해당 자료가 있을 경우 엉뚱한 곳만 삭제 하는 문제가 발생하기 때문
+        '--------------------------------------------------------------
+        If Not SUBRs.EOF Then
+            
+            '--------------------------------------------------------------
+            ' TB_의류 - 삭제 내용을 삭제 처리한다.
+            '--------------------------------------------------------------
+            Query = "DELETE FROM TB_할인정보"
+            Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+            Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+            ADOCon.Execute Query
+            
+            Call LOG_SaleDelete_SAVE("매장삭제: " & Query)
+                
+            Query = "SELECT TOP 1 시작일자 FROM TB_할인정보 "
+            Query = Query & " WHERE 시작일자 = '" & ADORs!시작일자 & "'"
+            Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+            Set SUBRs2 = New ADODB.Recordset
+            SUBRs2.Open Query, ADOCon, adOpenForwardOnly, adLockReadOnly
+            
+            If SUBRs2.EOF Then
+            
+                Query = "DELETE FROM TB_가맹점할인"
+                Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+                Query = Query & "   AND ISNULL(삭제,'N') = 'Y' "
+                Query = Query & "   AND 시작일자 = '" & ADORs!시작일자 & "'"
+                Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+                HostCon.Execute Query
+            
+                Call LOG_SaleDelete_SAVE("본사삭제:" & Query)
+            End If
+            SUBRs2.Close:    Set SUBRs2 = Nothing
+        Else
+                Query = "DELETE FROM TB_가맹점할인"
+                Query = Query & " WHERE 가맹점코드 = '" & 가맹점정보.가맹점코드 & "'"
+                Query = Query & "   AND ISNULL(삭제,'N') = 'Y' "
+                Query = Query & "   AND 시작일자 = '" & ADORs!시작일자 & "'"
+                Query = Query & "   AND 종료일자 = '" & ADORs!종료일자 & "'"
+                HostCon.Execute Query
+            
+                Call LOG_SaleDelete_SAVE("본사삭제 NOT :" & Query)
+        
+            
+        End If
+        SUBRs.Close:    Set SUBRs = Nothing
+        
+        ADORs.MoveNext
+    Loop
+    ADORs.Close:    Set ADORs = Nothing
+    '-------------------------------------------------------------------
+    Exit Function
+    
+    
+ERR_RTN:
+    
+    MsgBox "Error " & Err.Number & " (" & Err.description & ") in procedure GetReceive_할인 of Module basDBUpdate"
+
+End Function
+
+
+Private Function Get의류분류코드순서(sData() As String, sCode As String) As Integer
+    
+    Get의류분류코드순서 = 0
+    
+    For i = 0 To UBound(sData())
+        If Left(sData(i), 2) = sCode Then
+            If IsNumeric(Mid(sData(i), 4, 10)) = True Then
+                Get의류분류코드순서 = Val(Mid(sData(i), 4, 10))
+                Exit For
+            End If
+        End If
+    Next i
+     
+End Function

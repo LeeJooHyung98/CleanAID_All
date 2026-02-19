@@ -1,0 +1,1049 @@
+VERSION 5.00
+Object = "{F856EC8B-F03C-4515-BDC6-64CBD617566A}#8.0#0"; "fpSPR80.OCX"
+Object = "{F20E41DE-526A-423A-B746-D860D06076B4}#4.0#0"; "IGThreed40.ocx"
+Object = "{14ACBB92-9C4A-4C45-AFD2-7AE60E71E5B3}#4.0#0"; "IGSplitter40.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{A8E5842E-102B-4289-9D57-3B3F5B5E15D3}#13.2#0"; "Codejock.Controls.v13.2.1.ocx"
+Begin VB.Form P_04001_B 
+   Caption         =   "지사별 기간별 매출집계"
+   ClientHeight    =   9645
+   ClientLeft      =   1230
+   ClientTop       =   6615
+   ClientWidth     =   16170
+   BeginProperty Font 
+      Name            =   "굴림체"
+      Size            =   9.75
+      Charset         =   129
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "P_04001_B.frx":0000
+   LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
+   MDIChild        =   -1  'True
+   ScaleHeight     =   9645
+   ScaleWidth      =   16170
+   WindowState     =   2  '최대화
+   Begin SSSplitter.SSSplitter SSSplitter 
+      Height          =   9645
+      Left            =   0
+      TabIndex        =   0
+      Top             =   0
+      Width           =   16170
+      _ExtentX        =   28522
+      _ExtentY        =   17013
+      _Version        =   262144
+      AutoSize        =   1
+      SplitterBarWidth=   1
+      SplitterBarAppearance=   1
+      BorderStyle     =   1
+      PaneTree        =   "P_04001_B.frx":058A
+      Begin Threed.SSPanel panInput 
+         Height          =   780
+         Left            =   15
+         TabIndex        =   1
+         Top             =   540
+         Width           =   16140
+         _ExtentX        =   28469
+         _ExtentY        =   1376
+         _Version        =   262144
+         BevelOuter      =   0
+         RoundedCorners  =   0   'False
+         Begin XtremeSuiteControls.CheckBox CheckBox1 
+            Height          =   225
+            Left            =   7950
+            TabIndex        =   18
+            Top             =   120
+            Width           =   3135
+            _Version        =   851970
+            _ExtentX        =   5530
+            _ExtentY        =   397
+            _StockProps     =   79
+            Caption         =   "지사출고 수량 집계"
+            UseVisualStyle  =   -1  'True
+         End
+         Begin MSComCtl2.DTPicker dtInput 
+            Height          =   315
+            Index           =   0
+            Left            =   1230
+            TabIndex        =   2
+            Top             =   60
+            Width           =   3015
+            _ExtentX        =   5318
+            _ExtentY        =   556
+            _Version        =   393216
+            Format          =   57409536
+            CurrentDate     =   36686
+         End
+         Begin Threed.SSPanel panCaption 
+            Height          =   315
+            Index           =   11
+            Left            =   45
+            TabIndex        =   14
+            Top             =   60
+            Width           =   1155
+            _ExtentX        =   2037
+            _ExtentY        =   556
+            _Version        =   262144
+            Caption         =   "매출일자"
+            BevelOuter      =   1
+            RoundedCorners  =   0   'False
+         End
+         Begin MSComCtl2.DTPicker dtInput 
+            Height          =   315
+            Index           =   1
+            Left            =   4545
+            TabIndex        =   15
+            Top             =   60
+            Width           =   3015
+            _ExtentX        =   5318
+            _ExtentY        =   556
+            _Version        =   393216
+            Format          =   57409536
+            CurrentDate     =   36686
+         End
+         Begin VB.Label Label 
+            Alignment       =   2  '가운데 맞춤
+            Caption         =   "~"
+            BeginProperty Font 
+               Name            =   "굴림체"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Left            =   4245
+            TabIndex        =   16
+            Top             =   120
+            Width           =   300
+         End
+      End
+      Begin Threed.SSPanel pnlHeader 
+         Height          =   510
+         Left            =   15
+         TabIndex        =   3
+         Top             =   15
+         Width           =   8535
+         _ExtentX        =   15055
+         _ExtentY        =   900
+         _Version        =   262144
+         Font3D          =   1
+         ForeColor       =   255
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   11.25
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Caption         =   " 지사별 기간별 매출집계(P_04001_B)"
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_04001_B.frx":063C
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+      End
+      Begin Threed.SSPanel SSPanel 
+         Height          =   510
+         Index           =   1
+         Left            =   8565
+         TabIndex        =   4
+         Top             =   15
+         Width           =   7590
+         _ExtentX        =   13388
+         _ExtentY        =   900
+         _Version        =   262144
+         Font3D          =   3
+         ForeColor       =   192
+         BackColor       =   16777215
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         PictureBackgroundStyle=   2
+         PictureBackground=   "P_04001_B.frx":083E
+         BorderWidth     =   0
+         BevelOuter      =   0
+         Alignment       =   1
+         RoundedCorners  =   0   'False
+         FloodShowPct    =   -1  'True
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   7
+            Left            =   6660
+            TabIndex        =   5
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "종료"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Appearance      =   6
+            Picture         =   "P_04001_B.frx":0A40
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   6
+            Left            =   5730
+            TabIndex        =   6
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "엑셀"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_04001_B.frx":0FDA
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   5
+            Left            =   4800
+            TabIndex        =   7
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "인쇄"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_04001_B.frx":1574
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   4
+            Left            =   3750
+            TabIndex        =   8
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "취소"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_04001_B.frx":1B0E
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   3
+            Left            =   2820
+            TabIndex        =   9
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "삭제"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_04001_B.frx":20A8
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   2
+            Left            =   1890
+            TabIndex        =   10
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "저장"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_04001_B.frx":2642
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   1
+            Left            =   960
+            TabIndex        =   11
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "신규"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_04001_B.frx":2BDC
+         End
+         Begin XtremeSuiteControls.PushButton cmdBtn 
+            Height          =   450
+            Index           =   0
+            Left            =   30
+            TabIndex        =   12
+            Top             =   30
+            Width           =   900
+            _Version        =   851970
+            _ExtentX        =   1587
+            _ExtentY        =   794
+            _StockProps     =   79
+            Caption         =   "조회"
+            ForeColor       =   -2147483640
+            BackColor       =   -2147483636
+            Enabled         =   0   'False
+            Appearance      =   6
+            Picture         =   "P_04001_B.frx":3176
+         End
+      End
+      Begin FPSpreadADO.fpSpread spdTotal 
+         Height          =   4020
+         Left            =   15
+         TabIndex        =   13
+         Top             =   1335
+         Width           =   16140
+         _Version        =   524288
+         _ExtentX        =   28469
+         _ExtentY        =   7091
+         _StockProps     =   64
+         BackColorStyle  =   1
+         ColsFrozen      =   2
+         DisplayRowHeaders=   0   'False
+         EditEnterAction =   5
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   26
+         SpreadDesigner  =   "P_04001_B.frx":3710
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+      Begin FPSpreadADO.fpSpread spdView 
+         Height          =   4260
+         Left            =   15
+         TabIndex        =   17
+         Top             =   5370
+         Width           =   16140
+         _Version        =   524288
+         _ExtentX        =   28469
+         _ExtentY        =   7514
+         _StockProps     =   64
+         BackColorStyle  =   1
+         ColsFrozen      =   2
+         DisplayRowHeaders=   0   'False
+         EditEnterAction =   5
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "굴림체"
+            Size            =   9
+            Charset         =   129
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         GrayAreaBackColor=   16777215
+         GridSolid       =   0   'False
+         MaxCols         =   27
+         SpreadDesigner  =   "P_04001_B.frx":4811
+         HighlightHeaders=   1
+         HighlightStyle  =   1
+      End
+   End
+End
+Attribute VB_Name = "P_04001_B"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Dim RS01 As ADODB.Recordset
+Dim sValue() As String
+
+Dim Err_Num As Long
+Dim Err_Dec As String
+
+Private Sub cmdBtn_Click(Index As Integer)
+    On Error GoTo ErrRtn
+    
+    Select Case Index
+        Case 0: Call Data_Display   ' 조회
+        Case 1: 'Call DataAdd        ' 신규
+        Case 2: 'Call DataSave       ' 저장
+        Case 3: 'Call DataDelete     ' 삭제
+        Case 4: 'Call DataCancel     ' 취소
+        Case 5: 'Call DataPrint      ' 인쇄
+        Case 6: Call Export_Excel(P_00000.cdgExcel, spdTotal)       ' 엑셀
+        Case 7: Unload Me           ' 종료
+    End Select
+    
+    Exit Sub
+    
+ErrRtn:
+    Me.MousePointer = 0
+    
+    If Err.Number = "0" Then
+        
+    ElseIf Err.Number = "91" Then
+        End
+    Else
+        Resume Next
+    End If
+End Sub
+
+Private Sub Form_Activate()
+    cmdBtn(0).Enabled = True
+    
+    cmdBtn(5).Enabled = True
+    cmdBtn(6).Enabled = True
+        
+    pnlHeader.Caption = " " & Me.Caption & " (" & Me.Name & ")"
+End Sub
+
+Private Sub Form_Load()
+    On Error GoTo ErrRtn
+    
+    With spdTotal
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+'        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+        
+    With spdView
+        .MaxRows = 0
+        .RowHeight(-1) = 14
+        
+        'Spread 8 - 디자인
+        .HighlightHeaders = HighlightHeadersOff
+        .AppearanceStyle = AppearanceStyleEnhanced
+        .ScrollBarStyle = ScrollBarStyleVisualStyle
+        
+        '선택된 Row
+        .SelBackColor = &HFFFFC0 '황색 ^^
+        .SelForeColor = &H0&     '검은글씨
+'        .OperationMode = OperationModeSingle
+        
+        'Init the User Sort
+        .UserColAction = UserColActionSort
+    End With
+
+    dtInput(0).Value = DateAdd("d", -1, Date)
+    dtInput(1).Value = DateAdd("d", -1, Date)
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
+Private Sub Data_Display()
+    On Error GoTo ErrRtn
+    
+    Dim i        As Integer
+    Dim 지사코드 As String
+    Dim nCol    As Long
+    Dim nRow    As Long
+    Dim vText   As Variant
+    
+    '----------------------------------------------------------------------
+    If DBOpen_Master("1000") = False Then Exit Sub
+    
+    ReDim sValue(1)
+    
+    sValue(0) = Format(dtInput(0).Value, "YYYY-MM-DD")
+    sValue(1) = Format(dtInput(1).Value, "YYYY-MM-DD")
+    
+    Set RS01 = New ADODB.Recordset
+    Set RS01 = ExecProMaster("SP_04021_01", sValue(), Err_Num, Err_Dec)
+        
+    With spdTotal
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+    
+            .Col = 1:  .Text = RS01!지사코드 & ""                   ' 1
+            .Col = 2:  .Text = RS01!지사명 & ""                     ' 2
+    
+            .Col = 3:  .Text = RS01!접수금액 & ""                   ' 9
+            .Col = 4:  .Text = RS01!지사금액 & ""                   ' 3
+            .Col = 5:  .Text = RS01!가맹점금액 & ""                 ' 4
+            .Col = 6:  .Text = RS01!접수수량 & ""                   ' 5
+            .Col = 7:  .Text = "0" 'RS01!출고수량 & ""                   ' 6
+            
+            .Col = 8: .Text = RS01!현금입금 + RS01!카드금액 & ""   '10
+
+            If RS01!접수수량 = 0 Then
+                .Col = 9: .Text = 0 & ""                               '11
+                .Col = 10: .Text = 0 & ""                               '12
+                .Col = 11: .Text = 0 & ""                               '13
+            Else
+                .Col = 9: .Text = RS01!접수금액 / RS01!접수수량 & ""   '11
+                .Col = 10: .Text = RS01!지사금액 / RS01!접수수량 & ""   '12
+                .Col = 11: .Text = RS01!가맹점금액 / RS01!접수수량 & "" '13
+            End If
+
+            .Col = 12: .Text = RS01!현금입금 & ""                  '14
+            .Col = 13: .Text = RS01!카드금액 & ""                   '15
+            .Col = 14: .Text = RS01!카드건수 & ""                   '16
+            .Col = 15: .Text = RS01!쿠폰금액 & ""                   '17
+            .Col = 16: .Text = RS01!쿠폰건수 & ""                   '18
+            
+            .Col = 17: .Text = RS01!발생마일리지 & ""               '19
+            .Col = 18: .Text = RS01!사용마일리지 & ""               '20
+            .Col = 19: .Text = RS01!삭제마일리지 & ""               '21
+            
+            .Col = 20: .Text = RS01!반품환불금액 & ""               '22
+            .Col = 21: .Text = RS01!반품환불건수 & ""               '23
+            .Col = 22: .Text = RS01!세탁환불금액 & ""               '24
+            .Col = 23: .Text = RS01!세탁환불건수 & ""               '25
+            .Col = 24: .Text = RS01!재세탁수량 & ""                 '26
+            .Col = 25: .Text = RS01!수선금액 & ""                   '27
+            .Col = 26: .Text = RS01!수선수량 & ""
+            
+            RS01.MoveNext
+        Loop
+        
+        RS01.Close
+        Set RS01 = Nothing
+    
+        ReDim sValue(4)
+        
+        sValue(0) = "0000"
+        sValue(1) = "%"
+        sValue(2) = Format(dtInput(0).Value, "YYYY-MM-DD")
+        sValue(3) = Format(dtInput(1).Value, "YYYY-MM-DD")
+        sValue(4) = "MASTER"
+        
+        If CheckBox1.Value = xtpChecked Then
+            
+            If HeadOffice = MASTER_OFFICE_CODE Then
+                If DBOpen_Master(HeadOffice) = False Then Exit Sub
+                
+                Set RS01 = New ADODB.Recordset
+                Set RS01 = ExecProMaster("SP_04001_B_01", sValue(), Err_Num, Err_Dec)
+            Else
+                Set RS01 = New ADODB.Recordset
+                Set RS01 = ExecPro("SP_04001_B_01", sValue(), Err_Num, Err_Dec)
+            End If
+                
+        
+            Do While Not RS01.EOF
+                ' 지사출고 수량 출력
+                For nRow = 1 To .MaxRows
+                    .GetText 1, nRow, vText
+                    If CStr(vText) = RS01.Fields(0) Then
+                        .SetText 7, nRow, CVar(RS01.Fields(1))
+                        Exit For
+                    End If
+                Next nRow
+                
+                RS01.MoveNext
+            Loop
+            RS01.Close
+            Set RS01 = Nothing
+        End If
+        
+        
+        ' 합계 출력
+        For nCol = 3 To .MaxCols
+            Select Case nCol
+                Case 3: Call SpreadSum(spdTotal, 2, nCol)
+                Case 9, 10, 11:
+                    Dim TempCount As Variant
+                    Dim TempCost As Variant
+                    Call .GetText(6, .MaxRows, TempCount)
+                    Call .GetText(nCol - 6, .MaxRows, TempCost)
+                    .SetText nCol, .MaxRows, CVar(TempCost / TempCount)
+                Case Else: Call SpreadSum(spdTotal, -1, nCol)
+            End Select
+        Next nCol
+    
+        .Redraw = True
+    
+    End With
+    
+    
+
+    With spdTotal
+
+        If .MaxRows > 0 Then
+'            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+
+            .Row = .Row
+            .Row2 = .Row
+            .Col = 1
+            .Col2 = .MaxCols
+            .BlockMode = True
+            .BackColor = &HC0FFC0
+            .BlockMode = False
+        End If
+
+        .Redraw = True
+    End With
+    
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+
+End Sub
+
+'private Sub Data_Display()
+'    Dim i As Integer
+'    Dim j As Integer
+'    Dim sStartTag As String
+'    Dim sEndTag As String
+'    Dim lTotal(1) As Long
+'
+'    ReDim sValue(2)
+'
+'    sValue(0) = "0"
+'    sValue(1) = Mid(cboOffice.Text, 2, 4)
+'    sValue(2) = Format(dtInput.Value, "YYYY-MM-DD")
+'
+'    spdView.MaxRows = 0
+'
+'    Set RS01 = New ADODB.Recordset
+'    Set RS01 = ExecPro("SP_04001_00_ALL", sValue(), Err_Num, Err_Dec)
+'
+'    spdView.MaxCols = RS01.Fields.Count
+'    spdView.MaxRows = RS01.RecordCount
+'
+'    Call spdDisplay
+'    Call GetColWidth(REG_App, Me.Name, spdView)
+'
+'
+'    Call spdDisplay
+'    Call GetColWidth(REG_App, Me.Name, spdView)
+'
+'    For i = 0 To 9
+'        txtInput(i).Text = 0
+'    Next i
+'    With spdView
+'        .Redraw = False
+'        For i = 1 To RS01.RecordCount
+'            .Row = i
+'
+'            For j = 1 To spdView.MaxCols
+'                spdView.Col = j
+'
+'                If j = 2 Then
+'                    If RS01(j - 1) = "Y" Then
+'                        spdView.Text = RS01(j - 1) + ":개점"
+'                    Else
+'                        spdView.Text = RS01(j - 1) + ":폐점"
+'                    End If
+'                ElseIf j = 7 Then
+'
+'                        Select Case RS01(j - 1)
+'                            Case "1": spdView.Text = RS01(j - 1) + ":세일"
+'                            Case "2": spdView.Text = RS01(j - 1) + ":목요"
+'                            Case "3": spdView.Text = RS01(j - 1) + ":정상"
+'                        End Select
+'                ElseIf j = 25 Then
+'
+'                            Select Case RS01(j - 1)
+'                                Case "Y":  spdView.Text = True
+'                                Case Else: spdView.Text = False
+'                            End Select
+'                Else
+'                    spdView.Col = j: spdView.Text = RS01(j - 1)
+'                End If
+'            Next j
+'
+'            RS01.MoveNext
+'        Next i
+'        .Redraw = True
+'    End With
+'
+'
+'    RS01.Close
+'
+'    If spdView.MaxRows = 0 Then
+'        For i = 0 To 9
+'            txtInput(i).Text = 0
+'        Next i
+'    Else
+'        spdView.AutoCalc = True
+'
+'        spdView.MaxRows = spdView.MaxRows + 1
+'        spdView.Row = spdView.MaxRows
+'        spdView.RowHidden = True
+'
+'        spdView.Col = 1
+'        spdView.Text = "합계"
+'
+'        Dim cnt, Tamt, Mamt, Samt As Long
+'
+'
+'        spdView.Col = 8
+'        spdView.Formula = "SUM(H1:H" & spdView.MaxRows - 1 & ")"
+'        Tamt = spdView.Value
+'        txtInput(0).Text = spdView.Text
+'        spdView.Col = 9
+'        spdView.Formula = "SUM(I1:I" & spdView.MaxRows - 1 & ")"
+'        Mamt = spdView.Value
+'        txtInput(1).Text = spdView.Text
+'
+'        spdView.Col = 10
+'        spdView.Formula = "SUM(J1:J" & spdView.MaxRows - 1 & ")"
+'        Samt = spdView.Value
+'        txtInput(2).Text = spdView.Text
+'
+'        spdView.Col = 11
+'        spdView.Formula = "SUM(K1:K" & spdView.MaxRows - 1 & ")"
+'        cnt = spdView.Value
+'        txtInput(3).Text = spdView.Text
+'
+'        If cnt = 0 Then
+'            spdView.Col = 12
+'            spdView.Text = 0
+'
+'            spdView.Col = 13
+'            spdView.Text = 0
+'
+'            spdView.Col = 14
+'            spdView.Text = 0
+'        Else
+'            spdView.Col = 12
+'            spdView.Text = Tamt / cnt
+'
+'            spdView.Col = 13
+'            spdView.Text = Mamt / cnt
+'
+'            spdView.Col = 14
+'            spdView.Text = Samt / cnt
+'        End If
+'
+'        spdView.Col = 15
+'        spdView.Formula = "SUM(O1:O" & spdView.MaxRows - 1 & ")"
+'        txtInput(4).Text = spdView.Text
+'
+'        spdView.Col = 16
+'        spdView.Formula = "SUM(P1:P" & spdView.MaxRows - 1 & ")"
+'        txtInput(5).Text = spdView.Text
+'
+'        spdView.Col = 17
+'        spdView.Formula = "SUM(Q1:Q" & spdView.MaxRows - 1 & ")"
+'        txtInput(9).Text = spdView.Text
+'
+'        spdView.Col = 18
+'        spdView.Formula = "SUM(R1:R" & spdView.MaxRows - 1 & ")"
+'        txtInput(7).Text = spdView.Text
+'
+'        spdView.Col = 19
+'        spdView.Formula = "SUM(S1:S" & spdView.MaxRows - 1 & ")"
+'        txtInput(6).Text = spdView.Text
+'
+'        spdView.Col = 20
+'        spdView.Formula = "SUM(T1:T" & spdView.MaxRows - 1 & ")"
+'        txtInput(8).Text = spdView.Text
+'
+'        If txtInput(3).Text = 0 Then
+'            txtInput(10).Text = 0
+'            txtInput(11).Text = 0
+'        Else
+'            txtInput(10).Text = Format(txtInput(0).Text / txtInput(3).Text, "#,##0")
+'            txtInput(11).Text = Format(txtInput(1).Text / txtInput(3).Text, "#,##0")
+'        End If
+'        spdView.Col = 21
+'        spdView.Formula = "SUM(U1:U" & spdView.MaxRows - 1 & ")"
+'        spdView.Col = 22
+'        spdView.Formula = "SUM(V1:V" & spdView.MaxRows - 1 & ")"
+'        spdView.Col = 23
+'        spdView.Formula = "SUM(W1:W" & spdView.MaxRows - 1 & ")"
+'        spdView.Col = 24
+'        spdView.Formula = "SUM(X1:X" & spdView.MaxRows - 1 & ")"
+'
+'        spdView.MaxRows = spdView.MaxRows - 1
+'    End If
+'End Sub
+
+Public Sub DataSave()
+
+End Sub
+
+Public Sub DataCancel()
+    Call Data_Display
+End Sub
+
+Public Sub DataPrint()
+ 
+    
+End Sub
+  
+
+Private Sub spdTotal_AfterUserSort(ByVal Col As Long)
+Debug.Print "spdTotal_AfterUserSort"
+End Sub
+
+Private Sub spdTotal_BeforeUserSort(ByVal Col As Long, ByVal State As FPSpreadADO.BeforeUserSortStateConstants, DefaultAction As FPSpreadADO.BeforeUserSortDefaultActionConstants)
+Debug.Print "spdTotal_BeforeUserSort"
+
+    With spdTotal
+'        .Row = .Row
+'        .Row2 = .MaxRows - 1
+'        .Col = 1
+'        .Col2 = .MaxCols
+'        .BlockMode = True
+'        .BackColor = &HC0FFC0
+'        .BlockMode = False
+    End With
+
+End Sub
+
+Private Sub spdTotal_Click(ByVal Col As Long, ByVal Row As Long)
+    
+    If Row > 0 Then
+        spdTotal.Row = Row
+        spdTotal.Col = 1
+        Call Data_DisplaySUB(spdTotal.Text)
+    End If
+End Sub
+
+Private Sub spdTotal_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+    If NewRow <> -1 Then
+        With spdTotal
+            If NewRow <> -1 Then
+                .Row = Row
+                If (Row Mod 2) = 0 Then
+                    .Col = -1
+                    .BackColor = vbWhite
+                Else
+                    .Col = -1
+                    .BackColor = vbWhite
+                End If
+                
+                .Row = NewRow
+                .Col = -1
+                .BackColor = glbYellow
+            End If
+        End With
+    End If
+
+End Sub
+
+Private Sub spdView_BeforeUserSort(ByVal Col As Long, ByVal State As FPSpreadADO.BeforeUserSortStateConstants, DefaultAction As FPSpreadADO.BeforeUserSortDefaultActionConstants)
+    With spdView
+'        .Row = .Row
+'        .Row2 = .MaxRows - 1
+'        .Col = 1
+'        .Col2 = .MaxCols
+'        .BlockMode = True
+'        .BackColor = &HC0FFC0
+'        .BlockMode = True
+    End With
+
+End Sub
+
+Private Sub spdView_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+    If NewRow <> -1 Then
+        With spdView
+            If NewRow <> -1 Then
+                .Row = Row
+                If (Row Mod 2) = 0 Then
+                    .Col = -1
+                    .BackColor = vbWhite
+                Else
+                    .Col = -1
+                    .BackColor = vbWhite
+                End If
+                
+                .Row = NewRow
+                .Col = -1
+                .BackColor = glbYellow
+            End If
+        End With
+    End If
+End Sub
+
+
+
+Private Sub Data_DisplaySUB(sOfficeCode As String)
+    On Error GoTo ErrRtn
+
+    Dim nCol    As Long
+    Dim nRow    As Long
+    Dim vText   As Variant
+    
+    ReDim sValue(3)
+    
+    If sOfficeCode = "" Then Exit Sub
+    
+    sValue(0) = sOfficeCode
+    sValue(1) = ""
+    sValue(2) = Format(dtInput(0).Value, "YYYY-MM-dd")
+    sValue(3) = Format(dtInput(1).Value, "YYYY-MM-dd")
+    
+    If HeadOffice = MASTER_OFFICE_CODE Then
+        If DBOpen_Master(sOfficeCode) = False Then Exit Sub
+        
+        Set RS01 = New ADODB.Recordset
+        Set RS01 = ExecProMaster("SP_04001_01", sValue(), Err_Num, Err_Dec)
+    Else
+        Set RS01 = New ADODB.Recordset
+        Set RS01 = ExecPro("SP_04001_01", sValue(), Err_Num, Err_Dec)
+    End If
+    
+    With spdView
+        .MaxRows = 0
+        .Redraw = False
+        
+        Do Until RS01.EOF
+            .MaxRows = .MaxRows + 1
+            .Row = .MaxRows
+            
+            .Col = 1:  .Text = RS01!가맹점코드 & ""               ' 1
+            .Col = 2:  .Text = RS01!가맹점명 & ""                 ' 2
+            .Col = 3:  .Text = RS01!영업일수 & ""                 ' 3
+            .Col = 4:  .Text = RS01!접수금액 & ""                 ' 8
+            .Col = 5:  .Text = RS01!지사금액 & ""                 ' 4
+            .Col = 6:  .Text = RS01!가맹점금액 & ""               ' 5
+            .Col = 7:  .Text = RS01!접수수량 & ""                 ' 6
+            .Col = 8:  .Text = 0 'RS01!출고수량 & ""                 ' 7
+            .Col = 9:  .Text = RS01!현금입금 + RS01!카드금액 & "" ' 9
+            
+            If RS01!접수수량 = 0 Then
+                .Col = 10: .Text = 0 & ""   '10
+                .Col = 11: .Text = 0 & ""   '11
+                .Col = 12: .Text = 0 & ""   '12
+            Else
+                .Col = 10: .Text = RS01!접수금액 / RS01!접수수량 & ""   '10
+                .Col = 11: .Text = RS01!지사금액 / RS01!접수수량 & ""   '11
+                .Col = 12: .Text = RS01!가맹점금액 / RS01!접수수량 & "" '12
+            End If
+            
+            .Col = 13: .Text = RS01!현금입금 & ""                 '10
+            .Col = 14: .Text = RS01!카드금액 & ""                 '11
+            .Col = 15: .Text = RS01!카드건수 & ""                 '12
+            .Col = 16: .Text = RS01!쿠폰금액 & ""                 '13
+            .Col = 17: .Text = RS01!쿠폰건수 & ""                 '14
+            .Col = 18: .Text = RS01!발생마일리지 & ""             '15
+            .Col = 19: .Text = RS01!사용마일리지 & ""             '16
+            .Col = 20: .Text = RS01!삭제마일리지 & ""             '17
+            .Col = 21: .Text = RS01!반품환불금액 & ""             '18
+            .Col = 22: .Text = RS01!반품환불건수 & ""             '19
+            .Col = 23: .Text = RS01!세탁환불금액 & ""             '20
+            .Col = 24: .Text = RS01!세탁환불건수 & ""             '21
+            .Col = 25: .Text = RS01!재세탁수량 & ""               '22
+            .Col = 26: .Text = RS01!수선금액 & ""                 '23
+            .Col = 27: .Text = RS01!수선수량 & ""                 '24
+                        
+            RS01.MoveNext
+        Loop
+        RS01.Close
+        Set RS01 = Nothing
+        
+        ReDim sValue(4)
+        
+        sValue(0) = sOfficeCode
+        sValue(1) = "%"
+        sValue(2) = Format(dtInput(0).Value, "YYYY-MM-DD")
+        sValue(3) = Format(dtInput(1).Value, "YYYY-MM-DD")
+        sValue(4) = "STORE_SUM"
+        
+        If CheckBox1.Value = xtpChecked Then
+            If HeadOffice = MASTER_OFFICE_CODE Then
+                If DBOpen_Master(HeadOffice) = False Then Exit Sub
+                
+                Set RS01 = New ADODB.Recordset
+                Set RS01 = ExecProMaster("SP_04001_B_01", sValue(), Err_Num, Err_Dec)
+            Else
+                Set RS01 = New ADODB.Recordset
+                Set RS01 = ExecPro("SP_04001_B_01", sValue(), Err_Num, Err_Dec)
+            End If
+                
+            Do While Not RS01.EOF
+                ' 지사출고 수량 출력
+                For nRow = 1 To .MaxRows
+                    .GetText 1, nRow, vText
+                    If CStr(vText) = RS01.Fields(1) Then
+                        .SetText 8, nRow, CVar(RS01.Fields(2))
+                        Exit For
+                    End If
+                Next nRow
+                
+                RS01.MoveNext
+            Loop
+            RS01.Close
+            Set RS01 = Nothing
+        End If
+        
+        
+        ' 합계 출력
+        For nCol = 4 To .MaxCols
+            Select Case nCol
+                Case 4: Call SpreadSum(spdView, 2, nCol)
+                Case 10, 11, 12:
+                    Dim TempCount As Variant
+                    Dim TempCost As Variant
+                    Call .GetText(7, .MaxRows, TempCount)
+                    Call .GetText(nCol - 6, .MaxRows, TempCost)
+                    .SetText nCol, .MaxRows, CVar(TempCost / TempCount)
+                Case Else: Call SpreadSum(spdView, -1, nCol)
+            End Select
+        Next nCol
+ 
+        .Redraw = True
+    End With
+        
+    Exit Sub
+    
+ErrRtn:
+    Call Error_Msg("", Err.Source, Err.Number, Err.Description)
+End Sub
+
